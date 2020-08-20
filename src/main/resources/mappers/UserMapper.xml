@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nwafu.bingo.dao.UserDao">
+
+    <resultMap id="BaseUserMap" type="com.nwafu.bingo.entity.User">
+        <id column="uid" property="uid" jdbcType="INTEGER"/>
+        <result column="uname" property="uname" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="gamelist" property="gamelist" jdbcType="VARCHAR"/>
+        <result column="wishlist" property="wishlist" jdbcType="VARCHAR"/>
+        <result column="umail" property="umail" jdbcType="VARCHAR"/>
+        <result column="ualias" property="ualias" jdbcType="VARCHAR"/>
+        <result column="usex" property="usex" jdbcType="VARCHAR"/>
+        <result column="ubirthday" property="ubirthday" jdbcType="VARCHAR"/>
+        <result column="uprofile" property="uprofile" jdbcType="VARCHAR"/>
+        <result column="uavatar" property="uavatar" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <insert id="add" parameterType="com.nwafu.bingo.entity.User">
+        INSERT INTO
+            user(uid,uname,password,gamelist,wishlist,umail,ualias,usex,ubirthday,uprofile,uavatar)
+        VALUES (#{uid},#{uname},#{password},#{gamelist},#{wishlist},#{umail},#{ualias},#{usex},#{ubirthday},#{uprofile},#{uavatar})
+    </insert>
+    <select id="getByName" parameterType="String" resultMap="BaseUserMap">
+        SELECT
+            *
+        FROM
+            user
+        WHERE
+            uname =#{name}
+    </select>
+
+    <select id="getById" parameterType="Integer" resultMap="BaseUserMap">
+        SELECT
+            *
+        FROM
+            user
+        FROM
+            uid = #{id}
+    </select>
+    <select id="getAll" resultMap="BaseUserMap">
+        SELECT
+            *
+        FROM
+            user
+    </select>
+    <update id="update" parameterType="com.nwafu.bingo.entity.User">
+        UPDATE
+            user
+        SET
+            uname =#{uname},
+            password =#{password},
+            gamelist = #{gamelist},
+            wishlist =#{wishlist},
+            umail =#{umail},
+            ualias= #{ualias},
+            usex =#{usex},
+            ubirthday = #{ubirthday},
+            uprofile = #{uprofile},
+            uavatar = #{uavatar}
+        WHERE
+            uid = #{uid}
+    </update>
+</mapper>

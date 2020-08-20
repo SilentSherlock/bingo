@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nwafu.bingo.dao.AdminDao">
+
+    <resultMap id="BaseAdminMap" type="com.nwafu.bingo.entity.Admin">
+        <id column="aid" property="aid" jdbcType="INTEGER"/>
+        <result column="aname" property="aname" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <select id="getAll" resultMap="BaseAdminMap">
+        SELECT
+            *
+        FROM
+            admin
+    </select>
+    <select id="getByName" parameterType="String" resultMap="BaseAdminMap">
+        SELECT
+            *
+        FROM
+            admin
+        WHERE
+            aname =#{name}
+    </select>
+    <insert id="add" parameterType="com.nwafu.bingo.entity.Admin">
+        INSERT INTO
+            admin
+            (aid,aname,password)
+        VALUES
+            (#{aid},#{aname},#{password})
+    </insert>
+    <delete id="deleteById" parameterType="Integer">
+        DELETE FROM
+            admin
+        WHERE id = #{id}
+    </delete>
+    <update id="update" parameterType="com.nwafu.bingo.entity.Admin">
+        UPDATE
+            admin
+        SET
+            aname = #{aname},password = #{password}
+        WHERE
+            aid = #{aid}
+    </update>
+
+</mapper>
