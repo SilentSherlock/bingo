@@ -15,7 +15,7 @@ public class Game {
     private Float gprice;
     private Float discount;
     private Float gscore;
-    private String language;
+    private String language;//list类型的string转换得到
     private String detail;
     private String vhref;//list类型的string转换得到
     private String phref;//list类型的string转换得到

@@ -9,7 +9,7 @@ public class Orderlist {
     private Integer oid;
     private Integer uid;
     private String otime;
-    private String orderDetails;//由list类型的details转换
+    private String orderDetails;//由list类型的OrderDetail转换
 
     public Integer getOid() {
         return oid;
