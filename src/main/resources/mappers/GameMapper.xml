@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nwafu.bingo.dao.GameDao">
+
+    <resultMap id="BaseGameMap" type="com.nwafu.bingo.entity.Game">
+        <id column="gid" property="gid" jdbcType="INTEGER"/>
+        <result column="gname" property="gname" jdbcType="VARCHAR"/>
+        <result column="gtype" property="gtype" jdbcType="VARCHAR"/>
+        <result column="developer" property="developer" jdbcType="VARCHAR"/>
+        <result column="publisher" property="publisher" jdbcType="VARCHAR"/>
+        <result column="releasedata" property="releasedata" jdbcType="VARCHAR"/>
+        <result column="gprice" property="gprice" jdbcType="FLOAT"/>
+        <result column="discount" property="discount" jdbcType="FLOAT"/>
+        <result column="gscore" property="gscore" jdbcType="FLOAT"/>
+        <result column="language" property="language" jdbcType="VARCHAR"/>
+        <result column="detail" property="detail" jdbcType="VARCHAR"/>
+        <result column="vhref" property="vhref" jdbcType="VARCHAR"/>
+        <result column="phref" property="phref" jdbcType="VARCHAR"/>
+        <result column="chref" property="chref" jdbcType="VARCHAR"/>
+        <result column="dlclist" property="dlclist" jdbcType="VARCHAR"/>
+        <result column="platform" property="platform" jdbcType="VARCHAR"/>
+        <result column="systemreq" property="systemreq" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getAll" resultMap="BaseGameMap">
+        SELECT
+            *
+        FROM
+            game
+    </select>
+    <select id="getByName" parameterType="String" resultMap="BaseGameMap">
+        SELECT
+            *
+        FROM
+            game
+        WHERE gname like CONCAT ('%',#{name},'%')
+    </select>
+    <select id="getById" parameterType="Integer" resultMap="BaseGameMap">
+        SELECT
+            *
+        FROM
+            game
+        WHERE
+            gid = #{id}
+    </select>
+
+    <insert id="add" parameterType="com.nwafu.bingo.entity.Game" useGeneratedKeys="true">
+        INSERT INTO
+            game (gname,gtype,developer,publisher,releasedata,gprice,discount,gscore,language,
+                  detail,vhref,phref,chref,dlclist,platform,systemreq)
+        VALUES
+            (#{gname},#{gtype},#{developer},#{publisher},#{releasedata},#{gprice},#{discount},
+            #{gscore},#{language},#{detail},#{vhref},#{phref},#{chref,},#{dlclist},#{platform},#{systemreq});
+    </insert>
+
+    <update id="update" parameterType="com.nwafu.bingo.entity.Game">
+        UPDATE
+            game
+        SET
+
+            gname=#{gname},
+            gtype=#{gtype},
+            developer=#{developer},
+            publisher=#{publisher},
+            releasedata=#{releasedata},
+            gprice=#{gprice},
+            discount=#{discount},
+            gscore=#{gscore},
+            language=#{language},
+            detail=#{detail},
+            vhref=#{vhref},
+            phref=#{phref},
+            chref=#{chref},
+            dlclist=#{dlclist},
+            platform=#{platform},
+            systemreq=#{systemreq}
+        WHERE
+            gid =#{gid}
+    </update>
+</mapper>

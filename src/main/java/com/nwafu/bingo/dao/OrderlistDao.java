@@ -2,6 +2,7 @@ package com.nwafu.bingo.dao;
 
 import com.nwafu.bingo.entity.Orderlist;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * Date: 2020/8/20
  * Description: optional describe the class
  */
+@Repository
 public interface OrderlistDao {
 
     void add(Orderlist orderlist) throws Exception;
