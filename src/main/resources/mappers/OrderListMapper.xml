@@ -5,7 +5,7 @@
     <resultMap id="BaseOrderListMap" type="com.nwafu.bingo.entity.OrderDetail">
         <id column="oid" property="oid" jdbcType="INTEGER"/>
         <result column="uid" property="uid" jdbcType="INTEGER"/>
-        <result column="detail" property="detail" jdbcType="VARCHAR"/>
+        <result column="orderDetails" property="detail" jdbcType="VARCHAR"/>
         <result column="otime" property="otime" jdbcType="VARCHAR"/>
 
     </resultMap>

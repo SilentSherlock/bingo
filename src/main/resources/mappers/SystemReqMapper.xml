@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nwafu.bingo.dao.SystemReqDao">
 
-    <resultMap id="BaseSystemReqMap" type="com.nwafu.bingo.entity">
+    <resultMap id="BaseSystemReqMap" type="com.nwafu.bingo.entity.SystemReq">
         <id column="srid" property="srid" jdbcType="INTEGER"/>
         <result column="os" property="os" jdbcType="VARCHAR"/>
         <result column="ram" property="ram" jdbcType="VARCHAR"/>
@@ -25,7 +25,7 @@
         FROM
             systemreq
     </select>
-    <insert id="add" parameterType="com.nwafu.bingo.entity.SystemReq">
+    <insert id="add" parameterType="com.nwafu.bingo.entity.SystemReq" useGeneratedKeys="true">
         INSERT INTO
             systemreq(srid,os,ram,cpu,gpu,harddisk)
         VALUES (#{srid},#{os},#{ram},#{cpu},#{gpu},#{harddisk})

@@ -44,7 +44,7 @@
             gid = #{id}
     </select>
 
-    <insert id="add" parameterType="com.nwafu.bingo.entity.Game">
+    <insert id="add" parameterType="com.nwafu.bingo.entity.Game" useGeneratedKeys="true">
         INSERT INTO
             game (gid,gname,gtype,developer,publisher,releasedata,gprice,discount,gscore,language,
                   detail,vhref,phref,chref,dlclist,platform,systemreq)

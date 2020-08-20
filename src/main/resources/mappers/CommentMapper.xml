@@ -22,7 +22,7 @@
         WHERE
             ${idType} = #{idValue};
     </select>
-    <insert id="add" parameterType="com.nwafu.bingo.entity.Comment">
+    <insert id="add" parameterType="com.nwafu.bingo.entity.Comment" useGeneratedKeys="true">
         INSERT INTO
             comment (cid, uid ,pid, content,ctime,ctype,tocid,touid)
         VALUES
@@ -31,7 +31,7 @@
     <delete id="deleteById" >
         DELETE
             FROM comment
-        WHERE ${idType} = #{idType};
+        WHERE ${idType} = #{idValue};
     </delete>
 
 </mapper>

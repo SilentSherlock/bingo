@@ -17,7 +17,7 @@
 
     </resultMap>
 
-    <insert id="add" parameterType="com.nwafu.bingo.entity.User">
+    <insert id="add" parameterType="com.nwafu.bingo.entity.User" useGeneratedKeys="true">
         INSERT INTO
             user(uid,uname,password,gamelist,wishlist,umail,ualias,usex,ubirthday,uprofile,uavatar)
         VALUES (#{uid},#{uname},#{password},#{gamelist},#{wishlist},#{umail},#{ualias},#{usex},#{ubirthday},#{uprofile},#{uavatar})
@@ -28,7 +28,7 @@
         FROM
             user
         WHERE
-            uname =#{name}
+            uname = #{name}
     </select>
 
     <select id="getById" parameterType="Integer" resultMap="BaseUserMap">
@@ -36,7 +36,7 @@
             *
         FROM
             user
-        FROM
+        where
             uid = #{id}
     </select>
     <select id="getAll" resultMap="BaseUserMap">
