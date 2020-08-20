@@ -26,7 +26,7 @@
     </delete>
     <update id="update">
         update evaluation
-        set gid = #{gid}, content = #{content}, score = #{score}, time = #{time}
+        set gid = #{gid}, content = #{content}, score = #{score}, etime = #{etime}
         where uid = #{uid};
     </update>
 </mapper>
