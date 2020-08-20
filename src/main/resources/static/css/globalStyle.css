@@ -1,0 +1,100 @@
+@charset "UTF-8";
+/****************************基本颜色***********************/
+/****************************基本字体及动画***********************/
+/****************************框架组件常量***********************/
+/****************************滚动条***********************/
+/*参数说明
+::-webkit-scrollbar 滚动条整体部分
+::-webkit-scrollbar-thumb  滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
+::-webkit-scrollbar-track  滚动条的轨道（里面装有Thumb）
+::-webkit-scrollbar-button 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。
+::-webkit-scrollbar-track-piece 内层轨道，滚动条中间部分（除去）
+::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处
+::-webkit-resizer 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件
+*/
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #1a1e2e;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #292e41;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #33394d;
+}
+
+/****************************超链接***********************/
+a {
+  color: #7a80a2 !important;
+  text-decoration: none;
+}
+
+a:hover,
+a:active {
+  color: #b9c0ef !important;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/****************************按钮***********************/
+.btn-primary,
+.btn-primary:focus {
+  color: white;
+  background-color: #ff6900;
+  border: none;
+  box-shadow: none;
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+  color: white !important;
+  background-color: #ff9800 !important;
+  border: none !important;
+  box-shadow: none !important;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-secondary,
+.btn-secondary:focus {
+  color: white;
+  background-color: #5c668a;
+  border: none;
+  box-shadow: none;
+}
+
+.btn-secondary:hover,
+.btn-secondary:active {
+  color: white !important;
+  background-color: #949cb8 !important;
+  border: none !important;
+  box-shadow: none !important;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/****************************下拉菜单***********************/
+.dropdown-menu {
+  background-color: #33394d;
+  padding: 0;
+}
+
+.dropdown-menu .dropdown-item,
+.dropdown-menu .dropdown-item:focus {
+  background-color: #33394d;
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:active {
+  background-color: #5c668a;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/****************************输入框***********************/
+
+/*# sourceMappingURL=globalStyle.css.map */

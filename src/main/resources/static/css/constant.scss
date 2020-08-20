@@ -1,0 +1,48 @@
+/****************************基本颜色***********************/
+$yellow: rgb(255, 152, 0);
+$blue-dark: rgb(0, 103, 255);
+$orange: rgb(255, 105, 0);
+$blue-light: rgb(0, 150, 255);
+$gray: rgb(95, 95, 95);
+$red: rgb(220, 53, 69);
+$green: rgb(40, 167, 69);
+//背景色
+$background-dark: rgb(26, 30, 46);
+$background: rgb(32, 37, 57);
+$background-title: rgb(41, 46, 65);
+$background-light: rgb(51, 57, 77);
+//字体颜色
+$font-color-light: rgb(185, 192, 239);
+$font-color-highlight: white;
+$font-color: rgb(122, 128, 162);
+
+/****************************基本字体及动画***********************/
+//字体大小
+$font-size-text-small: 13px;
+$font-size-text: 16px;
+$font-size-title: 20px;
+$font-size-title-larger: 24px;
+$font-size-title-largest: 28px;
+
+//颜色变化动画
+$transition-color: background-color 0.3s, color 0.3s;
+//移动动画
+$transition-all: all 0.6s;
+
+/****************************框架组件常量***********************/
+//页面基本内容常量
+$body-min-height: 800px;//页面主题最小高度
+//导航栏
+$navbar-height: 70px;//导航栏高度
+$navbar-padding: 50px;//导航部分内容左右内边距
+$navbar-brand-width: 140px;//logo宽度
+$navbar-brand-height: 60px;
+$navbar-navlink-width: 100px;//链接宽度
+$navbar-avatar-width: 40px;//用户头像大小
+$navbar-form-width: 200px;//搜索框大小
+//面包屑导航栏
+$breadcrumb-height: 25px;//面包屑导航栏高度
+$breadcrumb-divider: quote(">");//面包屑导航栏分隔符
+$breadcrumb-divider-padding: 2px;//面包屑导航栏分隔符间距
+//页脚
+$foot-height: 100px;//页脚高度

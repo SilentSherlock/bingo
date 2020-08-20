@@ -1,0 +1,106 @@
+//导入基本常量
+@import "globalStyle";
+//导入侧边栏css
+//@import "sidebar";
+
+body {
+  background-color: $background;
+  color: $font-color;
+}
+
+//导航栏
+body > div.fixed-top > nav:first-of-type {
+  padding: 0 $navbar-padding;
+  background-color: $background !important;
+  color: $font-color;
+  height: $navbar-height;
+}
+
+.navbar .navbar-brand img {
+  width: $navbar-brand-width;
+  height: $navbar-brand-height;
+}
+
+.navbar .navbar-nav {
+  padding: 0 $navbar-padding;
+}
+
+.navbar .nav-link {
+  width: $navbar-navlink-width;
+  text-align: center;
+}
+
+.navbar .navbar-nav:last-of-type {
+  margin-right: 0 !important;
+  padding-right: $navbar-padding !important;
+}
+
+.navbar .navbar-nav:last-of-type .nav-item:first-of-type {
+  border-right: 2px $font-color solid;
+}
+
+#navbarSupportedContent > form {
+  padding: 0 $navbar-padding;
+}
+
+#navbarSupportedContent > form > .input-group > input {
+  width: $navbar-form-width;
+  margin-right: 10px;
+}
+
+#navbarSupportedContent > div:last-of-type {
+  padding: 0 $navbar-padding;
+  margin-right: 0 !important;
+  float: right;
+}
+
+#navbarSupportedContent > div:last-of-type a img {
+  width: $navbar-avatar-width;
+  height: $navbar-avatar-width;
+  border: 1px $background-light solid;
+  border-radius: $navbar-avatar-width / 2;
+}
+
+//面包屑导航
+.breadcrumb {
+  border-radius: 0;
+  padding: 3px $navbar-padding;
+  background-color: $background-light !important;
+  height: $breadcrumb-height;
+}
+
+.breadcrumb-item {
+  font-size: $font-size-text-small;
+  color: $font-color;
+}
+
+.breadcrumb-item:last-of-type {
+  color: $font-color-light;
+}
+
+.breadcrumb-item + .breadcrumb-item {
+  padding-left: $breadcrumb-divider-padding;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: $breadcrumb-divider;
+  padding-right: $breadcrumb-divider-padding;
+}
+
+//页面主体
+#body-container {
+  min-height: $body-min-height;
+  margin-top: $navbar-height + $breadcrumb-height;
+}
+
+#foot-container {
+  height: $foot-height;
+  line-height: $foot-height;
+  background-color: $background-dark;
+  color: $font-color;
+}
+
+#foot-container p {
+  font-size: $font-size-text;
+  margin: 0 auto;
+}
