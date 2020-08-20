@@ -19,8 +19,8 @@
 
     <insert id="add" parameterType="com.nwafu.bingo.entity.User" useGeneratedKeys="true">
         INSERT INTO
-            user(uid,uname,password,gamelist,wishlist,umail,ualias,usex,ubirthday,uprofile,uavatar)
-        VALUES (#{uid},#{uname},#{password},#{gamelist},#{wishlist},#{umail},#{ualias},#{usex},#{ubirthday},#{uprofile},#{uavatar})
+            user(uname,password,gamelist,wishlist,umail,ualias,usex,ubirthday,uprofile,uavatar)
+        VALUES (#{uname},#{password},#{gamelist},#{wishlist},#{umail},#{ualias},#{usex},#{ubirthday},#{uprofile},#{uavatar})
     </insert>
     <select id="getByName" parameterType="String" resultMap="BaseUserMap">
         SELECT

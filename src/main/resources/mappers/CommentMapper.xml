@@ -24,9 +24,9 @@
     </select>
     <insert id="add" parameterType="com.nwafu.bingo.entity.Comment" useGeneratedKeys="true">
         INSERT INTO
-            comment (cid, uid ,pid, content,ctime,ctype,tocid,touid)
+            comment (uid ,pid, content,ctime,ctype,tocid,touid)
         VALUES
-            (#{cid},#{uid},#{pid},#{content},#{ctime},#{ctype},#{tocid},#{touid});
+            (#{uid},#{pid},#{content},#{ctime},#{ctype},#{tocid},#{touid});
     </insert>
     <delete id="deleteById" >
         DELETE

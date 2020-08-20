@@ -27,8 +27,8 @@
     </select>
     <insert id="add" parameterType="com.nwafu.bingo.entity.SystemReq" useGeneratedKeys="true">
         INSERT INTO
-            systemreq(srid,os,ram,cpu,gpu,harddisk)
-        VALUES (#{srid},#{os},#{ram},#{cpu},#{gpu},#{harddisk})
+            systemreq(os,ram,cpu,gpu,harddisk)
+        VALUES (#{os},#{ram},#{cpu},#{gpu},#{harddisk})
     </insert>
 
     <delete id="deleteById" parameterType="Integer">

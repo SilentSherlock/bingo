@@ -12,9 +12,9 @@
 
     <insert id="add" parameterType="com.nwafu.bingo.entity.OrderDetail">
         INSERT INTO
-            orderlist(oid,uid,detail,otime)
+            orderlist(uid,detail,otime)
         VALUES
-            (#{oid},#{uid},#{detail},#{otime})
+            (#{uid},#{detail},#{otime})
     </insert>
 
     <select id="getById"  resultMap="BaseOrderListMap">

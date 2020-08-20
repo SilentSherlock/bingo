@@ -25,9 +25,9 @@
     <insert id="add" parameterType="com.nwafu.bingo.entity.Admin" useGeneratedKeys="true">
         INSERT INTO
             admin
-            (aid,aname,password)
+            (aname,password)
         VALUES
-            (#{aid},#{aname},#{password})
+            (#{aname},#{password})
     </insert>
     <delete id="deleteById" parameterType="Integer">
         DELETE FROM
