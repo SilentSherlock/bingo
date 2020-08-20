@@ -1,6 +1,7 @@
 package com.nwafu.bingo.dao;
 
 import com.nwafu.bingo.entity.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ import java.util.List;
  * Date: 2020/8/20
  * Description: optional describe the class
  */
+@Repository
 public interface UserDao {
 
     void add(User user) throws Exception;
