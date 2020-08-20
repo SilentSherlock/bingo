@@ -1,0 +1,110 @@
+package com.nwafu.bingo.service;
+
+import com.nwafu.bingo.dao.AdminDao;
+import com.nwafu.bingo.dao.UserDao;
+import com.nwafu.bingo.entity.Admin;
+import com.nwafu.bingo.entity.User;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTHdrFtrRef;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ * Date: 2020/8/20
+ * Description: 人员管理类，封装对管理员和用户两个实体的操作，并定义一些服务
+ * 验证功能
+ * 获取所有用户，管理员
+ * 根据id获取用户
+ * 添加，删除用户
+ * 添加，删除管理员
+ */
+@Service
+public class PersonService {
+
+    @Resource
+    private AdminDao adminDao;
+    @Resource
+    private UserDao userDao;
+    private static final String CLASSNAME = "PersonService";
+    /*对管理员登录进行验证*/
+    public Admin validateAdmin(String name, String password) throws Exception{
+        return (Admin) validate(name, password, 0);
+    }
+    /*对用户登录进行验证*/
+    public User validateUser(String name, String password) throws Exception {
+        return (User) validate(name, password, 1);
+    }
+    /*
+    * 0----管理员验证
+    * 1----用户验证
+    * */
+    private Object validate(String name, String password, int type) throws Exception{
+
+        Object result = new Object();
+        List<Admin> admins;
+        List<User> users;
+
+        if (type == 0) {
+            String status = "Admin Validate";
+            System.out.println(CLASSNAME + " " + status);
+            admins = adminDao.getByName(name);
+            for (Admin admin : admins) {
+                if (admin.getPassword().equals(password)) {
+                    System.out.println(CLASSNAME + " " + status + " success");
+                    result = admin;
+                    break;
+                }
+            }
+        }else if(type == 1) {
+            String status = "User Validate";
+            System.out.println(CLASSNAME + " " + status);
+            users = userDao.getByName(name);
+            for (User user : users) {
+                if (user.getPassword().equals(password)) {
+                    System.out.println(CLASSNAME + " " + status + " success");
+                    result = user;
+                    break;
+                }
+            }
+        }else {
+            System.out.println("PersonService: type " + type + " is invalid!");
+            return null;
+        }
+        return result;
+    }
+
+    public List<User> getAllUser() throws Exception {
+        String status = "PersonService: Get All Users";
+        System.out.println(status);
+        List<User> users = userDao.getAll();
+        if (users != null) {
+            System.out.println(status + " success");
+            return users;
+        }
+        return null;
+    }
+
+    public List<Admin> getaAllAdmin() throws Exception {
+        String status = "Get all Admin";
+        System.out.println(CLASSNAME + " " + status);
+        List<Admin> admins = adminDao.getAll();
+        if (admins != null) {
+            System.out.println(CLASSNAME + " " + status + " success");
+            return admins;
+        }
+        return null;
+    }
+
+    public User getUserById(Integer id) throws Exception {
+        String status = "Get user by Id";
+        System.out.println(CLASSNAME + " " + status);
+        User user = userDao.getById(id);
+        if (user != null) {
+            System.out.println(CLASSNAME + " " + status + " success");
+            return user;
+        }
+        return null;
+    }
+}
