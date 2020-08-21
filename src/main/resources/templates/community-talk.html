@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>community-talk</title>
+    <style>
+        body{
+            background: #202539;
+        }
+        div{
+            margin:0;
+            padding:0;
+            display: block;
+        }
+        h1,h2,ul,li{
+            margin:0;
+            padding:0;
+        }
+        ul{
+            list-style: none;
+        }
+        .community-container{
+            position: relative;
+            background: #202539;
+        }
+        .community-content{
+            padding: 130px 0 40px;
+            width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
+        }
+        .community-middle{
+            color: #b9c0ef;
+            font-size: 14px;
+            box-sizing: border-box;
+            overflow: hidden;
+            float: left;
+            width: 830px;
+        }
+        .community-post-content{
+            padding: 32px 40px 10px 40px;
+            margin-bottom: 20px;
+            background: #33394d;
+            font-size: 14px;
+            color: #b9c0ef;
+        }
+        .community-block-wrapper{
+            padding: 20px 40px;
+            background: #33394d;
+        }
+        .community-comment-block{
+            font-size: 12px;
+            color: #7a80a2;
+            background: #33394d;
+            padding: 20px 0;
+        }
+        .comment-wrapper{
+
+        }
+        .comment-wrapper img{
+            float: left;
+            width: 50px;
+            height: 50px;
+            border-radius: 25px 25px 25px 25px;
+            margin-right: 10px;
+            border: 0;
+        }
+        .textarea-block-wrapper{
+            float: left;
+            width: 690px;
+            background: #ffffff;
+        }
+        .textarea-block{
+            height: 90px;
+            position: relative;
+        }
+        .textarea-block-inner{
+            height: 90px;
+            line-height: 90px;
+            text-align: center;
+            font-size: 14px;
+            color: #959595;
+            border: 0;
+        }
+        .login-button{
+            cursor: pointer;
+            text-decoration: underline;
+            color: #000;
+        }
+        .textarea-block-wrapper .textarea-block .textarea-block-inner span{
+
+        }
+        .search-users-list{
+            position: absolute;
+            width: 200px;
+            background: #ffffff;
+            border: 1px solid #bfbfbf;
+            max-height: 150px;
+            overflow: auto;
+            z-index: 2;
+            display: none;
+        }
+        .user-block{
+            font-size: 14px;
+            padding-left: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+            color: #bfbfbf;
+        }
+        .button{
+            height: 38px;
+            padding-left: 20px;
+            background: #e4e6ec;
+        }
+        button{
+            appearance: button;
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            text-align: center;
+            align-items: flex-start;
+            cursor: default;
+            box-sizing: border-box;
+            margin: 0em;
+            font: 400 13.3333px Arial;
+            padding: 1px 6px;
+            border-width: 2px;
+            border-style: outset;
+            border-image: initial;
+            border-radius: 2px;
+        }
+        .image-button{
+            margin-top: 2px;
+            background: none;
+            color: #7a80a2;
+            outline: none;
+            font-size: 18px;
+            width: 20px;
+            float: left;
+            padding: 0;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            border: none;
+        }
+        .child{
+            width: inherit;
+            overflow: hidden;
+            position: relative;
+        }
+        .fa{
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+        }
+        input{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            margin: 0;
+            padding: 0;
+            text-shadow: none;
+            box-shadow: none;
+            text-indent: 0;
+            text-transform: none;
+            background-image: none;
+            border-image-outset: 0;
+            font: 12px/1.5 'Microsoft YaHei','Heiti SC','tahoma','arial','Hiragino Sans GB';
+        }
+        .mention-button{
+            margin-left: 20px;
+            height: 36px;
+            background: none;
+            color: #7a80a2;
+            outline: none;
+            font-size: 18px;
+            width: 20px;
+            padding:0;
+            border-width: 0;
+        }
+        .submit{
+            float: right;
+            font-size: 14px;
+            height: 38px;
+            line-height: 38px;
+            width: 78px;
+            color: #ffffff;
+            text-align: center;
+            cursor: pointer;
+            background: #ff6900;
+            margin-top: 0;
+        }
+        .word-block{
+            float: right;
+            font-size: 12px;
+            margin: 10px 10px 0 0;
+        }
+        .word-block span{
+            color: #ff6900;
+        }
+        .community-talk-item{
+            background: transparent;
+            padding: 20px 0;
+        }
+        .avatar-wrapper{
+            float: left;
+            height: 50px;
+            width: 50px;
+            overflow: hidden;
+            border-radius: 25px 25px 25px 25px;
+        }
+        .avatar-wrapper a{
+            cursor: pointer;
+            text-decoration: none;
+            color: #000;
+        }
+        .avatar-wrapper a img{
+            height: 50px;
+            width: 50px;
+            border: 0;
+        }
+        .comment-content{
+            margin-left: 80px;
+        }
+        .user-name{
+            color: #7a80a2;
+        }
+        .user-name a{
+            font-size: 16px;
+            font-weight: bold;
+            color: #b9c0ef;
+            margin-right: 20px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .content{
+            color: #b9c0ef;
+            font-size: 14px;
+            margin: 20px 0;
+            word-break: break-word;
+        }
+        .action{
+            text-align: right;
+        }
+        .reply{
+            border: none;
+            background: none;
+            outline: none;
+            color: #7a80a2;
+            padding: 2px 6px;
+        }
+        .like{
+            border: none;
+            background: none;
+            outline: none;
+            color: #7a80a2;
+            padding: 2px 6px;
+        }
+        .report{
+            border: none;
+            background: none;
+            outline: none;
+            color: #7a80a2;
+            padding: 2px 6px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="community-container">
+        <div class="community-content">
+            <div class="community-middle">
+                <div class="community-post-content">
+                    <!--发布的内容-->
+                </div>
+                <div class="community-block-wrapper">
+                    <div class="community-comment-block" style="height: 160px">
+                        <h1>评论</h1>
+                        <div class="comment-wrapper">
+                            <img src="../templates/image/user.jpg">
+                            <div class="textarea-block-wrapper">
+                                <div class="textarea-block">
+                                    <div class="textarea-block-inner" id="textarea-block">
+                                        <span class="login-button">登录</span>
+                                        <span>参与评论</span>
+                                    </div>
+                                    <ul class="search-users-list">
+                                        <li class="user-block">输入小伙伴名字查找</li>
+                                    </ul>
+                                </div>
+                                <div class="button">
+                                    <button class="image-button">
+                                        <div class="child">
+                                            <i class="fa">文件</i>
+                                            <input type="file">
+                                        </div>
+                                    </button>
+                                    <button class="mention-button">@</button>
+                                    <span class="submit">评论</span>
+                                    <div class="word-block">
+                                        还可以输入<span>140</span>字
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="community-talk-item">
+                        <div class="avatar-wrapper">
+                            <a target="_blank" href="#">
+                                <img src="../templates/image/user1.jpg">
+                            </a>
+                        </div>
+                        <div class="comment-content">
+                            <div class="user-name">
+                                <a target="_blank" href="#">user1</a>
+                                <span>发表于2020-8-21 09.30.45</span>
+                            </div>
+                            <div class="content">评论内容</div>
+                            <div class="action">
+                                <button class="reply">回复</button>
+                                <button class="like"><i class="fa">赞</i>0</button>
+                                <button class="report">举报</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="community-talk-item">
+                        <div class="avatar-wrapper">
+                            <a target="_blank" href="#">
+                                <img src="../templates/image/user1.jpg">
+                            </a>
+                        </div>
+                        <div class="comment-content">
+                            <div class="user-name">
+                                <a target="_blank" href="#">user1</a>
+                                <span>发表于2020-8-21 09.30.45</span>
+                            </div>
+                            <div class="content">评论内容</div>
+                            <div class="action">
+                                <button class="reply">回复</button>
+                                <button class="like"><i class="fa">赞</i>0</button>
+                                <button class="report">举报</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
