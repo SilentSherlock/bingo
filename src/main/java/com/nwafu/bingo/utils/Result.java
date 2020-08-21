@@ -6,6 +6,7 @@ import java.util.Map;
  * Date: 2020/8/21
  * Description: 封装返回的结果
  * status:状态码(Status中值)
+ *
  * Map<name, Object>
  *     name: 对象的名字
  *     Object: 对象值

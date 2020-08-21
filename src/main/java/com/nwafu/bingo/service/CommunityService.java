@@ -56,6 +56,7 @@ public class CommunityService {
 
     public void updatePost(Post post) throws Exception {
         String status = "update post";
+        log(CLASSNAME + " " + status);
         postDao.update(post);
     }
 
@@ -76,5 +77,21 @@ public class CommunityService {
             return comments;
         }
         return null;
+    }
+
+    /*
+    * 0----删除Post
+    * 1----删除Comment
+    * */
+    public void deletePostOrCommentById(String idType, Integer idValue, Integer type) throws Exception {
+        String status = "Delete comment or post by id";
+        if (type == 0) {
+            postDao.deleteById(idType, idValue);
+            log(CLASSNAME + " " + status + " post");
+        }else if (type == 1) {
+            commentDao.deleteById(idType, idValue);
+            log(CLASSNAME + " " + status + " comment");
+        }
+        log(CLASSNAME + " wrong type");
     }
 }
