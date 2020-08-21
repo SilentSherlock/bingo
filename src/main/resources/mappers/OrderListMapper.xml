@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nwafu.bingo.dao.OrderlistDao">
 
-    <resultMap id="BaseOrderListMap" type="com.nwafu.bingo.entity.OrderDetail">
+    <resultMap id="BaseOrderListMap" type="com.nwafu.bingo.entity.Orderlist">
         <id column="oid" property="oid" jdbcType="INTEGER"/>
         <result column="uid" property="uid" jdbcType="INTEGER"/>
-        <result column="orderDetails" property="detail" jdbcType="VARCHAR"/>
+        <result column="detail" property="orderDetails" jdbcType="VARCHAR"/>
         <result column="otime" property="otime" jdbcType="VARCHAR"/>
 
     </resultMap>
 
-    <insert id="add" parameterType="com.nwafu.bingo.entity.OrderDetail">
+    <insert id="add" parameterType="com.nwafu.bingo.entity.OrderDetail" useGeneratedKeys="true">
         INSERT INTO
             orderlist(uid,detail,otime)
         VALUES
-            (#{uid},#{detail},#{otime})
+            (#{uid},#{orderDetails},#{otime})
     </insert>
 
     <delete id="delete" parameterType="com.nwafu.bingo.entity.Orderlist">
