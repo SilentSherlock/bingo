@@ -77,4 +77,10 @@
         WHERE
             gid =#{gid}
     </update>
+    <delete id="delete" parameterType="com.nwafu.bingo.entity.Game">
+        DELETE FROM
+            game
+        WHERE
+            gid = #{gid}
+    </delete>
 </mapper>
