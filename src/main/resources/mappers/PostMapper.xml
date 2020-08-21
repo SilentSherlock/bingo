@@ -12,11 +12,11 @@
         <result column="title" property="title" jdbcType="VARCHAR"/>
 
     </resultMap>
-    <insert id="add" parameterType="com.nwafu.bingo.entity.Post">
+    <insert id="add" parameterType="com.nwafu.bingo.entity.Post" useGeneratedKeys="true">
         INSERT INTO
-            post(pid,uid,ptime,ptheme,plikenum,content,title)
+            post(uid,ptime,ptheme,plikenum,content,title)
         VALUES
-            (#{pid},#{uid},#{ptime},#{ptheme},#{plikenum},#{content},#{title});
+            (#{uid},#{ptime},#{ptheme},#{plikenum},#{content},#{title});
     </insert>
     <select id="getById" resultMap="BasePostMap">
         SELECT

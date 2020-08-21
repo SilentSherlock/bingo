@@ -5,16 +5,16 @@
     <resultMap id="BaseOrderListMap" type="com.nwafu.bingo.entity.OrderDetail">
         <id column="oid" property="oid" jdbcType="INTEGER"/>
         <result column="uid" property="uid" jdbcType="INTEGER"/>
-        <result column="detail" property="detail" jdbcType="VARCHAR"/>
+        <result column="orderDetails" property="detail" jdbcType="VARCHAR"/>
         <result column="otime" property="otime" jdbcType="VARCHAR"/>
 
     </resultMap>
 
     <insert id="add" parameterType="com.nwafu.bingo.entity.OrderDetail">
         INSERT INTO
-            orderlist(oid,uid,detail,otime)
+            orderlist(uid,detail,otime)
         VALUES
-            (#{oid},#{uid},#{detail},#{otime})
+            (#{uid},#{detail},#{otime})
     </insert>
 
     <select id="getById"  resultMap="BaseOrderListMap">
