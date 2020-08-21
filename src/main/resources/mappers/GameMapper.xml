@@ -8,7 +8,7 @@
         <result column="gtype" property="gtype" jdbcType="VARCHAR"/>
         <result column="developer" property="developer" jdbcType="VARCHAR"/>
         <result column="publisher" property="publisher" jdbcType="VARCHAR"/>
-        <result column="releasedata" property="releasedata" jdbcType="VARCHAR"/>
+        <result column="releasedate" property="realeasedate" jdbcType="VARCHAR"/>
         <result column="gprice" property="gprice" jdbcType="FLOAT"/>
         <result column="discount" property="discount" jdbcType="FLOAT"/>
         <result column="gscore" property="gscore" jdbcType="FLOAT"/>
@@ -46,10 +46,10 @@
 
     <insert id="add" parameterType="com.nwafu.bingo.entity.Game" useGeneratedKeys="true">
         INSERT INTO
-            game (gname,gtype,developer,publisher,releasedata,gprice,discount,gscore,language,
+            game (gname,gtype,developer,publisher,releasedate,gprice,discount,gscore,language,
                   detail,vhref,phref,chref,dlclist,platform,systemreq)
         VALUES
-            (#{gname},#{gtype},#{developer},#{publisher},#{releasedata},#{gprice},#{discount},
+            (#{gname},#{gtype},#{developer},#{publisher},#{realeasedate},#{gprice},#{discount},
             #{gscore},#{language},#{detail},#{vhref},#{phref},#{chref,},#{dlclist},#{platform},#{systemreq});
     </insert>
 
@@ -62,7 +62,7 @@
             gtype=#{gtype},
             developer=#{developer},
             publisher=#{publisher},
-            releasedata=#{releasedata},
+            releasedate=#{realeasedate},
             gprice=#{gprice},
             discount=#{discount},
             gscore=#{gscore},

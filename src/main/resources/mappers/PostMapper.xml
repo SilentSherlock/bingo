@@ -24,6 +24,11 @@
         FROM post
         WHERE ${idType} = #{idValue}
     </select>
+    <select id="getAll" resultMap="BasePostMap">
+        SELECT
+            *
+        FROM post
+    </select>
     <delete id="deleteById">
         DELETE
         FROM post
@@ -32,7 +37,7 @@
     <update id="update" parameterType="com.nwafu.bingo.entity.Post">
         UPDATE
             post
-        SET  uid = #{uid}, ptime =#{ptime}, ptheme = #{ptheme}, plikenum = #{plikenum}, conntent = #{content},title = #{title}
+        SET  uid = #{uid}, ptime =#{ptime}, ptheme = #{ptheme}, plikenum = #{plikenum}, content = #{content},title = #{title}
         WHERE pid = #{pid}
     </update>
 
