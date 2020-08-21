@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nwafu.bingo.dao.CommentDao">
+
+    <resultMap id="BaseCommentMap" type="com.nwafu.bingo.entity.Comment">
+        <id column="cid" property="cid" jdbcType="INTEGER"/>
+        <result column="uid" property="uid" jdbcType="INTEGER"/>
+        <result column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="ctime" property="ctime" jdbcType="VARCHAR"/>
+        <result column="ctype" property="ctype" jdbcType="INTEGER"/>
+        <result column="tocid" property="tocid" jdbcType="INTEGER"/>
+        <result column="touid" property="touid" jdbcType="INTEGER"/>
+
+    </resultMap>
+
+    <select id="getById" resultMap="BaseCommentMap">
+        SELECT
+            *
+        FROM
+            comment
+        WHERE
+            ${idType} = #{idValue};
+    </select>
+    <insert id="add" parameterType="com.nwafu.bingo.entity.Comment" useGeneratedKeys="true">
+        INSERT INTO
+            comment (uid ,pid, content,ctime,ctype,tocid,touid)
+        VALUES
+            (#{uid},#{pid},#{content},#{ctime},#{ctype},#{tocid},#{touid});
+    </insert>
+    <delete id="deleteById" >
+        DELETE
+            FROM comment
+        WHERE ${idType} = #{idValue};
+    </delete>
+
+</mapper>

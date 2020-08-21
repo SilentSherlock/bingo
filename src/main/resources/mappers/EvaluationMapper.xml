@@ -11,8 +11,8 @@
     </resultMap>
 
     <insert id="add" useGeneratedKeys="true">
-        insert into evaluation(eid, uid, gid, content, score, etime)
-        values (#{eid}, #{uid}, #{gid}, #{content}, #{score}, #{etime});
+        insert into evaluation(uid, gid, content, score, etime)
+        values (#{uid}, #{gid}, #{content}, #{score}, #{etime});
     </insert>
     <select id="getById" resultMap="evaluationMap">
         select * from evaluation
@@ -26,7 +26,7 @@
     </delete>
     <update id="update">
         update evaluation
-        set gid = #{gid}, content = #{content}, score = #{score}, etime = #{time}
+        set gid = #{gid}, content = #{content}, score = #{score}, etime = #{etime}
         where uid = #{uid};
     </update>
 </mapper>
