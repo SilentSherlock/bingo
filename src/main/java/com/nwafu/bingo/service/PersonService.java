@@ -4,11 +4,9 @@ import com.nwafu.bingo.dao.AdminDao;
 import com.nwafu.bingo.dao.UserDao;
 import com.nwafu.bingo.entity.Admin;
 import com.nwafu.bingo.entity.User;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTHdrFtrRef;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -48,28 +46,28 @@ public class PersonService {
 
         if (type == 0) {
             String status = "Admin Validate";
-            System.out.println(CLASSNAME + " " + status);
+            log(status);
             admins = adminDao.getByName(name);
             for (Admin admin : admins) {
                 if (admin.getPassword().equals(password)) {
-                    System.out.println(CLASSNAME + " " + status + " success");
+                    log(status + " success");
                     result = admin;
                     break;
                 }
             }
         }else if(type == 1) {
             String status = "User Validate";
-            System.out.println(CLASSNAME + " " + status);
+            log(status);
             users = userDao.getByName(name);
             for (User user : users) {
                 if (user.getPassword().equals(password)) {
-                    System.out.println(CLASSNAME + " " + status + " success");
+                    log(status + " success");
                     result = user;
                     break;
                 }
             }
         }else {
-            System.out.println("PersonService: type " + type + " is invalid!");
+            log(" type " + type + " is invalid!");
             return null;
         }
         return result;
@@ -86,7 +84,7 @@ public class PersonService {
         return null;
     }
 
-    public List<Admin> getaAllAdmin() throws Exception {
+    public List<Admin> getAllAdmin() throws Exception {
         String status = "Get all Admin";
         System.out.println(CLASSNAME + " " + status);
         List<Admin> admins = adminDao.getAll();
@@ -106,5 +104,41 @@ public class PersonService {
             return user;
         }
         return null;
+    }
+
+    public void addPerson(Object object) throws Exception{
+        String status = "Add Person";
+        log(status);
+        if (object != null) {
+            if (object instanceof Admin) {
+                adminDao.add((Admin) object);
+            }else if (object instanceof User) {
+                userDao.add((User) object);
+            }
+        }
+        log(status + " Parameter null or wrong type");
+    }
+
+    public void deleteAdminById(Integer id) throws Exception {
+        String status = "Delete Admin";
+        adminDao.deleteById(id);
+        log(status + "  success" );
+    }
+
+    public void updatePerson(Object object) throws Exception {
+        String status = "Update Person";
+        log(status);
+        if (object != null) {
+            if (object instanceof Admin) {
+                adminDao.update((Admin) object);
+            }else if (object instanceof User) {
+                userDao.update((User) object);
+            }
+        }
+        log(status + " Parameter null or wrong type");
+    }
+
+    private void log(String status) {
+        System.out.println(CLASSNAME + " " + status);
     }
 }
