@@ -17,6 +17,13 @@
             (#{uid},#{detail},#{otime})
     </insert>
 
+    <delete id="delete" parameterType="com.nwafu.bingo.entity.Orderlist">
+        DELETE FROM
+            orderlist
+        WHERE
+            oid = #{oid}
+    </delete>
+
     <select id="getById"  resultMap="BaseOrderListMap">
         SELECT
             *

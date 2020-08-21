@@ -14,8 +14,9 @@ import java.util.List;
 public interface OrderlistDao {
 
     void add(Orderlist orderlist) throws Exception;
+    void delete(Orderlist orderlist) throws Exception;
     /*根据不同的id来查询comment
      * idType的值应为oid,uid*/
-    List<Orderlist> getById(@Param("idType") Integer idType, @Param("idValue") Integer idValue) throws Exception;
+    List<Orderlist> getById(@Param("idType") String idType, @Param("idValue") Integer idValue) throws Exception;
     List<Orderlist> getAll() throws Exception;
 }

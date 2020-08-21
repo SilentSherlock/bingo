@@ -16,8 +16,8 @@ public interface EvaluationDao {
     void add(Evaluation evaluation) throws Exception;
     /*根据不同的id来查询comment
      * idType的值应为eid,uid,gid*/
-    List<Evaluation> getById(@Param("idType") Integer idType, @Param("idValue") Integer idValue) throws Exception;
+    List<Evaluation> getById(@Param("idType") String idType, @Param("idValue") Integer idValue) throws Exception;
     /*要求与上同*/
-    void deleteById(@Param("idType") Integer idType, @Param("idValue") Integer idValue) throws Exception;
+    void deleteById(@Param("idType") String idType, @Param("idValue") Integer idValue) throws Exception;
     void update(Evaluation evaluation) throws Exception;
 }

@@ -16,4 +16,5 @@ public interface SystemReqDao {
     List<SystemReq> getAll() throws Exception;
     void add(SystemReq systemReq) throws Exception;
     void deleteById(Integer id) throws Exception;
+    void updateById(SystemReq systemReq) throws Exception;
 }
