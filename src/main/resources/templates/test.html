@@ -6,12 +6,12 @@
     <!-- 引入网页图标 -->
     <link rel="icon" href="/src/icon.png">
     <!-- 引入bootstrap默认css样式 -->
-    <link rel="stylesheet" href="/extlib/bootstrap-4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/extlib/bootstrap-3.3.7/css/bootstrap.min.css">
     <!-- 引入bootstrapValidator默认css样式 -->
     <link rel="stylesheet" href="/extlib/bootstrapvalidator-0.5.3/css/bootstrapValidator.min.css">
     <!-- 注意：因为bootstrap和bootstrapValidator的js插件使用了jquery，所以jquery的引用必须放到bootstrap的js插件引用之前 -->
     <script type="text/javascript" src="/extlib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript" src="/extlib/bootstrap-4.5.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/extlib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/extlib/bootstrapvalidator-0.5.3/js/bootstrapValidator.min.js"></script>
     <!-- jquery.fileupload插件 -->
     <script type="text/javascript" src="/extlib/jquery.fileupload/js/vendor/jquery.ui.widget.min.js"></script>
@@ -22,7 +22,6 @@
     <!-- vue.js -->
     <script type="text/javascript" src="/extlib/vue-2.6.11/vue.js"></script>
     <!-- 引入自己的css库文件-->
-    <link rel="stylesheet" href="/css/globalStyle.css">
     <link rel="stylesheet" href="/css/index.css">
     <!-- 引入自己的js库文件 -->
     <script type="text/javascript" src="/js/reusable.js"></script>
@@ -30,89 +29,143 @@
     <script type="text/javascript" src="/js/index.js"></script>
 </head>
 <body>
-<div class="fixed-top">
+<div class="navbar-fixed-top">
     <!-- 导航栏 -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="javascript:void(0)">
-            <img src="/src/logo_rectangle.png" alt="Bingo">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)">首页 </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button"
-                       data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        游戏
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="btn navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div>
+                    <a href="javascript:void(0)" class="navbar-brand">
+                        <img src="/src/logo_rectangle.png" alt="Bingo">
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="javascript:void(0)">动作</a>
-                        <a class="dropdown-item" href="javascript:void(0)">冒险</a>
-                        <a class="dropdown-item" href="javascript:void(0)">所有游戏</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)">社区 </a>
-                </li>
-            </ul>
-            <form class="form-inline">
-                <div class="input-group input-group-sm">
-                    <input class="form-control" type="search" placeholder="请输入关键字" aria-label="Search">
                 </div>
-                <button class="btn btn-primary btn-sm" type="submit">搜索商店</button>
-            </form>
+            </div>
 
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)">登录 </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0)">注册 </a>
-                </li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="javascript:void(0)">首页</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">游戏
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="javascript:void(0)">免费游戏</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)">新游上线</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)">即将上线</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)">促销游戏</a></li>
+                            <li role="separator" class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)">动作</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)">射击</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)">策略</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)">模拟</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)">独立</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)">角色扮演</a></li>
+                            <li role="separator" class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)">所有游戏</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0)">社区</a></li>
+                </ul>
 
-            <div class="mr-auto">
-                <div class="dropdown">
-                    <a href="javascript:void(0)" class="dropdown-toggle" role="button" id="dropdownMenuButton"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="/static/src/avatar_default.png" alt="头像">
-                        <span id="index-navbar-adminName">&nbsp;用户昵称&nbsp;</span>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="javascript:void(0)">我的信息</a>
-                        <a class="dropdown-item" href="javascript:void(0)">我的订单</a>
-                        <a class="dropdown-item" href="javascript:void(0)">愿望单</a>
-                        <a class="dropdown-item" href="javascript:void(0)">购物车</a>
-                        <a class="dropdown-item" href="javascript:void(0)">退出</a>
+                <ul class="nav navbar-nav navbar-right" id="navbar-uinfo">
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">
+                            <img src="/src/avatar_default.png" alt="头像">
+                            <span id="index-navbar-adminName">&nbsp;用户昵称&nbsp;</span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0)">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;我的信息
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0)">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;我的订单
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0)">
+                                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp;我的购物车
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0)">
+                                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>&nbsp;我的愿望单
+                                </a>
+                            </li>
+                            <li role="separator" class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0)">
+                                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;退出
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right" id="navbar-nologged">
+                    <li><a href="javascript:void(0)">登录</a></li>
+                    <li><a href="javascript:void(0)">注册</a></li>
+                </ul>
+
+                <form class="nav navbar-form navbar-right" role="search" id="navbar-search-form">
+                    <div class="form-group">
+                        <label class="control-label" for="navbar-search-form-keyword-input"></label>
+                        <input type="text" class="form-control" id="navbar-search-form-keyword-input"
+                               name="navbar-search-form-keyword-input" placeholder="请输入关键字">
                     </div>
-                </div>
+                    <button type="submit" class="btn btn-primary" id="navbar-search-form-submit-button"
+                            name="navbar-search-form-submit-button"
+                            data-loading-text="<span class='glyphicon glyphicon-search' aria-hidden='true'></span> 搜索中...">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 搜索商店
+                    </button>
+                    <div class="form-group">
+                        <div class="dropdown" id="navbar-search-form-result">
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="javascript:void(0)">
+                                        sadf
+                                    </a>
+                                </li>
+                                <li role="separator" class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" href="javascript:void(0)">
+                                        sadf
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </nav>
     <!-- 面包屑导航 -->
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item" aria-current="page">您的位置：<a href="javascript:void(0)"> 首页</a></li>
-            <li class="breadcrumb-item" aria-current="page"><a href="javascript:void(0)">游戏</a></li>
-            <li class="breadcrumb-item" aria-current="page"><a href="javascript:void(0)">死亡搁浅</a></li>
-        </ol>
-    </nav>
+    <ol class="breadcrumb">
+        <li>您的位置：<a href="/">首页</a></li>
+        <li><a href="javascript:void(0)">游戏</a></li>
+        <li><a href="javascript:void(0)">FPS</a></li>
+        <li>Borderland3</li>
+    </ol>
 </div>
+
 <!-- 网页主体容器-->
 <div class="container-fluid">
     <!-- 网页内容容器 -->
     <div class="row" id="body-container">
         <!-- 动态加载 -->
-
-
+        案发当时发的发射点发
     </div>
     <!-- 页脚 -->
     <div class="row" id="foot-container">

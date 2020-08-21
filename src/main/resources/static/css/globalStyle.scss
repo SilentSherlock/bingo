@@ -1,3 +1,9 @@
+/**
+ * 作者: lwh
+ * 时间: 2020.8.20
+ * 描述：网页总体基本样式输入框、按钮、滚动条等规定
+ */
+
 //导入基本常量
 @import "constant";
 
@@ -32,13 +38,13 @@
 /****************************超链接***********************/
 a {
   color: $font-color !important;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 a:hover,
 a:active {
   color: $font-color-light !important;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: $transition-color;
 }
 
@@ -47,7 +53,7 @@ a:active {
 //主要按钮
 .btn-primary,
 .btn-primary:focus {
-  color: $font-color-highlight;
+  color: darken($font-color-highlight, 10);
   background-color: $orange;
   border: none;
   box-shadow: none;
@@ -95,6 +101,34 @@ a:active {
 .dropdown-menu .dropdown-item:active {
   background-color: lighten($background-light, 20);
   transition: $transition-color;
+}
+
+.dropdown-divider {
+  margin: 0;
+  border-top: 1px solid $background;
+}
+
+/****************************alert模态框**********************未完成*/
+.alert-modal-header {
+  border: none;
+  padding: 5px 15px 5px 15px;
+  background-color: $background;
+  color: $font-color-light;
+}
+
+.alert-modal-header span {
+  color: $font-color-light;
+}
+
+.alert-modal-body {
+  padding: 10px;
+  background-color: $background-light;
+  color: $font-color;
+}
+
+.alert-modal-body-foot {
+  margin-top: 20px;
+  text-align: right;
 }
 
 /****************************输入框***********************/

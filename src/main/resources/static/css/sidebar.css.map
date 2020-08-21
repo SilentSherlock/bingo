@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": ";AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;EA0BE",
+"mappings": ";AAAA;;;;GAIG;AAEH;;;;;;;;;;;;;;;;;;;;;;;;;;EA0BE",
 "sources": ["sidebar.scss"],
 "names": [],
 "file": "sidebar.css"

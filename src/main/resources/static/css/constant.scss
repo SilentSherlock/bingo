@@ -1,3 +1,9 @@
+/**
+ * 作者: lwh
+ * 时间: 2020.8.20
+ * 描述：网页总体样式采用颜色、字体大小、动画常量规定
+ */
+
 /****************************基本颜色***********************/
 $yellow: rgb(255, 152, 0);
 $blue-dark: rgb(0, 103, 255);
@@ -31,18 +37,14 @@ $transition-all: all 0.6s;
 
 /****************************框架组件常量***********************/
 //页面基本内容常量
-$body-min-height: 800px;//页面主题最小高度
+$body-min-height: 800px; //页面主题最小高度
 //导航栏
-$navbar-height: 70px;//导航栏高度
-$navbar-padding: 50px;//导航部分内容左右内边距
-$navbar-brand-width: 140px;//logo宽度
-$navbar-brand-height: 60px;
-$navbar-navlink-width: 100px;//链接宽度
-$navbar-avatar-width: 40px;//用户头像大小
-$navbar-form-width: 200px;//搜索框大小
+$navbar-height: 70px; //导航栏高度
+$navbar-padding: 50px; //导航部分内容左右内边距
+$navbar-navlink-width: 100px; //链接宽度
+$navbar-avatar-width: 40px; //用户头像大小
 //面包屑导航栏
-$breadcrumb-height: 25px;//面包屑导航栏高度
-$breadcrumb-divider: quote(">");//面包屑导航栏分隔符
-$breadcrumb-divider-padding: 2px;//面包屑导航栏分隔符间距
+$breadcrumb-height: 25px; //面包屑导航栏高度
+$breadcrumb-divider: quote(">"); //面包屑导航栏分隔符
 //页脚
-$foot-height: 100px;//页脚高度
+$foot-height: 100px; //页脚高度

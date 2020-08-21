@@ -1,4 +1,19 @@
 @charset "UTF-8";
+/**
+ * 作者: lwh
+ * 时间: 2020.8.20
+ * 描述：首页样式
+ */
+/**
+ * 作者: lwh
+ * 时间: 2020.8.20
+ * 描述：网页总体基本样式输入框、按钮、滚动条等规定
+ */
+/**
+ * 作者: lwh
+ * 时间: 2020.8.20
+ * 描述：网页总体样式采用颜色、字体大小、动画常量规定
+ */
 /****************************基本颜色***********************/
 /****************************基本字体及动画***********************/
 /****************************框架组件常量***********************/
@@ -33,20 +48,20 @@
 /****************************超链接***********************/
 a {
   color: #7a80a2 !important;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 a:hover,
 a:active {
   color: #b9c0ef !important;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: background-color 0.3s, color 0.3s;
 }
 
 /****************************按钮***********************/
 .btn-primary,
 .btn-primary:focus {
-  color: white;
+  color: #e6e6e6;
   background-color: #ff6900;
   border: none;
   box-shadow: none;
@@ -95,87 +110,119 @@ a:active {
   transition: background-color 0.3s, color 0.3s;
 }
 
+.dropdown-divider {
+  margin: 0;
+  border-top: 1px solid #202539;
+}
+
+/****************************alert模态框**********************未完成*/
+.alert-modal-header {
+  border: none;
+  padding: 5px 15px 5px 15px;
+  background-color: #202539;
+  color: #b9c0ef;
+}
+
+.alert-modal-header span {
+  color: #b9c0ef;
+}
+
+.alert-modal-body {
+  padding: 10px;
+  background-color: #33394d;
+  color: #7a80a2;
+}
+
+.alert-modal-body-foot {
+  margin-top: 20px;
+  text-align: right;
+}
+
 /****************************输入框***********************/
 body {
   background-color: #202539;
   color: #7a80a2;
 }
 
-body > div.fixed-top > nav:first-of-type {
+nav.navbar {
+  border: none;
+  border-radius: 0;
   padding: 0 50px;
-  background-color: #202539 !important;
+  margin: 0;
+  background-color: #202539;
   color: #7a80a2;
+  font-size: 20px;
+}
+
+nav.navbar .navbar-header .navbar-brand {
+  height: 70px;
+  padding: 0;
+}
+
+nav.navbar .navbar-header .navbar-brand img {
+  width: 173.6px;
   height: 70px;
 }
 
-.navbar .navbar-brand img {
-  width: 140px;
-  height: 60px;
-}
-
-.navbar .navbar-nav {
+nav.navbar ul.navbar-nav {
   padding: 0 50px;
+  line-height: 70px;
 }
 
-.navbar .nav-link {
+nav.navbar ul.navbar-nav > li > a {
   width: 100px;
+  height: 70px;
+  padding: 0;
+  line-height: 70px;
+  font-size: 16px;
   text-align: center;
 }
 
-.navbar .navbar-nav:last-of-type {
-  margin-right: 0 !important;
-  padding-right: 50px !important;
+nav.navbar li.active > a {
+  background-color: #33394d !important;
+  color: #b9c0ef !important;
 }
 
-.navbar .navbar-nav:last-of-type .nav-item:first-of-type {
-  border-right: 2px #7a80a2 solid;
+nav.navbar li.dropdown.open > a {
+  background-color: #33394d !important;
 }
 
-#navbarSupportedContent > form {
-  padding: 0 50px;
+nav.navbar form.navbar-form {
+  height: 70px;
+  margin: 0;
+  padding-top: 18px;
 }
 
-#navbarSupportedContent > form > .input-group > input {
-  width: 200px;
-  margin-right: 10px;
+nav.navbar ul.navbar-right > li.dropdown > a.dropdown-toggle {
+  width: unset;
 }
 
-#navbarSupportedContent > div:last-of-type {
-  padding: 0 50px;
-  margin-right: 0 !important;
-  float: right;
-}
-
-#navbarSupportedContent > div:last-of-type a img {
+nav.navbar #navbar-uinfo .dropdown-toggle > img {
   width: 40px;
   height: 40px;
-  border: 1px #33394d solid;
   border-radius: 20px;
 }
 
 .breadcrumb {
   border-radius: 0;
   padding: 3px 50px;
-  background-color: #33394d !important;
+  background-color: #33394d;
   height: 25px;
+  margin-bottom: 0;
 }
 
-.breadcrumb-item {
+.breadcrumb > li {
   font-size: 13px;
   color: #7a80a2;
 }
 
-.breadcrumb-item:last-of-type {
-  color: #b9c0ef;
-}
-
-.breadcrumb-item + .breadcrumb-item {
-  padding-left: 2px;
-}
-
-.breadcrumb-item + .breadcrumb-item::before {
+.breadcrumb > li + li::before {
+  color: #7a80a2;
   content: ">";
-  padding-right: 2px;
+}
+
+.breadcrumb > li + li:last-of-type {
+  color: #b9c0ef;
 }
 
 #body-container {

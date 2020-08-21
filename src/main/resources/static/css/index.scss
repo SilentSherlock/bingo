@@ -1,3 +1,9 @@
+/**
+ * 作者: lwh
+ * 时间: 2020.8.20
+ * 描述：首页样式
+ */
+
 //导入基本常量
 @import "globalStyle";
 //导入侧边栏css
@@ -9,55 +15,67 @@ body {
 }
 
 //导航栏
-body > div.fixed-top > nav:first-of-type {
+nav.navbar {
+  border: none;
+  border-radius: 0;
   padding: 0 $navbar-padding;
-  background-color: $background !important;
+  margin: 0;
+  background-color: $background;
   color: $font-color;
+  font-size: $font-size-title;
+}
+
+//导航栏brand
+nav.navbar .navbar-header .navbar-brand {
+  height: $navbar-height;
+  padding: 0;
+}
+
+nav.navbar .navbar-header .navbar-brand img {
+  width: $navbar-height * 2.48;
   height: $navbar-height;
 }
 
-.navbar .navbar-brand img {
-  width: $navbar-brand-width;
-  height: $navbar-brand-height;
-}
-
-.navbar .navbar-nav {
+//导航列表超链接通用样式
+nav.navbar ul.navbar-nav {
   padding: 0 $navbar-padding;
+  line-height: $navbar-height;
 }
 
-.navbar .nav-link {
+nav.navbar ul.navbar-nav > li > a {
   width: $navbar-navlink-width;
+  height: $navbar-height;
+  padding: 0;
+  line-height: $navbar-height;
+  font-size: $font-size-text;
   text-align: center;
 }
 
-.navbar .navbar-nav:last-of-type {
-  margin-right: 0 !important;
-  padding-right: $navbar-padding !important;
+//导航列表超链接被激活样式
+nav.navbar li.active > a {
+  background-color: $background-light !important;
+  color: $font-color-light !important;
 }
 
-.navbar .navbar-nav:last-of-type .nav-item:first-of-type {
-  border-right: 2px $font-color solid;
+nav.navbar li.dropdown.open > a {
+  background-color: $background-light !important;
 }
 
-#navbarSupportedContent > form {
-  padding: 0 $navbar-padding;
+//导航栏搜索框
+nav.navbar form.navbar-form {
+  height: $navbar-height;
+  margin: 0;
+  padding-top: 18px;
 }
 
-#navbarSupportedContent > form > .input-group > input {
-  width: $navbar-form-width;
-  margin-right: 10px;
+//用户信息展示导航标签特殊样式
+nav.navbar ul.navbar-right > li.dropdown > a.dropdown-toggle {
+  width: unset;
 }
 
-#navbarSupportedContent > div:last-of-type {
-  padding: 0 $navbar-padding;
-  margin-right: 0 !important;
-  float: right;
-}
-
-#navbarSupportedContent > div:last-of-type a img {
+nav.navbar #navbar-uinfo .dropdown-toggle > img {
   width: $navbar-avatar-width;
   height: $navbar-avatar-width;
-  border: 1px $background-light solid;
   border-radius: $navbar-avatar-width / 2;
 }
 
@@ -65,26 +83,26 @@ body > div.fixed-top > nav:first-of-type {
 .breadcrumb {
   border-radius: 0;
   padding: 3px $navbar-padding;
-  background-color: $background-light !important;
+  background-color: $background-light;
   height: $breadcrumb-height;
+  margin-bottom: 0;
 }
 
-.breadcrumb-item {
+//基本样式
+.breadcrumb > li {
   font-size: $font-size-text-small;
   color: $font-color;
 }
 
-.breadcrumb-item:last-of-type {
-  color: $font-color-light;
-}
-
-.breadcrumb-item + .breadcrumb-item {
-  padding-left: $breadcrumb-divider-padding;
-}
-
-.breadcrumb-item + .breadcrumb-item::before {
+//跟随于li之后的li的伪元素::before的样式
+.breadcrumb > li + li::before {
+  color: $font-color;
   content: $breadcrumb-divider;
-  padding-right: $breadcrumb-divider-padding;
+}
+
+//最后一个，即当前所处路径的样式
+.breadcrumb > li + li:last-of-type {
+  color: $font-color-light;
 }
 
 //页面主体

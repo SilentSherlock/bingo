@@ -165,55 +165,21 @@ function getCookie(cname) {
  */
 function myAlert(message) {
     //判断是否已经加载提示框modal
-    if (!isLoaded("alert")) {
+    if ($("#alert").length === 0) {
         $.ajax({
             url: "alert",
             type: "get",
-            async: false,
+            async: true,
             dataType: "html",
             success: function (data) {
                 $("body").append(data);
+                //显示模态框
+                $("#alert").modal();
+                //更改提示信息
+                $("#alert-message").text(message);
             },
             error: function (error) {
-                alert("----ajax请求加载自定义提示框执行出错！错误信息如下：----\n" + error.responseText);
-            }
-        });
-    }
-    //显示模态框
-    $("#alert").modal();
-    //更改提示信息
-    $("#alert-message").text(message);
-}
-
-/**
- * 作者: lwh
- * 时间: 2020.7.8
- * 描述: 加载组件，在组建已经加载的情况下不会重复加载
- * cinfo:json对象，例:
- * c0 = {
-        cname: "导航栏",            //组件名称
-        cid: "index-navbar",       //组件id
-        curl: "index_navbar",      //组件请求url
-        cinit: "index_navbar_init()"  //组件初始化函数
-    }
- */
-function loadSingleComponent(cinfo, target) {
-    //判断是否已经加载
-    if (!isLoaded(cinfo.cid)) {
-        //获取
-        $.ajax({
-            url: cinfo.curl,
-            type: "get",
-            async: false,
-            dataType: "html",
-            success: function (data) {
-                //加载到目标标签下
-                $(target).append(data);
-                //初始化组件
-                eval(cinfo.cinit);
-            },
-            error: function (error) {
-                alert("----ajax请求加载" + cinfo.cname + "出错！错误信息如下：----\n" + error.responseText);
+                alert("----ajax请求加载自定义提示框出错！----\n\n" + error.responseText);
             }
         });
     }
