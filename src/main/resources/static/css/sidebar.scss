@@ -1,0 +1,34 @@
+/**
+ * 作者: lwh
+ * 时间: 2020.8.20
+ * 描述：侧边栏样式
+ */
+
+/*
+//导入全局常量和样式
+@import "globalStyle";
+
+//侧边栏
+$sidebar-width: 425px;
+$sidebar-prompt-width: 25px;
+
+
+!*侧边栏侧边*!
+.sidebar {
+  position: fixed;
+  top: $navbar-height + $breadcrumb-height;
+  right: 0;
+  width: $sidebar-width;
+  height: 100%;
+}
+
+.sidebar .sidebar-prompt {
+  position: relative;
+  width: $sidebar-prompt-width;
+  height: 100%;
+  background: $background-dark;
+}
+
+!*侧边栏主体，默认隐藏*!
+*/
+
