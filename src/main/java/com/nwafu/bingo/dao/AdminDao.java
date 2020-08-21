@@ -10,6 +10,7 @@ import java.util.List;
  * Description: optional describe the class
  */
 @Repository
+
 public interface AdminDao {
 
     List<Admin> getAll() throws Exception;

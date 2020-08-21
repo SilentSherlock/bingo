@@ -32,7 +32,7 @@
     <delete id="deleteById" parameterType="Integer">
         DELETE FROM
             admin
-        WHERE id = #{id}
+        WHERE aid = #{id}
     </delete>
     <update id="update" parameterType="com.nwafu.bingo.entity.Admin">
         UPDATE
