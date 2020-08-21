@@ -1,0 +1,79 @@
+div{margin: 0;padding: 0;display: block;}
+body{font: 12px/1.5 'Microsoft YaHei','Heiti SC','tahoma','arial','Hiragino Sans GB';}
+img{border: 0;}
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+.p-span {
+  display: inline-block;
+  font-size: 12px;
+  color: #ffffff; 
+  padding: 0 4px;
+  font-weight: normal;
+  line-height: 18px;
+  border-radius: 2px 2px 2px 2px;
+  margin-right: 7px;
+  vertical-align: text-bottom;
+  position: relative;
+  top: 1px;
+}
+.titile-box{position:relative;}
+.titile{margin-top: 32px;margin-right: 0;margin-bottom: 32px;margin-left: 0;}
+.titile-d{/*width: 99999px;*/position: relative;transition: left 0.5s ease;}
+.titile-d-tem{float: left;background: #33394d;border-radius: 5px 5px 5px 5px;margin-right: 20px;position: relative;cursor: pointer;height: 236px;}
+.titile-cover{width: 224px;height: 132px;overflow: hidden;border-radius: 5px 5px 0 0;}
+.titile-info{position: relative;
+  box-sizing: border-box;
+  padding: 10px;
+  height: 104px;}
+.p-info{max-width: 204px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #7a80a2;
+}
+.p-price{position: absolute;
+  text-align: center;
+  right: 8px;
+  bottom: 18px;}
+.p-price-right{
+  display: inline-block;
+  position: relative;
+  /*right: 30px;*/
+  top: 8px;
+  text-align: right;}
+.list-price{font-size: 12px;
+  color: #7A80A2;
+  text-decoration: line-through;
+  display: block;}
+.true-price{color: #B9C0EF;
+  font-size: 16px;
+  font-weight: bold;
+  display: block;}
+.discount{display: inline-block;
+  background: #FF6900;
+  color: #ffffff;
+  padding: 4px 6px;
+  font-weight: bold;
+  border-radius: 2px 2px 2px 2px;
+  font-size: 16px;
+  margin-right: 2px;}
+.corner{
+  background-color:red;
+  /*background: ;*/
+  font-size: 14px;
+  color: #FFF;
+  line-height: 26px;
+  text-align: center;
+  position: absolute;
+  width: 70px;
+  height: 26px;
+  top: 5px;
+  left: -2px;}
+.cover{
+  width: 224px;height: 132px;
+}

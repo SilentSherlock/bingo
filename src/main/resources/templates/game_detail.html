@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>起飞的郭家栋</title>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/detail.css">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script type="text/css" src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="game-detail">
+    <div class="detail-main">
+        <h3 class="title"><span>樱岛麻衣</span></h3>
+        <div class="titile-content-left">
+            <div class="titile-content-left-1">
+                <div class="content">
+                    <div class="videos-player default-height" id="show">
+                        <video class="videoPlayer"   controls="controls"  autobuffer muted >
+                            <source src="video/1.mp4" type="video/mp4">
+                        </video>
+                        <!--<div class="new-big-center-play-btn" style="display: block" onclick="play()">
+                            <span class="glyphicon glyphicon-play">
+                        </div>-->
+                    </div>
+                    <div class="show-list">
+                        <div class="show-elem" >
+                            <img src="img/1.jpg" id="video" onclick="change(this)">
+                            <div class="player">
+                                <span class="glyphicon glyphicon-expand" ></span>
+                            </div>
+                        </div>
+                        <div class="show-elem" >
+                            <img src="img/2.jpg" id="elem" onclick="change(this)">
+                        </div>
+                        <div class="show-elem">
+                            <img src="img/3.jpg" id="elem" onclick="change(this)">
+                        </div>
+                        <div class="show-elem">
+                            <img src="img/4.jpg" id="elem" onclick="change(this)">
+                        </div>
+                        <div class="show-elem">
+                            <img src="img/5.jpg" id="elem" onclick="change(this)">
+                        </div>
+                        <div class="show-elem">
+                            <img src="img/6.jpg" id="elem" onclick="change(this)">
+                        </div>
+                        <div class="show-elem">
+                            <img src="img/7.jpg" id="elem" onclick="change(this)">
+                        </div>
+                        <div class="show-elem">
+                            <img src="img/8.jpg" id="elem" onclick="change(this)">
+                        </div>
+                    </div>
+                    <!--<div class="list-control">
+                        <div class="thumb"></div>
+                    </div>-->
+                </div>
+            </div>
+            <div class="titile-content-left-3">
+                <div class="titile-content-left-3-b">
+                    <div class="titile-content-left-3-1">配置需求</div>
+                </div>
+                <div class="titile-content-left-3-2">
+                    <div class="titile-content-left-3-2-1">
+                        <div class="titile-deploy">最低配置</div>
+                        <table class="main-table">
+                            <tbody>
+                            <tr class="t1">
+                                <td class="lab">操作系统</td>
+                                <td class="txt">Windows 7 64-bit | Windows 8 64-bit | Windows 10 64-bit</td>
+                            </tr>
+                            <tr>
+                                <td class="lab">内存</td>
+                                <td class="txt">4G RAM</td>
+                            </tr>
+                            <tr class="t1">
+                                <td class="lab">处理器</td>
+                                <td class="txt">Intel Core i3-2100 | AMD FX-6300</td>
+                            </tr>
+                            <tr>
+                                <td class="lab">DirectX版本</td>
+                                <td class="txt">11</td>
+                            </tr>
+                            <tr class="t1">
+                                <td class="lab">声卡</td>
+                                <td class="txt">DirectX 11 Compatible</td>
+                            </tr>
+                            <tr>
+                                <td class="lab">显卡</td>
+                                <td class="txt">NVIDIA GeForce GTX 760 | AMD Radeon HD 7950</td>
+                            </tr>
+                            <tr class="t1">
+                                <td class="lab">硬盘</td>
+                                <td class="txt">需要 25 GB 可用空间</td>
+                            </tr>
+                            <tr>
+                                <td class="lab">其他</td>
+                                <td class="txt">需要互联网连接</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="titile-content-left-3-2-2">
+                        <div class="titile-deploy">推荐配置</div>
+
+                        <table class="main-table">
+                            <tbody>
+                            <tr class="t1">
+                                <td class="lab">操作系统</td>
+                                <td class="txt">Windows 7 64-bit | Windows 8 64-bit | Windows 10 64-bit</td>
+                            </tr>
+                            <tr>
+                                <td class="lab">内存</td>
+                                <td class="txt">4G RAM</td>
+                            </tr>
+                            <tr class="t1">
+                                <td class="lab">处理器</td>
+                                <td class="txt">Intel Core i3-2100 | AMD FX-6300</td>
+                            </tr>
+                            <tr>
+                                <td class="lab">DirectX版本</td>
+                                <td class="txt">11</td>
+                            </tr>
+                            <tr class="t1">
+                                <td class="lab">声卡</td>
+                                <td class="txt">DirectX 11 Compatible</td>
+                            </tr>
+                            <tr>
+                                <td class="lab">显卡</td>
+                                <td class="txt">NVIDIA GeForce GTX 760 | AMD Radeon HD 7950</td>
+                            </tr>
+                            <tr class="t1">
+                                <td class="lab">硬盘</td>
+                                <td class="txt">需要 25 GB 可用空间</td>
+                            </tr>
+                            <tr>
+                                <td class="lab">其他</td>
+                                <td class="txt">需要互联网连接</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="titile-content-left-2">
+                <h3 class="titile-one">游戏评分</h3>
+                <div class="titile-two">
+                    <div class="score-1">
+                        <div class="score-1-1">8</div>
+                        <div class="score-1-2">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                            </svg>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                            </svg>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                            </svg>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                            </svg>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="titile-three">
+                    <div class="score-1-3">
+                        <div class="score-1-3-1">
+                            <div class="Avatar">
+                                <img class="uAvatar" src="img/Avatar.jpg">
+                            </div>
+                            <div class="uname">GKD</div>
+                        </div>
+                        <div class="score-1-3-2">
+                            <div class="score1">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                                </svg>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                                </svg>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                                </svg>
+                            </div>
+                            <div class="score2">发布于2020/8/20</div>
+                            <div class="score3">还八错</div>
+                        </div>
+                    </div>
+                    <div class="score-1-3">
+                        <div class="score-1-3-1">
+                            <div class="Avatar">
+                                <img class="uAvatar" src="img/Avatar.jpg">
+                            </div>
+                            <div class="uname">GKD</div>
+                        </div>
+                        <div class="score-1-3-2">
+                            <div class="score1">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                </svg>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                                </svg>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                                </svg>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                                </svg>
+                            </div>
+                            <div class="score2">发布于2020/8/20</div>
+                            <div class="score3">还八错</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="titile-content-right">
+            <div class="titile-content-right-1">
+
+                <div class="titile-content-left-2">
+                    <div class="d-cover">
+                        <img src="img/3.jpg" class="cover" alt="封面">
+                    </div>
+                    <div class="titile-two">
+                        <p>在《Sekiro: Shadows Die Twice》中你是“独臂之狼”，一个名誉不再、伤痕累累的忍者，一个从死亡边缘捡回一命的战士。你效忠守护继承古老血统的年轻皇子，与危险的苇名一族以及众多凶恶之徒为敌。年轻的皇子被抓走后，为挽回荣誉，你将不畏死亡，踏上危机四伏的征程。
+                            探索生死冲突不断的16世纪后期，感受残酷的日本战国时代，在黑暗、扭曲的世界，与威胁生命的敌人对峙。活用义手装备各种致命武器，大显忍者身手，在血腥对抗中潜行、上下穿梭，与敌人正面激烈交锋。
+                            复仇雪耻。夺回荣誉。巧妙杀敌。</p>
+                    </div>
+                </div>
+                <div class="tag-list">
+                    <a class="tag" href="">动作</a>
+                    <a class="tag" href="">第三人称</a>
+                    <a class="tag" href="">多人</a>
+                </div>
+                <div class="sale-info">
+                    <div>
+                        <div class="off-discount">
+                            <div class="off-count">-35%</div>
+                        </div>
+                        <div class="list-price">￥268</div>
+                        <div class="true-price">￥174</div>
+                    </div>
+                </div>
+                <div class="box-buy">
+                    <div>
+                        <div class="box-bts">
+                            <button class="shoopingcat">加入购物车</button>
+                        </div>
+                        <div class="buy">
+                            <button class="tobuy">立即上车</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="wish">
+                    <a href="">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart" fill="currentColor" xmlns="http://www.w3.org/2000/svg" >
+                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                        </svg>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg" hidden="true" >
+                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        </svg>加入心愿单
+                    </a>
+                </div>
+            </div>
+            <div class="titile-content-right-2">
+                <div class="item-info">
+                    <div class="item-label">开发商</div>
+                    <div class="item-content">
+                        <div class="item">2K</div>
+                    </div>
+                    <div class="item-label">发行商</div>
+                    <div class="item-content">
+                        <div class="item">2K</div>
+                    </div>
+                    <div class="item-label">发行日期</div>
+                    <div class="item-content">
+                        <div class="item">2017/2/22</div>
+                    </div>
+                    <div class="item-label">语言</div>
+                    <div class="item-content">
+                        <div class="item">中文</div>
+                        <div class="item">英文</div>
+                        <div class="item">法语</div>
+                    </div>
+                    <div class="item-label">支持系统</div>
+                    <div class="item-content">
+                        <div class="item">win</div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="titile-content-right-3">
+                同一开发商的其他大作
+            </div>-->
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function change(typp){
+        console.log("点击事件发生");
+        console.log($(typp));
+        console.log($(typp).attr("id"));
+        console.log($(typp).attr("src"));
+        if($(typp).attr("id")==="elem"){
+            document.getElementById("show").innerHTML="<img src="+$(typp).attr("src")+" class='default-height' />";
+        }
+        else{
+            document.getElementById("show").innerHTML="<video class=\"videoPlayer\"   controls=\"controls\"  autobuffer muted >\n" +
+                "                            <source src=\"video/1.mp4\" type=\"video/mp4\">\n" +
+                "                        </video>"
+        }
+        /*$.getElementById("show").innerHTML="<img src=\"img\/1.jpg\" />";*/
+    }
+</script>
+</body>
+</html>
