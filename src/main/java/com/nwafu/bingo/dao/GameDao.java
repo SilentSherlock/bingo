@@ -13,10 +13,11 @@ import java.util.List;
 public interface GameDao {
 
     void add(Game game) throws Exception;
+    void update(Game game) throws Exception;
+    void delete(Game game) throws Exception;
     List<Game> getAll() throws Exception;
     /*模糊查询*/
     List<Game> getByName(String name) throws Exception;
     /*直接根据gid获取*/
     Game getById(Integer id) throws Exception;
-    void update(Game game) throws Exception;
 }
