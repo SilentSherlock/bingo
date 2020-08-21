@@ -36,4 +36,13 @@
             FROM systemreq
         WHERE srid = #{id}
     </delete>
+
+    <update id="updateById" parameterType="com.nwafu.bingo.entity.SystemReq">
+        UPDATE
+            systemreq
+        SET
+            os = #{os}, ram = #{ram}, cpu = #{cpu}, gpu = #{gpu}, harddisk = #{harddisk}
+        WHERE
+            srid = #{srid}
+    </update>
 </mapper>
