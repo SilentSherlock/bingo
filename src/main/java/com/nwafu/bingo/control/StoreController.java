@@ -1,4 +1,4 @@
-package com.nwafu.bingo.controller;
+package com.nwafu.bingo.control;
 
 
 import com.nwafu.bingo.entity.Evaluation;
