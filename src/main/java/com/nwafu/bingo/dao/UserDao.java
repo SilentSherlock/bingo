@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface UserDao {
 
-    void add(User user) throws Exception;
+    int add(User user) throws Exception;
     List<User> getByName(String name) throws Exception;
     User getById(Integer id) throws Exception;
     List<User> getAll() throws Exception;
