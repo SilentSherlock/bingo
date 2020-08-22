@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>wish_list</title>
+    <style>
+        body{
+            background: #202539;
+        }
+        div,body,p,h1,h2,input,ul,li{
+            margin:0;
+            padding:0;
+        }
+        div{
+            display: block;
+        }
+        h1,h2,h3{
+            font-size:100%;
+            font-weight: normal;
+        }
+        .community-content{
+            padding: 130px 0 40px;
+            width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
+        }
+        .tabs-container{
+            min-height: 603px;
+        }
+        .left-menu-tabs{
+            float: left;
+            width: 160px;
+            height: auto;
+            background: #33394d;
+            overflow: hidden;
+            border-radius: 5px 5px 5px 5px;
+        }
+        .first-title{
+            font-size: 18px;
+            color: #b9c0ef;
+            margin: 0 20px 5px 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #3f4760;
+            float: none;
+            border-top: none;
+            height: 42px;
+        }
+        .tags-button{
+            padding: 0;
+            float: none;
+            height: 42px;
+            font-size: 16px;
+            line-height: 54px;
+            border-width: 4px 0 0;
+            text-decoration: none;
+        }
+        .tags-button a{
+            color: #7a80a2;
+            font-size: 16px;
+            display: block;
+            line-height: 42px;
+            text-align: center;
+            text-decoration: none;
+        }
+        .tags-button .active:link {
+
+        }
+        .tags-button .active:visited {
+            color: #ff6900;
+            background: #292e41;
+        }
+        .tags-button .active:hover {
+            color: #ff6900;
+            background: #292e41;
+        }
+        .tags-button .active:active{
+
+        }
+        .tags-button a:link {
+
+        }
+        .tags-button a:visited {
+        }
+        .tags-button a:hover {
+            color: #b9c0ef;
+            background: #292e41;
+        }
+        .tags-button a:active{
+        }
+        .active {
+            color: #ff6900;
+            background: #292e41;
+        }
+        .community-wish-list{
+            padding-left:170px;
+            padding-top:0;
+
+        }
+        .community-middle{
+            float: left;
+            width: 830px;
+        }
+        .wish-list-container{
+            background: #33394d;
+            padding: 0 20px;
+        }
+        .wish-list-menu{
+            float: right;
+            color: #b9c0ef;
+            position: relative;
+            margin-top: 15px;
+            line-height: 30px;
+            cursor: pointer;
+        }
+        .wish-list-owner{
+            color: #b9c0ef;
+            font-size: 14px;
+            padding: 20px 0;
+            border-bottom: 2px solid #b9c0ef;
+        }
+        .wish-tab{
+            height:61px
+        }
+        .wish-list-count{
+            float: left;
+            font-size: 14px;
+            padding: 20px 0;
+            color: #7a80a2;
+        }
+        .count{
+            color: #ff6900;
+        }
+        .wish-list-content{
+
+        }
+        .wish-list-block{
+            position: relative;
+            padding: 20px 0;
+            height: 100px;
+            line-height: 100px;
+        }
+        .image-wrapper{
+            display: inline-block;
+            height: 100px;
+            width: 164px;
+            vertical-align: middle;
+        }
+        img{
+            border: 0;
+            width:164px;
+            height: 100px;
+        }
+        .title{
+            display: inline-block;
+            font-size: 18px;
+            font-weight: bold;
+            text-indent: 20px;
+            width: 200px;
+            vertical-align: middle;
+            color: #b9c0ef;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        .percentage{
+            display: inline-block;
+            width: 70px;
+            text-align: right;
+        }
+        .list-price{
+            color: #7a80a2;
+            text-decoration: line-through;
+            font-size: 16px;
+            display: inline-block;
+            width: 70px;
+            text-align: right;
+        }
+        .sale-price{
+            color: #ff6900;
+            font-weight: bold;
+            font-size: 16px;
+            display: inline-block;
+            width: 70px;
+            text-align: right;
+        }
+        .shopping-operator{
+            float:right;
+            display: inline;
+        }
+        .button{
+            background: #ff6900;
+            outline: none;
+            border: none;
+            color: #ffffff;
+            padding: 0;
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            float: left;
+            margin: 0;
+            cursor: pointer;
+            appearance: button;
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            text-align: center;
+            align-items: flex-start;
+            box-sizing: border-box;
+            font: 400 13px Arial;
+            border-radius: 2px;
+        }
+        ul{
+            margin-top:20px;
+        }
+        li{
+            list-style-type: none;
+            height:40px;
+        }
+    </style>
+</head>
+<body>
+<div class="community-content">
+    <div class="tabs-container">
+        <div class="left-menu-tabs">
+            <div class="first-title tags-button">订单中心</div>
+            <div class="tags-button">
+                <a class="close" id="choose1" href="#">我的订单</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="#">我的点评</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="#">我的游戏</a>
+            </div>
+            <div class="first-title tags-button">我的账户</div>
+            <div class="tags-button">
+                <a class="close" href="#">基本信息</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="#">购物车</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="#">心愿单</a>
+            </div>
+        </div>
+    <div class="community-content community-wish-list">
+        <div class="community-middle">
+            <div class="wish-list-container">
+                <div class="wish-list-menu">
+                    <span>隐私设置</span>
+                </div>
+                <h1 class="wish-list-owner">心愿单</h1>
+                <div class="wish-tab">
+                    <p class="wish-list-count">共有<span class="count">2</span>项</p>
+                </div>
+                <div class="wish-list-content">
+                    <div class="wish-list-block">
+                        <span class="image-wrapper">
+                            <img src="../static/src/icon.png">
+                        </span>
+                        <a class="title" href="#" target="_blank">傀儡黑帮：傀儡师</a>
+                        <div class="percentage">
+                            <span>-0.2</span>
+                        </div>
+                        <div class="list-price">
+                            <span>￥80</span>
+                        </div>
+                        <div class="sale-price">
+                            <span>￥64</span>
+                        </div>
+                        <div class="shopping-operator">
+                            <ul>
+                                <li><button class="button">加入购物车</button></li>
+                                <li><button class="button">移出心愿单</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="wish-list-block">
+                        <span class="image-wrapper">
+                            <img src="../static/src/icon.png">
+                        </span>
+                        <a class="title" href="#" target="_blank">傀儡黑帮：傀儡师</a>
+                        <div class="percentage">
+                            <span>-0.2</span>
+                        </div>
+                        <div class="list-price">
+                            <span>￥80</span>
+                        </div>
+                        <div class="sale-price">
+                            <span>￥64</span>
+                        </div>
+                        <div class="shopping-operator">
+                            <ul>
+                                <li><button class="button">加入购物车</button></li>
+                                <li><button class="button">移出心愿单</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>
