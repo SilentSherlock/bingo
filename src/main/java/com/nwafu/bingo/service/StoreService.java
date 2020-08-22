@@ -41,9 +41,9 @@ public class StoreService {
     //region 游戏相关
     /**
     * @MethodName getAllGame
-    * @Description 获取数据库中全部游戏
+    * @Description
     * @Param []
-    * @return com.nwafu.bingo.service.StoreService
+    * @return List<Game>
     * @author yolia
     * @Date 8:40 2020/8/21
     **/
@@ -51,10 +51,21 @@ public class StoreService {
         return gameDao.getAll();
     }
     /**
+    * @MethodName getGameByNameExact
+    * @Description 根据name精确查询相关数据
+    * @Param [name]
+    * @return com.nwafu.bingo.entity.Game
+    * @author yolia
+    * @Date 10:18 2020/8/22
+    **/
+    public Game getGameByNameExact(String name) throws Exception {
+        return gameDao.getByNameExact(name);
+    }
+    /**
     * @MethodName addGame
     * @Description 向数据库中添加Game数据
     * @Param [game]
-    * @return com.nwafu.bingo.service.StoreService
+    * @return []
     * @author yolia
     * @Date 8:41 2020/8/21
     **/
@@ -65,7 +76,7 @@ public class StoreService {
     * @MethodName updateGame
     * @Description 更新数据库中的Game数据
     * @Param [game]
-    * @return com.nwafu.bingo.service.StoreService
+    * @return []
     * @author yolia
     * @Date 8:41 2020/8/21
     **/
@@ -76,7 +87,7 @@ public class StoreService {
     * @MethodName deleteGame
     * @Description 删除数据库中相关的Game数据
     * @Param [game]
-    * @return com.nwafu.bingo.service.StoreService
+    * @return []
     * @author yolia
     * @Date 8:45 2020/8/21
     **/
@@ -90,7 +101,7 @@ public class StoreService {
     * @MethodName getAllOrderList
     * @Description 获取所有订单
     * @Param []
-    * @return com.nwafu.bingo.service.StoreService
+    * @return List<Orderlist>
     * @author yolia
     * @Date 8:54 2020/8/21
     **/
@@ -100,8 +111,8 @@ public class StoreService {
     /**
     * @MethodName getOrderListById
     * @Description 根据相应的id获取该id下的订单列表
-    * @Param [idType, idValue] ------ 根据不同的id来查询comment, idType的值应为oid,uid
-    * @return com.nwafu.bingo.service.StoreService
+    * @Param [idType, idValue] ------ 根据不同的id来查询, idType的值应为oid,uid
+    * @return List<Orderlist>
     * @author yolia
     * @Date 9:12 2020/8/21
     **/
@@ -112,7 +123,7 @@ public class StoreService {
     * @MethodName addOrderList
     * @Description 向数据库中添加新的订单
     * @Param [orderlist]
-    * @return com.nwafu.bingo.service.StoreService
+    * @return []
     * @author yolia
     * @Date 9:16 2020/8/21
     **/
@@ -123,7 +134,7 @@ public class StoreService {
     * @MethodName deleteOrderList
     * @Description 删除订单
     * @Param [orderlist]
-    * @return com.nwafu.bingo.service.StoreService
+    * @return []
     * @author yolia
     * @Date 9:15 2020/8/21
     **/
@@ -137,7 +148,7 @@ public class StoreService {
     * @MethodName getSystemReq
     * @Description 根据id获取系统配置
     * @Param [id]
-    * @return com.nwafu.bingo.service.StoreService
+    * @return com.nwafu.bingo.entity.SystemReq
     * @author yolia
     * @Date 9:21 2020/8/21
     **/
@@ -145,10 +156,21 @@ public class StoreService {
         return systemReqDao.getById(id);
     }
     /**
+    * @MethodName getExact
+    * @Description 精确查询系统配置
+    * @Param [systemReq]
+    * @return com.nwafu.bingo.entity.SystemReq
+    * @author yolia
+    * @Date 10:20 2020/8/22
+    **/
+    public SystemReq getExact(SystemReq systemReq) throws Exception {
+        return systemReqDao.getExact(systemReq);
+    }
+    /**
     * @MethodName addSystemReq
     * @Description 添加系统配置(SystemReq)
     * @Param [systemReq]
-    * @return com.nwafu.bingo.service.StoreService
+    * @return []
     * @author yolia
     * @Date 9:22 2020/8/21
     **/
@@ -159,7 +181,7 @@ public class StoreService {
     * @MethodName deleteSystemReqById
     * @Description 根据id删除指定的系统配置(SystemReq)
     * @Param [id]
-    * @return com.nwafu.bingo.service.StoreService
+    * @return []
     * @author yolia
     * @Date 9:24 2020/8/21
     **/
@@ -170,7 +192,7 @@ public class StoreService {
     * @MethodName updateSystemReq
     * @Description 更新指定的系统配置(SystemReq)数据
     * @Param [systemReq]
-    * @return com.nwafu.bingo.service.StoreService
+    * @return []
     * @author yolia
     * @Date 9:29 2020/8/21
     **/
@@ -183,8 +205,8 @@ public class StoreService {
     /**
     * @MethodName getEvaluationById
     * @Description 根据相对应的id类型和id值获取指定的Evaluation列表
-    * @Param [idType, idValue] ------ 根据不同的id来查询comment, idType的值应为eid,uid,gid
-    * @return com.nwafu.bingo.service.StoreService
+    * @Param [idType, idValue] ------ 根据不同的id来查询, idType的值应为eid,uid,gid
+    * @return List<Evaluation>
     * @author yolia
     * @Date 9:33 2020/8/21
     **/
@@ -195,7 +217,7 @@ public class StoreService {
     * @MethodName addEvaluation
     * @Description 添加Evaluation记录数据
     * @Param [evaluation]
-    * @return com.nwafu.bingo.service.StoreService
+    * @return []
     * @author yolia
     * @Date 9:35 2020/8/21
     **/
@@ -205,8 +227,8 @@ public class StoreService {
     /**
     * @MethodName deleteEvaluationById
     * @Description 根据相对应的id类型和id值删除指定的Evaluation数据
-    * @Param [idType, idValue] ------ 根据不同的id来查询comment, idType的值应为eid,uid,gid
-    * @return com.nwafu.bingo.service.StoreService
+    * @Param [idType, idValue] ------ 根据不同的id来查询, idType的值应为eid,uid,gid
+    * @return []
     * @author yolia
     * @Date 9:36 2020/8/21
     **/
@@ -217,7 +239,7 @@ public class StoreService {
     * @MethodName updateEvaluation
     * @Description 更新指定的Evaluation
     * @Param [evaluation]
-    * @return com.nwafu.bingo.service.StoreService
+    * @return []
     * @author yolia
     * @Date 9:37 2020/8/21
     **/
