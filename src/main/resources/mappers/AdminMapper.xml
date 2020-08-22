@@ -22,7 +22,7 @@
         WHERE
             aname =#{name}
     </select>
-    <insert id="add" parameterType="com.nwafu.bingo.entity.Admin" useGeneratedKeys="true">
+    <insert id="add" parameterType="com.nwafu.bingo.entity.Admin" useGeneratedKeys="true" keyProperty="aid" keyColumn="aid">
         INSERT INTO
             admin
             (aname,password)
