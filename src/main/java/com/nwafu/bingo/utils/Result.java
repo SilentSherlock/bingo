@@ -1,5 +1,6 @@
 package com.nwafu.bingo.utils;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,9 +17,10 @@ public class Result {
     private int status;
     private Map<String, Object> resultMap;
 
-    public Result() {}
+    public Result() { resultMap = new HashMap<>(); }
     public Result(int status) {
         this.status = status;
+        resultMap = new HashMap<>();
     }
     public Result(int status, Map<String, Object> resultMap) {
         this.status = status;
