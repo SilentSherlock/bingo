@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>community</title>
+    <style>
+        body{
+            background: #202539;
+        }
+        div{
+            margin:0;
+            padding:0;
+            display: block;
+        }
+        h1,h2,ul,li{
+            margin:0;
+            padding:0;
+        }
+        img{
+            float: left;
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px 10px 10px 10px;
+            cursor: pointer;
+            border: 0;
+        }
+        .community-content{
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            margin: auto;
+            width: 830px;
+        }
+        .community-middle{
+            float: left;
+            width: 830px;
+        }
+        .home-slider-content{
+            background: #33394D;
+        }
+        .slider-content{
+            background: #33394D;
+        }
+        .slider-block{
+            position: relative;
+            overflow: hidden;
+            height: 350px;
+            width: 830px;
+        }
+        .image-list{
+            position: relative;
+            transition: left 0.5s ease-in-out;
+            white-space: nowrap;
+            width: 100%;
+            left: 0%;
+        }
+        .slider-item{
+            height: 350px;
+            display: inline-block;
+            vertical-align: top;
+            text-align: center;
+            overflow: hidden;
+        }
+        .image-list .slider-item a{
+            display: block;
+            height: 300px;
+            min-width: 830px;
+            position: relative;
+            color: #000;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .image-list .slider-item a img{
+            display: block;
+            width: 830px;
+            height: 300px;
+        }
+        .image-list .slider-item span{
+            position: absolute;
+            font-size: 14px;
+            color: #B9C0EF;
+            bottom: -37px;
+            left: 30px;
+        }
+        .active,.active1{
+            color: #B9C0EF;
+            background: #4C516A;
+            display: inline-block;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            box-sizing: border-box;
+            border: 1px solid #4C516A;
+            margin-right: 4px;
+        }
+
+        .community-news{
+            width: 830px;
+            height: 150px;
+            margin: 20px 0;
+        }
+        .title{
+            position: relative;
+            width: 830px;
+            height: 50px;
+            background: #292e41;
+            opacity: 1;
+            text-align: left;
+        }
+        .title-text{
+            transform: translate(0, -50%);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            font-size: 20px;
+            font-family: Microsoft YaHei UI;
+            font-weight: bold;
+            color: #b9c0ef;
+            opacity: 1;
+        }
+        .community-news-list{
+            height: 96px;
+            background-color: #33394d;
+            margin: 0;
+            display: -ms-grid;
+            display: grid;
+            -ms-grid-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+        li{
+            width: 26em;
+            position: relative;
+            left: 50px;
+            list-style-type: square;
+            font-size: 14px;
+            font-weight: 400;
+            color: #b9c0ef;
+        }
+        a{
+            color: #000;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .content-title{
+            width: 20em;
+            font-size: 14px;
+            font-family: Microsoft YaHei UI;
+            font-weight: 400;
+            color: #b9c0ef;
+        }
+        .text{
+            float: left;
+        }
+        .community-content{
+            position: relative;
+        }
+        .post-button{
+            border: none;
+            text-align: center;
+            box-sizing: border-box;
+            background: #508bf3;
+            color: #ffffff;
+            cursor: pointer;
+            outline: none;
+            position: absolute;
+            right: 20px;
+            top: 18px;
+            padding: 4px 22px;
+            font-size: 14px;
+            border-radius: 2px 2px 2px 2px;
+        }
+        .block-container{
+            margin-top: 20px;
+            background: #33394D;
+            border-radius: 5px 5px 5px 5px;
+        }
+        .block-types{
+            height: 65px;
+            background: #292E41;
+            padding: 0;
+        }
+        .type{
+            display: inline-block;
+            width: 124px;
+            height: 65px;
+            line-height: 65px;
+            text-align: center;
+            font-size: 16px;
+            color: #7A80A2;
+        }
+        .page-choose{
+            bottom: 15px;
+            right: 0;
+            width: auto;
+            background: #31374e;
+            padding: 0 18px 0;
+            position: absolute;
+            text-align: center;
+        }
+        .page-choose div{
+            display: inline-block;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            box-sizing: border-box;
+            border: 1px solid #4C516A;
+            color: #7A80A2;
+            margin-right: 4px;
+        }
+        .topic-list-container{
+            padding: 20px 30px 0 30px;
+        }
+        .item-wrap{
+
+            color: #7A80A2;
+            font-size: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #3f4760;
+        }
+        .header{
+            height: 40px;
+        }
+        .bottom{
+            height: 20px;
+        }
+        .btn{
+            float: left;
+            margin-top: 2px;
+        }
+        .left,.time{
+            float: left;
+        }
+        .nick-name{
+            color: #7A80A2;
+            margin-right: 10px;
+            float: left;
+        }
+        .left .time a{
+            margin-left: 5px;
+            color: #508BF3;
+        }
+        .btn-wrapper{
+            float: right;
+        }
+        .fa{
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-style: normal;
+            margin-right: 5px;
+            font-size: 12px;
+        }
+        .h2-in-header{
+            margin-block-start: 0.83em;
+            margin-block-end: 0.83em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-size: 14px;
+            width: 740px;
+            margin-bottom: 10px;
+            margin-top: 0;
+            word-wrap: break-word;
+            cursor: pointer;
+        }
+        .h1-in-header{
+            float: left;
+            font-size: 18px;
+            color: #B9C0EF;
+            cursor: pointer;
+            max-width: 550px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: normal;
+        }
+
+        button{
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0;
+            text-shadow: none;
+            display: inline-block;
+            text-align: center;
+            align-items: flex-start;
+            box-sizing: border-box;
+            margin: 0;
+            font: 400 13.333px Arial;
+            padding: 1px 6px;
+            border-image: initial;
+            border-radius: 2px;
+            border: none;
+            background: none;
+            color: #7a80a2;
+            outline: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="community-content">
+        <div class="community-middle">
+            <div class="home-slider-content">
+                <div class="slider-content">
+                    <div class="slider-block">
+                        <div class="image-list">
+                            <div class="slider-item" id="show1">
+                                <a href="#" target="_blank">
+                                    <img id="show-img" src="../templates/image/img1.jpg">
+                                    <span id="show-msg">这是第一条信息</span>
+                                </a>
+                            </div>
+                            <div class="slider-item" id="show2">
+                                <a href="#" target="_blank">
+                                    <img src="../templates/image/img2.jpg">
+                                    <span>这是第二条信息</span>
+                                </a>
+                            </div>
+                            <div class="slider-item" id="show3">
+                                <a href="#" target="_blank">
+                                    <img src="../templates/image/img3.jpg">
+                                    <span>这是第三条信息</span>
+                                </a>
+                            </div>
+                            <div class="slider-item" id="show4">
+                                <a href="#" target="_blank">
+                                    <img src="../templates/image/img4.jpg">
+                                    <span>这是第四条信息</span>
+                                </a>
+                            </div>
+                            <div class="slider-item" id="show5">
+                                <a href="#" target="_blank">
+                                    <img src="../templates/image/img5.jpg">
+                                    <span>这是第五条信息</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="page-choose">
+                            <div class="close" id="choose1">1</div>
+                            <div class="close">2</div>
+                            <div class="close">3</div>
+                            <div class="close">4</div>
+                            <div class="close">5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+            <div class="community-news">
+                <div class="title">
+                    <span class="title-text">社区要闻</span>
+                </div>
+                <ul class="community-news-list">
+                    <li>
+                        <a href="#"><span class="content-title"><span class="text">【#####】%%%%%%%%</span></span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="content-title"><span class="text">【#####】%%%%%%%%</span></span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="content-title"><span class="text">【#####】%%%%%%%%</span></span></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="content-title"><span class="text">【#####】%%%%%%%%</span></span></a>
+                    </li>
+                </ul>
+            </div>
+            </div>
+            <div class="community-content">
+                <a class="post-button">发布帖子</a>
+                <div class="block-container">
+                    <div class="block-types">
+                        <a class="type" id="tie1" href="#">最新帖子</a>
+                        <a class="type" href="#">最热帖子</a>
+                    </div>
+                    <div class="block-contents">
+                        <div class="topic-list-container">
+                            <div class="community-post-detail">
+                                <div class="item-wrap">
+                                    <div class="header"><div class="btn"></div><h1 class="h1-in-header">这是标题</h1></div>
+                                    <h2 class="h2-in-header">要问八月份有什么比暑促钱包成功瘦身更让人兴奋的事儿~？嘿，那必须是即将到来的杉果π哇！！硬核玩家的集会！各路游戏厂商的线上试玩，应有尽有~！而硬核玩家更能在其中赚取海量积分哦~！那么，检验硬核的唯一标准是？鉴定标准不如就让你来指定~  说说你心中想对硬核玩家发出的真题试炼！你对鉴定“头号玩家”又有怎样...</h2>
+                                    <div class="bottom">
+                                        <div class="left">
+                                            <img src="#"><a class="nick-name" href="#" target="_blank">用户名</a>
+                                            <span class="time">2020年8月21日&nbsp;&nbsp;<span>发表于<a target="_blank" href="#">名字</a></span></span>
+                                        </div>
+                                        <div class="btn-wrapper">
+                                            <button><i class="fa"></i>"37"</button>
+                                            <button><i>回复</i>"213"</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-wrap">
+                                    <div class="header"><div class="btn"></div><h1> class="h1-in-header">这是标题</h1></div>
+                                    <h2 class="h2-in-header">要问八月份有什么比暑促钱包成功瘦身更让人兴奋的事儿~？嘿，那必须是即将到来的杉果π哇！！硬核玩家的集会！各路游戏厂商的线上试玩，应有尽有~！而硬核玩家更能在其中赚取海量积分哦~！那么，检验硬核的唯一标准是？鉴定标准不如就让你来指定~  说说你心中想对硬核玩家发出的真题试炼！你对鉴定“头号玩家”又有怎样...</h2>
+                                    <div class="bottom">
+                                        <div class="left">
+                                            <img src="#"><a class="nick-name" href="#" target="_blank">用户名</a>
+                                            <span class="time">2020年8月21日&nbsp;&nbsp;<span>发表于<a target="_blank" href="#">名字</a></span></span>
+                                        </div>
+                                        <div class="btn-wrapper">
+                                            <button><i class="fa"></i>"37"</button>
+                                            <button><i>回复</i>"213"</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+        var tempShowDiv = $("#show1")
+        $(document).ready(function () {
+            $("#choose1").removeClass("close")
+            $("#choose1").addClass("active")
+            $("#tie1").addClass("active1")
+            $("#show1").show()
+            $("#show2").hide()
+            $("#show3").hide()
+            $("#show4").hide()
+            $("#show5").hide()
+        })
+        $(".close").hover(function () {
+            var tempChoose =$(".active")
+            var tag =$(this)
+            tempChoose.removeClass("active")
+            tempChoose.addClass("close")
+            tag.removeClass("close")
+            tag.addClass("active")
+            tempShowDiv.hide()
+            $("#show"+tag.text()).show()
+            tempShowDiv=$("#show"+tag.text())
+        })
+        $(".type").click(function () {
+            var tempTie = $(".active1")
+            var tag = $(this)
+            tempTie.removeClass("active1")
+            tag.addClass("active1")
+        })
+    </script>
+</body>
+</html>
