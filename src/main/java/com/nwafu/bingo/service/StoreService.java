@@ -51,6 +51,18 @@ public class StoreService {
         return gameDao.getAll();
     }
     /**
+    * @MethodName getGameById
+    * @Description 根据id获取商品信息
+    * @Param [id]
+    * @return com.nwafu.bingo.entity.Game
+    * @author yolia
+    * @Date 14:43 2020/8/22
+    **/
+    public Game getGameById(Integer id) throws Exception {
+        return gameDao.getById(id);
+    }
+
+    /**
     * @MethodName getGameByNameExact
     * @Description 根据name精确查询相关数据
     * @Param [name]

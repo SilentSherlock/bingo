@@ -50,6 +50,31 @@ public class StoreController {
         return result;
     }
     /**
+    * @MethodName gameDetailShow
+    * @Description 前端传入商品id，后端向前端传递该商品的相关信息
+    * @Param [id]
+    * @return com.nwafu.bingo.utils.Result
+     * Result包含状态值和键值对，状态值为SUCCESS时，传输数据成功，数据不为空，
+     *                              FAILURE时，传输数据失败，数据为空。
+     *                              传输成功时，返回game；否则返回提示信息。
+    * @author yolia
+    * @Date 14:45 2020/8/22
+    **/
+    @RequestMapping("gameDetailShow")
+    public Result gameDetailShow(Integer id) throws Exception {
+        Result result = new Result();
+        //获取数据
+        Game game = storeService.getGameById(id);
+        if(game == null){
+            result.getResultMap().put("game", "游戏不存在");
+            result.setStatus(Status.FAILURE);
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("game", game);
+        return result;
+    }
+    /**
     * @MethodName gameAddHandle
     * @Description 前端传入添加的游戏信息，将其插入数据库
     * @Param [game]
