@@ -19,6 +19,15 @@
         WHERE
             srid = #{id}
     </select>
+    <select id="getExact" parameterType="com.nwafu.bingo.entity.SystemReq" resultMap="BaseSystemReqMap">
+        SELECT
+            *
+        FROM
+            systemreq
+        WHERE
+            os = #{os} and ram = #{ram} and cpu = #{cpu} and gpu = #{gpu} and harddisk = #{harddisk}
+    </select>
+
     <select id="getAll" resultMap="BaseSystemReqMap">
         SELECT
             *

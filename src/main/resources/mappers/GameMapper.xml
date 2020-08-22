@@ -28,6 +28,16 @@
         FROM
             game
     </select>
+
+    <select id="getByNameExact" parameterType="String" resultMap="BaseGameMap">
+        SELECT
+            *
+        FROM
+            game
+        WHERE
+            gname = #{name}
+    </select>
+
     <select id="getByName" parameterType="String" resultMap="BaseGameMap">
         SELECT
             *
