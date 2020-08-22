@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface GameDao {
 
-    void add(Game game) throws Exception;
+    int add(Game game) throws Exception;
     void update(Game game) throws Exception;
     void delete(Game game) throws Exception;
     List<Game> getAll() throws Exception;

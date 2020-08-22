@@ -15,7 +15,7 @@ public interface AdminDao {
 
     List<Admin> getAll() throws Exception;
     List<Admin> getByName(String name) throws Exception;
-    void add(Admin admin) throws Exception;
+    int add(Admin admin) throws Exception;
     void deleteById(Integer id) throws Exception;
     void update(Admin admin) throws Exception;
 }
