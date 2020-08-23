@@ -12,10 +12,12 @@ import java.util.List;
 @Repository
 public interface GameDao {
 
-    void add(Game game) throws Exception;
+    int add(Game game) throws Exception;
     void update(Game game) throws Exception;
     void delete(Game game) throws Exception;
     List<Game> getAll() throws Exception;
+    /*精准查询*/
+    Game getByNameExact(String name) throws Exception;
     /*模糊查询*/
     List<Game> getByName(String name) throws Exception;
     /*直接根据gid获取*/

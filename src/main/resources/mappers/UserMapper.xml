@@ -17,7 +17,7 @@
 
     </resultMap>
 
-    <insert id="add" parameterType="com.nwafu.bingo.entity.User" useGeneratedKeys="true">
+    <insert id="add" parameterType="com.nwafu.bingo.entity.User" useGeneratedKeys="true" keyProperty="uid" keyColumn="uid">
         INSERT INTO
             user(uname,password,gamelist,wishlist,umail,ualias,usex,ubirthday,uprofile,uavatar)
         VALUES (#{uname},#{password},#{gamelist},#{wishlist},#{umail},#{ualias},#{usex},#{ubirthday},#{uprofile},#{uavatar})

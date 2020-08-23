@@ -73,6 +73,7 @@ public class PersonService {
         return result;
     }
 
+
     public List<User> getAllUser() throws Exception {
         String status = "PersonService: Get All Users";
         System.out.println(status);
@@ -95,6 +96,7 @@ public class PersonService {
         return null;
     }
 
+
     public User getUserById(Integer id) throws Exception {
         String status = "Get user by Id";
         System.out.println(CLASSNAME + " " + status);
@@ -106,17 +108,30 @@ public class PersonService {
         return null;
     }
 
-    public void addPerson(Object object) throws Exception{
+    public List<User> getByUserName(String name) throws Exception {
+        return userDao.getByName(name);
+    }
+
+    public List<Admin> getByAdminName(String name) throws Exception {
+        return adminDao.getByName(name);
+    }
+    public int addPerson(Object object) throws Exception{
         String status = "Add Person";
+        int generateId = 0;
         log(status);
         if (object != null) {
             if (object instanceof Admin) {
-                adminDao.add((Admin) object);
+                Admin admin = (Admin) object;
+                adminDao.add(admin);
+                generateId = admin.getAid();
             }else if (object instanceof User) {
+                User user = (User) object;
                 userDao.add((User) object);
+                generateId = user.getUid();
             }
         }
         log(status + " Parameter null or wrong type");
+        return generateId;
     }
 
     public void deleteAdminById(Integer id) throws Exception {

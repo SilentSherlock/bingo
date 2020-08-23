@@ -28,6 +28,16 @@
         FROM
             game
     </select>
+
+    <select id="getByNameExact" parameterType="String" resultMap="BaseGameMap">
+        SELECT
+            *
+        FROM
+            game
+        WHERE
+            gname = #{name}
+    </select>
+
     <select id="getByName" parameterType="String" resultMap="BaseGameMap">
         SELECT
             *
@@ -44,7 +54,7 @@
             gid = #{id}
     </select>
 
-    <insert id="add" parameterType="com.nwafu.bingo.entity.Game" useGeneratedKeys="true">
+    <insert id="add" parameterType="com.nwafu.bingo.entity.Game" useGeneratedKeys="true" keyProperty="gid" keyColumn="gid">
         INSERT INTO
             game (gname,gtype,developer,publisher,releasedate,gprice,discount,gscore,language,
                   detail,vhref,phref,chref,dlclist,platform,systemreq)

@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * Date: 2020/8/21
- * Description: optional describe the class
+ * Description: 社区管理控制类，负责社区相关实体的操作
  */
 @RestController
 @RequestMapping("/community")
@@ -108,4 +108,5 @@ public class CommunityController {
         result.setStatus(Status.SUCCESS);
         return result;
     }
+
 }
