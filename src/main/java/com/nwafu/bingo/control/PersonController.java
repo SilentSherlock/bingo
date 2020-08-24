@@ -174,6 +174,7 @@ public class PersonController {
     }
 
     private List<Game> transform(String listStr) throws Exception {
+        if (listStr == null) return null;
         JSONArray array = JSONArray.parseArray(listStr);
         List<Game> games = new LinkedList<>();
         for(Object id:array){
