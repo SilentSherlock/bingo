@@ -13,6 +13,7 @@ import java.util.List;
 public interface SystemReqDao {
 
     SystemReq getById(Integer id) throws Exception;
+    SystemReq getExact(SystemReq systemReq) throws Exception;
     List<SystemReq> getAll() throws Exception;
     void add(SystemReq systemReq) throws Exception;
     void deleteById(Integer id) throws Exception;
