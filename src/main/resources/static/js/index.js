@@ -6,7 +6,6 @@ $(document).ready(function () {
     setAClickListener();
     //为搜索表单注册验证和其他监听函数
     setSearchFormValidateLisener();
-
 });
 
 /**
@@ -15,11 +14,12 @@ $(document).ready(function () {
  * 描述: 判断当前是否有用户登录
  */
 function isLogin() {
-    $.get(requestmap.isLogged, function (data) {
-        console.log(data);
-        if (data.code === 200) {
+    $.get(requestmap.user_isLogged, function (data) {
+        if (data.status === 1) {
+            console.log("获取的已登录用户信息:");
+            console.log(data);
             //保存用户信息
-            userInfo = data.result;
+            userInfo = data.resultMap.loggedUserInfo;
             //隐藏登录、注册链接，显示用户信息
             $("nav.navbar ul.navbar-right:eq(1)").hide();
             $("nav.navbar ul.navbar-right:eq(0)").show();
@@ -28,10 +28,8 @@ function isLogin() {
             $("#index-navbar-uavatar").attr("src", userInfo.uavatar);
         } else {
             //显示登录、注册链接，隐藏用户信息
-            //$("nav.navbar ul.navbar-right:eq(1)").show();
-            //$("nav.navbar ul.navbar-right:eq(0)").hide();
-            $("nav.navbar ul.navbar-right:eq(1)").hide();
-            $("nav.navbar ul.navbar-right:eq(0)").show();
+            $("nav.navbar ul.navbar-right:eq(1)").show();
+            $("nav.navbar ul.navbar-right:eq(0)").hide();
         }
     });
 }
@@ -74,12 +72,12 @@ function setSearchFormValidateLisener() {
         keywords = keywords || "";
         console.log("保存搜索内容: " + keywords);
         //使用ajax提交搜索内容
-        $.get(requestmap.search, {keywords: keywords}, function (data) {
-            if (data.code === 200) {
+        $.get(requestmap.store_search, {keywords: keywords}, function (data) {
+            if (data.code === 1) {
                 console.log("搜索到相关信息进行显示");
-            } else if (data.code === 404) {
-                console.log("搜索结果为空");
+                console.log(data);
             } else {
+                console.log("搜索结果为空");
             }
             //更改搜索按钮的登陆状态
             $("#navbar-search-form-submit-button").button("reset");
@@ -152,4 +150,36 @@ function showGameDetail(ginfo) {
  */
 function showAllGame() {
 
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.8.22
+ * 描述: 加载用户登录页面
+ */
+function user_login() {
+    if ($("#" + components.component_user_login.cid).length === 0) {
+        $.get(components.component_user_login.curl, function (data) {
+            if (data !== undefined || data !== "") {
+                $("#body-container").html(data);
+            } else
+                alert("加载用户登录页面失败！");
+        });
+    }
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.8.22
+ * 描述: 加载用户注册页面
+ */
+function user_register() {
+    if ($("#" + components.component_user_register.cid).length === 0) {
+        $.get(components.component_user_register.curl, function (data) {
+            if (data !== undefined || data !== "") {
+                $("#body-container").html(data);
+            } else
+                alert("加载用户注册页面失败！");
+        });
+    }
 }
