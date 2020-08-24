@@ -2,6 +2,8 @@ package com.nwafu.bingo;
 
 import com.nwafu.bingo.dao.*;
 import com.nwafu.bingo.entity.*;
+import com.nwafu.bingo.service.CommunityService;
+import com.nwafu.bingo.service.PersonService;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
@@ -229,5 +231,97 @@ class BingoApplicationTests {
 		System.out.println(s.getOs());*/
 
 		systemReqDao.deleteById(1);
+	}
+
+	@Autowired
+	PersonService personService;
+
+	@Test
+	void PersonServiceTest() throws Exception {
+		//测试用户验证
+
+		//personService.validateAdmin("yangfan5","123");
+		//User u= personService.validateUser("晨晨","12021");
+		//System.out.println(u.getUname());
+
+		//获取所有用户
+		/*List<User> list = personService.getAllUser();
+		for(User u:list){
+			System.out.println(u.getUname());
+		}*/
+		/*List<Admin> list1 = personService.getAllAdmin();
+		for(Admin a:list1){
+			System.out.println(a.getAname());
+		}*/
+
+		//User user = personService.getUserById(0);
+		/*try {
+			System.out.println(user.getUname());
+		}catch (Exception e){
+
+		}*/
+		/*User user = new User();
+		user.setGamelist("test");
+		user.setPassword("12021");
+		user.setUalias("wanghui");
+		user.setUavatar("/c/clic/c");
+		user.setUbirthday("1998/7/12");
+		user.setUmail("12@qq.com");
+		user.setUname("王慧");
+		user.setUprofile("jfdisofo");
+		user.setUsex("nannvnan");
+		user.setWishlist("lol");
+
+		personService.addPerson(user);*/
+
+		personService.deleteAdminById(5);
+	}
+
+	@Autowired
+	CommunityService communityService;
+	@Test
+	void CommunityServiceTest() throws Exception{
+		Post post = new Post();
+
+		post.setContent("神死魔灭");
+		post.setPlikenum(45);
+		post.setPtheme("诸神黄昏");
+		post.setPtime("1999/12/1");
+		post.setTitle("玄远");
+		post.setUid(2);
+		/*communityService.addPostOrComment(post);
+
+		Comment comment = new Comment();
+		comment.setContent("woai92644849946");
+		comment.setCtime("2018/1/17");
+		comment.setCtype(0);
+
+		comment.setPid(5);
+		comment.setUid(2);
+		comment.setTocid(22);
+		comment.setTouid(23);
+
+		communityService.addPostOrComment(comment);
+		List<Post> list = communityService.getAll();
+
+		for(Post p:list){
+			System.out.println(p.getTitle());
+		}*/
+		post.setPid(5);
+
+		//communityService.updatePost(post);
+
+		/*List<Comment> list = communityService.getCommentById("uid",2);
+
+		for(Comment c:list){
+			System.out.println(c.getContent());
+		}*/
+		/*List<Post> list1 = communityService.getPostById("pid",6);
+		for(Post c:list1){
+			System.out.println(c.getTitle());
+		}*/
+		communityService.deletePostOrCommentById("cid",10,1);
+		communityService.deletePostOrCommentById("pid",5,0);
+
 	}
 }
