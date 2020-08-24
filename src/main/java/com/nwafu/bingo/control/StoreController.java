@@ -8,13 +8,12 @@ import com.nwafu.bingo.entity.SystemReq;
 import com.nwafu.bingo.service.StoreService;
 import com.nwafu.bingo.utils.Result;
 import com.nwafu.bingo.utils.Status;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("store")
 public class StoreController {
     @Resource
