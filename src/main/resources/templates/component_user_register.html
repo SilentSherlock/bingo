@@ -1,0 +1,67 @@
+<div class="container" id="user-register">
+    <!-- 注册表单区域 -->
+    <div class="row">
+        <div class="col-lg-3 col-lg-offset-5
+                    col-md-4 col-md-offset-4
+                    col-xs-7 col-xs-offset-2" id="user-register-form-div">
+
+            <div id="user-register-form-title">
+                <h4 id="user-register-form-title-text">
+                    <strong>注册</strong>
+                </h4>
+            </div>
+
+            <form id="user-register-form">
+
+                <div class="form-group">
+                    <label class="control-label" for="user-register-form-uname-input">用户名</label>
+                    <input type="text" class="form-control ipt-dark" id="user-register-form-uname-input"
+                           name="user-register-form-uname-input" placeholder="请输入用户名">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="user-register-form-password-input">密码</label>
+                    <input type="password" class="form-control ipt-dark" id="user-register-form-password-input"
+                           name="user-register-form-password-input" placeholder="请输入密码">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="user-register-form-email-input">邮箱</label>
+                    <input type="email" class="form-control ipt-dark" id="user-register-form-email-input"
+                           name="user-register-form-email-input" placeholder="请输入邮箱">
+                </div>
+
+                <div class="form-group">
+                    <button type="button" class="form-control btn btn-info" id="user-register-form-code-button"
+                            data-loading-text="正在发送...">
+                        发送验证码
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="user-register-form-code-input">验证码</label>
+                    <input type="text" class="form-control ipt-dark" id="user-register-form-code-input"
+                           name="user-register-form-code-input" placeholder="请输入最新收到的验证码">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-primary btn-form-main"
+                            id="user-register-form-submit-button"
+                            data-loading-text="正在注册...">
+                        注册
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <button type="button" class="form-control btn btn-secondary btn-form-main"
+                            id="user-register-form-reset-button">重置
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- 引入该部分的css库文件-->
+    <link rel="stylesheet" href="/css/user_register.css">
+    <!-- 引入该部分的js库文件-->
+    <script type="text/javascript" src="/js/user_register.js"></script>
+</div>
