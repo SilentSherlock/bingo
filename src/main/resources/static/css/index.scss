@@ -76,7 +76,8 @@ nav.navbar ul.navbar-right > li.dropdown > a.dropdown-toggle {
 nav.navbar #navbar-uinfo .dropdown-toggle > img {
   width: $navbar-avatar-width;
   height: $navbar-avatar-width;
-  border-radius: $navbar-avatar-width / 2;
+  border-radius: 50%;
+  transform: translateZ(0);
 }
 
 //面包屑导航

@@ -2,15 +2,15 @@
 
 //网页基本组件信息
 let components = {
-    c0: {
+    component_user_login: {
         cname: "登录",
-        cid: "login",
-        curl: "login"
+        cid: "user-login",
+        curl: "component_user_login"
     },
-    c1: {
+    component_user_register: {
         cname: "注册",
-        cid: "register",
-        curl: "register"
+        cid: "user-register",
+        curl: "component_user_register"
     },
     c2: {},
     c3: {},
@@ -23,8 +23,12 @@ let components = {
 
 //请求映射
 let requestmap = {
-    isLogged: "/isLogged",
-    search: "/search"
+    user_isLogged: "/user_isLogged",
+    user_login: "/user_login",
+    user_register: "/user_register",
+    user_register_code: "/user_register_code",
+    user_register_send_code: "/user_register_send_code",
+    store_search: "/store_search"
 };
 
 //用户信息
