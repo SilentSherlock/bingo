@@ -13,6 +13,7 @@
     标签：<input type="text" id="tag"><br>
     最小价格：<input type="text" id="minPrice"><br>
     最大价格：<input type="text" id="maxPrice"><br>
+    页码：<input type="text" id="pageIndex"><br>
     <input type="button" id="register-btn" value="注册">
 </form>
 <script>
@@ -20,12 +21,16 @@
 
         let formData = new FormData();
 
+        var pageIndex = $("#pageIndex").val();
+        var page = (pageIndex - 1) * 10;
+
         formData.append("order",$("#order").val());
         formData.append("sort",$("#sort").val());
         formData.append("category",$("#category").val())
         formData.append("tag",$("#tag").val());
         formData.append("minPrice",$("#minPrice").val());
         formData.append("maxPrice",$("#maxPrice").val());
+        formData.append("pageIndex", page);
 
         $.ajax({
             url:'/store/search',

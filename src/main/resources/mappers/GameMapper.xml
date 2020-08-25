@@ -131,6 +131,7 @@
         <if test="order == 'asc'">
             asc
         </if>
+        LIMIT #{pageIndex}, #{pageCount}
     </select>
 
     <select id="getById" parameterType="Integer" resultMap="BaseGameMap">

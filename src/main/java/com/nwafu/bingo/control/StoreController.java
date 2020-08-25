@@ -96,12 +96,12 @@ public class StoreController {
         //获取数据
         List<Game> gameList = storeService.getGameByName(name);
         if(gameList == null || gameList.size() == 0){
-            result.getResultMap().put("searchGameList", "搜索游戏不存在");
+            result.getResultMap().put("searchGameListByName", "搜索游戏不存在");
             result.setStatus(Status.FAILURE);
             return result;
         }
         result.setStatus(Status.SUCCESS);
-        result.getResultMap().put("searchGameList", gameList);
+        result.getResultMap().put("searchGameListByName", gameList);
         return result;
     }
     /**
@@ -122,11 +122,11 @@ public class StoreController {
         List<Game> gameList = storeService.getGameByType(types);
         if(gameList == null || gameList.size() == 0){
             result.setStatus(Status.FAILURE);
-            result.getResultMap().put("searchGameList", "该游戏类别不存在游戏");
+            result.getResultMap().put("searchGameListByType", "该游戏类别不存在游戏");
             return result;
         }
         result.setStatus(Status.SUCCESS);
-        result.getResultMap().put("searchGameList", gameList);
+        result.getResultMap().put("searchGameListByType", gameList);
         return result;
     }
     /**
@@ -134,6 +134,9 @@ public class StoreController {
     * @Description 用于搜索
     * @Param [search]  ----- 属性请到类中查看
     * @return com.nwafu.bingo.utils.Result
+     * Result包括状态值和键值对，状态值为SUCCESS时，数据搜索成功，存在数据，
+     *                              FAILURE时，数据搜索失败，无数据。
+     *                              数据存在时，返回searchList；否则返回提示信息。
     * @author yolia
     * @Date 15:21 2020/8/25
     **/
@@ -141,9 +144,15 @@ public class StoreController {
     public Result search(Search search) throws Exception {
         Result result = new Result();
         List<Game> gameList = storeService.search(search);
+        if(gameList == null || gameList.size() == 0){
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("searchList", "无内容");
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("searchList", gameList);
         return result;
     }
-
     /**
     * @MethodName gameAddHandle
     * @Description 前端传入添加的游戏信息，将其插入数据库

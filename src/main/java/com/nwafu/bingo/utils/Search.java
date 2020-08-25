@@ -9,6 +9,7 @@ import java.util.List;
  * tag: presale, newsale, promotion
  * minPrice: Float
  * maxPrice: Float
+ * pageIndex: Integer
  */
 public class Search {
     private String order;
@@ -17,6 +18,9 @@ public class Search {
     private List<String> tag;
     private Float minPrice;
     private Float maxPrice;
+
+    private Integer pageIndex;
+    private Integer pageCount = 10;
 
     public String getOrder() {
         return order;
@@ -64,5 +68,21 @@ public class Search {
 
     public void setMaxPrice(Float maxPrice) {
         this.maxPrice = maxPrice;
+    }
+
+    public Integer getPageIndex() {
+        return pageIndex;
+    }
+
+    public void setPageIndex(Integer pageIndex) {
+        this.pageIndex = pageIndex;
+    }
+
+    public Integer getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(Integer pageCount) {
+        this.pageCount = pageCount;
     }
 }

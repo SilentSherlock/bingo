@@ -3,6 +3,7 @@ package com.nwafu.bingo.dao;
 import com.nwafu.bingo.entity.Game;
 import com.nwafu.bingo.utils.Search;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
