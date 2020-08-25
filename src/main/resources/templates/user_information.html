@@ -117,10 +117,10 @@
         }
         .upload-photo{
             position: absolute;
-            right: -5px;
-            top: 70px;
-            width: 30px;
-            height: 30px;
+            right: 0px;
+            top: 0px;
+            width: 100px;
+            height: 100px;
         }
         .upload-photo input{
             position: absolute;
@@ -312,7 +312,7 @@
                     <div class="left-photo">
                         <img src="#">
                         <div class="upload-photo">
-                            <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png">
+                            <input type="file" id="image" accept="image/gif,image/jpeg,image/jpg,image/png">
                         </div>
                     </div>
                     <div class=" form-block">
@@ -443,8 +443,33 @@
 
     })
     $(".submit").click(function () {
-        window.location.href="";
-        //提交到后端
+        let submitData = new FormData();
+        let files = $("#image").get(0).files[0];
+        submitData.append("uprofile",$(".user-describe").val())
+        submitData.append("ualias",$("#user-name").val())
+        submitData.append("uavatar",files);
+        let birthday = $("#select-year option:selected").val()+"/"+
+                       $("select-month option:selected").val()+"/"+
+                       $("select-date option:selected").val();
+        submitData.append("ubirthday",birthday)
+        let sex="";
+        if($("#select-sex option:selected")==="0"){
+            sex="男"
+        }else if($("#select-sex option:selected")==="1"){
+            sex="女"
+        }else{
+            sex="保密"
+        }
+        submitData.append("usex",sex)
+        $.ajax({
+            url:'request/',
+            type:'post',
+            data:submitData,
+            async:false,
+            success:function (data) {
+                console.dir(data)
+            }
+        })
     })
     $(document).click(function () {
         var temp = $("#user-name").val().length
