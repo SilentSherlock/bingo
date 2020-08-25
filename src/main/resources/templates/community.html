@@ -403,7 +403,7 @@
                                     </div>
                                 </div>
                                 <div class="item-wrap">
-                                    <div class="header"><div class="btn"></div><h1> class="h1-in-header">这是标题</h1></div>
+                                    <div class="header"><div class="btn"></div><h1 class="h1-in-header">这是标题</h1></div>
                                     <h2 class="h2-in-header">要问八月份有什么比暑促钱包成功瘦身更让人兴奋的事儿~？嘿，那必须是即将到来的杉果π哇！！硬核玩家的集会！各路游戏厂商的线上试玩，应有尽有~！而硬核玩家更能在其中赚取海量积分哦~！那么，检验硬核的唯一标准是？鉴定标准不如就让你来指定~  说说你心中想对硬核玩家发出的真题试炼！你对鉴定“头号玩家”又有怎样...</h2>
                                     <div class="bottom">
                                         <div class="left">
@@ -427,6 +427,31 @@
     <script type="text/javascript">
         var tempShowDiv = $("#show1")
         $(document).ready(function () {
+            function getPostList(){
+                $.get(
+                    "community/allPosts",
+                    function (AllPosts) {
+                        var list=AllPosts.resultMap.AllPost;
+                        var html="";
+                        for(var i=0;i<list.length;i++){
+                            html+=
+                                "<div class="+"item-wrap"+">"+
+                                    "<div class="+"header"+"><div class="+"btn"+"></div><h1 class="+"h1-in-header"+">"+list[i].title+"</h1></div>"+
+                                    "<h2 class="+"h2-in-header"+">"+list[i].content+"</h2>"+
+                                        "<div class="+"left"+">"+
+                                            "<img src="+"#"+"><a class="+"nick-name"+" "+"href="+"#"+" " +"target="+"_blank"+">"+list[i].uid+"</a>"+
+                                            "<span class="+"time"+">"+list[i].ptime +"&nbsp;&nbsp;"+"<span>发表于<a target="+"_blank" +" "+"href="+"#"+">"+list[i].uid+"</a></span></span>"+
+                                        "</div>"+
+                                        "<div class="+"btn-wrapper"+">"+
+                                            "<button><i class="+"fa"+"></i>"+list[i].plikenum+"</button>"+
+                                            "<button><i>"+"回复"+"</i>"+" "+"</button>"+
+                                        "</div>"+
+                                    "</div>"+
+                                "</div>"
+                        }
+                    }
+                )
+            }
             $("#choose1").removeClass("close")
             $("#choose1").addClass("active")
             $("#tie1").addClass("active1")
