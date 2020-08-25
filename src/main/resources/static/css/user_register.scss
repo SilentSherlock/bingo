@@ -1,0 +1,43 @@
+/**
+ * 作者: lwh
+ * 时间: 2020.8.22
+ * 描述：注册模块样式
+ */
+
+//导入基本常量
+@import "globalStyle";
+
+/*页面背景图片*/
+body > div.container-fluid {
+  background-image: url("/src/register_background.jpg");
+  background-position: center $navbar-height;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: $transition-all;
+}
+
+/*页面高度*/
+#user-login {
+  min-height: $body-min-height;
+}
+
+/*注册框所在区域*/
+#user-register-form-div {
+  margin-top: $form-margin-top / 2;
+  border-radius: $form-border-radius;
+  padding-right: $form-area-padding;
+  padding-left: $form-area-padding;
+  background-color: $background-light;
+  color: $font-color-light;
+  box-shadow: $form-area-box-shadow;
+  transition: $transition-all;
+}
+
+/*注册框标题*/
+#user-register-form-title {
+  margin: 20px -20px 20px -20px;
+  height: 30px;
+  border-bottom: 1px solid $font-color;
+  text-align: center;
+  color: $font-color-light;
+}
