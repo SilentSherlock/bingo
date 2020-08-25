@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="/extlib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+
+    <form >
+        用户名：<input type="text" id="name"><br>
+        密码：<input type="text" id="password"><br>
+        邮箱：<input type="text" id="mail"><br>
+        昵称：<input type="text" id="alias"><br>
+        性别：<input type="text" id="sex"><br>
+        生日：<input type="text" id="birthday"><br>
+        简介：<input type="text" id="profile"><br>
+        头像：<input type="file" id="avatar"><br>
+        <input type="button" id="register-btn" value="注册">
+    </form>
+
+    <script>
+        $("#register-btn").on("click",function () {
+
+            let formData = new FormData();
+            let files = $("#avatar").get(0).files[0];
+            formData.append("avatar", files);
+
+            console.dir(files);
+            formData.append("uname",$("#name").val());
+            formData.append("password",$("#password").val());
+            formData.append("umail",$("#mail").val())
+            formData.append("ualias",$("#alias").val());
+            formData.append("usex",$("#sex").val());
+            formData.append("ubirthday",$("#birthday").val());
+            formData.append("uprofile",$("#profile").val());
+            //formData.append("user",user);
+            $.ajax({
+                url:'/person/addUser',
+                type:'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache : false,
+                dataType: 'json',
+                success:function (data) {
+                    console.dir(data)
+                }
+            })
+
+        })
+    </script>
+</body>
+</html>

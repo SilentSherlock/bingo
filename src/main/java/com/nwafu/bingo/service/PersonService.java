@@ -3,6 +3,7 @@ package com.nwafu.bingo.service;
 import com.nwafu.bingo.dao.AdminDao;
 import com.nwafu.bingo.dao.UserDao;
 import com.nwafu.bingo.entity.Admin;
+import com.nwafu.bingo.entity.Post;
 import com.nwafu.bingo.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +56,12 @@ public class PersonService {
                     break;
                 }
             }
+
+            if(result instanceof Admin){
+                System.out.println("Validate success");
+            }else {
+                result = null;
+            }
         }else if(type == 1) {
             String status = "User Validate";
             log(status);
@@ -66,10 +73,20 @@ public class PersonService {
                     break;
                 }
             }
+
+            /**
+             * 判断类型是否为user或者admin，否则会导致类型转换失败
+             */
+            if(result instanceof User){
+                System.out.println("Validate success");
+            }else {
+                result = null;
+            }
         }else {
             log(" type " + type + " is invalid!");
             return null;
         }
+
         return result;
     }
 
