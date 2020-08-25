@@ -4,7 +4,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Date: 2020/8/22
@@ -25,5 +27,19 @@ public class Tools {
             uploadFilePath.delete();
         }
         multipartFile.transferTo(uploadFilePath);
+    }
+
+    /**
+    * @MethodName getDays
+    * @Description 获取两个Date之间的天数差
+    * @Param [nowTime, targetTime]
+    * @return long
+    * @author yolia
+    * @Date 9:44 2020/8/25
+    **/
+    public static long getDays(Date nowTime, Date targetTime){
+        long diff = targetTime.getTime() - nowTime.getTime();
+        long days = diff / (1000 * 60 * 60 * 24);
+        return days;
     }
 }
