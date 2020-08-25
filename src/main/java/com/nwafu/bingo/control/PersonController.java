@@ -1,6 +1,5 @@
 package com.nwafu.bingo.control;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.nwafu.bingo.entity.Admin;
 import com.nwafu.bingo.entity.Game;
@@ -15,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.annotation.Resource;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+
 
 /**
  * Date: 2020/8/21
@@ -108,8 +107,9 @@ public class PersonController {
     @RequestMapping("/addAdmin")
     public Result addAdmin(Admin admin) throws Exception {
         List<Admin> admins = personService.getByAdminName(admin.getAname());
+
         Result result = new Result();
-        if (admins == null) {
+        if (admins.size() == 0) {
             result.setStatus(Status.SUCCESS);
             personService.addPerson(admin);
             result.getResultMap().put("info", "Insert Success");
@@ -121,15 +121,16 @@ public class PersonController {
     }
     /*not mkdir*/
     @RequestMapping("/addUser")
-    public Result addUser(User user, @Param("uavatar") MultipartFile file) throws Exception {
+    public Result addUser(User user,  @RequestParam("avatar")MultipartFile file) throws Exception {//
         List<User> users = personService.getByUserName(user.getUname());
+
         Result result = new Result();
-        if (users == null) {
+        if (users.size() == 0) {
             int uid = personService.addPerson(user);
             String imgFold = ResourceUtils.getURL("classpath:").getPath() +  "static/src/uinfo/";
             File foldPath = new File(imgFold);
             if (!foldPath.exists()) {
-                foldPath.mkdir();
+                foldPath.mkdirs();
             }
             String imgPath = imgFold + uid + ".jpg";
             File imgPathFile = new File(imgPath);
@@ -137,7 +138,8 @@ public class PersonController {
                 imgPathFile.delete();
             }
             file.transferTo(imgPathFile);
-
+            user.setUavatar(imgPath);
+            personService.updatePerson(user);
             result.setStatus(Status.SUCCESS);
             result.getResultMap().put("info", "Insert Success");
         }else {
@@ -172,10 +174,11 @@ public class PersonController {
     }
 
     private List<Game> transform(String listStr) throws Exception {
-        JSONArray ids = JSON.parseArray(listStr);
+        if (listStr == null) return null;
+        JSONArray array = JSONArray.parseArray(listStr);
         List<Game> games = new LinkedList<>();
-        for (Object id : ids) {
-            games.add(storeService.getGameById((Integer) id));
+        for(Object id:array){
+            games.add(storeService.getGameById(Integer.parseInt(id.toString())));
         }
         return games;
     }
