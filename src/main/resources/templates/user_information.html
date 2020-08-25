@@ -256,11 +256,14 @@
             display: inline-block;
             align-items: flex-start;
             margin: 0;
-            font: 400 13.3333px Arial;
-
+            font: 400 13px Arial;
         }
         .form-error-msg{
             color: #ff6900;
+            font-size:14px;
+        }
+        .form-right-msg{
+            color: #ffff00;
             font-size:14px;
         }
         #btn-link{
@@ -279,110 +282,186 @@
     </style>
 </head>
 <body>
-    <div class="community-content">
-        <div class="tabs-container">
-            <div class="left-menu-tabs">
-                <div class="first-title tags-button">订单中心</div>
-                <div class="tags-button">
-                    <a class="close" id="choose1" href="#">我的订单</a>
-                </div>
-                <div class="tags-button">
-                    <a class="close" href="#">我的点评</a>
-                </div>
-                <div class="tags-button">
-                    <a class="close" href="#">我的游戏</a>
-                </div>
-                <div class="first-title tags-button">我的账户</div>
-                <div class="tags-button">
-                    <a class="close" href="#">基本信息</a>
-                </div>
-                <div class="tags-button">
-                    <a class="close" href="#">购物车</a>
-                </div>
-                <div class="tags-button">
-                    <a class="close" href="#">心愿单</a>
-                </div>
+<div class="community-content">
+    <div class="tabs-container">
+        <div class="left-menu-tabs">
+            <div class="first-title tags-button">订单中心</div>
+            <div class="tags-button">
+                <a class="close" id="choose1" href="#">我的订单</a>
             </div>
-            <div class="center-user-tabs">
-                <div class="center-user-info">
-                    <div class="top-info">
-                        <div class="left-photo">
-                            <img src="#">
-                            <div class="upload-photo">
-                                <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png">
-                            </div>
-                        </div>
-                        <div class=" form-block">
-                            <p>个人介绍</p>
-                            <textarea placeholder="介绍一下自己吧"></textarea>
+            <div class="tags-button">
+                <a class="close" href="#">我的点评</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="#">我的游戏</a>
+            </div>
+            <div class="first-title tags-button">我的账户</div>
+            <div class="tags-button">
+                <a class="close" href="#">基本信息</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="#">购物车</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="#">心愿单</a>
+            </div>
+        </div>
+        <div class="center-user-tabs">
+            <div class="center-user-info">
+                <div class="top-info">
+                    <div class="left-photo">
+                        <img src="#">
+                        <div class="upload-photo">
+                            <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png">
                         </div>
                     </div>
+                    <div class=" form-block">
+                        <p>个人介绍</p>
+                        <textarea class="user-describe" placeholder="介绍一下自己吧"></textarea>
+                    </div>
+                </div>
+                <div class="form-block" style="width:100%;margin-left:0;">
+                    <div class="label-name" >真实姓名：</div>
+                    <div class="form-control" id="user-true-name">***</div>
+                </div>
+                <div class="form-block" style="width:100%;margin-left:0;">
+                    <div class="label-name">昵称：</div>
+                    <input id="user-name" type="text" class="form-control" placeholder="不要超过10个字符">
+                    <div class="form-error-msg">
+                        <i class="fa"></i>
+                    </div>
+                    <div class="form-right-msg">
+                        <i class="fa"></i>
+                    </div>
+                </div>
+                <div class="form-block" style="width:100%;margin-left:0;" >
+                    <div class="label-name">电子邮箱：</div>
+                    <div class="form-control" id="user-email">18211111509@777.com</div>
+                </div>
 
-                    <div class="form-block" style="width:100%;margin-left:0;">
-                        <div class="label-name">昵称：</div>
-                        <input type="text" class="form-control" placeholder="不要超过10个字符">
-                        <div class="form-error-msg">
-                            <i class="fa"></i>不要超过10个字符
-                        </div>
-                    </div>
-                    <div class="form-block" style="width:100%;margin-left:0;">
-                        <div class="label-name">电子邮箱：</div>
-                        <a class="form-control" id="btn-link" href="#">前往绑定</a>
-                    </div>
-                    <div class="form-block" style="width:100%;margin-left:0;">
-                        <div class="label-name">手机：</div>
-                        <div class="form-control">182*****509</div>
-                    </div>
-                    <div class="form-block" style="width:100%;margin-left:0;">
-                        <div class="label-name">姓别：</div>
-                        <select class="form-control">
-                            <option value="0">男</option>
-                            <option value="1">女</option>
-                            <option value="2">保密</option>
+                <div class="form-block" style="width:100%;margin-left:0;">
+                    <div class="label-name">姓别：</div>
+                    <select class="form-control" id="select-sex">
+                        <option value="0">男</option>
+                        <option value="1">女</option>
+                        <option value="2">保密</option>
+                    </select>
+                </div>
+                <div class="form-block" style="width:100%;margin-left:0;">
+                    <div class="label-name">你的生日：</div>
+                    <div class="data-choose">
+                        <select id="select-year">
+
+                        </select>
+                        <select id="select-month">
+
+                        </select>
+                        <select id="select-date">
+
                         </select>
                     </div>
-                    <div class="form-block" style="width:100%;margin-left:0;">
-                        <div class="label-name">你的生日：</div>
-                        <div class="data-choose">
-                            <select>
-                                <option value="0">1900</option>
-                                <option value="1">1901</option>
-                                <option value="2">1902</option>
-                            </select>
-                            <select>
-                                <option value="0">1</option>
-                                <option value="1">2</option>
-                                <option value="2">3</option>
-                            </select>
-                            <select>
-                                <option value="0">1</option>
-                                <option value="1">2</option>
-                                <option value="2">3</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="btn-wrap">
-                        <button class="submit">保存全部修改</button>
-                    </div>
+                </div>
+                <div class="btn-wrap">
+                    <button class="submit">保存全部修改</button>
                 </div>
             </div>
         </div>
     </div>
-    <script src="../static/extlib/jquery-3.5.1/jquery-3.5.1.js"></script>
-    <script type="text/javascript">
-        var templateDiv = $("#choose1")
-        $(document).ready(function () {
-            $("#choose1").removeClass("close")
-            $("#choose1").addClass("active")
-        })
-        $(".close").click(function () {
-            templateDiv.removeClass("active")
-            templateDiv.addClass("close")
-            $(this).removeClass("close")
-            $(this).addClass("active")
-            templateDiv=$(this)
+</div>
+<script src="extlib/jquery-3.5.1/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+    var templateDiv = $("#choose1")
+    var thisUser
+    $(document).ready(function () {
+        //获取用户信息
+        function getUser() {
+            $.get(
+                "request/getuser",
+                function (user) {
+                    thisUser=user;
+                }
+            )
+        }
+        //根据获取的个人信息进行显示
+        function setUserMsg(){
+            $(".user-describe").val(thisUser.uprofile);
+            $("#user-true-name").text(thisUser.uname);
+            $("#user-name").val(thisUser.ualias);
+            $("#user-email").text(thisUser.umail);
+            if(thisUser.usex==="男"){
+                $("#select-sex").find("option[value='0']").attr("selected",true);
+            }else if(thisUser.usex==="女"){
+                $("#select-sex").find("option[value='1']").attr("selected",true);
+            }else{
+                $("#select-sex").find("option[value='2']").attr("selected",true);
+            }
+            var date = thisUser.ubirthday;//获取用户生日
+            var list = date.split("/");//得到年月日
+            //设置select的默认属性
+            $("#select-year").find("option[value="+list[0]+"]").attr("selected",true);
+            $("#select-month").find("option[value="+list[1]+"]").attr("selected",true);
+            $("#select-date").find("option[value="+list[2]+"]").attr("selected",true);
+        }
 
-        })
-    </script>
+        $("#choose1").removeClass("close")
+        $("#choose1").addClass("active")
+        $(".form-error-msg").hide()
+        $(".form-right-msg").hide()
+
+        var date = new Date();
+        var year = date.getFullYear();
+        var j=0;
+        var html_y="";
+        var html_m="";
+        var html_d="";
+        for(var i=1900;i<year;i++){
+            html_y+="<option value="+i+">"+i+"</option>";
+            j++;
+        }
+        j=0;
+        for(var i=1;i<13;i++){
+            html_m+="<option value="+i+">"+i+"</option>";
+            j++;
+        }
+        j=0;
+        for(var i=1;i<31;i++){
+            html_d+="<option value="+i+">"+i+"</option>";
+            j++;
+        }
+        $("#select-year").html(html_y);
+        $("#select-month").html(html_m);
+        $("#select-date").html(html_d);
+        getUser()
+        setUserMsg()
+    })
+    $(".close").click(function () {
+        templateDiv.removeClass("active")
+        templateDiv.addClass("close")
+        $(this).removeClass("close")
+        $(this).addClass("active")
+        templateDiv=$(this)
+
+    })
+    $(".submit").click(function () {
+        window.location.href="";
+        //提交到后端
+    })
+    $(document).click(function () {
+        var temp = $("#user-name").val().length
+        if(temp>10){
+            $(".form-error-msg").show()
+            $(".form-right-msg").hide()
+            $(".form-error-msg").text("不要超过10个字符")
+        }else if(temp==0){
+            $(".form-error-msg").show()
+            $(".form-right-msg").hide()
+            $(".form-error-msg").text("昵称不能为空")
+        }else{
+            $(".form-error-msg").hide()
+            $(".form-right-msg").show()
+            $(".form-right-msg").text("昵称符合要求")
+        }
+    })
+</script>
 </body>
 </html>
