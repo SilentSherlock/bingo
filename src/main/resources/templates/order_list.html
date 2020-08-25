@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/orderList.css">
+    <script type="text/javascript" src="extlib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<div class="community-content">
+    <div class="tabs-container">
+        <div class="left-menu-tabs">
+            <div class="first-title tags-button">订单中心</div>
+            <div class="tags-button">
+                <a href="#">我的订单</a>
+            </div>
+            <div class="tags-button">
+                <a href="#">我的点评</a>
+            </div>
+            <div class="tags-button">
+                <a href="#">我的游戏</a>
+            </div>
+            <div class="first-title tags-button">我的账户</div>
+            <div class="tags-button">
+                <a href="#">基本信息</a>
+            </div>
+        </div>
+        <div class="order-main">
+            <div class="order-title">
+                <div class="row1">商品名称</div>
+                <div class="row2">购买日期</div>
+                <div class="row3">订单号</div>
+                <div class="row3">总计</div>
+            </div>
+            <div class="myorder-elem">
+        <span class="column1">
+            <span class="column1-elem" id="1-1" onmouseover="on(this)" onmouseout="leave(this)">
+                <img src="/src/cover1.jpg">
+                <span class="column1-elem-txt" id="txt1-1">只狼</span>
+            </span>
+            <span class="column1-elem" id="1-2" onmouseover="on(this)" onmouseout="leave(this)">
+                <img src="/src/cover1.jpg">
+                <span class="column1-elem-txt" id="txt1-2">天外飞仙</span>
+            </span>
+            <span class="column1-elem" id="1-3" onmouseover="on(this)" onmouseout="leave(this)">
+                <img src="/src/cover1.jpg" >
+                <span class="column1-elem-txt" id="txt1-3">落花</span>
+            </span>
+            <span class="column1-elem" id="1-4" onmouseover="on(this)" onmouseout="leave(this)">
+                <img src="/src/cover1.jpg">
+                <span class="column1-elem-txt" id="txt1-4">流雪</span>
+            </span>
+            <span class="column1-elem" id="1-5" onmouseover="on(this)" onmouseout="leave(this)">
+                <img src="/src/cover1.jpg">
+                <span class="column1-elem-txt" id="txt1-5">柳絮</span>
+            </span>
+        </span>
+                <div class="row2">2020-08-02 12:00:00</div>
+                <div class="row3">201701****</div>
+                <div class="row3">￥80.00</div>
+            </div>
+            <div class="myorder-elem">
+        <span class="column1">
+            <span class="column1-elem">
+                <img src="/src/cover1.jpg">
+                <span class="column1-elem-txt">飞飞飞</span>
+            </span>
+            <span class="column1-elem">
+                <img src="/src/cover1.jpg">
+                <span class="column1-elem-txt">飞飞飞</span>
+            </span>
+        </span>
+                <div class="row2">2020-08-02 12:00:00</div>
+                <div class="row3">201701****</div>
+                <div class="row3">￥80.00</div>
+            </div>
+            <div class="myorder-elem">
+        <span class="column1">
+            <span class="column1-elem">
+                <img src="/src/cover1.jpg">
+                <span class="column1-elem-txt">飞飞飞</span>
+            </span>
+        </span>
+                <div class="row2">2020-08-02 12:00:00</div>
+                <div class="row3">201701****</div>
+                <div class="row3">￥80.00</div>
+            </div>
+            <div class="myorder-elem"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function on(typp){
+        console.log("悬浮事件发生");
+        $("#txt"+$(typp).attr("id")).show();
+    }
+    function leave(typp){
+        console.log("悬浮事件发生");
+        $("#txt"+$(typp).attr("id")).hide();
+    }
+</script>
+</body>
+</html>
