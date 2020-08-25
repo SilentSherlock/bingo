@@ -184,12 +184,14 @@
             display: inline-block;
             width: 70px;
             text-align: right;
+            float:right;
+            padding-right: 25px;
         }
         .shopping-operator{
             float:right;
             display: inline;
         }
-        .button{
+        .button1,.button2{
             background: #ff6900;
             outline: none;
             border: none;
@@ -250,64 +252,95 @@
                 <a class="close" href="#">心愿单</a>
             </div>
         </div>
-    <div class="community-content community-wish-list">
-        <div class="community-middle">
-            <div class="wish-list-container">
-                <div class="wish-list-menu">
-                    <span>隐私设置</span>
-                </div>
-                <h1 class="wish-list-owner">心愿单</h1>
-                <div class="wish-tab">
-                    <p class="wish-list-count">共有<span class="count">2</span>项</p>
-                </div>
-                <div class="wish-list-content">
-                    <div class="wish-list-block">
-                        <span class="image-wrapper">
-                            <img src="../static/src/icon.png">
-                        </span>
-                        <a class="title" href="#" target="_blank">傀儡黑帮：傀儡师</a>
-                        <div class="percentage">
-                            <span>-0.2</span>
-                        </div>
-                        <div class="list-price">
-                            <span>￥80</span>
-                        </div>
-                        <div class="sale-price">
-                            <span>￥64</span>
-                        </div>
-                        <div class="shopping-operator">
-                            <ul>
-                                <li><button class="button">加入购物车</button></li>
-                                <li><button class="button">移出心愿单</button></li>
-                            </ul>
-                        </div>
+        <div class="community-content community-wish-list">
+            <div class="community-middle">
+                <div class="wish-list-container">
+                    <div class="wish-list-menu">
+                        <span>隐私设置</span>
                     </div>
-                    <div class="wish-list-block">
-                        <span class="image-wrapper">
-                            <img src="../static/src/icon.png">
-                        </span>
-                        <a class="title" href="#" target="_blank">傀儡黑帮：傀儡师</a>
-                        <div class="percentage">
-                            <span>-0.2</span>
-                        </div>
-                        <div class="list-price">
-                            <span>￥80</span>
-                        </div>
-                        <div class="sale-price">
-                            <span>￥64</span>
-                        </div>
-                        <div class="shopping-operator">
-                            <ul>
-                                <li><button class="button">加入购物车</button></li>
-                                <li><button class="button">移出心愿单</button></li>
-                            </ul>
-                        </div>
+                    <h1 class="wish-list-owner"></h1>
+                    <div class="wish-tab">
+                        <p class="wish-list-count">共有<span class="count">n</span>项</p>
+                    </div>
+                    <div class="wish-list-content">
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 </div>
+<script src="extlib/jquery-3.5.1/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+    var thisUser;
+    $(document).ready(function () {
+        function getUser() {
+            $.get(
+                "request/getuser",
+                function (user) {
+                    thisUser=user;
+                    $(".wish-list-owner").text(thisUser.uname+"的心愿单");
+                }
+            )
+        }
+        function getWishList() {
+            $.get(
+                "/store/gameShow",
+                function(gameList){
+
+                    var list=gameList.resultMap.gameList;
+                    $(".count").text(list.length);
+                    var html="";
+                    for(var i=0;i<list.length;i++){
+                        var wish=list[i]
+                        var temp=(parseFloat(wish.gprice)*(parseFloat(wish.discount))).toString();
+                        if(temp.length>6){
+                            temp.substr(0,6);
+                        }
+                        var typelist = wish.gtype;
+                        typelist = typelist.substring(1,typelist.length-1);
+                        console.log(typelist)
+                        typelist = typelist.split(",")
+
+                        html+=
+                            "<div class="+"wish-list-block"+">"+
+                            "<span class="+"image-wrapper"+">"+
+                            "<img src="+wish.phref+">"+
+                            "</span>"+
+                            "<a class="+"title"+ " "+"href="+"#"+ " "+"target="+"_blank"+">"+wish.gname+"</a>"+
+
+                            "<div class="+"shopping-operator"+">"+
+                            "<ul>"+
+                            "<li><button id="+wish.gid+"-1"+" "+"class="+"button1"+">加入购物车</button></li>"+
+                            "<li><button id="+wish.gid+"-2"+" "+"class="+"button2"+">移出心愿单</button></li>"+
+                            "</ul>"+
+                            "</div>"+
+                            "<div class="+"sale-price"+">"+
+                            "<span>￥"+temp+"</span>"+
+                            "</div>"+
+                            "</div>"
+                    }
+                    $(".wish-list-content").html(html)
+                }
+            )
+        }
+        $(".button1").click(function () {
+            var temp = $(this).id
+            temp.substr(0,temp.length-2)
+            window.location.href="request?gid=".concat(temp);
+            //提交到后端
+            //添加到购物车
+        })
+        $(".button2").click(function () {
+            var temp = $(this).id
+            temp.substr(0,temp.length-2)
+            window.location.href="request?gid=".concat(temp);
+            //提交到后端
+            //移出心愿单
+        })
+        getUser()
+        getWishList()
+    })
+</script>
 </body>
 </html>
