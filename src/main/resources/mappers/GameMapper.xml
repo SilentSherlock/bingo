@@ -8,7 +8,7 @@
         <result column="gtype" property="gtype" jdbcType="VARCHAR"/>
         <result column="developer" property="developer" jdbcType="VARCHAR"/>
         <result column="publisher" property="publisher" jdbcType="VARCHAR"/>
-        <result column="releasedate" property="realeasedate" jdbcType="VARCHAR"/>
+        <result column="releasedate" property="realeasedate" jdbcType="DATE"/>
         <result column="gprice" property="gprice" jdbcType="FLOAT"/>
         <result column="discount" property="discount" jdbcType="FLOAT"/>
         <result column="gscore" property="gscore" jdbcType="FLOAT"/>
@@ -45,6 +45,95 @@
             game
         WHERE gname like CONCAT ('%',#{name},'%')
     </select>
+
+    <select id="getByType" resultMap="BaseGameMap">
+        SELECT
+            *
+        FROM
+            game
+        WHERE
+            <foreach collection="list" open="" close="" item="type" separator="and">
+                gtype like CONCAT ('%', #{type}, '%')
+            </foreach>
+    </select>
+
+    <select id="search" parameterType="com.nwafu.bingo.utils.Search" resultMap="BaseGameMap">
+        SELECT
+            *
+        FROM
+            game
+        <where>
+            <choose>
+                <when test="sort == 'discount'">
+                    discount != 1
+                </when>
+                <when test="sort == 'new'">
+                    releasedate BETWEEN DATE_SUB(CURDATE(), INTERVAL 30 DAY) and DATE_ADD(CURDATE(), INTERVAL 1 YEAR)
+                </when>
+                <when test="sort == 'score'">
+                    gscore BETWEEN 8 and 10
+                </when>
+                <otherwise>
+
+                </otherwise>
+            </choose>
+            <if test="category != null and category.size() != 0">
+                <foreach collection="category" open="and" close="" item="type" separator="and">
+                    gtype like CONCAT ('%', #{type}, '%')
+                </foreach>
+            </if>
+            <if test="tag != null and tag.size() != 0">
+                <foreach collection="tag" open="and" close="" item="t" separator="and">
+                    <choose>
+                        <when test="t == 'presale'">
+                            releasedate BETWEEN CURDATE() and DATE_ADD(CURDATE(), INTERVAL 1 YEAR)
+                        </when>
+                        <when test="t == 'newsale'">
+                            releasedate BETWEEN DATE_SUB(CURDATE(), INTERVAL 30 DAY) and CURDATE()
+                        </when>
+                        <when test="t == 'promotion'">
+                            discout != 1
+                        </when>
+                        <otherwise>
+                            1 = 1
+                        </otherwise>
+                    </choose>
+                </foreach>
+            </if>
+            <if test="minPrice != null">
+                and gprice &gt;= #{minPrice}
+            </if>
+            <if test="maxPrice != null">
+                and gprice &lt;= #{maxPrice}
+            </if>
+        </where>
+        ORDER BY
+        <choose>
+            <when test="sort == 'discount'">
+                1 - discount
+            </when>
+            <when test="sort == 'new'">
+                releasedate
+            </when>
+            <when test="sort == 'score'">
+                gscore
+            </when>
+            <when test="sort == 'price'">
+                gprice
+            </when>
+            <otherwise>
+                gid
+            </otherwise>
+        </choose>
+        <if test="order == 'desc'">
+            desc
+        </if>
+        <if test="order == 'asc'">
+            asc
+        </if>
+        LIMIT #{pageIndex}, #{pageCount}
+    </select>
+
     <select id="getById" parameterType="Integer" resultMap="BaseGameMap">
         SELECT
             *
