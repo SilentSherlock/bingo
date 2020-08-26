@@ -21,6 +21,18 @@ import java.util.*;
 public class StoreController {
     @Resource
     StoreService storeService;
+    /**
+    * @MethodName getPageAllNum
+    * @Description 获取分页下标总数
+    * @Param []
+    * @return java.lang.Integer
+    * @author yolia
+    * @Date 10:00 2020/8/26
+    **/
+    private Integer getPageAllNum(Search search) throws Exception {
+        Integer allSearchNum = storeService.searchCount(search);
+        return (int)Math.ceil((double)allSearchNum / (double)search.getPageCount());
+    }
 
     //region 游戏相关
     /**
@@ -133,7 +145,7 @@ public class StoreController {
     * @return com.nwafu.bingo.utils.Result
      * Result包括状态值和键值对，状态值为SUCCESS时，数据搜索成功，存在数据，
      *                              FAILURE时，数据搜索失败，无数据。
-     *                              数据存在时，返回searchList；否则返回提示信息。
+     *                              数据存在时，返回searchList和allSearchNum；否则返回提示信息。
     * @author yolia
     * @Date 15:21 2020/8/25
     **/
@@ -146,8 +158,10 @@ public class StoreController {
             result.getResultMap().put("searchList", "无内容");
             return result;
         }
+        Integer allSearchNum = getPageAllNum(search);
         result.setStatus(Status.SUCCESS);
         result.getResultMap().put("searchList", gameList);
+        result.getResultMap().put("allSearchNum", allSearchNum);
         return result;
     }
     /**
@@ -457,6 +471,32 @@ public class StoreController {
         result.getResultMap().put("evaluationList_" + idType, evaluationList);
         return result;
     }
+    /**
+    * @MethodName searchEvaluationByUidAndGid
+    * @Description 根据uid和gid查找评测
+    * @Param [uid, gid]
+    * @return com.nwafu.bingo.utils.Result
+     * Result包括状态值和键值对，状态值为SUCCESS时，数据查询成功，数据存在，
+     *                              FAILURE时，数据查询失败，数据不存在。
+     *                              数据存在时，返回evaluation；否则返回提示信息。
+    * @author yolia
+    * @Date 9:55 2020/8/26
+    **/
+    @RequestMapping("searchEvaluationByUidAndGid")
+    public Result searchEvaluationByUidAndGid(Integer uid, Integer gid) throws Exception {
+        Result result = new Result();
+        //获取数据
+        Evaluation evaluation = storeService.getEvaluationByUidAndGid(uid, gid);
+        if(evaluation == null) {
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("evaluation", "无评测");
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("evaluation", evaluation);
+        return result;
+    }
+
     /**
     * @MethodName evaluationAddHandle
     * @Description 向数据库中添加新的评测数据（不查重）
