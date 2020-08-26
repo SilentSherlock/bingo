@@ -4,6 +4,16 @@ div {
   padding: 0;
 }
 
+.content-title {
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: normal;
+  color: #b9c0ef;
+}
+
 .order-main {
   padding-left: 20px;
   padding-right: 20px;
