@@ -8,6 +8,7 @@ import com.nwafu.bingo.entity.Evaluation;
 import com.nwafu.bingo.entity.Game;
 import com.nwafu.bingo.entity.Orderlist;
 import com.nwafu.bingo.entity.SystemReq;
+import com.nwafu.bingo.utils.Search;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -61,7 +62,6 @@ public class StoreService {
     public Game getGameById(Integer id) throws Exception {
         return gameDao.getById(id);
     }
-
     /**
     * @MethodName getGameByNameExact
     * @Description 根据name精确查询相关数据
@@ -72,6 +72,39 @@ public class StoreService {
     **/
     public Game getGameByNameExact(String name) throws Exception {
         return gameDao.getByNameExact(name);
+    }
+    /**
+    * @MethodName getGameByName
+    * @Description 模糊查询相关游戏
+    * @Param [name]
+    * @return java.util.List<com.nwafu.bingo.entity.Game>
+    * @author yolia
+    * @Date 16:40 2020/8/24
+    **/
+    public List<Game> getGameByName(String name) throws Exception {
+        return gameDao.getByName(name);
+    }
+    /**
+    * @MethodName getGameByType
+    * @Description 根据类别模糊查询
+    * @Param [types]
+    * @return java.util.List<com.nwafu.bingo.entity.Game>
+    * @author yolia
+    * @Date 8:23 2020/8/25
+    **/
+    public List<Game> getGameByType(List<String> types) throws Exception {
+        return gameDao.getByType(types);
+    }
+    /**
+    * @MethodName search
+    * @Description 按照相对应的要求进行搜索
+    * @Param [search]
+    * @return java.util.List<com.nwafu.bingo.entity.Game>
+    * @author yolia
+    * @Date 14:39 2020/8/25
+    **/
+    public List<Game> search(Search search) throws Exception {
+        return gameDao.search(search);
     }
     /**
     * @MethodName addGame
