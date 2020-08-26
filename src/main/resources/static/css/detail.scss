@@ -2,7 +2,7 @@
   padding-left: 20%;
   width: 100%;
   height: 100%;
-/*  padding: 0;*/
+  /*  padding: 0;*/
   margin: 0;
   display: block;
 }
@@ -64,6 +64,7 @@ p{
   width: 550px;
 }
 .titile-content-left{
+  height: 100%;
   width: 800px;
   float: left;
   margin-right: 20px;
@@ -81,7 +82,8 @@ p{
   margin-bottom: 20px;
 }
 .titile-content-left-2{
-/*  height: 325px;*/
+  /*  height: 325px;*/
+  height: 700px;
   background-color: #33394d;
   box-sizing: border-box;
   position: relative;
@@ -101,6 +103,7 @@ p{
   margin: 0 20px 20px 20px;
 }
 .titile-three {
+  height: 500px;
   float: left;
   margin: 20px 20px 20px 20px;
 }
@@ -136,6 +139,16 @@ p{
   min-height: 93px;
   margin-bottom: 20px;
   position: relative;
+}
+.titile-content-right-1-2{
+  /*  height: 325px;*/
+  height: 300px;
+  background-color: #33394d;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  transition: height .5s;
+  margin-bottom: 20px;
 }
 .tag-list{
   padding: 20px 20px 0 20px;
@@ -259,10 +272,10 @@ p{
   margin-bottom: 20px;
 }
 .titile-deploy{
-   font-size: 16px;
-   text-align: left;
-   color: #b9c0ef;
- }
+  font-size: 16px;
+  text-align: left;
+  color: #b9c0ef;
+}
 .main-table{
   margin-top: 14px;
   font-size: 12px;
@@ -307,14 +320,15 @@ p{
   box-sizing: border-box;
 }
 .item {
+
   margin-right: 5px;
   text-align: center;
   color: #b9c0ef;
   display: inline-block;
   background-color: #292e41;
   border-radius: 2px;
-  height: 25px;
-  line-height: 25px;
+  height: 20px;
+  line-height: 20px;
 }
 .d-cover{
   margin-bottom: 10px;
@@ -343,6 +357,7 @@ p{
 .score-1-2{
   height: 60px;
   margin-top: 30px;
+  margin-left: 30px;
   float: left;
   display: inline-block;
 }
@@ -360,14 +375,14 @@ p{
 .score-1-3{
   display: block;
   width: 740px;
-  height: 130px;
+  height: 500px;
   padding-left: 20px;
 }
 .score-1-3-1{
   position: absolute;
   display: inline-block;
   width: 200px;
-  height: 130px;
+  height: 100px;
   margin: 0;
   padding: 0;
 }
@@ -457,4 +472,9 @@ p{
   left: 55px;
   z-index:9999;
   font-size: 40px;
+}
+.sElem{
+  width: 700px;
+  height: 100px;
+  display: block;
 }

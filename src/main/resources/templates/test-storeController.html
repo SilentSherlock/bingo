@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Store Controller</title>
+    <script type="text/javascript" src="/extlib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<form >
+    排序：<input type="text" id="order"><br>
+    排序种类：<input type="text" id="sort"><br>
+    类别：<input type="text" id="category"><br>
+    标签：<input type="text" id="tag"><br>
+    最小价格：<input type="text" id="minPrice"><br>
+    最大价格：<input type="text" id="maxPrice"><br>
+    页码：<input type="text" id="pageIndex"><br>
+    <input type="button" id="register-btn" value="注册">
+</form>
+<script>
+    $("#register-btn").on("click",function () {
+
+        let formData = new FormData();
+
+        var pageIndex = $("#pageIndex").val();
+        var page = (pageIndex - 1) * 10;
+
+        formData.append("order",$("#order").val());
+        formData.append("sort",$("#sort").val());
+        formData.append("category",$("#category").val())
+        formData.append("tag",$("#tag").val());
+        formData.append("minPrice",$("#minPrice").val());
+        formData.append("maxPrice",$("#maxPrice").val());
+        formData.append("pageIndex", page);
+
+        $.ajax({
+            url:'/store/search',
+            type:'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache : false,
+            dataType: 'json',
+            success:function (data) {
+                console.dir(data)
+            }
+        })
+
+    })
+</script>
+</body>
+</html>

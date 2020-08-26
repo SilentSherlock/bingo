@@ -1,7 +1,9 @@
 package com.nwafu.bingo.dao;
 
 import com.nwafu.bingo.entity.Game;
+import com.nwafu.bingo.utils.Search;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -11,7 +13,6 @@ import java.util.List;
  */
 @Repository
 public interface GameDao {
-
     int add(Game game) throws Exception;
     void update(Game game) throws Exception;
     void delete(Game game) throws Exception;
@@ -20,6 +21,10 @@ public interface GameDao {
     Game getByNameExact(String name) throws Exception;
     /*模糊查询*/
     List<Game> getByName(String name) throws Exception;
+    List<Game> getByType(List<String> types) throws Exception;
+    //搜素相关
+    int searchCount(Search search) throws Exception;
+    List<Game> search(Search search) throws Exception;
     /*直接根据gid获取*/
     Game getById(Integer id) throws Exception;
 }
