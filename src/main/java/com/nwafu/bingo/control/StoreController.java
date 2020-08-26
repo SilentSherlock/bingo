@@ -1,29 +1,38 @@
 package com.nwafu.bingo.control;
 
 
-import com.nwafu.bingo.entity.Evaluation;
-import com.nwafu.bingo.entity.Game;
-import com.nwafu.bingo.entity.Orderlist;
-import com.nwafu.bingo.entity.SystemReq;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.nwafu.bingo.entity.*;
 import com.nwafu.bingo.service.StoreService;
 import com.nwafu.bingo.utils.Result;
 import com.nwafu.bingo.utils.Search;
 import com.nwafu.bingo.utils.Status;
 import com.nwafu.bingo.utils.Tools;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("store")
 public class StoreController {
     @Resource
     StoreService storeService;
+    /**
+    * @MethodName getPageAllNum
+    * @Description 获取分页下标总数
+    * @Param []
+    * @return java.lang.Integer
+    * @author yolia
+    * @Date 10:00 2020/8/26
+    **/
+    private Integer getPageAllNum(Search search) throws Exception {
+        Integer allSearchNum = storeService.searchCount(search);
+        return (int)Math.ceil((double)allSearchNum / (double)search.getPageCount());
+    }
 
     //region 游戏相关
     /**
@@ -136,7 +145,7 @@ public class StoreController {
     * @return com.nwafu.bingo.utils.Result
      * Result包括状态值和键值对，状态值为SUCCESS时，数据搜索成功，存在数据，
      *                              FAILURE时，数据搜索失败，无数据。
-     *                              数据存在时，返回searchList；否则返回提示信息。
+     *                              数据存在时，返回searchList和allSearchNum；否则返回提示信息。
     * @author yolia
     * @Date 15:21 2020/8/25
     **/
@@ -149,8 +158,10 @@ public class StoreController {
             result.getResultMap().put("searchList", "无内容");
             return result;
         }
+        Integer allSearchNum = getPageAllNum(search);
         result.setStatus(Status.SUCCESS);
         result.getResultMap().put("searchList", gameList);
+        result.getResultMap().put("allSearchNum", allSearchNum);
         return result;
     }
     /**
@@ -253,6 +264,49 @@ public class StoreController {
         }
         result.setStatus(Status.SUCCESS);
         result.getResultMap().put("orderList_" + idType, orderlists);
+        return result;
+    }
+    /**
+    * @MethodName orderListById
+    * @Description 根据id类型和id值获取订单列表，并计算每单的费用
+    * @Param [idType, idValue]
+    * @return com.nwafu.bingo.utils.Result
+     * Result包括状态值和键值对，状态值为SUCCESS时，数据查询成功，数据存在；
+     *                              FAILURE时，数据查询失败，数据不存在。
+     *                              数据查询成功，返回orderLists和orderListAllPrice；否则返回提示信息
+    * @author yolia
+    * @Date 8:31 2020/8/26
+    **/
+    @RequestMapping("orderListById")
+    public Result orderListById(String idType, Integer idValue) throws Exception {
+        Result result = new Result();
+        List<Orderlist> orderlists = storeService.getOrderListById(idType, idValue);
+        if(orderlists == null || orderlists.size() == 0){
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("orderLists", "无内容");
+            return result;
+        }
+        List<Float> orderListAllPrice = new ArrayList<>();
+        for(Orderlist orderlist : orderlists){
+            JSONArray array = JSON.parseArray(orderlist.getOrderDetails());
+            if(array == null || array.size() == 0) continue;
+            Float curOrderListAllPrice = 0.0f;
+            for(int i = 0; i < array.size(); i++){
+                float price =  array.getJSONObject(i).getFloat("price");
+                float discount = array.getJSONObject(i).getFloat("discount");
+                curOrderListAllPrice += price * discount;
+            }
+            orderListAllPrice.add(curOrderListAllPrice);
+        }
+        //
+        if(orderListAllPrice.size() == 0){
+            result.getResultMap().put("orderListAllPrice", "订单列表为空");
+            result.setStatus(Status.FAILURE);
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("orderLists", orderlists);
+        result.getResultMap().put("orderListAllPrice", orderListAllPrice);
         return result;
     }
     /**
@@ -417,6 +471,32 @@ public class StoreController {
         result.getResultMap().put("evaluationList_" + idType, evaluationList);
         return result;
     }
+    /**
+    * @MethodName searchEvaluationByUidAndGid
+    * @Description 根据uid和gid查找评测
+    * @Param [uid, gid]
+    * @return com.nwafu.bingo.utils.Result
+     * Result包括状态值和键值对，状态值为SUCCESS时，数据查询成功，数据存在，
+     *                              FAILURE时，数据查询失败，数据不存在。
+     *                              数据存在时，返回evaluation；否则返回提示信息。
+    * @author yolia
+    * @Date 9:55 2020/8/26
+    **/
+    @RequestMapping("searchEvaluationByUidAndGid")
+    public Result searchEvaluationByUidAndGid(Integer uid, Integer gid) throws Exception {
+        Result result = new Result();
+        //获取数据
+        Evaluation evaluation = storeService.getEvaluationByUidAndGid(uid, gid);
+        if(evaluation == null) {
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("evaluation", "无评测");
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("evaluation", evaluation);
+        return result;
+    }
+
     /**
     * @MethodName evaluationAddHandle
     * @Description 向数据库中添加新的评测数据（不查重）
