@@ -125,12 +125,14 @@
                 gid
             </otherwise>
         </choose>
-        <if test="order == 'desc'">
-            desc
-        </if>
-        <if test="order == 'asc'">
-            asc
-        </if>
+        <choose>
+            <when test="order == 'asc'">
+                asc
+            </when>
+            <otherwise>
+                desc
+            </otherwise>
+        </choose>
         LIMIT #{pageIndex}, #{pageCount}
     </select>
 
