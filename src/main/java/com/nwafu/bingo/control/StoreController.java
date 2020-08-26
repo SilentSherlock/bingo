@@ -7,10 +7,16 @@ import com.nwafu.bingo.entity.Orderlist;
 import com.nwafu.bingo.entity.SystemReq;
 import com.nwafu.bingo.service.StoreService;
 import com.nwafu.bingo.utils.Result;
+import com.nwafu.bingo.utils.Search;
 import com.nwafu.bingo.utils.Status;
+import com.nwafu.bingo.utils.Tools;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -71,6 +77,80 @@ public class StoreController {
         }
         result.setStatus(Status.SUCCESS);
         result.getResultMap().put("game", game);
+        return result;
+    }
+    /**
+    * @MethodName searchGameByName
+    * @Description 根据Name模糊查询游戏
+    * @Param [name]
+    * @return com.nwafu.bingo.utils.Result
+     * Result包含状态值和键值对，状态值为SUCCESS时，查询数据不为空，
+     *                              FAILURE时，查询数据为空。
+     *                              数据不为空是，返回gameList；否则返回提示信息。
+    * @author yolia
+    * @Date 16:43 2020/8/24
+    **/
+    @RequestMapping("searchGameByName")
+    public Result searchGameByName(String name) throws Exception {
+        Result result = new Result();
+        //获取数据
+        List<Game> gameList = storeService.getGameByName(name);
+        if(gameList == null || gameList.size() == 0){
+            result.getResultMap().put("searchGameListByName", "搜索游戏不存在");
+            result.setStatus(Status.FAILURE);
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("searchGameListByName", gameList);
+        return result;
+    }
+    /**
+    * @MethodName searchGameByType
+    * @Description 根据类别模糊查询游戏列表
+    * @Param [types]
+    * @return com.nwafu.bingo.utils.Result
+     * Result包含状态值和键值对，状态值为SUCCESS时，查询数据存在，
+     *                              FAILURE时，查询数据不存在。
+     *                              如果数据存在，返回gameList；否则返回提示信息。
+    * @author yolia
+    * @Date 8:26 2020/8/25
+    **/
+    @RequestMapping("searchGameByType")
+    public Result searchGameByType(@RequestParam(value = "types[]") List<String> types) throws Exception {
+        Result result = new Result();
+        //获取数据
+        List<Game> gameList = storeService.getGameByType(types);
+        if(gameList == null || gameList.size() == 0){
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("searchGameListByType", "该游戏类别不存在游戏");
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("searchGameListByType", gameList);
+        return result;
+    }
+    /**
+    * @MethodName search
+    * @Description 用于搜索
+    * @Param [search]  ----- 属性请到类中查看
+    * @return com.nwafu.bingo.utils.Result
+     * Result包括状态值和键值对，状态值为SUCCESS时，数据搜索成功，存在数据，
+     *                              FAILURE时，数据搜索失败，无数据。
+     *                              数据存在时，返回searchList；否则返回提示信息。
+    * @author yolia
+    * @Date 15:21 2020/8/25
+    **/
+    @RequestMapping("search")
+    public Result search(Search search) throws Exception {
+        Result result = new Result();
+        List<Game> gameList = storeService.search(search);
+        if(gameList == null || gameList.size() == 0){
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("searchList", "无内容");
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("searchList", gameList);
         return result;
     }
     /**

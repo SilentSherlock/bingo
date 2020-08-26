@@ -3,22 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>我的游戏</title>
-    <link rel="stylesheet" type="text/css" href="/css/orderList.css">
+    <link rel="stylesheet" type="text/css" href="/css/gameList.css">
+    <script type="text/javascript" src="extlib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 </head>
 <body>
-<div class="order-main">
-    <div class="myorder-elem">
+<div class="order-main" id="order-content">
+    <div class="content-title">我的游戏</div>
+    <!--<div class="myorder-elem">
         <div class="game-elem">
-            <img src="/src/cover1.jpg">
+            <img src="" class="gameCover">
             <span class="elem-name">飞飞飞</span>
+            <div class="condition" onclick="javascript:void (0)">
+                <button class="condition">查看激活码</button>
+            </div>
         </div>
-    </div>
-    <div class="myorder-elem">
-        <div class="game-elem">
-            <img src="/src/cover1.jpg">
-            <span class="elem-name">飞飞飞</span>
-        </div>
-    </div>
+    </div>-->
 </div>
+<script type="text/javascript">
+    $(document).ready(function (){
+        function getinfo(){
+            var data = {
+                uid : 1
+            }
+            $.get(
+                "/person/getUserById", data,
+                function (userResult) {
+                    var gamelist = JSON.parse(userResult.resultMap.user.gamelist);
+                    console.log(gamelist);
+                    var gamel = gamelist.length,i=0,html="";
+                    console.log(gamel);
+                    for( ;i<gamel;i++){
+                        html = "";
+                        console.log("查找游戏的id:" + gamelist[i])
+                        $.ajax({
+                            url:"store/gameDetailShow" +"?id="+ gamelist[i],
+                            type:'get',
+                            async:false,
+                            success: function (gameResult){
+                                console.log(gameResult);
+                                var game = gameResult.resultMap.game;
+                                html+= "<div class=\"myorder-elem\">\n" +
+                                    "        <div class=\"game-elem\">\n" +
+                                    "            <img src=" +game.chref+ " class=\"gameCover\">\n" +
+                                    "            <span class=\"elem-name\">" +game.gname+ "</span>\n" +
+                                    "            <div class=\"condition\" onclick=\"javascript:void (0)\">\n" +
+                                    "                <button class=\"condition\">查看激活码</button>\n" +
+                                    "            </div>\n" +
+                                    "        </div>\n" +
+                                    "    </div>";
+                                $("#order-content").append(html);
+                            }
+                            })
+                    }
+                })
+        }
+        getinfo()
+    })
+</script>
 </body>
 </html>

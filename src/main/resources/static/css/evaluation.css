@@ -53,7 +53,7 @@ div {
   font-size: 18px;
   position: absolute;
   left: 0;
-  top: 30px;
+  top: 10px;
 }
 
 .game-elem {
@@ -63,11 +63,6 @@ div {
   position: relative;
   float: left;
   cursor: pointer;
-}
-
-.column1-elem img {
-  width: 135px;
-  height: 80px;
 }
 
 .score {
@@ -150,6 +145,11 @@ button {
   line-height: 42px;
   text-align: center;
   text-decoration: none;
+}
+
+.game-chref {
+  width: 135px;
+  height: 80px;
 }
 
 /*# sourceMappingURL=evaluation.css.map */

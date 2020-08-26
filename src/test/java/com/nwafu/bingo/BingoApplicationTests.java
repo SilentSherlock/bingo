@@ -10,6 +10,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
@@ -108,7 +109,7 @@ class BingoApplicationTests {
 		game.setPhref("fasfdadsfsadfasf");
 		game.setPlatform("dfasafafsa");
 		game.setPublisher("郭氏集团");
-		game.setRealeasedate("fadsfsadagssagsafsafsa");
+		game.setRealeasedate(new Date());
 		game.setSystemreq("windows10");
 		game.setVhref("dfadasfdafasfa");
 		game.setGid(102);
