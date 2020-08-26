@@ -96,6 +96,17 @@ public class StoreService {
         return gameDao.getByType(types);
     }
     /**
+    * @MethodName searchCount
+    * @Description 获取搜索总数
+    * @Param [search]
+    * @return java.lang.Integer
+    * @author yolia
+    * @Date 10:06 2020/8/26
+    **/
+    public Integer searchCount(Search search) throws Exception {
+        return gameDao.searchCount(search);
+    }
+    /**
     * @MethodName search
     * @Description 按照相对应的要求进行搜索
     * @Param [search]
@@ -257,6 +268,17 @@ public class StoreService {
     **/
     public List<Evaluation> getEvaluationById(String idType, Integer idValue) throws Exception {
         return evaluationDao.getById(idType, idValue);
+    }
+    /**
+    * @MethodName getEvaluationByUidAndGid
+    * @Description 根据uid和gid查找评测
+    * @Param [uid, gid]
+    * @return com.nwafu.bingo.entity.Evaluation
+    * @author yolia
+    * @Date 9:53 2020/8/26
+    **/
+    public Evaluation getEvaluationByUidAndGid(Integer uid, Integer gid) throws Exception {
+        return evaluationDao.getByUidAndGid(uid, gid);
     }
     /**
     * @MethodName addEvaluation
