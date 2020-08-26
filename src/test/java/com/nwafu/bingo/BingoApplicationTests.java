@@ -200,7 +200,7 @@ class BingoApplicationTests {
 		Orderlist orderlist = new Orderlist();
 		orderlist.setOrderDetails("goumai");
 		orderlist.setUid(2);
-		orderlist.setOtime("1992/1/1");
+		orderlist.setOtime(new Date());
 		orderlist.setOid(1);
 		//orderlistDao.add(orderlist);
 
