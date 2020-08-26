@@ -6,7 +6,7 @@
         <id column="oid" property="oid" jdbcType="INTEGER"/>
         <result column="uid" property="uid" jdbcType="INTEGER"/>
         <result column="detail" property="orderDetails" jdbcType="VARCHAR"/>
-        <result column="otime" property="otime" jdbcType="VARCHAR"/>
+        <result column="otime" property="otime" jdbcType="DATE"/>
 
     </resultMap>
 
