@@ -13,7 +13,6 @@ import java.util.List;
  */
 @Repository
 public interface GameDao {
-
     int add(Game game) throws Exception;
     void update(Game game) throws Exception;
     void delete(Game game) throws Exception;
@@ -23,6 +22,8 @@ public interface GameDao {
     /*模糊查询*/
     List<Game> getByName(String name) throws Exception;
     List<Game> getByType(List<String> types) throws Exception;
+    //搜素相关
+    int searchCount(Search search) throws Exception;
     List<Game> search(Search search) throws Exception;
     /*直接根据gid获取*/
     Game getById(Integer id) throws Exception;

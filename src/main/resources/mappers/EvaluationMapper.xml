@@ -20,6 +20,14 @@
             ${idType} = #{idValue};
         </where>
     </select>
+    <select id="getByUidAndGid" resultMap="evaluationMap">
+        select
+            *
+        from
+            evaluation
+        where
+            uid = #{uid} and gid = #{gid}
+    </select>
     <delete id="deleteById">
         delete from evaluation
         where ${idType} = #{idValue};
