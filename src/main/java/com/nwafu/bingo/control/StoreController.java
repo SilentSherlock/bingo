@@ -511,6 +511,12 @@ public class StoreController {
     @RequestMapping("evaluationAddHandle")
     public Result evaluationAddHandle(Evaluation evaluation) throws Exception {
         Result result = new Result();
+        Evaluation searchEvaluation = storeService.getEvaluationByUidAndGid(evaluation.getUid(), evaluation.getGid());
+        if(searchEvaluation != null){
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("addEvaluationHandle", "数据已存在");
+            return result;
+        }
         storeService.addEvaluation(evaluation);
         result.setStatus(Status.SUCCESS);
         result.getResultMap().put("addEvaluationHandle", evaluation);

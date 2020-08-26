@@ -169,7 +169,7 @@
                 gscore
             </when>
             <when test="sort == 'price'">
-                gprice
+                gprice * discount
             </when>
             <otherwise>
                 gid
