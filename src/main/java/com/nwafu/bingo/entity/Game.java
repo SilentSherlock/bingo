@@ -1,5 +1,7 @@
 package com.nwafu.bingo.entity;
 
+import java.util.Date;
+
 /**
  * Date: 2020/8/19
  * Description: optional describe the class
@@ -11,7 +13,7 @@ public class Game {
     private String gtype;//list类型的string转换得到
     private String developer;
     private String publisher;
-    private String realeasedate;
+    private Date realeasedate;
     private Float gprice;
     private Float discount;
     private Float gscore;
@@ -64,11 +66,11 @@ public class Game {
         this.publisher = publisher;
     }
 
-    public String getRealeasedate() {
+    public Date getRealeasedate() {
         return realeasedate;
     }
 
-    public void setRealeasedate(String realeasedate) {
+    public void setRealeasedate(Date realeasedate) {
         this.realeasedate = realeasedate;
     }
 

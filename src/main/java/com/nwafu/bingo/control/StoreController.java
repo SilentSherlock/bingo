@@ -1,17 +1,20 @@
 package com.nwafu.bingo.control;
 
 
-import com.nwafu.bingo.entity.Evaluation;
-import com.nwafu.bingo.entity.Game;
-import com.nwafu.bingo.entity.Orderlist;
-import com.nwafu.bingo.entity.SystemReq;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.nwafu.bingo.entity.*;
 import com.nwafu.bingo.service.StoreService;
 import com.nwafu.bingo.utils.Result;
+import com.nwafu.bingo.utils.Search;
 import com.nwafu.bingo.utils.Status;
+import com.nwafu.bingo.utils.Tools;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("store")
@@ -71,6 +74,80 @@ public class StoreController {
         }
         result.setStatus(Status.SUCCESS);
         result.getResultMap().put("game", game);
+        return result;
+    }
+    /**
+    * @MethodName searchGameByName
+    * @Description 根据Name模糊查询游戏
+    * @Param [name]
+    * @return com.nwafu.bingo.utils.Result
+     * Result包含状态值和键值对，状态值为SUCCESS时，查询数据不为空，
+     *                              FAILURE时，查询数据为空。
+     *                              数据不为空是，返回gameList；否则返回提示信息。
+    * @author yolia
+    * @Date 16:43 2020/8/24
+    **/
+    @RequestMapping("searchGameByName")
+    public Result searchGameByName(String name) throws Exception {
+        Result result = new Result();
+        //获取数据
+        List<Game> gameList = storeService.getGameByName(name);
+        if(gameList == null || gameList.size() == 0){
+            result.getResultMap().put("searchGameListByName", "搜索游戏不存在");
+            result.setStatus(Status.FAILURE);
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("searchGameListByName", gameList);
+        return result;
+    }
+    /**
+    * @MethodName searchGameByType
+    * @Description 根据类别模糊查询游戏列表
+    * @Param [types]
+    * @return com.nwafu.bingo.utils.Result
+     * Result包含状态值和键值对，状态值为SUCCESS时，查询数据存在，
+     *                              FAILURE时，查询数据不存在。
+     *                              如果数据存在，返回gameList；否则返回提示信息。
+    * @author yolia
+    * @Date 8:26 2020/8/25
+    **/
+    @RequestMapping("searchGameByType")
+    public Result searchGameByType(@RequestParam(value = "types[]") List<String> types) throws Exception {
+        Result result = new Result();
+        //获取数据
+        List<Game> gameList = storeService.getGameByType(types);
+        if(gameList == null || gameList.size() == 0){
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("searchGameListByType", "该游戏类别不存在游戏");
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("searchGameListByType", gameList);
+        return result;
+    }
+    /**
+    * @MethodName search
+    * @Description 用于搜索
+    * @Param [search]  ----- 属性请到类中查看
+    * @return com.nwafu.bingo.utils.Result
+     * Result包括状态值和键值对，状态值为SUCCESS时，数据搜索成功，存在数据，
+     *                              FAILURE时，数据搜索失败，无数据。
+     *                              数据存在时，返回searchList；否则返回提示信息。
+    * @author yolia
+    * @Date 15:21 2020/8/25
+    **/
+    @RequestMapping("search")
+    public Result search(Search search) throws Exception {
+        Result result = new Result();
+        List<Game> gameList = storeService.search(search);
+        if(gameList == null || gameList.size() == 0){
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("searchList", "无内容");
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("searchList", gameList);
         return result;
     }
     /**
@@ -173,6 +250,49 @@ public class StoreController {
         }
         result.setStatus(Status.SUCCESS);
         result.getResultMap().put("orderList_" + idType, orderlists);
+        return result;
+    }
+    /**
+    * @MethodName orderListById
+    * @Description 根据id类型和id值获取订单列表，并计算每单的费用
+    * @Param [idType, idValue]
+    * @return com.nwafu.bingo.utils.Result
+     * Result包括状态值和键值对，状态值为SUCCESS时，数据查询成功，数据存在；
+     *                              FAILURE时，数据查询失败，数据不存在。
+     *                              数据查询成功，返回orderLists和orderListAllPrice；否则返回提示信息
+    * @author yolia
+    * @Date 8:31 2020/8/26
+    **/
+    @RequestMapping("orderListById")
+    public Result orderListById(String idType, Integer idValue) throws Exception {
+        Result result = new Result();
+        List<Orderlist> orderlists = storeService.getOrderListById(idType, idValue);
+        if(orderlists == null || orderlists.size() == 0){
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("orderLists", "无内容");
+            return result;
+        }
+        List<Float> orderListAllPrice = new ArrayList<>();
+        for(Orderlist orderlist : orderlists){
+            JSONArray array = JSON.parseArray(orderlist.getOrderDetails());
+            if(array == null || array.size() == 0) continue;
+            Float curOrderListAllPrice = 0.0f;
+            for(int i = 0; i < array.size(); i++){
+                float price =  array.getJSONObject(i).getFloat("price");
+                float discount = array.getJSONObject(i).getFloat("discount");
+                curOrderListAllPrice += price * discount;
+            }
+            orderListAllPrice.add(curOrderListAllPrice);
+        }
+        //
+        if(orderListAllPrice.size() == 0){
+            result.getResultMap().put("orderListAllPrice", "订单列表为空");
+            result.setStatus(Status.FAILURE);
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("orderLists", orderlists);
+        result.getResultMap().put("orderListAllPrice", orderListAllPrice);
         return result;
     }
     /**
