@@ -1,5 +1,6 @@
 package com.nwafu.bingo.control;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.nwafu.bingo.entity.Admin;
 import com.nwafu.bingo.entity.Game;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -119,27 +122,21 @@ public class PersonController {
         }
         return result;
     }
-    /*not mkdir*/
+
+    /*not mkdir
+    * update: add mkdir
+    * */
     @RequestMapping("/addUser")
-    public Result addUser(User user,  @RequestParam("avatar")MultipartFile file) throws Exception {//
+    public Result addUser(User user) throws Exception {//
         List<User> users = personService.getByUserName(user.getUname());
 
         Result result = new Result();
         if (users.size() == 0) {
-            int uid = personService.addPerson(user);
             String imgFold = ResourceUtils.getURL("classpath:").getPath() +  "static/src/uinfo/";
             File foldPath = new File(imgFold);
             if (!foldPath.exists()) {
                 foldPath.mkdirs();
             }
-            String imgPath = imgFold + uid + ".jpg";
-            File imgPathFile = new File(imgPath);
-            if (imgPathFile.exists()) {
-                imgPathFile.delete();
-            }
-            file.transferTo(imgPathFile);
-            user.setUavatar(imgPath);
-            personService.updatePerson(user);
             result.setStatus(Status.SUCCESS);
             result.getResultMap().put("info", "Insert Success");
         }else {
@@ -157,11 +154,21 @@ public class PersonController {
         return result;
     }
 
-    //first edition, will be modified
+    //second edition, may be modified
     @RequestMapping("/updateUser")
-    public Result updateUser(User user) throws Exception {
+    public Result updateUser(User user, @RequestParam("avatar")MultipartFile file) throws Exception {
         Result result = new Result();
         personService.updatePerson(user);
+
+        if (file != null) {
+            int uid = user.getUid();
+            String imgPath = ResourceUtils.getURL("classpath").getPath() + "static/src/uinfo/" + uid + ".jpg";
+            File img = new File(imgPath);
+            if (img.exists()) {
+                img.delete();
+            }
+            file.transferTo(img);
+        }
         result.setStatus(Status.SUCCESS);
         return result;
     }
@@ -171,6 +178,35 @@ public class PersonController {
         Result result = new Result(Status.SUCCESS);
         personService.deleteAdminById(aid);
         return result;
+    }
+
+    /*
+    * 0----管理员验证
+    * 1----用户验证
+    * */
+    @RequestMapping("/validateNameLegality")
+    public String validateNameLegality(@RequestParam("name") String name, @RequestParam("type") Integer type) throws Exception{
+        Map<String, String> resultMap = new HashMap<>();
+        if (name != null) {
+            if (type == 0) {
+                List<Admin> admins = personService.getByAdminName(name);
+                if (admins != null) {
+                    resultMap.put("valid", "false");
+                }else {
+                    resultMap.put("valid", "true");
+                }
+            }else if(type == 1) {
+                List<User> users = personService.getByUserName(name);
+                if (users != null) {
+                    resultMap.put("valid", "false");
+                }else {
+                    resultMap.put("valid", "true");
+                }
+            }
+        }
+        resultMap.put("valid", "false");
+
+        return JSON.toJSONString(resultMap);
     }
 
     private List<Game> transform(String listStr) throws Exception {
