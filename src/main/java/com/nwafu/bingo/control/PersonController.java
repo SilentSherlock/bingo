@@ -163,7 +163,7 @@ public class PersonController {
 
         if (file != null) {
             int uid = user.getUid();
-            String imgPath = ResourceUtils.getURL("classpath").getPath() + "static/src/uinfo/" + uid + ".jpg";
+            String imgPath = ResourceUtils.getURL("classpath:").getPath() + "static/src/uinfo/" + uid + ".jpg";
             File img = new File(imgPath);
             if (img.exists()) {
                 img.delete();
