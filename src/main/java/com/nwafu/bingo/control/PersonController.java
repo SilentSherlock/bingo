@@ -163,7 +163,7 @@ public class PersonController {
 
         if (file != null) {
             int uid = user.getUid();
-            String imgPath = ResourceUtils.getURL("classpath").getPath() + "static/src/uinfo/" + uid + ".jpg";
+            String imgPath = ResourceUtils.getURL("classpath:").getPath() + "static/src/uinfo/" + uid + ".jpg";
             File img = new File(imgPath);
             if (img.exists()) {
                 img.delete();
@@ -174,6 +174,27 @@ public class PersonController {
         return result;
     }
 
+    @RequestMapping("/updateWishListById")
+    public Result updateWishListById(@RequestParam("uid") Integer uid, @RequestParam("gid") Integer gid) throws Exception {
+        Result result = new Result();
+
+        if (uid != null && gid != null) {
+            User user = personService.getUserById(uid);
+            String wishList = user.getWishlist();
+            JSONArray jsonArray = JSON.parseArray(wishList);
+            jsonArray.add(gid);
+            wishList = JSON.toJSONString(jsonArray);
+            user.setWishlist(wishList);
+            personService.updatePerson(user);
+
+            result.setStatus(Status.SUCCESS);
+        }else {
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("msg", "uid or gid is null!");
+        }
+
+        return result;
+    }
     @RequestMapping("/deleteAdminById")
     public Result deleteAdminById(@RequestParam("aid") Integer aid) throws Exception {
         Result result = new Result(Status.SUCCESS);
