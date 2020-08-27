@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>购物车</title>
-    <link rel="stylesheet" type="text/css" href="/css/orderList.css">
+    <link rel="stylesheet" type="text/css" href="/css/shoppingcar.css">
     <script type="text/javascript" src="extlib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 </head>
 <body>
@@ -13,31 +13,21 @@
             <div class="order-title">
                 <div class="row1">商品名称</div>
                 <div class="price">价格</div>
+                <div class="row3">数量</div>
                 <div class="row3">操作</div>
             </div>
             <div class="myorder-elem">
                 <input type="checkbox" class="che-buy" onclick="">
                 <span class="column1">
                     <span class="game-title" id="1-1">
-                        <img class="column1-img" src="/src/cover1.jpg" id="">
+                        <img class="column1-img" src="https://media.st.dl.pinyuncloud.com/steam/apps/552990/header.jpg?t=1597765218" id="">
                         <span class="column1-img" id="">只狼</span>
                     </span>
                 </span>
                 <div class="price" id="">￥80.00</div>
-                <div class="operate">
-                    <button >删除</button>
-                    <button >加入心愿单</button>
+                <div class="row3" id="">
+                    <input type="number" class="num" id="content-score" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" oninput="if(value>10)value=10;if(value<1)value=1">
                 </div>
-            </div>
-            <div class="myorder-elem">
-                <input type="checkbox" class="che-buy" onclick="">
-                <span class="column1">
-                    <span class="game-title" id="1-1">
-                        <img class="column1-img" src="/src/cover1.jpg" id="">
-                        <span class="column1-img" id="">只狼</span>
-                    </span>
-                </span>
-                <div class="price" id="">￥80.00</div>
                 <div class="operate">
                     <button >删除</button>
                     <button >加入心愿单</button>
@@ -51,4 +41,15 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    $(document).ready(function (){
+        function setInfo(){
+            console.log("开始设置信息")
+           var shoppingcar = sessionStorage.getItem("shoppingcar");
+            console.log(shoppingcar);
+        }
+        setInfo()
+        console.log("准备就绪")
+    })
+</script>
 </html>
