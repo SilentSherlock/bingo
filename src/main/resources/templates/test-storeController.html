@@ -9,8 +9,10 @@
 <form >
     排序：<input type="text" id="order"><br>
     排序种类：<input type="text" id="sort"><br>
+    地区：<input type="text" id="area"><br>
     类别：<input type="text" id="category"><br>
     标签：<input type="text" id="tag"><br>
+    语言：<input type="text" id="language"><br>
     最小价格：<input type="text" id="minPrice"><br>
     最大价格：<input type="text" id="maxPrice"><br>
     页码：<input type="text" id="pageIndex"><br>
@@ -23,14 +25,18 @@
 
         var pageIndex = $("#pageIndex").val();
         var page = (pageIndex - 1) * 10;
-
+        var category = ["多人", "策略"];
+        var tag = [];
         formData.append("order",$("#order").val());
         formData.append("sort",$("#sort").val());
-        formData.append("category",$("#category").val())
-        formData.append("tag",$("#tag").val());
+        formData.append("area",$("#area").val());
+        formData.append("category", JSON.stringify(category))
+        formData.append("tag", JSON.stringify(tag));
+        formData.append("language",$("#language").val());
         formData.append("minPrice",$("#minPrice").val());
         formData.append("maxPrice",$("#maxPrice").val());
         formData.append("pageIndex", page);
+        console.log(JSON.stringify(Object.assign({}, category)));
 
         $.ajax({
             url:'/store/search',

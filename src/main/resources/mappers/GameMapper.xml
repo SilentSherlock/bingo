@@ -76,6 +76,16 @@
 
                 </otherwise>
             </choose>
+            <if test="area != null">
+                <choose>
+                    <when test="area == 'China'">
+                        and language = '["中文"]'
+                    </when>
+                    <otherwise>
+                        and language != '["中文"]'
+                    </otherwise>
+                </choose>
+            </if>
             <if test="category != null and category.size() != 0">
                 <foreach collection="category" open="and" close="" item="type" separator="and">
                     gtype like CONCAT ('%', #{type}, '%')
@@ -98,6 +108,16 @@
                         </otherwise>
                     </choose>
                 </foreach>
+            </if>
+            <if test="language != null">
+                <choose>
+                    <when test="language == 'Chinese'">
+                        and language like "%中文%"
+                    </when>
+                    <otherwise>
+                        and language like "%英文%"
+                    </otherwise>
+                </choose>
             </if>
             <if test="minPrice != null">
                 and gprice &gt;= #{minPrice}
@@ -127,6 +147,16 @@
 
                 </otherwise>
             </choose>
+            <if test="area != null and area != ''">
+                <choose>
+                    <when test="area == 'China'">
+                        and language = '["中文"]'
+                    </when>
+                    <otherwise>
+                        and language != '["中文"]'
+                    </otherwise>
+                </choose>
+            </if>
             <if test="category != null and category.size() != 0">
                 <foreach collection="category" open="and" close="" item="type" separator="and">
                     gtype like CONCAT ('%', #{type}, '%')
@@ -149,6 +179,16 @@
                         </otherwise>
                     </choose>
                 </foreach>
+            </if>
+            <if test="language != null and language != ''">
+                <choose>
+                    <when test="language == 'Chinese'">
+                        and language like "%中文%"
+                    </when>
+                    <otherwise>
+                        and language like "%英文%"
+                    </otherwise>
+                </choose>
             </if>
             <if test="minPrice != null">
                 and gprice &gt;= #{minPrice}
