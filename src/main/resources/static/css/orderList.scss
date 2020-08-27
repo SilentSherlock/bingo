@@ -15,10 +15,10 @@ div{
 .order-main{
   padding-left: 20px;
   padding-right: 20px;
-  margin-left: 170px;
+  //margin-left: 170px;
   margin-top: 150px;
   background-color: #2b669a;
-  width: 900px;
+  width: 1100px;
   height: 100%;
 }
 .sum{
@@ -117,7 +117,7 @@ body{
 }
 .column1-elem{
   width: 135px;
-  height: 80px;
+  height: 85px;
   overflow: hidden;
   position: relative;
   float: left;
@@ -140,21 +140,21 @@ body{
 }
 .column1-elem img{
   width: 135px;
-  height: 80px;
+  height: 85px;
 }
 .column1-elem-txt{
   margin: 0;
-  padding: 0;
   display: none;
   width: 135px;
   height: 80px;
-  line-height: 80px;
+  //line-height: 80px;
   text-align: center;
   background: rgba(0, 0, 0, 0.6);
   color: #ffffff;
   font-size: 12px;
   position: absolute;
   left: 0;
+  padding-top: 20%;
 }
 .elem-name{
   margin-left: 135px;
@@ -226,4 +226,19 @@ body{
   line-height: 42px;
   text-align: center;
   text-decoration: none;
+}
+.condition{
+  display: inline;
+  float: right;
+  width: 200px;
+  height: 40px;
+  background-color: #28669A;
+  text-align: center;
+  position: relative;
+  top: 18%;
+  border: px solid #00ff11;
+}
+.condition :hover{
+  color: #28669A;
+  background-color: olivedrab;
 }
