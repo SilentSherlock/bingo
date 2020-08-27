@@ -5,22 +5,20 @@ import com.alibaba.fastjson.JSONArray;
 import com.nwafu.bingo.entity.Admin;
 import com.nwafu.bingo.entity.Game;
 import com.nwafu.bingo.entity.User;
+import com.nwafu.bingo.service.MailService;
 import com.nwafu.bingo.service.PersonService;
 import com.nwafu.bingo.service.StoreService;
 import com.nwafu.bingo.utils.Result;
 import com.nwafu.bingo.utils.Status;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.annotation.Resource;
 import java.io.File;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -35,6 +33,9 @@ public class PersonController {
     private PersonService personService;
     @Resource
     private StoreService storeService;
+    @Resource
+    private MailService mailService;
+    private String code = "";
 
     @RequestMapping("/adminValidate")
     public Result adminValidate(Admin admin) throws Exception {
@@ -173,6 +174,27 @@ public class PersonController {
         return result;
     }
 
+    @RequestMapping("/updateWishListById")
+    public Result updateWishListById(@RequestParam("uid") Integer uid, @RequestParam("gid") Integer gid) throws Exception {
+        Result result = new Result();
+
+        if (uid != null && gid != null) {
+            User user = personService.getUserById(uid);
+            String wishList = user.getWishlist();
+            JSONArray jsonArray = JSON.parseArray(wishList);
+            jsonArray.add(gid);
+            wishList = JSON.toJSONString(jsonArray);
+            user.setWishlist(wishList);
+            personService.updatePerson(user);
+
+            result.setStatus(Status.SUCCESS);
+        }else {
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("msg", "uid or gid is null!");
+        }
+
+        return result;
+    }
     @RequestMapping("/deleteAdminById")
     public Result deleteAdminById(@RequestParam("aid") Integer aid) throws Exception {
         Result result = new Result(Status.SUCCESS);
@@ -187,24 +209,25 @@ public class PersonController {
     @RequestMapping("/validateNameLegality")
     public String validateNameLegality(@RequestParam("name") String name, @RequestParam("type") Integer type) throws Exception{
         Map<String, String> resultMap = new HashMap<>();
-        if (name != null) {
+        if (name != null && !"".equals(name)) {
             if (type == 0) {
                 List<Admin> admins = personService.getByAdminName(name);
-                if (admins != null) {
+                if (admins.size() != 0) {
                     resultMap.put("valid", "false");
                 }else {
                     resultMap.put("valid", "true");
                 }
             }else if(type == 1) {
                 List<User> users = personService.getByUserName(name);
-                if (users != null) {
+                if (users.size() != 0) {
                     resultMap.put("valid", "false");
                 }else {
                     resultMap.put("valid", "true");
                 }
             }
+        }else {
+            resultMap.put("valid", "false");
         }
-        resultMap.put("valid", "false");
 
         return JSON.toJSONString(resultMap);
     }
@@ -217,5 +240,27 @@ public class PersonController {
             games.add(storeService.getGameById(Integer.parseInt(id.toString())));
         }
         return games;
+    }
+
+    @RequestMapping("user_register_code")
+    public String user_register_code(@RequestParam("code") String code) {
+        System.out.println(code);
+        Map<String, String> result = new HashMap<>();
+        if (code.equals(this.code))
+            result.put("valid", "true");
+        else
+            result.put("valid", "false");
+        return JSON.toJSONString(result);
+    }
+    //验证
+    @RequestMapping("user_register_send_code")
+    public Result user_register_send_code(@RequestParam("umail") String umail) {
+        code = String.valueOf(new Date().getTime()).substring(7);
+        String text = "您的验证码为：" + code;
+        String subject = "彬果游戏(Bingo)—注册";
+
+        mailService.sendSimpleEmail(umail, subject, text);
+
+        return new Result(Status.SUCCESS, null);
     }
 }
