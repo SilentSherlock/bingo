@@ -169,6 +169,8 @@ public class PersonController {
                 img.delete();
             }
             file.transferTo(img);
+            user.setUavatar(imgPath);
+            personService.updatePerson(user);
         }
         result.setStatus(Status.SUCCESS);
         return result;
