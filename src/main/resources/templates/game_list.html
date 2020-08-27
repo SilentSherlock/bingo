@@ -11,10 +11,10 @@
     <div class="content-title">我的游戏</div>
     <!--<div class="myorder-elem">
         <div class="game-elem">
-            <img src="" class="gameCover">
+            <a href=""><img src="" class="gameCover"></a>
             <span class="elem-name">飞飞飞</span>
-            <div class="condition" onclick="javascript:void (0)">
-                <button class="condition">查看激活码</button>
+            <div class="condition" id="showCode">
+                <button class="condition" >查看激活码</button>
             </div>
         </div>
     </div>-->
@@ -44,11 +44,11 @@
                                 var game = gameResult.resultMap.game;
                                 html+= "<div class=\"myorder-elem\">\n" +
                                     "        <div class=\"game-elem\">\n" +
-                                    "            <img src=" +game.chref+ " class=\"gameCover\">\n" +
-                                    "            <span class=\"elem-name\">" +game.gname+ "</span>\n" +
-                                    "            <div class=\"condition\" onclick=\"javascript:void (0)\">\n" +
-                                    "                <button class=\"condition\">查看激活码</button>\n" +
-                                    "            </div>\n" +
+                                    "            <a href=" +"game_detail.html?gid=" + gamelist[i] + "><img src=" +game.chref+ " class=\"gameCover\">\n" +
+                                    "            <span class=\"elem-name\">" +game.gname+ "</span></a>\n" +
+                                   /* "            <div class=\"condition\" onclick=\"javascript:void (0)\">\n" +
+                                    "                <button class=\"condition\" id=\"showCode\">查看激活码</button>\n" +
+                                    "            </div>\n" +*/
                                     "        </div>\n" +
                                     "    </div>";
                                 $("#order-content").append(html);
