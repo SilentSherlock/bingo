@@ -37,4 +37,12 @@
         FROM
             orderlist
     </select>
+    <select id="getByCurTime" resultMap="BaseOrderListMap">
+        SELECT
+            *
+        FROM
+            orderlist
+        WHERE
+            otime BETWEEN DATE_SUB(CURDATE(), INTERVAL 30 DAY) and CURDATE()
+    </select>
 </mapper>

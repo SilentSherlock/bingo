@@ -176,6 +176,17 @@ public class StoreService {
         return orderlistDao.getById(idType, idValue);
     }
     /**
+    * @MethodName getOrderListByCurTime
+    * @Description 查询当前时间，以及当前时间前30天内的订单列表
+    * @Param []
+    * @return java.util.List<com.nwafu.bingo.entity.Orderlist>
+    * @author yolia
+    * @Date 14:12 2020/8/27
+    **/
+    public List<Orderlist> getOrderListByCurTime() throws Exception {
+        return orderlistDao.getByCurTime();
+    }
+    /**
     * @MethodName addOrderList
     * @Description 向数据库中添加新的订单
     * @Param [orderlist]
