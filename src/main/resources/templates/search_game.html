@@ -3,18 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <title>card</title>
     <style>
         body{
             background: #202539;
             width: 1180px;
         }
+        .game-block{
+            width: 1200px;
+            height: 1200px;
+        }
         #search-left{
             width: 830px;
             float: left;
+            height: 1200px;
+        }
+        .search-store-pagination{
+            margin-top: 35px;
+        }
+        .page-list{
+            cursor: pointer;
+            border: none;
+            color: #7a80a2;
+            line-height: 24px;
+            padding: 0px 8px;
+        }
+        .page-item{
+            cursor: pointer;
+            border: 1px solid #33394d;
+            color: #7a80a2;
+            line-height: 24px;
+            padding: 0px 8px;
+            margin:5px;
+            background-color:#202539 ;
+        }
+        .active-button{
+            color: #ffffff;
+            border: 1px solid #ff6900;
+            background: #ff6900;
         }
         h2{
             margin: 0;
@@ -24,6 +50,12 @@
             color: #7a80a2;
             background: #292e41;
             text-indent: 20px;
+            font-weight: normal;
+        }
+        h1 {
+            float: left;
+            margin: 0;
+            padding: 0;
         }
         a{
             color: #000000;
@@ -52,6 +84,8 @@
             margin-inline-start: 0px;
             margin-inline-end: 0px;
             padding-inline-start: 40px;
+            padding-left: 0;
+            height: 1100px;
         }
         li{
             height: 100px;
@@ -59,6 +93,53 @@
             margin-bottom: 10px;
             overflow: hidden;
             border-radius: 5px 5px 5px 5px;
+        }
+        .store-search-container{
+            padding-top: 100px;
+            padding-left: 140px;
+            margin: 0 auto 80px;
+            width: 1200px;
+            min-height: calc(100vh - 320px);
+        }
+        .search-title{
+            padding-top: 30px;
+            height: 55px;
+        }
+
+        .search-title h1{
+            font-size: 20px;
+            color: #b9c0ef;
+            float: left;
+        }
+        .condition{
+            padding-top: 40px;
+        }
+        .game-sort-order{
+            padding: 0 8px 0 0;
+            cursor: pointer;
+            margin-right: 40px;
+            background: none;
+            outline: none;
+            border: none;
+            font-size: 14px;
+            color: #7a80a2;
+            position: relative;
+            appearance: button;
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            text-align: center;
+            align-items: flex-start;
+            box-sizing: border-box;
+            border-radius: 2px;
+        }
+        button:focus{
+            outline: none;
         }
         .left{
             float: left;
@@ -184,7 +265,7 @@
             width: 175px;
             padding-left: 20px;
         }
-        .tags-block-wrapper{
+        .tags-block-wrapper,.tags-block-wrapper1,.tags-block-wrapper2,.tags-block-wrapper3,.tags-block-wrapper4{
             cursor: pointer;
         }
         .choose-fa{
@@ -195,201 +276,242 @@
             text-rendering: auto;
             -webkit-font-smoothing: antialiased;
         }
+        .active{
+            font-weight: bold;
+            color: #b9c0ef;
+            border: none;
+        }
+
     </style>
 </head>
 <body>
-<div id="search-left">
-    <ul id="game-list">
-        <div style="width:800px">
-            <!--            游戏信息-->
-        </div>
+<div class="store-search-container">
+    <div class="search-title">
+        <h1>全部游戏</h1>
+    </div>
+    <div class="condition">
+        <button id="first-sort-choose" class="game-sort-order active">全部</button>
+        <button class="game-sort-order">折扣</button>
+        <button class="game-sort-order">最新</button>
+        <button class="game-sort-order">评分</button>
+        <button class="game-sort-order">价格
+        <i class="fa">▲</i> </button>
+    </div>
+    <div class="game-block">
+        <div id="search-left">
+            <ul id="game-list">
+                <div style="width:800px">
+                    <!--            游戏信息-->
+                </div>
 
-    </ul>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-        </ul>
-    </nav>
-</div>
-<div id="search-right">
-    <div>
-        <div class="search-block" style="height: 95px">
-            <h2 >按地区</h2>
-            <div class="search-tags" style="height: 30%">
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>中国站
-                        </span>
-                </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>国际站
-                        </span>
-                </div>
+            </ul>
+            <div class="search-store-pagination">
+                <span class="page-list">
+
+                </span>
             </div>
         </div>
-        <div class="search-block" style="height: 212px">
-            <h2>按类型</h2>
-            <div class="search-tags" style="height: 70%">
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>动作
-                        </span>
+        <div id="search-right">
+            <div>
+                <div class="search-block" style="height: 95px">
+                    <h2 >按地区</h2>
+                    <div class="search-tags" style="height: 30%">
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper4" id="fa21">中国站</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper4" id="fa22">国际站</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>射击
-                        </span>
+                <div class="search-block" style="height: 212px">
+                    <h2>按类型</h2>
+                    <div class="search-tags" style="height: 70%">
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper" id="fa1">动作</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper" id="fa2">射击</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper" id="fa3">策略</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper" id="fa4">角色扮演</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper" id="fa5">模拟</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper" id="fa6">体育</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper" id="fa7">独立</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper" id="fa8">休闲</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper" id="fa9">竞速</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper" id="fa10">冒险</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>策略
-                        </span>
+                <div class="search-block" style="height: 124px">
+                    <h2>热门标签</h2>
+                    <div class="search-tags" style="height: 50%">
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper1" id="fa11">预售游戏</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper1" id="fa12">新品游戏</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper1" id="fa14">促销游戏</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>角色扮演
-                        </span>
+                <div class="search-block" style="height: 94px">
+                    <h2>按语言</h2>
+                    <div class="search-tags" style="height: 30%">
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper3" id="fa15">中文</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper3" id="fa16">英文</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>模拟
-                        </span>
-                </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>体育
-                        </span>
-                </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>独立
-                        </span>
-                </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>休闲
-                        </span>
-                </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>竞速
-                        </span>
-                </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>冒险
-                        </span>
-                </div>
-            </div>
-        </div>
-        <div class="search-block" style="height: 124px">
-            <h2>热门标签</h2>
-            <div class="search-tags" style="height: 50%">
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>免费游戏
-                        </span>
-                </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>新品游戏
-                        </span>
-                </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>热门游戏
-                        </span>
-                </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>促销游戏
-                        </span>
-                </div>
-            </div>
-        </div>
-        <div class="search-block" style="height: 94px">
-            <h2>按语言</h2>
-            <div class="search-tags" style="height: 30%">
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>中文
-                        </span>
-                </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>英文
-                        </span>
-                </div>
-            </div>
-        </div>
-        <div class="search-block" style="height: 124px">
-            <h2>按价格</h2>
-            <div class="search-tags" style="height: 30%">
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>￥0-10
-                        </span>
-                </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>￥11-50
-                        </span>
-                </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>￥51-100
-                        </span>
-                </div>
-                <div class="tags-block">
-                        <span class="tags-block-wrapper">
-                            <i class="choose-fa"></i>>=￥101
-                        </span>
+                <div class="search-block" style="height: 124px">
+                    <h2>按价格</h2>
+                    <div class="search-tags" style="height: 30%">
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper2" id="fa17">￥0-10</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper2" id="fa18">￥11-50</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper2" id="fa19">￥51-100</span>
+                        </div>
+                        <div class="tags-block">
+                        <span class="tags-block-wrapper2" id="fa20">>=￥101</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <script src="extlib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+    let formData;
+    let sort;
+    let order="desc";
+    let pageIndex=0;
+    let price_sort=0;//初始为从高到低
+    var category=new Array();
+    var tag=new Array();
+    let minPrice;
+    let maxPrice;
+    let area;
+    let language;
+
+    let firstFormData={
+        sort:sort,
+        pageIndex:pageIndex,
+        order:order,
+        category:JSON.stringify(category),
+        tag:JSON.stringify(tag),
+        minPrice:minPrice,
+        maxPrice:maxPrice,
+        area:area,
+        language:language,
+    }
+    JSON.stringify(firstFormData)
+    console.log(firstFormData)
+    formData=firstFormData;
     $(document).ready(function () {
         function getGameList() {
-            $.get(
-                "/store/gameShow",
-                function(gamelist){
-                    var gamel=gamelist.resultMap.gameList
+            $.post(
+                "/store/search",
+            formData,
+            function(gameList){
+                    //console.log(gameList);
+                    var gamel=gameList.resultMap.searchList
+                    var page=gameList.resultMap.allSearchNum
+                    // console.log(formData)
+                    // console.log(gameList)
                     var html="";
+                    $('#game-list').empty()
+                    if(gameList.status == 0)
+                        return;
                     for(var i=0;i<gamel.length;i++){
+
                         var game=gamel[i]
                         var temp=(parseFloat(game.gprice)*(parseFloat(game.discount))).toString();
                         if(temp.length>6){
                             temp.substr(0,6);
                         }
+                        //得到游戏类别数组
                         var typelist = game.gtype;
-                        typelist = typelist.substring(1,typelist.length-1);
-                        console.log(typelist)
+                        typelist = (typelist!=null?typelist.substring(1,typelist.length-1):"");
+
                         typelist = typelist.split(",")
+                        //得到游戏语言数组
+                        var languagelist = game.language;
+                        languagelist = (languagelist!=null?languagelist.substring(1,languagelist.length-1):"")
+
+                        languagelist = languagelist.split(",")
+                        for(var j=0;j<languagelist.length;j++){
+                            //console.log(languagelist[j])
+                            languagelist[j].substring(1,languagelist[j].length-1)
+                        }
+
 
                         html+=
                             "<li>"+
-                            "<a href="+"game_detail.html?gid=game.gid"+" class="+" "+">"+
+                            "<a href="+"game_detail.html?gid=game.gid"+" class="+"game-click"+">"+
                             "<div class="+"left"+"><img src="+game.phref+"></div>"+
-                            "<div class="+"right"+">"+
-                            "<span class="+"game-discount"+">"+game.discount+"</span>"+
-                            "<span class="+"game-origin-price"+">￥"+game.gprice+"</span>"+
+                            "<div class="+"right"+">"
+                        if(game.discount!=1&&game.discount!=null){
+                            html+=
+                             "<span class="+"game-discount"+">"+game.discount+"</span>"+
+                             "<span class="+"game-origin-price"+">￥"+game.gprice+"</span>"
+                        }
+                        html+=
                             "<span class="+"game-sale-price"+">￥"+temp+"</span>"+
                             "</div>"+
                             "<div class="+"middle"+">"+
                             "<p class="+"title"+">"+
-                            game.gname+
-                            "<span class="+"title-tag"+">促销</span>"+
-                            "<span class="+"title-area"+">国际站</span>"+
-                            "</p>"+
-                            "<p class="+"date"+">发行于"+game.realeasedate+"</p>"+
-                            "<p class="+"tags"+">"
+                            game.gname
 
-                        for(var j=0;j<typelist.length;j++){
+                        if(game.discount!=1){
+                            html+="<span class="+"title-tag"+">促销</span>"
+                        }
+                        var china=false;
+                        for(var start=0;start<languagelist.length;start++){
+                            if(languagelist[start]==="\"中文\""&&languagelist.length==1) {
+                                html += "<span class=" + "title-area" + ">中国站</span>";
+                                china=true;
+                                break;
+                            }
+                        }
+                        if(!china){
+
+                            html+="<span class="+"title-area"+">国际站</span>"
+                        }
+
+                        html+= "</p>"+
+                            "<p class='date'>发行于"+(game.realeasedate!=null?game.realeasedate.substring(0,10):' ')+"</p>"+
+                            "<p class='tags'>"
+                        console.log(html)
+                        for(j=0;j<typelist.length;j++){
                             html+=
-                                "<span class="+"tag-block"+">"+typelist[j].substring(1,typelist[j].length-1)+"</span>"
+                                "<span class="+"tag-block"+">"+(typelist[j]!=null?typelist[j].substring(1,typelist[j].length-1):' ')+"</span>"
                         }
                         html+="</p>"+
                             "</div>"+
@@ -397,48 +519,322 @@
                             "</li>"
                     }
                     $("#game-list").html(html)
+                    setPage(page)
                 }
             )
         }
-        function selectPage(word="") {
-            $.get(
-                "/movie/search/page?word=".concat(word),
-                function (page) {
-                    if (page.pageNumber === 0) {
-                        $(".pagination").html("")
-                        return
-                    }
-                    tempPage = page
-                    var html =""
+        function setPage(pageNumber) {
+            console.log("pagenumber= "+pageNumber);
+            var html =""
+            if (pageNumber === 0) {
+                $(".pagination").html("")
+                return
+            }
 
-                    for(var i=1;i<=tempPage.pageNumber;i++){
-                        if (tempPage.current === i) {
-                            html +=
-                                "<li class=\"page-item active\"><a class=\"page-link\" href=\"#\">" + i + "</a></li>"
-                        } else {
-                            html +=
-                                "<li class=\"page-item\"><a class=\"page-link\" href=\"#\">" + i + "</a></li>"
-                        }
-                    }
-                    $(".pagination").html(html)
+
+            for(var i=0;i<pageNumber;i++){
+                if (i===parseInt(pageIndex/10)) {
+                    html +=
+                        "<button class=\"page-item active-button\">" + parseInt(i+1).toString() + "</button>"
+                } else {
+                    html +=
+                        "<button class=\"page-item\">" + parseInt(i+1).toString()+ "</button>"
                 }
-            )
+                    }
+            $(".page-list").empty()
+            $(".page-list").html(html)
 
         }
         //为页码设置事件 -> 分页切换
-        $(document).on("click", ".page-link", function () {
-            //分页数据切换
-            getGameList(Number(this.innerText))
+        $(document).on("click", ".page-item", function () {
+            console.log($(this).text())
+            pageIndex =(parseInt($(this).text()) -1)*10
+            console.log("pageIndex is "+pageIndex)
+            let thisFormData={
+                sort:sort,
+                pageIndex:pageIndex,
+                order:order,
+                category:JSON.stringify(category),
+                tag:JSON.stringify(tag),
+                minPrice:minPrice,
+                maxPrice:maxPrice,
+                area:area,
+                language:language,
+            }
+            JSON.stringify(thisFormData)
+            //console.log(thisFormData)
+            formData=thisFormData;
+            getGameList()
             //分页栏的切换
             //将原有属性为 active 的 a 改为默认
+            $(".active-button").removeClass("active-button")
+            //将当前 a 的属性添加 active
+            $(this).addClass("active-button")
+        })
+        $(document).on("click",".game-sort-order",function () {
+            pageIndex=0
+            if(this.innerText==="全部"){
+                sort="";
+            }else if(this.innerText==="折扣"){
+                sort="discount"
+            }else if(this.innerText==="最新"){
+                sort="new"
+            }else if(this.innerText==="评分"){
+                sort="score"
+            }else{
+                sort="price"
+            }
+            if(sort==="price"){
+                if(price_sort==0){
+                    price_sort=1;
+                }else{
+                    price_sort=0;
+                }
+                if(price_sort==1){
+                    order="desc";
+                    $(".fa").text("▲")
+                }else{
+                    order="asc";
+                    $(".fa").text("▼")
+                }
+                console.log("价格的排序方法是"+price_sort)
+                let thisFormData={
+                    sort:sort,
+                    pageIndex:pageIndex,
+                    order:order,
+                    category:JSON.stringify(category),
+                    tag:JSON.stringify(tag),
+                    minPrice:minPrice,
+                    maxPrice:maxPrice,
+                    area:area,
+                    language:language,
+                }
+                JSON.stringify(thisFormData)
+                //console.log(thisFormData)
+                formData=thisFormData;
+                getGameList()
+            }else{
+                let thisFormData={
+                    sort:sort,
+                    pageIndex:pageIndex,
+                    order:order,
+                    category:JSON.stringify(category),
+                    tag:JSON.stringify(tag),
+                    minPrice:minPrice,
+                    maxPrice:maxPrice,
+                    area:area,
+                    language:language,
+                }
+                JSON.stringify(thisFormData)
+                //console.log(thisFormData)
+                formData=thisFormData;
+                getGameList()
+            }
+
+
             $(".active").removeClass("active")
             //将当前 a 的属性添加 active
-            $(this.parentElement).addClass("active")
+            $(this).addClass("active")
         })
-        $()
+       // * category: 类别
+       // * tag: presale, newsale, promotion
+       // * minPrice: Float
+       // * maxPrice: Float
+        $(document).on("click",".tags-block-wrapper",function () {
+            var thisString = $(this).text()
+            var first = thisString[0];
 
+                 if(first=="√"){
+                     var str = thisString
+                     $(this).text((str!=null?str.substring(1,str.length):""))
+                     category.splice($.inArray($(this).text(),category),1)
+                     console.log("category= "+$(this).text())
+                 }else{
+                     category.push(thisString)
+                     thisString="√"+thisString;
+                     $(this).text(thisString);
+                 }
+                 let thisFormData={
+                     sort:sort,
+                     pageIndex:pageIndex,
+                     order:order,
+                     category:JSON.stringify(category),
+                     tag:JSON.stringify(tag),
+                     minPrice:minPrice,
+                     maxPrice:maxPrice,
+                     area:area,
+                     language:language,
+                 }
+                 JSON.stringify(thisFormData)
+                // console.log(thisFormData)
+                 formData=thisFormData;
+                 getGameList()
+        })
+        $(document).on("click",".tags-block-wrapper1",function () {
+            var thisString = $(this).text()
+            var unchangeString = thisString;
+            var first = thisString[0];
+
+            if(first=="√"){
+                var str = thisString
+                $(this).text((str!=null?str.substring(1,str.length):""))
+                tag.splice($.inArray($(this).text(),tag),1)
+                console.log("tag= "+$(this).text())
+            }else{
+                if(thisString=="预售游戏"){
+                    thisString="presale";
+                }else if(thisString=="新品游戏"){
+                    thisString="newsale";
+                }else{
+                    thisString="promotion";
+                }
+                tag.push(thisString)
+                thisString="√"+unchangeString;
+                $(this).text(thisString);
+            }
+            let thisFormData={
+                sort:sort,
+                pageIndex:pageIndex,
+                order:order,
+                category:JSON.stringify(category),
+                tag:JSON.stringify(tag),
+                minPrice:minPrice,
+                maxPrice:maxPrice,
+                area:area,
+                language:language,
+            }
+            // JSON.stringify(thisFormData)
+            //console.log(thisFormData)
+            formData=thisFormData;
+            getGameList()
+        })
+        $(document).on("click",".tags-block-wrapper2",function () {
+            var temp = $(this).text()
+            if(temp[0]!="√"){
+                for(var i=17;i<=20;i++) {
+                    var tempinner = $("#fa" + i).text()
+                    if (tempinner[0] == "√") {
+                        $("#fa" + i).text(tempinner.substring(1, tempinner.length))
+                    }
+                }
+                $(this).text("√"+temp);
+            }
+
+            switch ($(this).text()) {
+                case "√￥0-10":
+                    minPrice=0;
+                    maxPrice=10;
+                    break;
+                case "√￥11-50":
+                    minPrice=11;
+                    maxPrice=50;
+                    break;
+                case "√￥51-100":
+                    minPrice=51;
+                    maxPrice=100;
+                    break;
+                case "√>=￥101":
+                    minPrice=100;
+                    maxPrice=10000;
+                    break;
+                default:
+                    break;
+            }
+            let thisFormData={
+                sort:sort,
+                pageIndex:pageIndex,
+                order:order,
+                category:JSON.stringify(category),
+                tag:JSON.stringify(tag),
+                minPrice:minPrice,
+                maxPrice:maxPrice,
+                area:area,
+                language:language,
+            }
+            JSON.stringify(thisFormData)
+           // console.log(thisFormData)
+            formData=thisFormData;
+            getGameList()
+        })
+        //语言是3 area:China,other
+        // ，地区是4 language:Chinese,other
+        $(document).on("click",".tags-block-wrapper4",function () {
+            var temp = $(this).text()
+            if(temp[0]!="√"){
+                for(var i=21;i<=22;i++) {
+                    var tempinner = $("#fa" + i).text()
+                    if (tempinner[0] == "√") {
+                        $("#fa" + i).text(tempinner.substr(1, tempinner.length))
+                    }
+                }
+                $(this).text("√"+temp);
+            }
+
+            switch ($(this).text()) {
+                case "√中国站":
+                    area="China";
+                    break;
+                case "√国际站":
+                   area="other";
+                    break;
+                default:
+                    break;
+            }
+            let thisFormData={
+                sort:sort,
+                pageIndex:pageIndex,
+                order:order,
+                category:JSON.stringify(category),
+                tag:JSON.stringify(tag),
+                minPrice:minPrice,
+                maxPrice:maxPrice,
+                area:area,
+                language:language,
+            }
+            JSON.stringify(thisFormData)
+            //console.log(thisFormData)
+            formData=thisFormData;
+            getGameList()
+        })
+        $(document).on("click",".tags-block-wrapper3",function () {
+            var temp = $(this).text()
+            if(temp[0]!="√"){
+                for(var i=15;i<=16;i++) {
+                    var tempinner = $("#fa" + i).text()
+                    if (tempinner[0] == "√") {
+                        $("#fa" + i).text(tempinner.substring(1, tempinner.length))
+                    }
+                }
+                $(this).text("√"+temp);
+            }
+
+            switch ($(this).text()) {
+                case "√中文":
+                    language="Chinese";
+                    break;
+                case "√英文":
+                    language="other";
+                    break;
+                default:
+                    break;
+            }
+            let thisFormData={
+                sort:sort,
+                pageIndex:pageIndex,
+                order:order,
+                category:JSON.stringify(category),
+                tag:JSON.stringify(tag),
+                minPrice:minPrice,
+                maxPrice:maxPrice,
+                area:area,
+                language:language,
+            }
+            JSON.stringify(thisFormData)
+            //console.log(thisFormData)
+            formData=thisFormData;
+            getGameList()
+        })
         getGameList()
-        selectPage()
     })
 
 </script>
