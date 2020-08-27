@@ -28,10 +28,10 @@
                         </div>-->
                     </div>
                     <div class="show-list">
-                        <div class="show-elem" >
+                        <div class="show-elem">
                             <img src="" id="video" onclick="change(this)">
-                            <div class="player">
-                                <span class="glyphicon glyphicon-expand" ></span>
+                            <div class="player" id="videochild" onclick="change(this)">
+                                <span class="glyphicon glyphicon-expand" id="videochild"></span>
                             </div>
                         </div>
                         <div class="show-elem" >
@@ -242,12 +242,8 @@
     var GAMEINFO
     var videohref
     function change(typp) {
-        console.log("点击事件发生");
-        console.log($(typp));
-        console.log($(typp).attr("id"));
-        /*console.log($(typp).attr("aria-valuetext"));*/
-        console.log($(typp).attr("src"));
-        if ($(typp).attr("id") === "video") {
+        console.log("点击元素:"+$(typp).attr("id"));
+        if ($(typp).attr("id") === "video" || $(typp).attr("id") === "videochild") {
             document.getElementById("show").innerHTML = "<video class=\"videoPlayer\" src="+game.vhref +" id=\"videoPlayer\" controls=\"controls\"  autobuffer muted >\n" +
                  "</video>"
         } else {
@@ -406,7 +402,8 @@
                     document.getElementById("elem6").src=game.phref;
                     document.getElementById("developer").innerText=game.developer;
                     document.getElementById("publisher").innerText=game.publisher;
-                    document.getElementById("realeasedate").innerText=game.realeasedate;
+                    document.getElementById("realeasedate").innerText=game.realeasedate.substr(0,10);
+                    console.log(typeof  game.realeasedate);
                     var temp = JSON.parse(game.platform);
                     document.getElementById("platform").innerText=temp;
                     temp = JSON.parse(game.language);
