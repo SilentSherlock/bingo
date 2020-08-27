@@ -76,6 +76,19 @@
 
                 </otherwise>
             </choose>
+            <if test="area != null">
+                <choose>
+                    <when test="area == 'China' and area != ''">
+                        and language = '["中文"]'
+                    </when>
+                    <otherwise>
+                        and language != '["中文"]'
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="name != null and name != ''">
+                and gname like CONCAT('%', #{name}, '%')
+            </if>
             <if test="category != null and category.size() != 0">
                 <foreach collection="category" open="and" close="" item="type" separator="and">
                     gtype like CONCAT ('%', #{type}, '%')
@@ -91,13 +104,23 @@
                             releasedate BETWEEN DATE_SUB(CURDATE(), INTERVAL 30 DAY) and CURDATE()
                         </when>
                         <when test="t == 'promotion'">
-                            discout != 1
+                            discount != 1
                         </when>
                         <otherwise>
                             1 = 1
                         </otherwise>
                     </choose>
                 </foreach>
+            </if>
+            <if test="language != null">
+                <choose>
+                    <when test="language == 'Chinese' and language != ''">
+                        and language like "%中文%"
+                    </when>
+                    <otherwise>
+                        and language like "%英文%"
+                    </otherwise>
+                </choose>
             </if>
             <if test="minPrice != null">
                 and gprice &gt;= #{minPrice}
@@ -127,6 +150,19 @@
 
                 </otherwise>
             </choose>
+            <if test="name != null and name != ''">
+                and gname like CONCAT('%', #{name}, '%')
+            </if>
+            <if test="area != null and area != ''">
+                <choose>
+                    <when test="area == 'China'">
+                        and language = '["中文"]'
+                    </when>
+                    <otherwise>
+                        and language != '["中文"]'
+                    </otherwise>
+                </choose>
+            </if>
             <if test="category != null and category.size() != 0">
                 <foreach collection="category" open="and" close="" item="type" separator="and">
                     gtype like CONCAT ('%', #{type}, '%')
@@ -142,13 +178,23 @@
                             releasedate BETWEEN DATE_SUB(CURDATE(), INTERVAL 30 DAY) and CURDATE()
                         </when>
                         <when test="t == 'promotion'">
-                            discout != 1
+                            discount != 1
                         </when>
                         <otherwise>
                             1 = 1
                         </otherwise>
                     </choose>
                 </foreach>
+            </if>
+            <if test="language != null and language != ''">
+                <choose>
+                    <when test="language == 'Chinese'">
+                        and language like "%中文%"
+                    </when>
+                    <otherwise>
+                        and language like "%英文%"
+                    </otherwise>
+                </choose>
             </if>
             <if test="minPrice != null">
                 and gprice &gt;= #{minPrice}
@@ -169,7 +215,7 @@
                 gscore
             </when>
             <when test="sort == 'price'">
-                gprice
+                gprice * discount
             </when>
             <otherwise>
                 gid

@@ -4,6 +4,7 @@ import com.nwafu.bingo.entity.Orderlist;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,4 +20,5 @@ public interface OrderlistDao {
      * idType的值应为oid,uid*/
     List<Orderlist> getById(@Param("idType") String idType, @Param("idValue") Integer idValue) throws Exception;
     List<Orderlist> getAll() throws Exception;
+    List<Orderlist> getByCurTime() throws Exception;
 }
