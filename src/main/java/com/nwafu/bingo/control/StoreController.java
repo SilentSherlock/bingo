@@ -10,10 +10,12 @@ import com.nwafu.bingo.utils.Search;
 import com.nwafu.bingo.utils.Status;
 import com.nwafu.bingo.utils.Tools;
 import com.sun.org.apache.xpath.internal.operations.Or;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @RestController
@@ -150,7 +152,16 @@ public class StoreController {
     * @Date 15:21 2020/8/25
     **/
     @RequestMapping("search")
-    public Result search(Search search) throws Exception {
+    public Result search(HttpServletRequest request, Search search) throws Exception {
+        //处理前端传递过来的json字符串，将其转化能为List
+        String category = request.getParameter("category");
+        JSONArray categoryList = JSONArray.parseArray(category);
+        search.setCategory(categoryList.toJavaList(String.class));
+
+        String tag = request.getParameter("tag");
+        JSONArray tagList = JSONArray.parseArray(tag);
+        search.setTag(tagList.toJavaList(String.class));
+        //
         Result result = new Result();
         List<Game> gameList = storeService.search(search);
         if(gameList == null || gameList.size() == 0){
