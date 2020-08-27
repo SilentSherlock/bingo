@@ -78,7 +78,7 @@
             </choose>
             <if test="area != null">
                 <choose>
-                    <when test="area == 'China'">
+                    <when test="area == 'China' and area != ''">
                         and language = '["中文"]'
                     </when>
                     <otherwise>
@@ -101,7 +101,7 @@
                             releasedate BETWEEN DATE_SUB(CURDATE(), INTERVAL 30 DAY) and CURDATE()
                         </when>
                         <when test="t == 'promotion'">
-                            discout != 1
+                            discount != 1
                         </when>
                         <otherwise>
                             1 = 1
@@ -111,7 +111,7 @@
             </if>
             <if test="language != null">
                 <choose>
-                    <when test="language == 'Chinese'">
+                    <when test="language == 'Chinese' and language != ''">
                         and language like "%中文%"
                     </when>
                     <otherwise>
@@ -172,7 +172,7 @@
                             releasedate BETWEEN DATE_SUB(CURDATE(), INTERVAL 30 DAY) and CURDATE()
                         </when>
                         <when test="t == 'promotion'">
-                            discout != 1
+                            discount != 1
                         </when>
                         <otherwise>
                             1 = 1
