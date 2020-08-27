@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 引入 ECharts 文件 -->
+    <script type="text/javascript" src="/extlib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width:800px;height:600px;"></div>
+
+    <script type="text/javascript">
+        function DateToTime(date) {
+            //时间戳为10位(s)需*1000，时间戳为13位(ms)的话不需乘1000，默认时间戳单位为ms
+            //yyyy
+            let Y = date.getFullYear() + '/';
+            let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '/';
+            let D = (date.getDate() + 1 < 10 ? '0' + (date.getDate()) : date.getDate());
+            return Y + M + D;
+        }
+    </script>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        var time = new Date();
+        var timeData = [];
+        for(var i = 29; i >=0; i--){
+            console.log(DateToTime(new Date(time.getTime() - i * 24 * 3600 * 1000)));
+            timeData.push(DateToTime(new Date(time.getTime() - i * 24 * 3600 * 1000)));
+        }
+
+        var gid = {
+            gid : 1
+        };
+        var data = [];
+        $.ajax({url:'/store/getSale2DateByGId',
+                type:'post',
+                data: gid,
+                async: false,
+                success:function (result) {
+                    data = result.resultMap.sales;
+                }});
+        console.log(data);
+        option = {
+            title: {
+                text: '游戏销量关系图',
+                subtext: '七天之内的销量',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    animation: false
+                }
+            },
+            legend: {
+                data: ['销量'],
+                left: 10
+            },
+            toolbox: {
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            axisPointer: {
+                link: {xAxisIndex: 'all'}
+            },
+            dataZoom: [
+                {
+                    show: true,
+                    realtime: true,
+                    start: 100 - (7 / 30) * 100 + 1,
+                    end: 100,
+                    xAxisIndex: [0]
+                },
+                {
+                    type: 'inside',
+                    realtime: true,
+                    start: 100 - (7 / 30) * 100 + 1,
+                    end: 100,
+                    xAxisIndex: [0]
+                }
+            ],
+            grid: {
+                left: 50,
+                right: 50,
+                height: '50%'
+            },
+            xAxis:{
+                type: 'category',
+                boundaryGap: false,
+                data: timeData
+            },
+            yAxis: {
+                name: '销量(份)',
+                type: 'value',
+            },
+            series:{
+                name: '销量',
+                type: 'line',
+                symbolSize: 8,
+                hoverAnimation: false,
+                data: data
+            }
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

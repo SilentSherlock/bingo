@@ -86,6 +86,9 @@
                     </otherwise>
                 </choose>
             </if>
+            <if test="name != null and name != ''">
+                and gname like CONCAT('%', #{name}, '%')
+            </if>
             <if test="category != null and category.size() != 0">
                 <foreach collection="category" open="and" close="" item="type" separator="and">
                     gtype like CONCAT ('%', #{type}, '%')
@@ -147,6 +150,9 @@
 
                 </otherwise>
             </choose>
+            <if test="name != null and name != ''">
+                and gname like CONCAT('%', #{name}, '%')
+            </if>
             <if test="area != null and area != ''">
                 <choose>
                     <when test="area == 'China'">
