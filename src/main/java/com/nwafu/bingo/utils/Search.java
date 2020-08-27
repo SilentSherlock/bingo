@@ -5,8 +5,10 @@ import java.util.List;
 /**
  * order: desc, asc
  * sort: discount, new, score, price
+ * area: China, other
  * category: 类别
  * tag: presale, newsale, promotion
+ * language: Chinese, other
  * minPrice: Float
  * maxPrice: Float
  * pageIndex: Integer
@@ -14,8 +16,10 @@ import java.util.List;
 public class Search {
     private String order;
     private String sort;
+    private String area;
     private List<String> category;
     private List<String> tag;
+    private String language;
     private Float minPrice;
     private Float maxPrice;
 
@@ -38,6 +42,14 @@ public class Search {
         this.sort = sort;
     }
 
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
     public List<String> getCategory() {
         return category;
     }
@@ -52,6 +64,14 @@ public class Search {
 
     public void setTag(List<String> tag) {
         this.tag = tag;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public Float getMinPrice() {
