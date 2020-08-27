@@ -9,8 +9,6 @@ import com.nwafu.bingo.utils.Result;
 import com.nwafu.bingo.utils.Search;
 import com.nwafu.bingo.utils.Status;
 import com.nwafu.bingo.utils.Tools;
-import com.sun.org.apache.xpath.internal.operations.Or;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +32,39 @@ public class StoreController {
     private Integer getPageAllNum(Search search) throws Exception {
         Integer allSearchNum = storeService.searchCount(search);
         return (int)Math.ceil((double)allSearchNum / (double)search.getPageCount());
+    }
+    /**
+    * @MethodName searchOrderListByCurTime
+    * @Description 获取丛今天起，以及今天之前30天内的销量信息
+    * @Param []
+    * @return java.util.Map<java.util.Date,java.util.Map<java.lang.Integer,java.lang.Integer>>
+    * @author yolia
+    * @Date 15:26 2020/8/27
+    **/
+    private Map<Date, Map<Integer, Integer>> searchOrderListByCurTime() throws Exception {
+        List<Orderlist> orderlists = storeService.getOrderListByCurTime();
+        Map<Date, Map<Integer, Integer>> sale2Date = new HashMap<>();
+        for(Orderlist orderlist : orderlists){
+            Date curOrderTime = orderlist.getOtime();
+            JSONArray array = JSON.parseArray(orderlist.getOrderDetails());
+            if(array == null || array.size() == 0) continue;;
+            for(int i = 0; i < array.size(); i++){
+                Integer gid = array.getJSONObject(i).getInteger("gid");
+                Integer saleNum  = array.getJSONObject(i).getJSONArray("klist").size();
+                if(sale2Date.containsKey(curOrderTime)){
+                    if(sale2Date.get(curOrderTime).containsKey(gid)){
+                        sale2Date.get(curOrderTime).put(gid, sale2Date.get(curOrderTime).get(gid) + saleNum);
+                    }else{
+                        sale2Date.get(curOrderTime).put(gid, saleNum);
+                    }
+                }else{
+                    Map<Integer, Integer> id2Sale = new HashMap<>();
+                    id2Sale.put(gid, saleNum);
+                    sale2Date.put(curOrderTime, id2Sale);
+                }
+            }
+        }
+        return sale2Date;
     }
 
     //region 游戏相关
@@ -155,12 +186,16 @@ public class StoreController {
     public Result search(HttpServletRequest request, Search search) throws Exception {
         //处理前端传递过来的json字符串，将其转化能为List
         String category = request.getParameter("category");
-        JSONArray categoryList = JSONArray.parseArray(category);
-        search.setCategory(categoryList.toJavaList(String.class));
+        if(category != null){
+            JSONArray categoryList = JSONArray.parseArray(category);
+            search.setCategory(categoryList.toJavaList(String.class));
+        }
 
         String tag = request.getParameter("tag");
-        JSONArray tagList = JSONArray.parseArray(tag);
-        search.setTag(tagList.toJavaList(String.class));
+        if(tag != null){
+            JSONArray tagList = JSONArray.parseArray(tag);
+            search.setTag(tagList.toJavaList(String.class));
+        }
         //
         Result result = new Result();
         List<Game> gameList = storeService.search(search);
@@ -318,6 +353,33 @@ public class StoreController {
         result.setStatus(Status.SUCCESS);
         result.getResultMap().put("orderLists", orderlists);
         result.getResultMap().put("orderListAllPrice", orderListAllPrice);
+        return result;
+    }
+    /**
+    * @MethodName getSale2DateByGId
+    * @Description 根据游戏ID获取30天内相应的销量
+    * @Param [gid]
+    * @return com.nwafu.bingo.utils.Result
+    * @author yolia
+    * @Date 15:39 2020/8/27
+    **/
+    @RequestMapping("getSale2DateByGId")
+    public Result getSale2DateByGId(Integer gid) throws Exception {
+        Result result = new Result();
+        Integer[] sales = new Integer[30];
+        Map<Date, Map<Integer, Integer>> sale2Date = searchOrderListByCurTime();
+        if(sale2Date == null){
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("sales", "后台出错");
+            return result;
+        }
+        for(int i = 29; i >= 0; i--){
+            Date cur = new Date();
+            Date date = Tools.setHMS20(new Date(cur.getTime() - i * 24 * 3600 * 1000));
+            sales[29 - i] = sale2Date.containsKey(date) ? sale2Date.get(date).get(gid) : 0;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("sales", sales);
         return result;
     }
     /**
