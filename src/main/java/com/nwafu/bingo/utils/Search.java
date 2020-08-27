@@ -14,6 +14,7 @@ import java.util.List;
  * pageIndex: Integer
  */
 public class Search {
+    private String name;
     private String order;
     private String sort;
     private String area;
@@ -25,6 +26,15 @@ public class Search {
 
     private Integer pageIndex;
     private Integer pageCount = 10;
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getOrder() {
         return order;

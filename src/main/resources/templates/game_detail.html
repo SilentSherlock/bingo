@@ -189,14 +189,14 @@
                     </div>
                 </div>
                 <div class="wish">
-                    <a href="">
+                    <button  class="addwish" onclick="addWishList()">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart" fill="currentColor" xmlns="http://www.w3.org/2000/svg" >
                             <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                         </svg>
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg" hidden="true" >
                             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                         </svg>加入心愿单
-                    </a>
+                    </button>
                 </div>
             </div>
             <div class="titile-content-right-2">
@@ -250,7 +250,6 @@
             document.getElementById("show").innerHTML = "<img src=" + $(typp).attr("src") + " class='default-height' />";
         }
     }
-
     //根据分数显示星星
     function star(score,string){
         var sc=9,i,item=5;
@@ -277,7 +276,7 @@
         else{
             sessionStorage.getItem("shoppingcar");
             //加入购物车
-            var i=0,keylist = [];
+            /*var i=0,keylist = [];
             var charac = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678";
             for(; i<buynum;i++){
                 var key = "";
@@ -289,22 +288,20 @@
                 key += charac.charAt(temp1) + charac.charAt(temp2)+ charac.charAt(temp3)+ charac.charAt(temp4)+ charac.charAt(temp5);
                 keylist.push(key);
             }
-            console.log("key为: "+keylist);
-            var orDetails = {
-                gid : GAMEID,
-                klist : keylist,
-                discount : game.discount,
-                price : game.gprice
+            console.log("key为: "+keylist);*/
+            var item = {
+                "gid" : parseInt(GAMEID),
+                "discount" : game.discount,
+                "price" : game.gprice
             }
-            var shoppingcar = [{
-                oid : null,
-                uid : 1,
-                otime : "2020-08-26",
-                orderDetails : orDetails
-            }]
+            var shoppingcar = [];
+            shoppingcar.push(item);
             console.log(shoppingcar);
-            //sessionStorage.setItem("shoppingcar",shoppingcar);
-            console.log(sessionStorage.getItem("shoppingcar"));
+            sessionStorage.setItem("shoppingcar",JSON.stringify(shoppingcar));
+            car = sessionStorage.getItem("shoppingcar");
+            carContent = JSON.parse(car);
+            console.log(carContent);
+            console.log(carContent[0]);
             window.alert("加入购物车成功！");
         }
     }
@@ -360,6 +357,45 @@
             console.log(orderContent);
             window.alert("购买成功！");
         }
+    }
+    function addWishList(){
+        var data = {
+            uid : 1
+        }
+        $.get(
+            "/person/getUserById",data,
+            function (result){
+                console.log(result);
+                wishlist = result.resultMap.wishList;
+                console.log(wishlist);
+                var i=0,length=wishlist.length,exist=0;
+                for( ;i<length;i++){
+                    console.log(wishlist[i].gid);
+                    console.log(GAMEID);
+                    if(GAMEID==wishlist[i].gid)
+                    {
+                        exist=1;
+                        break;
+                    }
+                }
+                if(exist==1){
+                    window.alert("已在心愿单中！请勿重复添加");
+                }
+                else {
+                    var data = {
+                        uid : 1,
+                        gid : GAMEID
+                    }
+                    $.post(
+                        "/person/updateWishListById", data,
+                        function (result){
+                            console.log(result);
+                        }
+                    )
+                    window.alert("加入心愿单成功！");
+                }
+            }
+        )
     }
     $(document).ready(function () {
         //获取游戏ID
