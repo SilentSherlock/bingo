@@ -1,0 +1,50 @@
+@charset "UTF-8";
+/**
+ * 作者: lwh
+ * 时间: 2020.8.22
+ * 描述：注册模块样式
+ */
+/**
+ * 作者: lwh
+ * 时间: 2020.8.20
+ * 描述：网页总体样式采用颜色、字体大小、动画常量规定
+ */
+/****************************基本颜色***********************/
+/****************************基本字体及动画***********************/
+/****************************框架组件常量***********************/
+/*页面背景图片*/
+body > div.container-fluid {
+  background-image: url("/src/register_background.jpg");
+  background-position: center 70px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: all 0.6s;
+}
+
+/*页面高度*/
+#user-login {
+  min-height: 800px;
+}
+
+/*注册框所在区域*/
+#user-register-form-div {
+  margin-top: 50px;
+  border-radius: 5px;
+  padding-right: 30px;
+  padding-left: 30px;
+  background-color: #33394d;
+  color: #b9c0ef;
+  box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.6s;
+}
+
+/*注册框标题*/
+#user-register-form-title {
+  margin: 20px -20px 20px -20px;
+  height: 30px;
+  border-bottom: 1px solid #7a80a2;
+  text-align: center;
+  color: #b9c0ef;
+}
+
+/*# sourceMappingURL=component_user_register.css.map */

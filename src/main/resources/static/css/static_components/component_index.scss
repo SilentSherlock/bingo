@@ -1,0 +1,46 @@
+/**
+ * 时间: 2020.8.25
+ * 描述：首页内容样式
+ */
+@import "../constant";
+
+//图片轮播
+#index-carousel .carousel-inner img {
+  width: 100%;
+  height: $index-carousel-height;
+  //被替换的内容大小保持其宽高比，同时填充元素的整个内容框
+  //如果对象的宽高比与盒子的宽高比不匹配，该对象将被剪裁以适应
+  object-fit: cover;
+}
+
+//推荐板块
+#index-body-recommendation-container {
+  padding-top: 1px;
+  padding-bottom: $index-body-recommendation-margin;
+}
+
+.index-body-recommendation {
+  margin-top: $index-body-recommendation-margin;
+}
+
+.index-body-recommendation:first-of-type {
+  margin-top: $index-body-recommendation-margin / 2;
+}
+
+.index-body-recommendation .recommendation-title-container span:first-of-type {
+  color: $font-color-light;
+  font-size: $font-size-title;
+}
+
+.index-body-recommendation .recommendation-title-container span:last-of-type {
+  float: right;
+}
+
+.index-body-recommendation .recommendation-body-container {
+  padding: 1px;
+  border-top: 4px solid $background-light;
+}
+
+.index-body-recommendation .recommendation-body-container > div.col-sm-2 {
+  margin-top: $index-game-card-margin-top;
+}

@@ -1,112 +1,68 @@
 /**
  * 作者: lwh
- * 时间: 2019.12.10
- * 描述: 一些比较常用的函数，需要引入jquery
+ * 时间: 2020.8.27
+ * 描述: 自定义提示框
  */
-
-/**
- * 作者: lwh
- * 时间: 2019.12.10
- * 描述: 根据参数名paramName获取浏览器地址的参数值，失败返回null
- */
-function getUrlParam(paramName) {
-    //构造一个含有目标参数的正则表达式对象
-    let reg = new RegExp("(^|&)" + paramName + "=([^&]*)(&|$)");
-    //匹配目标参数
-    let r = window.location.search.substr(1).match(reg);
-    if (r != null)
-        return decodeURIComponent(r[2]); //对参数进行解码并返回
-    return null;
+function myAlert(message) {
+    //判断是否已经加载提示框modal
+    let alert = $("#alert");
+    if ($(alert).length === 0) {
+        $.get(static_components.component_alert.curl, function (data) {
+            $("body").append(data);
+            //显示模态框
+            $("#alert").modal();
+            //更改提示信息
+            $("#alert-message").text(message);
+        });
+    }
+    //显示模态框
+    $(alert).modal();
+    //更改提示信息
+    $("#alert-message").text(message);
 }
 
 /**
  * 作者: lwh
- * 时间: 2019.12.10
- * 描述: 转换日期格式(时间戳转换为datetime格式yyyy:mm:dd hh:mm:ss)
+ * 时间: 2020.8.27
+ * 描述: 在指定位置显示内容加载失败
+ *
+ * 加载失败和内容为空之后不进行任何操作，所以直接异步请求即可
  */
-function timestampToTime(timestamp) {
-    //时间戳为10位(s)需*1000，时间戳为13位(ms)的话不需乘1000，默认时间戳单位为ms
-    let date = new Date(parseInt(timestamp));
-    //yyyy
-    let Y = date.getFullYear() + '-';
-    let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-    let D = date.getDate() + ' ';
-    let h = date.getHours() + ':';
-    let m = (date.getMinutes() < 10 ? '0' + (date.getMinutes()) : date.getMinutes()) + ':';
-    let s = (date.getSeconds() < 10 ? '0' + (date.getSeconds()) : date.getSeconds());
-    return Y + M + D + h + m + s;
+function ajaxFailed(errorShowTagId) {
+    //请求失败
+    $.get(static_components.component_load_error.curl, function (data) {
+        $(errorShowTagId).html(data);
+    });
 }
 
 /**
  * 作者: lwh
- * 时间: 2019.12.10
- * 描述: 判断给定的时间是今天（返回0）、明天（返回1）还是后天（返回2）、其他（返回-1）
+ * 时间: 2020.8.27
+ * 描述: 在指定位置显示内容为空
  */
-function toRelativeDate(data) {
-    let today0 = new Date(new Date().toLocaleDateString()).getTime();
-    let result = (data - today0) / 1000 / 24 / 60 / 60;
-    if (result >= 0 && result < 1) {
-        return 0;
-    } else if (result >= 1 && result < 2) {
-        return 1;
-    } else if (result >= 2 && result < 3) {
-        return 2;
-    } else
-        return -1;
+function ajaxNoContent(noContentShowTagId) {
+    //请求内容为空
+    $.get(static_components.component_none_result.curl, function (data) {
+        $(noContentShowTagId).html(data);
+    });
 }
 
 /**
  * 作者: lwh
- * 时间: 2019.12.10
- * 描述: 判断给定的时间是今天、明天还是后天、其他(直接返回String)
+ * 时间: 2020.8.27
+ * 描述: 在指定位置显示加载动画
+ *
+ * 因为加载动画的同时或者之后有其他操作，所以将动画加载操作封装到一个promise对象中，让其
+ * 成为微任务
  */
-function toRelativeDateString(data) {
-    let str = toRelativeDate(data);
-    if (str === 0) {
-        return "今天";
-    } else if (str === 1) {
-        return "明天";
-    } else if (str === 2) {
-        return "后天";
-    } else
-        return "其他";
-}
-
-/**
- * 作者: lwh
- * 时间: 2019.12.10
- * 描述: 将给定的时间戳转换为当天的xx小时:xx分
- */
-function timestampToTimeOfTheDay(timestamp) {
-    let date = new Date(timestamp);
-    return date.getHours() + ":" + date.getMinutes();
-}
-
-/**
- * 作者: lwh
- * 时间: 2019.12.10
- * 描述: 将给定的时间戳转换为星期几
- */
-function getDateWeek(date) {
-    let day = new Date(date);
-    let today = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-    return today[day.getDay()];
-}
-
-/**
- * 作者: lwh
- * 时间: 2020.4.11
- * 描述: 将信息存入session(所给信息为JSON对象，存储格式也为键值对模式)
- */
-function saveData2Ses(jsonStr) {
-    //遍历json数组并进行存储
-    $.each(jsonStr, function (key, value) {
-        //将键值对存入sessionStorage
-        if (value instanceof Object)
-            window.sessionStorage.setItem(key, JSON.stringify(value));
-        else
-            //将键值对存入sessionStorage
-            window.sessionStorage.setItem(key, value);
+function loadingAnimation(showTagId) {
+    //加载动画
+    return new Promise(function (resolve) {
+        $.get(static_components.component_loading_animation.curl, function (data) {
+            //显示加载动画
+            $(showTagId).html(data);
+            resolve();
+        });
     });
 }
 
@@ -156,31 +112,4 @@ function getCookie(cname) {
         }
     }
     return null;
-}
-
-/**
- * 作者: lwh
- * 时间: 2020.4.28
- * 描述: 自定义提示框
- */
-function myAlert(message) {
-    //判断是否已经加载提示框modal
-    if ($("#alert").length === 0) {
-        $.ajax({
-            url: "alert",
-            type: "get",
-            async: true,
-            dataType: "html",
-            success: function (data) {
-                $("body").append(data);
-                //显示模态框
-                $("#alert").modal();
-                //更改提示信息
-                $("#alert-message").text(message);
-            },
-            error: function (error) {
-                alert("----ajax请求加载自定义提示框出错！----\n\n" + error.responseText);
-            }
-        });
-    }
 }
