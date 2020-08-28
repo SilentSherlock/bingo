@@ -1,3 +1,68 @@
+.titile-three {
+  height: 100%;
+  float: left;
+  margin: 20px 20px 20px 20px;
+}
+
+.score-1-3 {
+  display: block;
+  width: 740px;
+  height: 100%;
+  padding-left: 20px;
+}
+
+.sElem {
+  width: 700px;
+  height: 100px;
+  display: block;
+}
+
+.score-1-3-1 {
+  position: absolute;
+  display: inline-block;
+  width: 200px;
+  height: 100px;
+  margin: 0;
+  padding: 0;
+}
+
+.score-1-3-2 {
+  position: absolute;
+  margin-left: 130px;
+  display: inline-block;
+  width: 500px;
+}
+
+.Avatar {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+}
+
+.uAvatar {
+  height: 50px;
+  width: 50px;
+  padding: 0;
+  margin: 0;
+}
+
+.uname {
+  color: #7a80a2;
+  display: inline-block;
+  width: 90px;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.score2 {
+  color: #7a80a2;
+}
+
+.score3 {
+  color: #7a80a2;
+}
+
 .game-detail {
   padding-left: 20%;
   width: 100%;
@@ -116,12 +181,6 @@ p {
 
 .titile-two {
   margin: 0 20px 20px 20px;
-}
-
-.titile-three {
-  height: 100%;
-  float: left;
-  margin: 20px 20px 20px 20px;
 }
 
 .titile-content-left-3 {
@@ -419,59 +478,6 @@ p {
   color: yellow;
 }
 
-.score2 {
-  color: #7a80a2;
-}
-
-.score3 {
-  color: #7a80a2;
-}
-
-.score-1-3 {
-  display: block;
-  width: 740px;
-  height: 100%;
-  padding-left: 20px;
-}
-
-.score-1-3-1 {
-  position: absolute;
-  display: inline-block;
-  width: 200px;
-  height: 100px;
-  margin: 0;
-  padding: 0;
-}
-
-.score-1-3-2 {
-  position: absolute;
-  margin-left: 130px;
-  display: inline-block;
-  width: 500px;
-}
-
-.Avatar {
-  display: inline-block;
-  height: 50px;
-  width: 50px;
-}
-
-.uAvatar {
-  height: 50px;
-  width: 50px;
-  padding: 0;
-  margin: 0;
-}
-
-.uname {
-  color: #7a80a2;
-  display: inline-block;
-  width: 90px;
-  height: 20px;
-  padding: 0;
-  margin: 0;
-}
-
 .videoPlayer {
   width: 100%;
   height: 100%;
@@ -540,12 +546,6 @@ p {
   left: 55px;
   z-index: 9999;
   font-size: 40px;
-}
-
-.sElem {
-  width: 700px;
-  height: 100px;
-  display: block;
 }
 
 /*# sourceMappingURL=detail.css.map */

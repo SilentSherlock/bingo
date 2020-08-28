@@ -21,11 +21,7 @@
                 <div class="content">
                     <div class="videos-player default-height" id="show">
                         <video class="videoPlayer" id="videoPlayer"  src="" controls="controls"  autobuffer muted >
-                            <!--<source src="" type="video/mp4" id="gvideo">-->
                         </video>
-                        <!--<div class="new-big-center-play-btn" style="display: block" onclick="play()">
-                            <span class="glyphicon glyphicon-play">
-                        </div>-->
                     </div>
                     <div class="show-list">
                         <div class="show-elem">
@@ -53,9 +49,6 @@
                             <img src="" id="elem6" onclick="change(this)">
                         </div>
                     </div>
-                    <!--<div class="list-control">
-                        <div class="thumb"></div>
-                    </div>-->
                 </div>
             </div>
             <div class="titile-content-left-3">
@@ -157,7 +150,6 @@
         </div>
         <div class="titile-content-right">
             <div class="titile-content-right-1">
-
                 <div class="titile-content-1-2">
                     <div class="d-cover">
                         <img src="" class="cover" id="cover" alt="封面">
@@ -241,6 +233,7 @@
     var GAMEID
     var GAMEINFO
     var videohref
+    //
     function change(typp) {
         console.log("点击元素:"+$(typp).attr("id"));
         if ($(typp).attr("id") === "video" || $(typp).attr("id") === "videochild") {
@@ -368,7 +361,20 @@
                     console.log(result);
                 }
             )
-            console.log(orderContent);
+            var gids = [];
+            gids.push(parseInt(GAMEID));
+            var data = {
+                uid : 1,
+                gid : JSON.stringify(gids),
+                mode : 1
+            }
+            console.log(JSON.stringify(gids));
+            $.post(
+                "/person/updateGameListById",data,
+                function (result){
+                    console.log(result);
+                }
+            );
             window.alert("购买成功！");
         }
     }
@@ -398,7 +404,8 @@
                 else {
                     var data = {
                         uid : 1,
-                        gid : GAMEID
+                        gid : GAMEID,
+                        mode : 1
                     }
                     $.post(
                         "/person/updateWishListById", data,
@@ -425,7 +432,8 @@
             $.get("store/gameDetailShow", data,
                 function (result){
                     game = result.resultMap.game;
-                    //console.log(result);
+                    //
+                    console.log(result);
                     document.getElementById("title").innerText=game.gname;
                     document.getElementById("detail").innerText=game.detail;
                     document.getElementById("cover").src=game.chref;
@@ -453,6 +461,8 @@
                     document.getElementById("developer").innerText=game.developer;
                     document.getElementById("publisher").innerText=game.publisher;
                     document.getElementById("realeasedate").innerText=game.realeasedate.substr(0,10);
+                    var time = game.realeasedate;
+                    console.log("发行时间:" + time);
                     console.log(typeof  game.realeasedate);
                     var temp = JSON.parse(game.platform);
                     document.getElementById("platform").innerText=temp;
