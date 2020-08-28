@@ -169,6 +169,8 @@ public class PersonController {
             if (!foldPath.exists()) {
                 foldPath.mkdirs();
             }
+            user.setUalias(user.getUname());
+            user.setUavatar("/src/avatar_default.png");
             personService.addPerson(user);
             result.setStatus(Status.SUCCESS);
             result.getResultMap().put("info", "Insert Success");
