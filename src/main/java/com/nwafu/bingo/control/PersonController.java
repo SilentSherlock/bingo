@@ -169,6 +169,9 @@ public class PersonController {
             if (!foldPath.exists()) {
                 foldPath.mkdirs();
             }
+            user.setUalias(user.getUname());
+            user.setUavatar("/src/avatar_default.png");
+            personService.addPerson(user);
             result.setStatus(Status.SUCCESS);
             result.getResultMap().put("info", "Insert Success");
         }else {
@@ -186,6 +189,14 @@ public class PersonController {
         return result;
     }
 
+    @RequestMapping("/updateUserNoPhoto")
+    public Result updateUserNoPhoto(User user) throws Exception {
+        Result result = new Result();
+        personService.updatePerson(user);
+        result.setStatus(Status.SUCCESS);
+        return result;
+    }
+
     //second edition, may be modified
     @RequestMapping("/updateUser")
     public Result updateUser(User user, @RequestParam("avatar")MultipartFile file) throws Exception {
@@ -194,13 +205,14 @@ public class PersonController {
 
         if (file != null) {
             int uid = user.getUid();
-            String imgPath = ResourceUtils.getURL("classpath:").getPath() + "static/src/uinfo/" + uid + ".jpg";
+            String imgSrc = "/src/uinfo" + uid + ".jpg";
+            String imgPath = ResourceUtils.getURL("classpath:").getPath() + "static" + imgSrc;
             File img = new File(imgPath);
             if (img.exists()) {
                 img.delete();
             }
             file.transferTo(img);
-            user.setUavatar(imgPath);
+            user.setUavatar(imgSrc);
             personService.updatePerson(user);
         }
         result.setStatus(Status.SUCCESS);
@@ -227,16 +239,17 @@ public class PersonController {
         JSONArray jsonArray = JSON.parseArray(gids);
         Result result = new Result();
         User user = personService.getUserById(uid);
-        String oldGameList = user.getGamelist();
+//        String oldGameList = user.getGamelist();
+
         for (Object gid : jsonArray) {
             Integer gidInt = (Integer) gid;
             Result tmp = updateGameListOrWishList(uid, gidInt, mode, 0);
             if (tmp.getStatus() == Status.FAILURE) {
-                result.setStatus(Status.FAILURE);
+                /*result.setStatus(Status.FAILURE);
                 result.getResultMap().put("msg", "add gid by list failed");
                 user.setGamelist(oldGameList);
-                personService.updatePerson(user);
-                return result;
+                personService.updatePerson(user);*/
+                System.out.println("多出一条游戏，应前端沙雕需求，不返回错误");
             }
         }
         result.setStatus(Status.SUCCESS);
@@ -263,8 +276,14 @@ public class PersonController {
             else jsonArray = JSON.parseArray(list);
 
             if (mode == 1) {
-                jsonArray.add(gid);
-                result.setStatus(Status.SUCCESS);
+                if (!jsonArray.contains(gid)) {
+                    jsonArray.add(gid);
+                    result.setStatus(Status.SUCCESS);
+                }else {
+                    result.setStatus(Status.FAILURE);
+                    result.getResultMap().put("msg", "the game is in the gamelist or wishlist");
+                }
+
             }else if (mode == 0) {
                 int target = jsonArray.indexOf(gid);
                 if (target == -1) {

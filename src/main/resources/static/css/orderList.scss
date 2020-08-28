@@ -1,3 +1,85 @@
+//region 列表开始
+.myorder-elem{
+  height: 120px;
+  padding: 20px 0;
+  box-sizing: border-box;
+  position: relative;
+}
+.column1{
+  height: 85px;
+  width: 425px;
+  float: left;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  overflow-x: auto;
+}
+.column1-elem{
+  width: 135px;
+  height: 85px;
+  overflow: hidden;
+  position: relative;
+  float: left;
+  cursor: pointer;
+}
+.column1-img {
+  display: inline;
+  float: left;
+  height: 80px;
+  line-height: 80px;
+  padding-left: 50px;
+}
+.column1-elem img{
+  width: 135px;
+  height: 85px;
+}
+.column1-elem-txt{
+  margin: 0;
+  display: none;
+  width: 135px;
+  height: 80px;
+  //line-height: 80px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  font-size: 12px;
+  position: absolute;
+  left: 0;
+  padding-top: 20%;
+}
+.row2{
+  width: 170px;
+  float: left;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.row3{
+  width: 120px;
+  float: left;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.condition{
+  display: inline;
+  float: right;
+  width: 200px;
+  height: 40px;
+  background-color: #28669A;
+  text-align: center;
+  position: relative;
+  top: 18%;
+  border: px solid #00ff11;
+}
+.condition :hover{
+  color: #28669A;
+  background-color: olivedrab;
+}
+//endregion 列表结束
 div{
   display: block;
   margin: 0;
@@ -53,22 +135,6 @@ div{
   top: 50%;
   transform: translateY(-50%);
 }
-.row2{
-  width: 170px;
-  float: left;
-  text-align: center;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.row3{
-  width: 120px;
-  float: left;
-  text-align: center;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
 .order-title {
   font-size: 16px;
   height: 42px;
@@ -99,30 +165,6 @@ div{
 body{
   background-color: whitesmoke;
 }*/
-.myorder-elem{
-  height: 120px;
-  padding: 20px 0;
-  box-sizing: border-box;
-  position: relative;
-}
-.column1{
-  height: 85px;
-  width: 425px;
-  float: left;
-  text-align: center;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  overflow-x: auto;
-}
-.column1-elem{
-  width: 135px;
-  height: 85px;
-  overflow: hidden;
-  position: relative;
-  float: left;
-  cursor: pointer;
-}
 .game-title{
   width: 400px;
   height: 80px;
@@ -130,31 +172,6 @@ body{
   position: relative;
   float: left;
   cursor: pointer;
-}
-.column1-img {
-  display: inline;
-  float: left;
-  height: 80px;
-  line-height: 80px;
-  padding-left: 50px;
-}
-.column1-elem img{
-  width: 135px;
-  height: 85px;
-}
-.column1-elem-txt{
-  margin: 0;
-  display: none;
-  width: 135px;
-  height: 80px;
-  //line-height: 80px;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.6);
-  color: #ffffff;
-  font-size: 12px;
-  position: absolute;
-  left: 0;
-  padding-top: 20%;
 }
 .elem-name{
   margin-left: 135px;
@@ -226,19 +243,4 @@ body{
   line-height: 42px;
   text-align: center;
   text-decoration: none;
-}
-.condition{
-  display: inline;
-  float: right;
-  width: 200px;
-  height: 40px;
-  background-color: #28669A;
-  text-align: center;
-  position: relative;
-  top: 18%;
-  border: px solid #00ff11;
-}
-.condition :hover{
-  color: #28669A;
-  background-color: olivedrab;
 }
