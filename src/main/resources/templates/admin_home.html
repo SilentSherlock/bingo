@@ -51,12 +51,13 @@
         .nav-pills>li.active>a:hover{
             color: #dbdbdb;
             background-color:black;/*#177ddc*/
+
         }
-        .nav-second>li.active>a,
+        /*.nav-second>li.active>a,
         .nav-second>li.active>a:focus,
         .nav-second>li.active>a:hover{
-            background-color: #177ddc;
-        }
+            background-color: black;
+        }*/
         .nav-second>li>a,
         .nav-second>li>a:focus,
         .nav-second>li>a:hover{
@@ -74,6 +75,10 @@
             color: #9d9d9d;
             background-color: #333;
             border-color: #333;
+        }
+        .nav>li>a:focus,
+        .nav>li>a:hover{
+            border-color: black;
         }
 
         .navbar-title{
@@ -215,15 +220,17 @@
         let currentIndex = 1;
         let countpage = 0;
         let updategid;
+        let search_game_name;
         /*实现翻页*/
-        function ChangePage(index, search){
+        function ChangePage(index, search_name,gtype){
             let html = "";
             let pageHtml = "";
             $.ajax({
                 url:"/store/search",
                 type:"post",
                 data:{
-                    name: search,
+                    name: search_name,
+                    category:gtype,
                     pageIndex:index,
                     pageCount:10,
                 },
@@ -335,7 +342,7 @@
                 <li role="presentation" ><a href="#" style="text-align: center" id="home">首页</a></li>
                 <!--游戏管理-->
                 <li role="presentation" >
-                    <a  class="btn btn-primary"role="button" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+                    <a  class="btn "role="button" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
                     游戏
                     </a>
                     <div class="collapse" id="collapseExample1">
@@ -349,7 +356,7 @@
                 </li>
                 <!--用户管理-->
                 <li role="presentation" >
-                    <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+                    <a class="btn " role="button" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
                         用户
                     </a>
                     <div class="collapse" id="collapseExample2">
@@ -362,7 +369,7 @@
                 </li>
                 <!--订单管理-->
                 <li role="presentation" >
-                    <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
+                    <a class="btn " role="button" data-toggle="collapse" href="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
                         订单
                     </a>
                     <div class="collapse" id="collapseExample3">
@@ -717,8 +724,11 @@
     /*查询游戏*/
     $("#search-btn").on("click",function () {
         currentPage = 1;
-        ChangePage(currentPage,$("#search-game").val());
-
+        search_game_name = $("#search-game").val();
+        console.dir($("#game-type").val());
+        let str = new String();
+        str = "[\""+ $("#game-type").val()+"\"]";
+        ChangePage(currentPage,search_game_name,str);
     })
     /**
      *填充复选框中的内容
@@ -827,7 +837,7 @@
             currentPage = this.innerText
         }
         currentIndex = 10 * (currentPage-1);
-        ChangePage(currentIndex);
+        ChangePage(currentIndex,search_game_name);
     })
     /**
      *编辑框填充内容
