@@ -57,7 +57,8 @@
 }
 .myorder-elem{
   height: 120px;
-  padding: 20px 0;
+  padding-top:  20px;
+  padding-left: 20px;
   box-sizing: border-box;
   position: relative;
 }
@@ -91,6 +92,17 @@
   line-height: 80px;
   padding-left: 50px;
 }
+.column1-txt{
+  display: inline;
+  float: left;
+  height: 80px;
+  width: 120px;
+  padding-top: 30px;
+  padding-left: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .column1-elem img{
   width: 135px;
   height: 85px;
@@ -101,14 +113,27 @@
   float: left;
   text-align: center;
   position: relative;
-  top: 75%;
+  top: 60%;
   transform: translateY(-50%);
+  background-color: #28669A;
+}
+.sum1 :hover{
+  color: #28669A;
+  background-color: olivedrab;
+}
+
+.da{
+  width: 80px;
+  border: 0;
+  background-color: #28669A;
+}
+.da :hover{
 }
 .sum{
   padding-left: 20px;
   padding-right: 20px;
   margin-top: 15px;
-  background-color: #2b669a;
+  background-color: #28669A;
   width: 800px;
   height: 80px;
 }
@@ -117,20 +142,21 @@
   display: inline;
   float: right;
   line-height: 80px;
+  background-color: #28669A;
 }
 .sum-but{
   margin-top: 23px;
-  background-color:lightgreen;
   width: 100px;
   height: 38px;
   display: inline;
   float: right;
-  font-size: 20px;
+  font-size: 15px;
+  background-color:#1c7430;
 }
 .num{
   width: 30px;
-  background-color: antiquewhite;
-  border: 0;
+  background-color: #28669A;
+  border: 1px solid #245269;
 }
 .addwish{
   border: 0;

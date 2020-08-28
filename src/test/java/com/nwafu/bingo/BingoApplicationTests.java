@@ -79,19 +79,19 @@ class BingoApplicationTests {
 
 		//userDao.add(user);
 
-		/*List<User> list = userDao.getAll();
+		List<User> list = userDao.getUserPage(2,3);
 		for(User u : list){
 			System.out.println(u.getUname());
 		}
-		List<User> list2 = userDao.getByName("程冰");
+		/*List<User> list2 = userDao.getByName("程冰");
 		for(User u : list2){
 			System.out.println(u.getUname());
 		}*/
 		/*User u = userDao.getById(1);
 		System.out.println(u.getUname());*/
 
-		user.setUid(2);
-		userDao.update(user);
+		//user.setUid(2);
+		//userDao.update(user);
 	}
 	@Test
 	void testGame() throws Exception{
