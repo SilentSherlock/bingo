@@ -61,7 +61,7 @@ a:active {
 /****************************按钮***********************/
 .btn-primary,
 .btn-primary:focus {
-  color: #e6e6e6;
+  color: white;
   background-color: #ff6900;
   border: none;
   box-shadow: none;
@@ -79,7 +79,7 @@ a:active {
 .btn-secondary,
 .btn-secondary:focus {
   color: white;
-  background-color: #5c668a;
+  background-color: #47506c;
   border: none;
   box-shadow: none;
 }
@@ -87,7 +87,7 @@ a:active {
 .btn-secondary:hover,
 .btn-secondary:active {
   color: white !important;
-  background-color: #949cb8 !important;
+  background-color: #5c668a !important;
   border: none !important;
   box-shadow: none !important;
   transition: background-color 0.3s, color 0.3s;
@@ -136,18 +136,19 @@ a:active {
 .alert-modal-header {
   border: none;
   padding: 5px 15px 5px 15px;
-  background-color: #202539;
-  color: #b9c0ef;
+  background-color: #ff9800;
+  color: white;
+  font-weight: bold;
 }
 
 .alert-modal-header span {
-  color: #b9c0ef;
+  color: white;
 }
 
 .alert-modal-body {
   padding: 10px;
   background-color: #33394d;
-  color: #7a80a2;
+  color: #b9c0ef;
 }
 
 .alert-modal-body-foot {
@@ -186,6 +187,10 @@ a:active {
 
 .has-success .control-label {
   color: #28a745;
+}
+
+.has-feedback .help-block {
+  color: #dc3545;
 }
 
 .form-control[disabled] {

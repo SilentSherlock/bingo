@@ -1,0 +1,316 @@
+/**
+ * 时间: 2020.8.28
+ * 描述：所有游戏页面样式
+ */
+@import "../constant";
+
+#search-left {
+  min-width: 700px;
+  float: left;
+  height: 1200px;
+}
+
+.search-store-pagination {
+  margin-top: 35px;
+}
+
+.page-list {
+  cursor: pointer;
+  border: none;
+  color: #7a80a2;
+  line-height: 24px;
+  padding: 0 8px;
+}
+
+.page-item {
+  cursor: pointer;
+  border: 1px solid #33394d;
+  color: #7a80a2;
+  line-height: 24px;
+  padding: 0 8px;
+  margin: 5px;
+  background-color: #202539;
+}
+
+.active-button {
+  color: #ffffff;
+  border: 1px solid #ff6900;
+  background: #ff6900;
+}
+
+#all-game h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 45px;
+  color: #7a80a2;
+  background: #292e41;
+  text-indent: 20px;
+  font-weight: normal;
+}
+
+#all-game h1 {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+/*#all-game a {
+  color: #000000;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#all-game a:link {
+
+}
+
+#all-game a:visited {
+
+}
+
+#all-game a:hover {
+  background-color: black;
+  text-decoration: none;
+}
+
+#all-game a:active {
+
+}*/
+
+#all-game ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 40px;
+  padding-left: 0;
+  height: 1100px;
+}
+
+#all-game li {
+  height: 100px;
+  background: #33394d;
+  margin-bottom: 10px;
+  overflow: hidden;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.store-search-container {
+  padding-top: 50px;
+  min-height: calc(100vh - 320px);
+}
+
+.search-title {
+  padding-top: 30px;
+  height: 55px;
+}
+
+.search-title h1 {
+  font-size: 20px;
+  color: #b9c0ef;
+  float: left;
+}
+
+.condition {
+  padding-top: 40px;
+}
+
+.game-sort-order {
+  padding: 0 8px 0 0;
+  cursor: pointer;
+  margin-right: 40px;
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 14px;
+  color: #7a80a2;
+  position: relative;
+  appearance: button;
+  -webkit-writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+/*
+
+#all-game button:focus {
+  outline: none;
+}
+*/
+
+.left {
+  float: left;
+  width: 25%;
+}
+
+.middle {
+  margin: 0 150px 0 190px;
+  padding: 15px 0 15px 10px;
+}
+
+.title {
+  font-size: 16px;
+  color: #b9c0ef;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /*  margin-top: 0;
+    margin-bottom: 0;*/
+}
+
+
+.title span {
+  display: inline-block;
+  font-size: 12px;
+  color: #ffffff;
+  padding: 0 4px;
+  font-weight: normal;
+  line-height: 18px;
+  border-radius: 2px 2px 2px 2px;
+  margin-left: 6px;
+  vertical-align: text-bottom;
+}
+
+#all-game p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+.title-tag {
+  background: #fd115b;
+}
+
+.title-area {
+  background: #3178F5;
+  float: bottom;
+}
+
+.date {
+  color: #7a80a2;
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+.tags {
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+.tag-block {
+  margin-right: 5px;
+  display: inline-block;
+  line-height: 16px;
+  padding: 0 2px;
+  color: #7a80a2;
+  border: 1px solid #7a80a2;
+  border-radius: 2px 2px 2px 2px;
+}
+
+.right {
+  float: right;
+  margin-top: 40px;
+}
+
+.game-discount {
+  color: #ffffff;
+  background: #7a80a2;
+  padding: 2px 4px;
+  border-radius: 2px 2px 2px 2px;
+  margin-right: 15px;
+}
+
+.game-origin-price {
+  color: #7a80a2;
+  text-decoration: line-through;
+  margin-right: 15px;
+}
+
+.game-sale-price {
+  color: #eb6100;
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 15px;
+  float: right;
+}
+
+#all-game img {
+  border: 0;
+  height: 100px;
+  width: 100%;
+}
+
+#all-game div {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+#all-game h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 45px;
+  color: #7a80a2;
+  background: #292e41;
+  text-indent: 20px;
+}
+
+#search-right {
+  width: 350px;
+  margin-left: 850px;
+  padding-top: 16px;
+  overflow: hidden;
+}
+
+.search-block {
+  background: #33394d;
+}
+
+.search-tags {
+  padding: 10px 0;
+}
+
+.tags-block {
+  box-sizing: border-box;
+  color: #7a80a2;
+  font-size: 14px;
+  float: left;
+  line-height: 30px;
+  width: 175px;
+  padding-left: 20px;
+}
+
+.tags-block-wrapper, .tags-block-wrapper1, .tags-block-wrapper2, .tags-block-wrapper3, .tags-block-wrapper4 {
+  cursor: pointer;
+}
+
+.choose-fa {
+  margin-right: 6px;
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.active {
+  font-weight: bold;
+  color: #b9c0ef;
+  border: none;
+}
