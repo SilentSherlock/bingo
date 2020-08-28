@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -41,5 +42,24 @@ public class Tools {
         long diff = targetTime.getTime() - nowTime.getTime();
         long days = diff / (1000 * 60 * 60 * 24);
         return days;
+    }
+    /**
+    * @MethodName setHMS20
+    * @Description 将时间的Hour、Minute、Second清零
+    * @Param [now]
+    * @return java.util.Date
+    * @author yolia
+    * @Date 16:18 2020/8/27
+    **/
+    public static Date setHMS20(Date now){
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(now);
+        // 将时分秒,毫秒域清零
+        cal1.set(Calendar.HOUR_OF_DAY, 0);
+        cal1.set(Calendar.MINUTE, 0);
+        cal1.set(Calendar.SECOND, 0);
+        cal1.set(Calendar.MILLISECOND, 0);
+
+        return cal1.getTime();
     }
 }
