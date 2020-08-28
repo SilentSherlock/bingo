@@ -62,4 +62,13 @@
         WHERE
             uid = #{uid}
     </update>
+
+    <select id="getUserPage"  resultMap="BaseUserMap">
+        SELECT
+            *
+        FROM
+            user
+            limit #{current_index} ,#{size}
+
+    </select>
 </mapper>
