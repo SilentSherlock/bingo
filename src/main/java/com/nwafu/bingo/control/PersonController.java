@@ -192,8 +192,24 @@ public class PersonController {
     * 1----个人账户中删除游戏
     * */
     @RequestMapping("/updateGameListById")
-    public Result updateGameListById(@RequestParam("uid") Integer uid, @RequestParam("gid") Integer gid, @RequestParam("mode") int mode) throws Exception {
-        return updateGameListOrWishList(uid, gid, mode, 0);
+    public Result updateGameListById(@RequestParam("uid") Integer uid, @RequestParam("gid") String gids, @RequestParam("mode") int mode) throws Exception {
+        JSONArray jsonArray = JSON.parseArray(gids);
+        Result result = new Result();
+        User user = personService.getUserById(uid);
+        String oldGameList = user.getGamelist();
+        for (Object gid : jsonArray) {
+            Integer gidInt = (Integer) gid;
+            Result tmp = updateGameListOrWishList(uid, gidInt, mode, 0);
+            if (tmp.getStatus() == Status.FAILURE) {
+                result.setStatus(Status.FAILURE);
+                result.getResultMap().put("msg", "add gid by list failed");
+                user.setGamelist(oldGameList);
+                personService.updatePerson(user);
+                return result;
+            }
+        }
+        result.setStatus(Status.SUCCESS);
+        return result;
     }
 
     /*
