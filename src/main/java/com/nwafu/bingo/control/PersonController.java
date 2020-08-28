@@ -176,20 +176,36 @@ public class PersonController {
         return result;
     }
 
+    /*
+    * mode
+    * 1----增加游戏
+    * 0----删除游戏
+    * */
     @RequestMapping("/updateWishListById")
-    public Result updateWishListById(@RequestParam("uid") Integer uid, @RequestParam("gid") Integer gid) throws Exception {
+    public Result updateWishListById(@RequestParam("uid") Integer uid, @RequestParam("gid") Integer gid, @RequestParam("mode") int mode) throws Exception {
         Result result = new Result();
 
         if (uid != null && gid != null) {
             User user = personService.getUserById(uid);
             String wishList = user.getWishlist();
             JSONArray jsonArray = JSON.parseArray(wishList);
-            jsonArray.add(gid);
+            if (mode == 1) {
+                jsonArray.add(gid);
+                result.setStatus(Status.SUCCESS);
+            }else if (mode == 0) {
+                int target = jsonArray.indexOf(gid);
+                if (target == -1) {
+                    result.setStatus(Status.FAILURE);
+                    result.getResultMap().put("msg", "wishList doesn't contains the game");
+                }else {
+                    jsonArray.remove(target);
+                    result.setStatus(Status.SUCCESS);
+                }
+            }
+
             wishList = JSON.toJSONString(jsonArray);
             user.setWishlist(wishList);
             personService.updatePerson(user);
-
-            result.setStatus(Status.SUCCESS);
         }else {
             result.setStatus(Status.FAILURE);
             result.getResultMap().put("msg", "uid or gid is null!");
@@ -197,6 +213,7 @@ public class PersonController {
 
         return result;
     }
+    
     @RequestMapping("/deleteAdminById")
     public Result deleteAdminById(@RequestParam("aid") Integer aid) throws Exception {
         Result result = new Result(Status.SUCCESS);
@@ -265,4 +282,6 @@ public class PersonController {
 
         return new Result(Status.SUCCESS, null);
     }
+
+
 }
