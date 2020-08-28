@@ -1,39 +1,38 @@
-JSON.stringify(firstFormData)
-console.log(firstFormData)
-formData = firstFormData;
+//所有游戏页面初始化
 $(document).ready(function () {
+    formData = firstFormData;
+
     function getGameList() {
         $.post(
             "/store/search",
             formData,
             function (gameList) {
-                //console.log(gameList);
-                var gamel = gameList.resultMap.searchList
-                var page = gameList.resultMap.allSearchNum
-                // console.log(formData)
-                // console.log(gameList)
-                var html = "";
-                $('#game-list').empty()
-                if (gameList.status == 0)
-                    return;
-                for (var i = 0; i < gamel.length; i++) {
+                let gamel = gameList.resultMap.searchList;
+                let page = gameList.resultMap.allSearchNum;
+                let html = "";
 
-                    var game = gamel[i]
-                    var temp = (parseFloat(game.gprice) * (parseFloat(game.discount))).toString();
+                $('#game-list').empty();
+
+                if (gameList.status === 0)
+                    return;
+                for (let i = 0; i < gamel.length; i++) {
+
+                    let game = gamel[i]
+                    let temp = (parseFloat(game.gprice) * (parseFloat(game.discount))).toString();
                     if (temp.length > 6) {
                         temp.substr(0, 6);
                     }
                     //得到游戏类别数组
-                    var typelist = game.gtype;
+                    let typelist = game.gtype;
                     typelist = (typelist != null ? typelist.substring(1, typelist.length - 1) : "");
 
                     typelist = typelist.split(",")
                     //得到游戏语言数组
-                    var languagelist = game.language;
+                    let languagelist = game.language;
                     languagelist = (languagelist != null ? languagelist.substring(1, languagelist.length - 1) : "")
 
                     languagelist = languagelist.split(",")
-                    for (var j = 0; j < languagelist.length; j++) {
+                    for (let j = 0; j < languagelist.length; j++) {
                         //console.log(languagelist[j])
                         languagelist[j].substring(1, languagelist[j].length - 1)
                     }
@@ -42,7 +41,7 @@ $(document).ready(function () {
                     html +=
                         "<li>" +
                         "<a href=" + "game_detail.html?gid=game.gid" + " class=" + "game-click" + ">" +
-                        "<div class=" + "left" + "><img src=" + game.phref + "></div>" +
+                        "<div class=" + "left" + "><img src=" + game.chref + "></div>" +
                         "<div class=" + "right" + ">"
                     if (game.discount != 1 && game.discount != null) {
                         html +=
@@ -75,7 +74,6 @@ $(document).ready(function () {
                     html += "</p>" +
                         "<p class='date'>发行于" + (game.realeasedate != null ? game.realeasedate.substring(0, 10) : ' ') + "</p>" +
                         "<p class='tags'>"
-                    console.log(html)
                     for (j = 0; j < typelist.length; j++) {
                         html +=
                             "<span class=" + "tag-block" + ">" + (typelist[j] != null ? typelist[j].substring(1, typelist[j].length - 1) : ' ') + "</span>"
@@ -92,7 +90,7 @@ $(document).ready(function () {
     }
 
     function setPage(pageNumber) {
-        console.log("pagenumber= " + pageNumber);
+        //console.log("pagenumber= "+pageNumber);
         var html = ""
         if (pageNumber === 0) {
             $(".pagination").html("")
@@ -210,6 +208,7 @@ $(document).ready(function () {
     // * minPrice: Float
     // * maxPrice: Float
     $(document).on("click", ".tags-block-wrapper", function () {
+        pageIndex = 0;
         var thisString = $(this).text()
         var first = thisString[0];
 
@@ -240,6 +239,7 @@ $(document).ready(function () {
         getGameList()
     })
     $(document).on("click", ".tags-block-wrapper1", function () {
+        pageIndex = 0;
         var thisString = $(this).text()
         var unchangeString = thisString;
         var first = thisString[0];
@@ -278,6 +278,8 @@ $(document).ready(function () {
         getGameList()
     })
     $(document).on("click", ".tags-block-wrapper2", function () {
+        pageIndex = 0;
+        console.log("page is " + pageIndex)
         var temp = $(this).text()
         if (temp[0] != "√") {
             for (var i = 17; i <= 20; i++) {
@@ -287,6 +289,8 @@ $(document).ready(function () {
                 }
             }
             $(this).text("√" + temp);
+        } else {
+            $(this).text(temp.substring(1, temp.length));
         }
 
         switch ($(this).text()) {
@@ -307,6 +311,8 @@ $(document).ready(function () {
                 maxPrice = 10000;
                 break;
             default:
+                minPrice = null;
+                maxPrice = null;
                 break;
         }
         let thisFormData = {
@@ -328,6 +334,7 @@ $(document).ready(function () {
     //语言是3 area:China,other
     // ，地区是4 language:Chinese,other
     $(document).on("click", ".tags-block-wrapper4", function () {
+        pageIndex = 0;
         var temp = $(this).text()
         if (temp[0] != "√") {
             for (var i = 21; i <= 22; i++) {
@@ -337,6 +344,8 @@ $(document).ready(function () {
                 }
             }
             $(this).text("√" + temp);
+        } else {
+            $(this).text(temp.substring(1, temp.length));
         }
 
         switch ($(this).text()) {
@@ -347,6 +356,7 @@ $(document).ready(function () {
                 area = "other";
                 break;
             default:
+                area = null;
                 break;
         }
         let thisFormData = {
@@ -366,6 +376,7 @@ $(document).ready(function () {
         getGameList()
     })
     $(document).on("click", ".tags-block-wrapper3", function () {
+        pageIndex = 0;
         var temp = $(this).text()
         if (temp[0] != "√") {
             for (var i = 15; i <= 16; i++) {
@@ -375,6 +386,8 @@ $(document).ready(function () {
                 }
             }
             $(this).text("√" + temp);
+        } else {
+            $(this).text(temp.substring(1, temp.length));
         }
 
         switch ($(this).text()) {
@@ -385,6 +398,7 @@ $(document).ready(function () {
                 language = "other";
                 break;
             default:
+                language = null;
                 break;
         }
         let thisFormData = {
