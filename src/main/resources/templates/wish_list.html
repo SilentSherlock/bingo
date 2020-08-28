@@ -4,31 +4,40 @@
     <meta charset="UTF-8">
     <title>wish_list</title>
     <style>
-        body{
+        body {
             background: #202539;
         }
-        div,body,p,h1,h2,input,ul,li{
-            margin:0;
-            padding:0;
+
+        div, body, p, h1, h2, input {
+            margin: 0;
+            padding: 0;
         }
-        div{
+
+        div {
             display: block;
         }
-        h1,h2,h3{
-            font-size:100%;
-            font-weight: normal;
-        }
-        .community-content{
+
+        .community-content {
             padding: 130px 0 40px;
             width: 1200px;
             margin: 0 auto;
             position: relative;
             min-height: 100vh;
         }
-        .tabs-container{
+
+        .tabs-container {
             min-height: 603px;
         }
-        .left-menu-tabs{
+
+        /*.left-menu-tabs{*/
+        /*    float: left;*/
+        /*    width: 160px;*/
+        /*    height: auto;*/
+        /*    background: #33394d;*/
+        /*    overflow: hidden;*/
+        /*    border-radius: 5px 5px 5px 5px;*/
+        /*}*/
+        .left-menu-tabs {
             float: left;
             width: 160px;
             height: auto;
@@ -36,7 +45,8 @@
             overflow: hidden;
             border-radius: 5px 5px 5px 5px;
         }
-        .first-title{
+
+        .first-title {
             font-size: 18px;
             color: #b9c0ef;
             margin: 0 20px 5px 20px;
@@ -46,7 +56,8 @@
             border-top: none;
             height: 42px;
         }
-        .tags-button{
+
+        .tags-button {
             padding: 0;
             float: none;
             height: 42px;
@@ -55,7 +66,8 @@
             border-width: 4px 0 0;
             text-decoration: none;
         }
-        .tags-button a{
+
+        .tags-button a {
             color: #7a80a2;
             font-size: 16px;
             display: block;
@@ -63,49 +75,62 @@
             text-align: center;
             text-decoration: none;
         }
+
         .tags-button .active:link {
 
         }
+
         .tags-button .active:visited {
             color: #ff6900;
             background: #292e41;
         }
+
         .tags-button .active:hover {
             color: #ff6900;
             background: #292e41;
         }
-        .tags-button .active:active{
+
+        .tags-button .active:active {
 
         }
+
         .tags-button a:link {
 
         }
+
         .tags-button a:visited {
         }
+
         .tags-button a:hover {
             color: #b9c0ef;
             background: #292e41;
         }
-        .tags-button a:active{
+
+        .tags-button a:active {
         }
+
         .active {
             color: #ff6900;
             background: #292e41;
         }
-        .community-wish-list{
-            padding-left:170px;
-            padding-top:0;
+
+        .community-wish-list {
+            padding-left: 170px;
+            padding-top: 0;
 
         }
-        .community-middle{
+
+        .community-middle {
             float: left;
             width: 830px;
         }
-        .wish-list-container{
+
+        .wish-list-container {
             background: #33394d;
             padding: 0 20px;
         }
-        .wish-list-menu{
+
+        .wish-list-menu {
             float: right;
             color: #b9c0ef;
             position: relative;
@@ -113,45 +138,55 @@
             line-height: 30px;
             cursor: pointer;
         }
-        .wish-list-owner{
+
+        .wish-list-owner {
             color: #b9c0ef;
             font-size: 14px;
             padding: 20px 0;
             border-bottom: 2px solid #b9c0ef;
         }
-        .wish-tab{
-            height:61px
+
+        .wish-tab {
+            height: 61px
         }
-        .wish-list-count{
+
+        .wish-list-count {
             float: left;
             font-size: 14px;
             padding: 20px 0;
             color: #7a80a2;
         }
-        .count{
+
+        .count {
             color: #ff6900;
         }
-        .wish-list-content{
+
+        .wish-list-content {
 
         }
-        .wish-list-block{
+
+        .wish-list-block {
             position: relative;
             padding: 20px 0;
             height: 100px;
             line-height: 100px;
+            border-bottom: 1px black solid;
         }
-        .image-wrapper{
+
+        .image-wrapper {
             display: inline-block;
             height: 100px;
             width: 164px;
             vertical-align: middle;
         }
-        img{
+
+        img {
             border: 0;
-            width:164px;
+            width: 164px;
             height: 100px;
         }
-        .title{
+
+        .title {
             display: inline-block;
             font-size: 18px;
             font-weight: bold;
@@ -164,12 +199,14 @@
             overflow: hidden;
             text-decoration: none;
         }
-        .percentage{
+
+        .percentage {
             display: inline-block;
             width: 70px;
             text-align: right;
         }
-        .list-price{
+
+        .list-price {
             color: #7a80a2;
             text-decoration: line-through;
             font-size: 16px;
@@ -177,21 +214,24 @@
             width: 70px;
             text-align: right;
         }
-        .sale-price{
+
+        .sale-price {
             color: #ff6900;
             font-weight: bold;
             font-size: 16px;
             display: inline-block;
             width: 70px;
             text-align: right;
-            float:right;
+            float: right;
             padding-right: 25px;
         }
-        .shopping-operator{
-            float:right;
+
+        .shopping-operator {
+            float: right;
             display: inline;
         }
-        .button1,.button2{
+
+        .button1, .button2 {
             background: #ff6900;
             outline: none;
             border: none;
@@ -218,12 +258,14 @@
             font: 400 13px Arial;
             border-radius: 2px;
         }
-        ul{
-            margin-top:20px;
+
+        ul {
+            margin-top: 20px;
         }
-        li{
+
+        li {
             list-style-type: none;
-            height:40px;
+            height: 40px;
         }
     </style>
 </head>
@@ -233,7 +275,7 @@
         <div class="left-menu-tabs">
             <div class="first-title tags-button">订单中心</div>
             <div class="tags-button">
-                <a class="close" id="choose1" href="#">我的订单</a>
+                <a class="close" href="#">我的订单</a>
             </div>
             <div class="tags-button">
                 <a class="close" href="#">我的点评</a>
@@ -249,14 +291,14 @@
                 <a class="close" href="#">购物车</a>
             </div>
             <div class="tags-button">
-                <a class="close" href="#">心愿单</a>
+                <a class="close" href="#" id="choose1">心愿单</a>
             </div>
         </div>
-        <div class="community-content community-wish-list">
+        <div class=" community-wish-list">
             <div class="community-middle">
                 <div class="wish-list-container">
                     <div class="wish-list-menu">
-                        <span>隐私设置</span>
+                        <span onclick="reload()">刷新界面</span>
                     </div>
                     <h1 class="wish-list-owner"></h1>
                     <div class="wish-tab">
@@ -272,74 +314,176 @@
 </div>
 <script src="extlib/jquery-3.5.1/jquery-3.5.1.js"></script>
 <script type="text/javascript">
+    var templateDiv = $("#choose1")
+    var uid=1;
+    var list;
     var thisUser;
     $(document).ready(function () {
         function getUser() {
-            $.get(
-                "request/getuser",
-                function (user) {
-                    thisUser=user;
-                    $(".wish-list-owner").text(thisUser.uname+"的心愿单");
+            // $.get(
+            //     "/person/getUserById?uid=".concat(1),
+            //     function (user) {
+            //         console.log(user)
+            //         thisUser = user.resultMap.user;
+            //         list = user.resultMap.wishList;
+            //         $(".wish-list-owner").text(thisUser.ualias + "的心愿单");
+            //     }
+            // )
+            $.ajax({
+                url:'/person/getUserById?uid='.concat(uid),
+                type:'get',
+                async:false,
+                success:function (user) {
+                    console.log(user)
+                    thisUser = user.resultMap.user;
+                    list = user.resultMap.wishList;
+                    $(".wish-list-owner").text(thisUser.ualias + "的心愿单");
                 }
-            )
+            })
         }
+
         function getWishList() {
-            $.get(
-                "/store/gameShow",
-                function(gameList){
-
-                    var list=gameList.resultMap.gameList;
-                    $(".count").text(list.length);
-                    var html="";
-                    for(var i=0;i<list.length;i++){
-                        var wish=list[i]
-                        var temp=(parseFloat(wish.gprice)*(parseFloat(wish.discount))).toString();
-                        if(temp.length>6){
-                            temp.substr(0,6);
-                        }
-                        var typelist = wish.gtype;
-                        typelist = typelist.substring(1,typelist.length-1);
-                        console.log(typelist)
-                        typelist = typelist.split(",")
-
-                        html+=
-                            "<div class="+"wish-list-block"+">"+
-                            "<span class="+"image-wrapper"+">"+
-                            "<img src="+wish.phref+">"+
-                            "</span>"+
-                            "<a class="+"title"+ " "+"href="+"#"+ " "+"target="+"_blank"+">"+wish.gname+"</a>"+
-
-                            "<div class="+"shopping-operator"+">"+
-                            "<ul>"+
-                            "<li><button id="+wish.gid+"-1"+" "+"class="+"button1"+">加入购物车</button></li>"+
-                            "<li><button id="+wish.gid+"-2"+" "+"class="+"button2"+">移出心愿单</button></li>"+
-                            "</ul>"+
-                            "</div>"+
-                            "<div class="+"sale-price"+">"+
-                            "<span>￥"+temp+"</span>"+
-                            "</div>"+
-                            "</div>"
-                    }
-                    $(".wish-list-content").html(html)
+            if (list==null||list.status == 0)
+                return;
+            $(".count").text(list.length);
+            var html = "";
+            for (var i = 0; i < list.length; i++) {
+                var wish = list[i]
+                var temp = (parseFloat(wish.gprice) * (parseFloat(wish.discount))).toString();
+                if (temp.length > 6) {
+                    temp.substr(0, 6);
                 }
-            )
+                var typelist = wish.gtype;
+                typelist = typelist.substring(1, typelist.length - 1);
+                //console.log(typelist)
+                typelist = typelist.split(",")
+
+                html +=
+                    "<div class=" + "wish-list-block" + ">" +
+                    "<span class=" + "image-wrapper" + ">" +
+                    "<img src=" + wish.chref + ">" +
+                    "</span>" +
+                    "<a class=" + "title" + " " + "href=" + "#" + " " + "target=" + "_blank" + ">" + wish.gname + "</a>" +
+
+                    "<div class=" + "shopping-operator" + ">" +
+                    "<ul>" +
+                    "<li><button id=" + wish.gid + "-1" + " " + "class=" + "button1" + ">加入购物车</button></li>" +
+                    "<li><button id=" + wish.gid + "-2" + " " + "class=" + "button2" + ">移出心愿单</button></li>" +
+                    "</ul>" +
+                    "</div>" +
+                    "<div class=" + "sale-price" + ">" +
+                    "<span>￥" + temp + "</span>" +
+                    "</div>" +
+                    "</div>"
+            }
+            $(".wish-list-content").html(html)
         }
-        $(".button1").click(function () {
-            var temp = $(this).id
-            temp.substr(0,temp.length-2)
-            window.location.href="request?gid=".concat(temp);
-            //提交到后端
-            //添加到购物车
+
+        $(".close").click(function () {
+            console.log("click 1")
+            templateDiv.removeClass("active")
+            templateDiv.addClass("close")
+            $(this).removeClass("close")
+            $(this).addClass("active")
+            templateDiv = $(this)
         })
-        $(".button2").click(function () {
-            var temp = $(this).id
-            temp.substr(0,temp.length-2)
-            window.location.href="request?gid=".concat(temp);
-            //提交到后端
-            //移出心愿单
+        $(document).on("click", ".close", function () {
+            templateDiv.removeClass("active")
+            templateDiv.addClass("close")
+            $(this).removeClass("close")
+            $(this).addClass("active")
+            templateDiv = $(this)
         })
+
+        $("#choose1").removeClass("close")
+        $("#choose1").addClass("active")
         getUser()
         getWishList()
+
+    })
+    function reload(){
+        location.reload();
+    }
+    $(document).on("click", ".button1", function () {
+        console.log("click 1")
+        var wish;
+        var temp = $(this).attr("id")
+        temp = temp.substring(0, temp.length - 2)
+        console.log(temp)
+        for (var i = 0; i < list.length; i++) {
+            if (list[i].gid == temp) {
+                wish = list[i];
+            }
+        }
+        var item = {
+            "gid": wish.gid,
+            "discount": wish.discount,
+            "price": wish.gprice,
+            "gname": wish.gname,
+            "chref": wish.chref,
+        }
+        console.log(item)
+        addCar(item)
+    })
+
+    function addCar(item) {//加入购物车
+        console.log(item.gid)
+        var shoppingcar = [], exist = 0;
+        //判断购物车是否为空或购物车不存在
+        if (localStorage.getItem("shoppingcar") == null || (JSON.parse(localStorage.getItem("shoppingcar")))[0] == null) ;
+        else {
+            exist = 1;//购物车存在，但商品不在购物车中;
+            console.log("购物车存在")
+            shoppingcar = JSON.parse(localStorage.getItem("shoppingcar"));
+            var i = 0, length = shoppingcar.length;
+            for (; i < length; i++) {
+                if (JSON.parse(shoppingcar[i] == null)) {
+                    delete shoppingcar[i];
+                } else if (parseInt(item.gid) == shoppingcar[i].gid) {
+                    exist = 2;
+                    console.log("购物车存在，商品在购物车中")
+                    window.alert("已加入购物车，请勿重复添加！");
+                    break;
+                }
+            }
+        }
+        if (exist == 0 || exist == 1) {//购物车中没有该商品
+            shoppingcar.push(item);
+            localStorage.setItem("shoppingcar", JSON.stringify(shoppingcar));
+            /*car = localStorage.getItem("shoppingcar");
+            carContent = JSON.parse(car);
+            console.log(carContent);
+            console.log(carContent[0]);*/
+            window.alert("加入购物车成功！");
+        }
+    }
+
+    $(document).on("click", ".button2", function () {
+        console.log("click 2")
+        var temp = $(this).attr("id")
+        temp.substring(0, temp.length - 2)
+        console.log(temp)
+        let submitData = new FormData();
+        submitData.append("uid", thisUser.uid)
+        submitData.append("gid", parseInt(temp))
+        submitData.append("mode",0)
+        JSON.stringify(submitData)
+        $.ajax({
+            url:'/person/updateWishListById',
+            type:'post',
+            data:submitData,
+            processData:false,
+            contentType: false,
+            cache : false,
+            async:false,
+            success:function (data) {
+                console.dir(data)
+                alert("删除成功")
+            }
+        })
+        location.reload();
+        //提交到后端
+        //移出心愿单
     })
 </script>
 </body>
