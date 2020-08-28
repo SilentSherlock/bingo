@@ -56,8 +56,9 @@ let dynamic_components = {
 
 //数据请求映射
 let requestmap = {
-    user_isLogged: "/user_isLogged",
+    user_isLogged: "/person/isLogin",
     user_login: "/person/userValidate",
+    user_logout: "/person/logout",
     user_register: "/person/addUser",
     user_register_validate_code: "/person/user_register_code",
     user_register_validate_uname: "/person/validateNameLegality",

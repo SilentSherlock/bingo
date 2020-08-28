@@ -312,7 +312,7 @@ function showPreGame(game_recommendation_card_html) {
                     html.find(".index-game-card-info-price-container > div > span:first-of-type").hide();
                     //更改现价显示发售日期
                     html.find(".index-game-card-info-price-container > div > span:last-of-type").css("margin-top", "15px");
-                    html.find(".index-game-card-info-price-container > div > span:last-of-type").text(value.realeasedate.split("T")[0]);
+                    html.find(".index-game-card-info-price-container > div > span:last-of-type").text(value.realeasedate.split(" ")[0]);
 
                     finalHtml += html.html();
                 });

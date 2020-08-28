@@ -228,6 +228,7 @@ public class PersonController {
         Result result = new Result();
         User user = personService.getUserById(uid);
         String oldGameList = user.getGamelist();
+
         for (Object gid : jsonArray) {
             Integer gidInt = (Integer) gid;
             Result tmp = updateGameListOrWishList(uid, gidInt, mode, 0);
@@ -263,8 +264,14 @@ public class PersonController {
             else jsonArray = JSON.parseArray(list);
 
             if (mode == 1) {
-                jsonArray.add(gid);
-                result.setStatus(Status.SUCCESS);
+                if (!jsonArray.contains(gid)) {
+                    jsonArray.add(gid);
+                    result.setStatus(Status.SUCCESS);
+                }else {
+                    result.setStatus(Status.FAILURE);
+                    result.getResultMap().put("msg", "the game is in the gamelist or wishlist");
+                }
+
             }else if (mode == 0) {
                 int target = jsonArray.indexOf(gid);
                 if (target == -1) {
