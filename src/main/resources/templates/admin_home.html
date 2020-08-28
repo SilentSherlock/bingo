@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>彬果游戏(Bingo)—管理系统</title>
+    <!-- 引入网页图标 -->
+    <link rel="icon" href="/src/icon.png">
+    <!--引入bootstrap默认css样式-->
+    <link rel="stylesheet" href="https://lwh147.github.io/src/bootstrap-3.3.7/css/bootstrap.min.css">
+    <!--引入bootstrapValidator默认css样式-->
+    <link rel="stylesheet"
+          href="https://lwh147.github.io/src/bootstrapvalidator-0.5.3/css/bootstrapValidator.min.css">
+    <!--注意：因为bootstrap和bootstrapValidator的js插件使用了jquery，所以jquery的引用必须放到bootstrap的js插件引用之前-->
+    <script type="text/javascript" src="https://lwh147.github.io/src/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="https://lwh147.github.io/src/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+            src="https://lwh147.github.io/src/bootstrapvalidator-0.5.3/js/bootstrapValidator.min.js"></script>
+    <!--jquery.fileupload插件-->
+    <script type="text/javascript"
+            src="https://lwh147.github.io/src/jquery.fileupload/js/vendor/jquery.ui.widget.min.js"></script>
+    <script type="text/javascript"
+            src="https://lwh147.github.io/src/jquery.fileupload/js/jquery.iframe-transport.min.js"></script>
+    <script type="text/javascript"
+            src="https://lwh147.github.io/src/jquery.fileupload/js/jquery.fileupload.min.js"></script>
+    <!--jqueryMD5加密插件-->
+    <script type="text/javascript" src="https://lwh147.github.io/src/jquery.md5/md5.js"></script>
+    <!-- vue.js -->
+    <script type="text/javascript" src="https://lwh147.github.io/src/vue-2.6.11/vue.js"></script>
+    <!-- 引入自己的css库文件 -->
+    <!--<link rel="stylesheet" href="/css/index.css">-->
+    <!-- 引入自己的js库文件 -->
+    <script type="text/javascript" src="/js/reusable.js"></script>
+    <script type="text/javascript" src="/js/globalVars.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    <style type="text/css">
+
+        .navbar-brand{
+            height: 70px;
+            padding: 0px;
+        }
+        .left-nav{
+            margin-left: 0px;
+            width: 15%;
+            height: 800px;
+            padding-top: 0px;
+            background-color: black;
+            float: left;
+        }
+        .nav-pills>li.active>a,
+        .nav-pills>li.active>a:focus,
+        .nav-pills>li.active>a:hover{
+            color: #dbdbdb;
+            background-color:black;/*#177ddc*/
+        }
+        .nav-second>li.active>a,
+        .nav-second>li.active>a:focus,
+        .nav-second>li.active>a:hover{
+            background-color: #177ddc;
+        }
+        .nav-second>li>a,
+        .nav-second>li>a:focus,
+        .nav-second>li>a:hover{
+            background-color: #f5222d;
+            color: #dbdbdb;
+        }
+
+        .nav-pills>li>a:focus,
+        .nav-pills>li>a:hover{
+            color: #dbdbdb;
+            background-color: black;
+            border-color: #333;
+        }
+        .nav>li>a{
+            color: #9d9d9d;
+            background-color: #333;
+            border-color: #333;
+        }
+
+        .navbar-title{
+            height: 70px;
+            width: 100%;
+            background-color: black;
+        }
+        .navbar-contain{
+            width: 100%;
+            top: 20px;
+            position: relative;
+        }
+        .contain-div{
+            width: 85%;
+            height: 800px;
+            padding-top: 0px;
+            float: right;
+        }
+        .contain-nav{
+            width: 100%;
+
+            height: 75px;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-color: #dbdbdb;
+
+        }
+        .main-contain{
+            width: 100%;
+            height: 725px;
+            padding: 0;
+
+        }
+        .main-nav{
+            width: 100%;
+            height: 30px;
+        }
+        .contain-des{
+            width: 100%;
+            height: 70px;
+            left: 20px;
+            position: relative;
+        }
+        .info-content-out{
+            width: 100%;
+            height: 605px;
+            background-color: #dbdbdb;
+        }
+        .info-content{
+            width: 90%;
+            height: 90%;
+            position: relative;
+            left: 5%;
+            top:5%;
+            background-color: white;
+        }
+        .object-operator{
+            position: relative;
+            width: 100%;
+            height: 10%;
+
+        }
+        .object-search{
+            position: relative;
+            top: 10px;
+            left: 10px;
+            float: left;
+            padding-left: 20px;
+        }
+        .object-search-button{
+            position: relative;
+            top:10px;
+            left: 10px;
+            float: left;
+            padding-left: 5px;
+
+        }
+        .btn-default:focus
+        .btn-default:hover,
+        .btn:hover,
+        .btn:focus{
+            background-color: #f5222d;
+            color: white;
+            border-style: none;
+        }
+        .object-show{
+            width: 95%;
+            height: 80%;
+            position: relative;
+            left: 20px;
+            top:5px;
+        }
+        .table-head{
+            background-color: #fafafa;
+            font-size: 15px;
+        }
+        .rows{
+            font-size: 15px;
+        }
+        .rows:hover{
+            background-color: #fef1f0;
+        }
+        .edit{
+            color: red;
+            font-family: 微软雅黑;
+        }
+
+        .edit:link,
+        .edit:visited,
+        .edit:visited,
+        .edit:active{
+            color: red;
+        }
+        .pages{
+            position: relative;
+            bottom: 10px;
+            width: 100%;
+        }
+        .modal-dialog{
+            width: 1000px;
+        }
+        .edit-game{
+            position: relative;
+            left: 50px;
+        }
+        .edit-game>span{
+            text-align: right;
+            display: inline-block;
+            width: 100px;
+        }
+        .type-checkbox:checked{
+            color: white;
+            background-color: #f5222d;
+        }
+    </style>
+
+    <script type="text/javascript">
+        let currentPage = 1;
+        let currentIndex = 1;
+        let countpage = 0;
+        let updategid;
+        /*实现翻页*/
+        function ChangePage(index, search){
+            let html = "";
+            let pageHtml = "";
+            $.ajax({
+                url:"/store/search",
+                type:"post",
+                data:{
+                    name: search,
+                    pageIndex:index,
+                    pageCount:10,
+                },
+                dataType:'json',
+                success:function (Result) {
+
+                    if(Result.status == 1){
+
+                        html += "<table class='table '>" +
+                            "<tr class='table-head'>" +
+                            "<th scope='col'>唯一识别码</th>" +
+                            "<th scope='col'>游戏名称</th>" +
+                            "<th scope='col'>游戏类型</th>" +
+                            "<th scope='col'>售价</th>" +
+                            "<th colspan='2'>操作</th>" +
+                            "</tr>"
+                        for(let key in Result.resultMap.searchList){
+                            html +=
+                            "<tr class='rows'>" +
+                            "<td scope='col'>" + Result.resultMap.searchList[key].gid + "</td>" +
+                            "<td scope='col'>" + Result.resultMap.searchList[key].gname + "</td>" +
+                            "<td scope='col'>" + Result.resultMap.searchList[key].gtype + "</td>" +
+                            "<td scope='col'>" + Result.resultMap.searchList[key].gprice + "</td>" +
+                            "<td scope='col'> <a class='edit' role='button' data-toggle='modal' href='#myModal' id='"+ Result.resultMap.searchList[key].gid+"'>编辑</a></td>"+
+                            "<td scope='col'> <a class='more' role='button' data-toggle='modal' href='#myModal'>更多</a></td>"+
+                            "</tr>"
+                    }
+                        html += "</table>";
+                        $(".object-show").html(html);
+                    }
+                    console.dir(Result);
+                    pageHtml +=
+                        "<nav aria-label=\"Page navigation\">\n" +
+                        "  <ul class=\"pagination \">\n" +
+                        "    <li>\n" +
+                        "      <a class='to-page' href=\"#\" aria-label=\"Previous\">\n" +
+                        "        <span aria-hidden=\"true\">&laquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>"
+                    countpage = Result.resultMap.allSearchNum;
+                    let pages = new Array();
+                    if(currentPage>3){
+                        if(currentPage<countpage-3){
+                            pages.push(currentPage-3);
+                            pages.push(currentPage-2);
+                            pages.push(currentPage-1);
+                            pages.push(currentPage*1);
+                            pages.push(currentPage*1+1);
+                            pages.push(currentPage*1+2);
+                        }else{
+                            for(let i = countpage-6;i < countpage;i++){
+                                pages.push(i+1);
+                            }
+                        }
+                    }else{
+                        for(let i = 0;i < 6;i++){
+                            pages.push(i+1);
+                        }
+                    }
+                    for(let i = 0; i < pages.length;i++){
+                        let page = i;
+                        if(pages[page]>countpage){
+                            break;
+                        }
+                        if(pages[page] == currentPage){
+                            pageHtml +="<li class='active'><a class='to-page'>"+pages[page]+"</a></li>"
+                        }else {
+                            pageHtml +="<li ><a class='to-page'>"+pages[page]+"</a></li>"
+                        }
+                    }
+                    pageHtml +=
+                        "<li>\n" +
+                        "      <a class='to-page' href=\"#\" aria-label=\"Next\">\n" +
+                        "        <span aria-hidden=\"true\">&raquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>\n" +
+                        "  </ul>\n" +
+                        "</nav>"
+                    $(".pages").html(pageHtml);
+                }
+            })
+        }
+        /*页面初始化*/
+        $(document).ready(function () {
+            $("#home-content").show();
+            $("#edit-query-game").hide();
+            $("#add-game-content").hide();
+        })
+    </script>
+</head>
+<body STYLE="background-color:#F6F6F6" STYLE="width: 100%"><!--STYLE="background-color: black  #17435f"-->
+<!--导航栏部分-->
+<div class="left-nav">
+    <!--导航栏图标-->
+    <nav class="navbar-inverse navbar-title" >
+        <div class="navbar-header">
+            <div class="">
+                <a class="navbar-brand" href="#">
+                    <img src="/src/logo_rectangle.png" alt="Bingo" height="70px">
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!--导航栏-->
+    <nav class="navbar-inverse navbar-contain">
+        <div class="">
+            <ul class="nav nav-pills nav-stacked">
+                <!--首页-->
+                <li role="presentation" ><a href="#" style="text-align: center" id="home">首页</a></li>
+                <!--游戏管理-->
+                <li role="presentation" >
+                    <a  class="btn btn-primary"role="button" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+                    游戏
+                    </a>
+                    <div class="collapse" id="collapseExample1">
+                        <div >
+                            <ul class="nav nav-second ">
+                                <li role="presentation" ><a href="#"  id="search-edit-game">查询编辑游戏</a></li>
+                                <li role="presentation" ><a href="#"  id="add-game">添加游戏</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <!--用户管理-->
+                <li role="presentation" >
+                    <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+                        用户
+                    </a>
+                    <div class="collapse" id="collapseExample2">
+                        <ul class="nav nav-second ">
+                            <li role="presentation" ><a href="#">查看用户信息</a></li>
+                            <li role="presentation" ><a href="#">修改用户信息</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+                <!--订单管理-->
+                <li role="presentation" >
+                    <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
+                        订单
+                    </a>
+                    <div class="collapse" id="collapseExample3">
+                        <ul class="nav nav-second ">
+                            <li role="presentation" ><a href="#">查询订单</a></li>
+                            <li role="presentation" ><a href="#">修改订单</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</div>
+<div class="contain-div">
+    <!--内容页菜单栏-->
+    <div class="contain-nav">
+
+    </div>
+    <!--主要内容-->
+    <div class="main-contain">
+        <!--面包屑-->
+        <div class="main-nav">
+            <ol class="breadcrumb">
+                <li class="active">首页</li>
+            </ol>
+        </div>
+        <!--当前页面内容描述-->
+        <div class="contain-des">
+            <h2>查询电影</h2>
+            <h5>一些与电影相关的信息</h5>
+        </div>
+        <!--主要内容-->
+        <div class="info-content-out">
+            <!--首页内容-->
+            <div class="info-content" id="home-content">首页</div>
+            <!--编辑查询游戏-->
+            <div class="info-content" id="edit-query-game">
+                <div class="object-operator">
+                    <div class="object-search">
+                        游戏：<label><input type="text" class="form-control" placeholder="请输入游戏名称" id="search-game"></label>
+                    </div>
+                    <div class="object-search">
+                        筛选：<label><input type="text" class="form-control" placeholder="请输入游戏类型" id="game-type"></label>
+                    </div>
+                    <div class="object-search-button">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            请选择 <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a id = "many-person"href="#">多人</a></li>
+                            <li><a id = "action"href="#">动作</a></li>
+                            <li><a id = "venture"href="#">冒险</a></li>
+                            <li><a id = "first"href="#">第一人称</a></li>
+                        </ul>
+                    </div>
+                    <div class="object-search-button">
+                        <button type="button" class="btn btn-default" id="search-btn">查询</button>
+                    </div>
+                </div>
+                <div class="object-show">
+                    <table class="table ">
+                        <tr class="table-head">
+                        <th scope="col">唯一识别码</th>
+                        <th scope="col">游戏名称</th>
+                        <th scope="col">游戏类型</th>
+                        <th scope="col">售价</th>
+                        <th colspan="2" >操作</th>
+
+                        </tr>
+
+                        <tr class="rows">
+                            <td scope="col">5</td>
+                            <td scope="col">lol</td>
+                            <td scope="col">moba</td>
+                            <td scope="col">5$</td>
+                            <td scope="col"><a class="edit" role="button" data-toggle="modal" href="#myModal">编辑</a></td>
+                            <td scope="col"><a class="edit" role="button" data-toggle="modal" href="#myModal">更多</a></td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="pages" align="center"></div>
+            </div>
+            <!--添加游戏-->
+            <div class="info-content" id="add-game-content">
+                <div class="add-table">
+                    <table>
+                        <tr>
+                            <td>
+                                <span>游戏名称：</span>
+                            </td>
+                            <td>
+                                <label><input type="text" class="form-control" placeholder="请输入游戏名称" id="game-name-add"></label>
+                            </td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><span>游戏售价：</span></td>
+                            <td><label><input type="text" class="form-control" placeholder="请输入游戏售价" id="game-price-add"></label></td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <span>游戏类型：</span>
+                            </td>
+                            <td>
+                                <label><input type="text" class="form-control" placeholder="请输入游戏类型" id="game-types-add"></label>
+                            </td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><span>游戏类型：</span></td>
+                            <td>
+                                <label class=" ">
+                                    <input type="checkbox"  autocomplete="off" name="types" value="动作"> 动作
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" autocomplete="off" name="types"value="冒险"> 冒险
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types" value="多人">多人
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types" value="射击">射击
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types" value="休闲">休闲
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types" value="模拟">模拟
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span>游戏开发商：</span></td>
+                            <td><label><input type="text" class="form-control" placeholder="请输入游戏开发商" id="game-devoloper-add"></label></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><span>游戏发行商：</span></td>
+                            <td><label><input type="text" class="form-control" placeholder="请输入游戏发行商" id="game-publisher-add"></label></td>
+                        </tr>
+                        <tr>
+                            <td><span>发行日期：</span></td>
+                            <td><label for="game-releasedate"><input type="date" class="form-control"  id="game-releasedate-add"></label></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><span>折扣：</span></td>
+                            <td><label><input type="text" class="form-control" placeholder="请输入折扣" id="game-discount-add"></label></td>
+                        </tr>
+                        <tr>
+                            <td><span>游戏语言：</span></td>
+                            <td><label><input type="text" class="form-control" placeholder="请输入游戏支持的语言" id="game-language-add"></label></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><span>选择语言：</span></td>
+                            <td>
+                                <label class=" ">
+                                    <input type="checkbox" autocomplete="off" name="languages" value="中文">中文
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" autocomplete="off" name="languages" value="英文">英文
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" autocomplete="off" name="languages" value="法语">法语
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" autocomplete="off" name="languages" value="意大利语">意大利语
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" autocomplete="off" name="languages" value="日文">日文
+                                </label>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><span>游戏详情：</span></td>
+                            <td colspan="4"><label ><textarea  cols="88"rows="4" class="form-control" placeholder="请输入游戏详情" id="game-detail-add"></textarea></label></td>
+                        </tr>
+                        <tr>
+                            <td><span>视频资料链接：</span></td>
+                            <td colspan="4"><label><textarea cols="88" class="form-control" placeholder="请输入视频链接" id="game-video-add"></textarea></label></td>
+                        </tr>
+                        <tr>
+                            <td><span>图片资料链接：</span></td>
+                            <td colspan="4"><label><textarea cols="88" class="form-control" placeholder="请输入图片链接" id="game-picture-add"></textarea></label></td>
+                        </tr>
+                        <tr>
+                            <td><span>封面资料链接：</span></td>
+                            <td colspan="4"><label><textarea cols="88" class="form-control" placeholder="请输入封面图片链接" id="game-face-add"></textarea></label></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--模态框-实现编辑游戏功能-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="Modal title" id="myModalLabel">编辑</h4>
+            </div>
+            <div class="modal-body">
+                <div class="edit-game" >
+                    <table>
+                        <tr>
+                            <td>
+                                <span>游戏名称：</span>
+                            </td>
+                            <td>
+                                <label><input type="text" class="form-control" placeholder="请输入游戏名称" id="game-name"></label>
+                            </td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><span>游戏售价：</span></td>
+                            <td><label><input type="text" class="form-control" placeholder="请输入游戏售价" id="game-price"></label></td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <span>游戏类型：</span>
+                            </td>
+                            <td>
+                                <label><input type="text" class="form-control" placeholder="请输入游戏类型" id="game-types"></label>
+                            </td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><span>游戏类型：</span></td>
+                            <td>
+                                    <label class=" ">
+                                        <input type="checkbox"  autocomplete="off" name="types" value="动作"> 动作
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" autocomplete="off" name="types"value="冒险"> 冒险
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" class="" autocomplete="off"name="types" value="多人">多人
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" class="" autocomplete="off"name="types" value="射击">射击
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" class="" autocomplete="off"name="types" value="休闲">休闲
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" class="" autocomplete="off"name="types" value="模拟">模拟
+                                    </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span>游戏开发商：</span></td>
+                            <td><label><input type="text" class="form-control" placeholder="请输入游戏开发商" id="game-devoloper"></label></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><span>游戏发行商：</span></td>
+                            <td><label><input type="text" class="form-control" placeholder="请输入游戏发行商" id="game-publisher"></label></td>
+                        </tr>
+                        <tr>
+                            <td><span>发行日期：</span></td>
+                            <td><label for="game-releasedate"><input type="date" class="form-control"  id="game-releasedate"></label></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><span>折扣：</span></td>
+                            <td><label><input type="text" class="form-control" placeholder="请输入折扣" id="game-discount"></label></td>
+                        </tr>
+                        <tr>
+                            <td><span>游戏语言：</span></td>
+                            <td><label><input type="text" class="form-control" placeholder="请输入游戏支持的语言" id="game-language"></label></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><span>选择语言：</span></td>
+                            <td>
+                                <label class=" ">
+                                    <input type="checkbox" autocomplete="off" name="languages" value="中文">中文
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" autocomplete="off" name="languages" value="英文">英文
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" autocomplete="off" name="languages" value="法语">法语
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" autocomplete="off" name="languages" value="意大利语">意大利语
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" autocomplete="off" name="languages" value="日文">日文
+                                </label>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><span>游戏详情：</span></td>
+                            <td colspan="4"><label ><textarea  cols="88"rows="4" class="form-control" placeholder="请输入游戏详情" id="game-detail"></textarea></label></td>
+                        </tr>
+                        <tr>
+                            <td><span>视频资料链接：</span></td>
+                            <td colspan="4"><label><textarea cols="88" class="form-control" placeholder="请输入视频链接" id="game-video"></textarea></label></td>
+                        </tr>
+                        <tr>
+                            <td><span>图片资料链接：</span></td>
+                            <td colspan="4"><label><textarea cols="88" class="form-control" placeholder="请输入图片链接" id="game-picture"></textarea></label></td>
+                        </tr>
+                        <tr>
+                            <td><span>封面资料链接：</span></td>
+                            <td colspan="4"><label><textarea cols="88" class="form-control" placeholder="请输入封面图片链接" id="game-face"></textarea></label></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="close-editor">关闭</button>
+                <button type="button" class="btn btn-default" id="save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    /*跳转至首页*/
+    $("#home").on("click",function () {
+        let bread_html="";
+        bread_html +=
+            "<li class='active'><首页</li>";
+        $(".breadcrumb").html(bread_html);
+        $("#home-content").show();
+        $("#add-game-content").hide()
+        $("#edit-query-game").hide();
+    })
+    /*跳转至编辑查询游戏页面*/
+    $("#search-edit-game").on("click",function () {
+        let bread_html="";
+        bread_html +=
+            "<li><a href=>首页</a></li>" +
+            "<li><a href=>游戏</a></li>" +
+            "<li class='active'>查询编辑游戏</li>";
+        $(".breadcrumb").html(bread_html)
+        ChangePage(currentIndex);
+        $("#home-content").hide();
+        $("#add-game-content").hide()
+        $("#edit-query-game").show();
+    })
+    /*跳转至添加游戏页面*/
+    $("#add-game").on("click",function () {
+        let bread_html = "";
+        bread_html +=
+            "<li><a href=>首页</a></li>" +
+            "<li><a href=>游戏</a></li>" +
+            "<li class='active'>添加游戏</li>";
+        $(".breadcrumb").html(bread_html)
+        $("#home-content").hide();
+        $("#edit-query-game").hide();
+        $("#add-game-content").show();
+
+    })
+
+    /*查询游戏*/
+    $("#search-btn").on("click",function () {
+        currentPage = 1;
+        ChangePage(currentPage,$("#search-game").val());
+
+    })
+    /**
+     *填充复选框中的内容
+     */
+    $("input[name=types]").click(function () {
+        let arr = new Array();
+        $("input[name=types]:checked").each(function (key,value) {
+            arr[key]=$(value).val();
+        });
+        let str = new String();
+        str = "[\"";
+        for(let i = 0; i < arr.length; i++){
+            if(i==arr.length-1){
+                str = str+arr[i]+"\"";
+            }else {
+                str = str+ arr[i] + "\",\""
+            }
+        }
+        str = str+"]"
+
+        $("#game-types").val(str);
+        /*$("#game-types").val(arr.join(","));*/
+    })
+    $("input[name=languages]").click(function () {
+        let arr = new Array();
+        $("input[name=languages]:checked").each(function (key,value) {
+            arr[key]=$(value).val();
+        });
+        let str = new String();
+        str = "[\"";
+        for(let i = 0; i < arr.length; i++){
+            if(i==arr.length-1){
+                str = str+arr[i]+"\"";
+            }else {
+                str = str+ arr[i] + "\",\""
+            }
+        }
+        str = str+"]"
+
+        $("#game-language").val(str);
+
+    })
+
+    /**
+     *保存修改内容
+     */
+    $("#save").on("click",function () {
+        let str = new String();
+        str = $("#game-releasedate").val()
+        let str_array = new Array();
+        str_array = str.split('-');
+        let date = new String();
+        date = str_array[0] + "/"+str_array[1]+"/" + str_array[2];
+        $.ajax({
+            url:"/store/gameUpdateHandle",
+            type:'post',
+            data:{
+                gid:updategid,
+                gname:$("#game-name").val(),
+                gtype:$("#game-types").val(),
+                developer:$("#game-devoloper").val(),
+                publisher:$("#game-publisher").val(),
+                realeasedate:date,
+                gprice:$("#game-price").val(),
+                discount:$("#game-discount").val(),
+                gscore:$("#game-score").val(),
+                language:$("#game-language").val(),
+                detail:$("#game-detail").val(),
+                vhref:$("#game-video").val(),
+                phref:$("#game-picture").val(),
+                chref:$("#game-face").val(),
+            },
+            dataType:'json',
+            success:function (Result) {
+                if(Result.status == 1){
+                    alert("更新成功")
+                    $("#close-editor").trigger('click');
+                }
+
+            }
+
+        })
+    })
+
+    /**
+     *翻页
+     */
+    $(document).on("click",".to-page",function () {
+        /*console.dir(currentPage)
+        console.dir(this.innerText)*/
+        if(this.innerText=="»"){
+            currentPage++;
+            if(currentPage > countpage){
+                currentPage = countpage;
+            }else {
+                currentPage = currentPage;
+            }
+        }else if(this.innerText=="«"){
+            currentPage--;
+            if(currentPage == 0){
+                currentPage = 1;
+            }else {
+                currentPage = currentPage;
+            }
+        }else {
+            currentPage = this.innerText
+        }
+        currentIndex = 10 * (currentPage-1);
+        ChangePage(currentIndex);
+    })
+    /**
+     *编辑框填充内容
+     */
+    $(document).on("click",".edit",function () {
+        console.dir(this.id);
+
+        $.ajax({
+            url:"/store/gameDetailShow",
+            type:'post',
+            data:{
+                id:this.id,
+            },
+            dataType:'json',
+            success:function (Result) {
+
+                let str = new String();
+                let times = new Array();
+                times = str.split('T');
+                $("#game-name").val(Result.resultMap.game.gname);
+                $("#game-types").val(Result.resultMap.game.gtype);
+                $("#game-devoloper").val(Result.resultMap.game.developer);
+                $("#game-publisher").val(Result.resultMap.game.publisher);
+                $("#game-releasedate").val(times[0]);
+                $("#game-price").val(Result.resultMap.game.gprice);
+                $("#game-discount").val(Result.resultMap.game.discount);
+                $("#game-score").val(Result.resultMap.game.gscore);
+                $("#game-language").val(Result.resultMap.game.language);
+                $("#game-detail").val(Result.resultMap.game.detail);
+                $("#game-video").val(Result.resultMap.game.vhref);
+                $("#game-picture").val(Result.resultMap.game.phref);
+                $("#game-face").val(Result.resultMap.game.chref)
+                updategid = Result.resultMap.game.gid;
+            }
+        })
+
+    })
+
+
+    $("#many-person").on("click",function () {
+        $("#game-type").val("多人");
+    })
+    $("#action").on("click",function () {
+        $("#game-type").val("动作");
+    })
+    $("#venture").on("click",function () {
+        $("#game-type").val("冒险");
+    })
+    $("#first").on("click",function () {
+        $("#game-type").val("第一人称");
+    })
+</script>
+
+</body>
+</html>
