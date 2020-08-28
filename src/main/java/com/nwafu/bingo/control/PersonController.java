@@ -178,17 +178,41 @@ public class PersonController {
 
     /*
     * mode
-    * 1----增加游戏
-    * 0----删除游戏
+    * 1----愿望单中增加游戏
+    * 0----愿望单中删除游戏
     * */
     @RequestMapping("/updateWishListById")
     public Result updateWishListById(@RequestParam("uid") Integer uid, @RequestParam("gid") Integer gid, @RequestParam("mode") int mode) throws Exception {
+        return updateGameListOrWishList(uid, gid, mode, 1);
+    }
+
+    /*
+    * mode
+    * 0----个人账户中增加游戏
+    * 1----个人账户中删除游戏
+    * */
+    @RequestMapping("/updateGameListById")
+    public Result updateGameListById(@RequestParam("uid") Integer uid, @RequestParam("gid") Integer gid, @RequestParam("mode") int mode) throws Exception {
+        return updateGameListOrWishList(uid, gid, mode, 0);
+    }
+
+    /*
+    * listType
+    * 0----GameList
+    * 1----WishList
+    * */
+    private Result updateGameListOrWishList(Integer uid, Integer gid, int mode, int listType) throws Exception {
         Result result = new Result();
 
         if (uid != null && gid != null) {
             User user = personService.getUserById(uid);
-            String wishList = user.getWishlist();
-            JSONArray jsonArray = JSON.parseArray(wishList);
+            String list = "";
+
+            if (listType == 0) list = user.getGamelist();
+            else if (listType == 1) list = user.getWishlist();
+
+
+            JSONArray jsonArray = JSON.parseArray(list);
             if (mode == 1) {
                 jsonArray.add(gid);
                 result.setStatus(Status.SUCCESS);
@@ -196,15 +220,17 @@ public class PersonController {
                 int target = jsonArray.indexOf(gid);
                 if (target == -1) {
                     result.setStatus(Status.FAILURE);
-                    result.getResultMap().put("msg", "wishList doesn't contains the game");
+                    result.getResultMap().put("msg", "list doesn't contains the game");
                 }else {
                     jsonArray.remove(target);
                     result.setStatus(Status.SUCCESS);
                 }
             }
 
-            wishList = JSON.toJSONString(jsonArray);
-            user.setWishlist(wishList);
+            list = JSON.toJSONString(jsonArray);
+            if (listType == 0) user.setGamelist(list);
+            else if (listType == 1) user.setWishlist(list);
+
             personService.updatePerson(user);
         }else {
             result.setStatus(Status.FAILURE);
@@ -213,7 +239,6 @@ public class PersonController {
 
         return result;
     }
-    
     @RequestMapping("/deleteAdminById")
     public Result deleteAdminById(@RequestParam("aid") Integer aid) throws Exception {
         Result result = new Result(Status.SUCCESS);
