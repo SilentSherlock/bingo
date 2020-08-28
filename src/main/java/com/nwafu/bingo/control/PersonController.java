@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.*;
 
@@ -38,12 +39,13 @@ public class PersonController {
     private String code = "";
 
     @RequestMapping("/adminValidate")
-    public Result adminValidate(Admin admin) throws Exception {
+    public Result adminValidate(Admin admin, HttpSession httpSession) throws Exception {
         Result result = new Result();
         Admin admin1 = personService.validateAdmin(admin.getAname(), admin.getPassword());
         if (admin1 != null) {
             result.setStatus(Status.SUCCESS);
             result.getResultMap().put("admin", admin1);
+            httpSession.setAttribute("loginAdmin", admin1);
         }else {
             result.setStatus(Status.FAILURE);
         }
@@ -51,18 +53,47 @@ public class PersonController {
     }
 
     @RequestMapping("/userValidate")
-    public Result userValidate(User user) throws Exception {
+    public Result userValidate(User user, HttpSession httpSession) throws Exception {
         Result result = new Result();
         User user1 = personService.validateUser(user.getUname(), user.getPassword());
         if (user1 != null) {
             result.setStatus(Status.SUCCESS);
             result.getResultMap().put("user", user1);
+            httpSession.setAttribute("loginUser", user1);
         }else {
             result.setStatus(Status.FAILURE);
         }
         return result;
     }
 
+    @RequestMapping("/isLogin")
+    public Result isLogin(HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("loginUser");
+        Result result = new Result();
+        if (user != null) {
+            result.setStatus(Status.SUCCESS);
+            result.getResultMap().put("loggedUserInfo", user);
+        }else {
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("msg", "user is null");
+        }
+
+        return result;
+    }
+
+    @RequestMapping("/logout")
+    public Result logout(HttpSession httpSession) {
+        Result result = new Result();
+        User user = (User) httpSession.getAttribute("loginUser");
+        if (user != null) {
+            httpSession.removeAttribute("loginUser");
+            result.setStatus(Status.SUCCESS);
+        }else {
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("msg", "logout failed, There's no user");
+        }
+        return result;
+    }
     /*gamelist and wishlist not include*/
     @RequestMapping("/getAllUser")
     public Result getAllUser() throws Exception {
@@ -227,8 +258,10 @@ public class PersonController {
             if (listType == 0) list = user.getGamelist();
             else if (listType == 1) list = user.getWishlist();
 
+            JSONArray jsonArray;
+            if (list == null || list.length() == 0) jsonArray = new JSONArray();
+            else jsonArray = JSON.parseArray(list);
 
-            JSONArray jsonArray = JSON.parseArray(list);
             if (mode == 1) {
                 jsonArray.add(gid);
                 result.setStatus(Status.SUCCESS);
@@ -293,7 +326,7 @@ public class PersonController {
     }
 
     private List<Game> transform(String listStr) throws Exception {
-        if (listStr == null) return null;
+        if (listStr == null || "".equals(listStr)) return null;
         JSONArray array = JSONArray.parseArray(listStr);
         List<Game> games = new LinkedList<>();
         for(Object id:array){
