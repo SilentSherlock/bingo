@@ -1,62 +1,96 @@
 //全局变量
-
 //网页基本组件信息
-let components = {
+//静态组件信息，组件的样式固定
+let static_components = {
+    component_index: {
+        cname: "首页",
+        cid: "index-body",
+        curl: "/page/component_index"
+    },
     component_user_login: {
         cname: "登录",
         cid: "user-login",
-        curl: "component_user_login"
+        curl: "/page/component_user_login"
     },
     component_user_register: {
         cname: "注册",
         cid: "user-register",
-        curl: "component_user_register"
+        curl: "/page/component_user_register"
     },
-    c2: {},
-    c3: {},
-    c4: {},
-    c5: {},
-    c6: {},
-    c7: {},
-    c8: {}
+    component_loading_animation: {
+        cname: "正在加载动画",
+        cid: "loading-animation",
+        curl: "/page/component_loading_animation"
+    },
+    component_load_error: {
+        cname: "加载失败",
+        cid: "load-error",
+        curl: "/page/component_load_error"
+    },
+    component_none_result: {
+        cname: "没有内容",
+        cid: "none-result",
+        curl: "/page/component_none_result"
+    },
+    component_all_game: {
+        cname: "所有游戏",
+        cid: "all-game",
+        curl: "/page/component_all_game"
+    },
+    component_alert: {
+        cname: "提示模态框",
+        cid: "alert",
+        curl: "/page/alert"
+    },
 };
 
-//请求映射
+//动态组件信息，展示游戏的卡片等依赖具体数据实现的组件
+let dynamic_components = {
+    component_game_recommendation_card: {
+        cname: "首页推荐游戏展示卡片样式",
+        cid: "game_recommendation_card",
+        curl: "/page/component_game_recommendation_card"
+    },
+
+};
+
+//数据请求映射
 let requestmap = {
     user_isLogged: "/user_isLogged",
-    user_login: "/user_login",
-    user_register: "/user_register",
-    user_register_code: "/user_register_code",
-    user_register_send_code: "/user_register_send_code",
-    store_search: "/store_search"
+    user_login: "/person/userValidate",
+    user_register: "/person/addUser",
+    user_register_validate_code: "/person/user_register_code",
+    user_register_validate_uname: "/person/validateNameLegality",
+    user_register_send_code: "/person/user_register_send_code",
+    store_search: "/store/search"
 };
 
 //用户信息
 let userInfo;
 
-//用户当前所处位置
-let uposition = [""];
+//用户当前位置
+let uposition = [];
 
-//面包屑导航涉及的位置
-let breadcrumb = {
-    b1: {
-        key: "游戏",
-        href: ""
-    },
-    b2: {
-        key: "社区",
-        href: ""
-    },
-    b3: {
-        key: "登录",
-        href: ""
-    },
-    b4: {
-        key: "注册",
-        href: ""
-    },
-    b5: {
-        key: "我的信息",
-        href: ""
-    }
+//复用搜索处理的默认参数
+let index_pageCount = 12;
+let index_pageIndex = 0;
+
+//所有游戏页面
+let minPrice;
+let maxPrice;
+let area;
+let language;
+let formData;
+let sort;
+let order = "desc";
+let pageIndex = 0;
+let price_sort = 0;//初始为从高到低
+let category = [];
+let tag = [];
+
+let firstFormData = {
+    pageIndex: pageIndex,
+    order: order,
+    category: JSON.stringify(category),
+    tag: JSON.stringify(tag),
 };

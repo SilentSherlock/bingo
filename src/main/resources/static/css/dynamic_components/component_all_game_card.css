@@ -1,0 +1,133 @@
+@charset "UTF-8";
+/**
+ * 时间: 2020.8.28
+ * 描述：所有游戏页面游戏列表卡片样式
+ */
+/**
+ * 作者: lwh
+ * 时间: 2020.8.20
+ * 描述：网页总体样式采用颜色、字体大小、动画常量规定
+ */
+/****************************基本颜色***********************/
+/****************************基本字体及动画***********************/
+/****************************框架组件常量***********************/
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+  padding-left: 0;
+  width: 800px;
+  height: 1100px;
+}
+
+.all-game-card {
+  height: 100px;
+  background: #33394d;
+  margin-bottom: 10px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.all-game-card p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+.all-game-card .all-game-card-left {
+  float: left;
+  margin-right: 20px;
+}
+
+.all-game-card .all-game-card-left img {
+  border: 0;
+  width: 190px;
+  height: 100px;
+}
+
+.all-game-card .all-game-card-right {
+  float: right;
+  margin-top: 40px;
+}
+
+.all-game-card .right-game-discount {
+  color: white;
+  background: #ff6900;
+  padding: 2px 4px;
+  border-radius: 2px 2px 2px 2px;
+  margin-right: 15px;
+  font-size: 16px;
+}
+
+.all-game-card .right-game-origin-price {
+  color: #7a80a2;
+  font-size: 16px;
+  text-decoration: line-through;
+  margin-right: 15px;
+}
+
+.all-game-card .right-game-price {
+  color: #ff6900;
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 15px;
+  float: right;
+}
+
+.all-game-card .all-game-card-middle {
+  margin: 0 150px 0 190px;
+  padding: 15px 0;
+}
+
+.all-game-card .all-game-card-middle .middle-title {
+  font-size: 16px;
+  color: #b9c0ef;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.all-game-card .all-game-card-middle .middle-title-area {
+  display: inline-block;
+  font-size: 13px;
+  color: white;
+  padding: 0 4px;
+  font-weight: normal;
+  line-height: 18px;
+  border-radius: 2px 2px 2px 2px;
+  margin-left: 6px;
+  vertical-align: text-bottom;
+  background: #0067ff;
+  float: bottom;
+}
+
+.all-game-card .all-game-card-middle .middle-date {
+  color: #7a80a2;
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+.all-game-card .all-game-card-middle .middle-game-types {
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+.all-game-card .all-game-card-middle .middle-game-type {
+  margin-right: 5px;
+  display: inline-block;
+  line-height: 16px;
+  padding: 0 2px;
+  color: #7a80a2;
+  border: 1px solid #7a80a2;
+  border-radius: 2px 2px 2px 2px;
+}
+
+/*# sourceMappingURL=component_all_game_card.css.map */

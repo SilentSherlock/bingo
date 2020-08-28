@@ -53,7 +53,7 @@ a:active {
 //主要按钮
 .btn-primary,
 .btn-primary:focus {
-  color: darken($font-color-highlight, 10);
+  color: $font-color-highlight;
   background-color: $orange;
   border: none;
   box-shadow: none;
@@ -72,7 +72,7 @@ a:active {
 .btn-secondary,
 .btn-secondary:focus {
   color: $font-color-highlight;
-  background-color: lighten($background-light, 20);
+  background-color: lighten($background-light, 10);
   border: none;
   box-shadow: none;
 }
@@ -80,7 +80,7 @@ a:active {
 .btn-secondary:hover,
 .btn-secondary:active {
   color: $font-color-highlight !important;
-  background-color: lighten($background-light, 40) !important;
+  background-color: lighten($background-light, 20) !important;
   border: none !important;
   box-shadow: none !important;
   transition: $transition-color;
@@ -130,18 +130,19 @@ a:active {
 .alert-modal-header {
   border: none;
   padding: 5px 15px 5px 15px;
-  background-color: $background;
-  color: $font-color-light;
+  background-color: $yellow;
+  color: $font-color-highlight;
+  font-weight: bold;
 }
 
 .alert-modal-header span {
-  color: $font-color-light;
+  color: $font-color-highlight;
 }
 
 .alert-modal-body {
   padding: 10px;
   background-color: $background-light;
-  color: $font-color;
+  color: $font-color-light;
 }
 
 .alert-modal-body-foot {
@@ -180,6 +181,10 @@ a:active {
 
 .has-success .control-label {
   color: $green;
+}
+
+.has-feedback .help-block {
+  color: $red;
 }
 
 .form-control[disabled] {
