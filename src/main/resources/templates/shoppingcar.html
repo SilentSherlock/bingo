@@ -97,6 +97,7 @@
                 console.log(result);
             }
         )
+        console.log("gids: "+ gids);
         //更改用户游戏列表
         var data = {
             uid : 1,
@@ -205,7 +206,7 @@
                         "                </span>\n" +
                         "                <div class=\"price\" id=\"\">￥" +shoppingcar[i].price+ "</div>\n" +
                         "                <div class=\"row3\" id=\"\">\n" +
-                        "                    <input type=\"number\" step='1'  onchange='pricesum(this)'  class=\"num\" id=" +i + " onkeydown=\"return false;\"  min=\"1\" value=\"1\">" +
+                        "                    <input type=\"number\" step='1'  onchange='pricesum(this)'  class=\"num\" id=" +i + " onkeydown=\"return false;\" max=\"10\" min=\"1\" value=\"1\">" +
                         "                </div>\n" +
                         "<div class=\"operate\">\n" +
                         "                    <div class=\"sum1\"><button class=\"da\" onclick='deleteCar(this) 'id=" +shoppingcar[i].gid+ ">删除</button></div>\n" +
