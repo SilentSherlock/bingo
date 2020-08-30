@@ -49,8 +49,24 @@ $breadcrumb-divider: quote(">"); //面包屑导航栏分隔符
 //页脚
 $foot-height: 100px; //页脚高度
 
-//登陆表单
+//登录注册表单样式
 $form-margin-top: 100px;
 $form-border-radius: 5px;
 $form-area-padding: 30px;
 $form-area-box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.3);
+
+//首页幻灯片高度
+$index-carousel-height: 500px;
+
+//首页推荐模块
+$index-body-recommendation-margin: 100px;
+$index-game-card-margin-top: 15px;
+$index-game-card-height: 180px;
+$index-game-card-box-shadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.3);
+$index-game-card-border-radius: 3px;
+$index-game-card-cover-height: 55%;
+$index-game-card-info-padding: 8px 8px 0 8px;
+$index-game-card-discount-padding: 2px 3px;
+$index-game-card-discount-label-top: 5px;
+$index-game-card-discount-label-left: 15px;
+$index-game-card-discount-margin-right: 3px;

@@ -146,8 +146,7 @@ public class PersonService {
                 userDao.add((User) object);
                 generateId = user.getUid();
             }
-        }
-        log(status + " Parameter null or wrong type");
+        }else log(status + " Parameter null or wrong type");
         return generateId;
     }
 
@@ -166,8 +165,7 @@ public class PersonService {
             }else if (object instanceof User) {
                 userDao.update((User) object);
             }
-        }
-        log(status + " Parameter null or wrong type");
+        }else log(status + " Parameter null or wrong type");
     }
 
     public List<User> getUserPage(Integer current_index, Integer size) throws Exception {

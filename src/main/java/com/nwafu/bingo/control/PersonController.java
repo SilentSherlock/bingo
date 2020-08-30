@@ -8,6 +8,7 @@ import com.nwafu.bingo.entity.User;
 import com.nwafu.bingo.service.MailService;
 import com.nwafu.bingo.service.PersonService;
 import com.nwafu.bingo.service.StoreService;
+import com.nwafu.bingo.service.TextSearchService;
 import com.nwafu.bingo.utils.Result;
 import com.nwafu.bingo.utils.Search;
 import com.nwafu.bingo.utils.Status;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.*;
 
@@ -36,15 +38,18 @@ public class PersonController {
     private StoreService storeService;
     @Resource
     private MailService mailService;
+    @Resource
+    private TextSearchService textSearchService;
     private String code = "";
 
     @RequestMapping("/adminValidate")
-    public Result adminValidate(Admin admin) throws Exception {
+    public Result adminValidate(Admin admin, HttpSession httpSession) throws Exception {
         Result result = new Result();
         Admin admin1 = personService.validateAdmin(admin.getAname(), admin.getPassword());
         if (admin1 != null) {
             result.setStatus(Status.SUCCESS);
             result.getResultMap().put("admin", admin1);
+            httpSession.setAttribute("loginAdmin", admin1);
         }else {
             result.setStatus(Status.FAILURE);
         }
@@ -52,18 +57,47 @@ public class PersonController {
     }
 
     @RequestMapping("/userValidate")
-    public Result userValidate(User user) throws Exception {
+    public Result userValidate(User user, HttpSession httpSession) throws Exception {
         Result result = new Result();
         User user1 = personService.validateUser(user.getUname(), user.getPassword());
         if (user1 != null) {
             result.setStatus(Status.SUCCESS);
             result.getResultMap().put("user", user1);
+            httpSession.setAttribute("loginUser", user1);
         }else {
             result.setStatus(Status.FAILURE);
         }
         return result;
     }
 
+    @RequestMapping("/isLogin")
+    public Result isLogin(HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("loginUser");
+        Result result = new Result();
+        if (user != null) {
+            result.setStatus(Status.SUCCESS);
+            result.getResultMap().put("loggedUserInfo", user);
+        }else {
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("msg", "user is null");
+        }
+
+        return result;
+    }
+
+    @RequestMapping("/logout")
+    public Result logout(HttpSession httpSession) {
+        Result result = new Result();
+        User user = (User) httpSession.getAttribute("loginUser");
+        if (user != null) {
+            httpSession.removeAttribute("loginUser");
+            result.setStatus(Status.SUCCESS);
+        }else {
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("msg", "logout failed, There's no user");
+        }
+        return result;
+    }
     /*gamelist and wishlist not include*/
     @RequestMapping("/getAllUser")
     public Result getAllUser() throws Exception {
@@ -139,6 +173,9 @@ public class PersonController {
             if (!foldPath.exists()) {
                 foldPath.mkdirs();
             }
+            user.setUalias(user.getUname());
+            user.setUavatar("/src/avatar_default.png");
+            personService.addPerson(user);
             result.setStatus(Status.SUCCESS);
             result.getResultMap().put("info", "Insert Success");
         }else {
@@ -156,6 +193,14 @@ public class PersonController {
         return result;
     }
 
+    @RequestMapping("/updateUserNoPhoto")
+    public Result updateUserNoPhoto(User user) throws Exception {
+        Result result = new Result();
+        personService.updatePerson(user);
+        result.setStatus(Status.SUCCESS);
+        return result;
+    }
+
     //second edition, may be modified
     @RequestMapping("/updateUser")
     public Result updateUser(User user, @RequestParam("avatar")MultipartFile file) throws Exception {
@@ -164,33 +209,101 @@ public class PersonController {
 
         if (file != null) {
             int uid = user.getUid();
-            String imgPath = ResourceUtils.getURL("classpath:").getPath() + "static/src/uinfo/" + uid + ".jpg";
+            String imgSrc = "/src/uinfo/" + uid + ".jpg";
+            String imgPath = ResourceUtils.getURL("classpath:").getPath() + "static" + imgSrc;
             File img = new File(imgPath);
             if (img.exists()) {
                 img.delete();
             }
             file.transferTo(img);
-            user.setUavatar(imgPath);
+            user.setUavatar(imgSrc);
             personService.updatePerson(user);
         }
         result.setStatus(Status.SUCCESS);
         return result;
     }
 
+    /*
+    * mode
+    * 1----愿望单中增加游戏
+    * 0----愿望单中删除游戏
+    * */
     @RequestMapping("/updateWishListById")
-    public Result updateWishListById(@RequestParam("uid") Integer uid, @RequestParam("gid") Integer gid) throws Exception {
+    public Result updateWishListById(@RequestParam("uid") Integer uid, @RequestParam("gid") Integer gid, @RequestParam("mode") int mode) throws Exception {
+        return updateGameListOrWishList(uid, gid, mode, 1);
+    }
+
+    /*
+    * mode
+    * 0----个人账户中增加游戏
+    * 1----个人账户中删除游戏
+    * */
+    @RequestMapping("/updateGameListById")
+    public Result updateGameListById(@RequestParam("uid") Integer uid, @RequestParam("gid") String gids, @RequestParam("mode") int mode) throws Exception {
+        JSONArray jsonArray = JSON.parseArray(gids);
+        Result result = new Result();
+        User user = personService.getUserById(uid);
+//        String oldGameList = user.getGamelist();
+
+        for (Object gid : jsonArray) {
+            Integer gidInt = (Integer) gid;
+            Result tmp = updateGameListOrWishList(uid, gidInt, mode, 0);
+            if (tmp.getStatus() == Status.FAILURE) {
+                /*result.setStatus(Status.FAILURE);
+                result.getResultMap().put("msg", "add gid by list failed");
+                user.setGamelist(oldGameList);
+                personService.updatePerson(user);*/
+                System.out.println("多出一条游戏，应前端沙雕需求，不返回错误");
+            }
+        }
+        result.setStatus(Status.SUCCESS);
+        return result;
+    }
+
+    /*
+    * listType
+    * 0----GameList
+    * 1----WishList
+    * */
+    private Result updateGameListOrWishList(Integer uid, Integer gid, int mode, int listType) throws Exception {
         Result result = new Result();
 
         if (uid != null && gid != null) {
             User user = personService.getUserById(uid);
-            String wishList = user.getWishlist();
-            JSONArray jsonArray = JSON.parseArray(wishList);
-            jsonArray.add(gid);
-            wishList = JSON.toJSONString(jsonArray);
-            user.setWishlist(wishList);
-            personService.updatePerson(user);
+            String list = "";
 
-            result.setStatus(Status.SUCCESS);
+            if (listType == 0) list = user.getGamelist();
+            else if (listType == 1) list = user.getWishlist();
+
+            JSONArray jsonArray;
+            if (list == null || list.length() == 0) jsonArray = new JSONArray();
+            else jsonArray = JSON.parseArray(list);
+
+            if (mode == 1) {
+                if (!jsonArray.contains(gid)) {
+                    jsonArray.add(gid);
+                    result.setStatus(Status.SUCCESS);
+                }else {
+                    result.setStatus(Status.FAILURE);
+                    result.getResultMap().put("msg", "the game is in the gamelist or wishlist");
+                }
+
+            }else if (mode == 0) {
+                int target = jsonArray.indexOf(gid);
+                if (target == -1) {
+                    result.setStatus(Status.FAILURE);
+                    result.getResultMap().put("msg", "list doesn't contains the game");
+                }else {
+                    jsonArray.remove(target);
+                    result.setStatus(Status.SUCCESS);
+                }
+            }
+
+            list = JSON.toJSONString(jsonArray);
+            if (listType == 0) user.setGamelist(list);
+            else if (listType == 1) user.setWishlist(list);
+
+            personService.updatePerson(user);
         }else {
             result.setStatus(Status.FAILURE);
             result.getResultMap().put("msg", "uid or gid is null!");
@@ -236,7 +349,7 @@ public class PersonController {
     }
 
     private List<Game> transform(String listStr) throws Exception {
-        if (listStr == null) return null;
+        if (listStr == null || "".equals(listStr)) return null;
         JSONArray array = JSONArray.parseArray(listStr);
         List<Game> games = new LinkedList<>();
         for(Object id:array){

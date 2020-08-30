@@ -21,11 +21,7 @@
                 <div class="content">
                     <div class="videos-player default-height" id="show">
                         <video class="videoPlayer" id="videoPlayer"  src="" controls="controls"  autobuffer muted >
-                            <!--<source src="" type="video/mp4" id="gvideo">-->
                         </video>
-                        <!--<div class="new-big-center-play-btn" style="display: block" onclick="play()">
-                            <span class="glyphicon glyphicon-play">
-                        </div>-->
                     </div>
                     <div class="show-list">
                         <div class="show-elem">
@@ -53,9 +49,6 @@
                             <img src="" id="elem6" onclick="change(this)">
                         </div>
                     </div>
-                    <!--<div class="list-control">
-                        <div class="thumb"></div>
-                    </div>-->
                 </div>
             </div>
             <div class="titile-content-left-3">
@@ -157,7 +150,6 @@
         </div>
         <div class="titile-content-right">
             <div class="titile-content-right-1">
-
                 <div class="titile-content-1-2">
                     <div class="d-cover">
                         <img src="" class="cover" id="cover" alt="封面">
@@ -226,9 +218,9 @@
             <div class="titile-content-right-3" id="addContent" hidden>
                 <div class="item-info">
                     <br>
-                        <span>评论内容:</span><input type="text" id="content-txt" style="width:200px;height:80px;"></br>
-                        <span>评&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分:</span><input type="number" id="content-score" oninput="if(value>10)value=10;if(value<0)value=0"></br>
-                        <button type="submit" id="submit">提交评测</button>
+                    <span>评论内容:</span><input type="text" id="content-txt" style="width:200px;height:80px;"></br>
+                    <span>评&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分:</span><input type="number" id="content-score" oninput="if(value>10)value=10;if(value<0)value=0"></br>
+                    <button type="submit" id="submit">提交评测</button>
                     </form>
                 </div>
             </div>
@@ -241,11 +233,12 @@
     var GAMEID
     var GAMEINFO
     var videohref
+    //
     function change(typp) {
         console.log("点击元素:"+$(typp).attr("id"));
         if ($(typp).attr("id") === "video" || $(typp).attr("id") === "videochild") {
             document.getElementById("show").innerHTML = "<video class=\"videoPlayer\" src="+game.vhref +" id=\"videoPlayer\" controls=\"controls\"  autobuffer muted >\n" +
-                 "</video>"
+                "</video>"
         } else {
             document.getElementById("show").innerHTML = "<img src=" + $(typp).attr("src") + " class='default-height' />";
         }
@@ -268,40 +261,61 @@
         return string;
     }
     function addCar(){//加入购物车
-        var num,gnum=1,buynum;
-        num = window.prompt("输入购买数量");
-        if(isNaN(buynum=parseInt(num,10))){
-            window.alert("请输入整数!!!");
+        /* num = window.prompt("输入购买数量");
+         if(isNaN(buynum=parseInt(num,10))){
+             window.alert("请输入整数!!!");
+         }
+         else{
+             sessionStorage.getItem("shoppingcar");
+             //加入购物车
+             var i=0,keylist = [];
+             var charac = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678";
+             for(; i<buynum;i++){
+                 var key = "";
+                 var temp1= Math.random()*57;
+                 var temp2= Math.random()*57;
+                 var temp3= Math.random()*57;
+                 var temp4= Math.random()*57;
+                 var temp5= Math.random()*57;
+                 key += charac.charAt(temp1) + charac.charAt(temp2)+ charac.charAt(temp3)+ charac.charAt(temp4)+ charac.charAt(temp5);
+                 keylist.push(key);
+             }
+             console.log("key为: "+keylist);*/
+        var item = {
+            "gid" : parseInt(GAMEID),
+            "discount" : game.discount,
+            "price" : game.gprice,
+            "gname" : game.gname,
+            "chref" : game.chref
         }
+        var shoppingcar = [],exist=0;
+        //判断购物车是否为空或购物车不存在
+        if(localStorage.getItem("shoppingcar")==null || (JSON.parse(localStorage.getItem("shoppingcar")))[0]==null);
         else{
-            sessionStorage.getItem("shoppingcar");
-            //加入购物车
-            /*var i=0,keylist = [];
-            var charac = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678";
-            for(; i<buynum;i++){
-                var key = "";
-                var temp1= Math.random()*57;
-                var temp2= Math.random()*57;
-                var temp3= Math.random()*57;
-                var temp4= Math.random()*57;
-                var temp5= Math.random()*57;
-                key += charac.charAt(temp1) + charac.charAt(temp2)+ charac.charAt(temp3)+ charac.charAt(temp4)+ charac.charAt(temp5);
-                keylist.push(key);
+            exist=1;//购物车存在，但商品不在购物车中;
+            console.log("购物车存在")
+            shoppingcar = JSON.parse(localStorage.getItem("shoppingcar"));
+            var i=0,length = shoppingcar.length;
+            for( ;i<length;i++){
+                if(JSON.parse(shoppingcar[i]==null)){
+                    delete shoppingcar[i];
+                }
+                else
+                if(GAMEID==shoppingcar[i].gid){
+                    exist=2;
+                    console.log("购物车存在，商品在购物车中")
+                    window.alert("已加入购物车，请勿重复添加！");
+                    break;
+                }
             }
-            console.log("key为: "+keylist);*/
-            var item = {
-                "gid" : parseInt(GAMEID),
-                "discount" : game.discount,
-                "price" : game.gprice
-            }
-            var shoppingcar = [];
+        }
+        if(exist==0 || exist ==1){//购物车中没有该商品
             shoppingcar.push(item);
-            console.log(shoppingcar);
-            sessionStorage.setItem("shoppingcar",JSON.stringify(shoppingcar));
-            car = sessionStorage.getItem("shoppingcar");
+            localStorage.setItem("shoppingcar",JSON.stringify(shoppingcar));
+            /*car = localStorage.getItem("shoppingcar");
             carContent = JSON.parse(car);
             console.log(carContent);
-            console.log(carContent[0]);
+            console.log(carContent[0]);*/
             window.alert("加入购物车成功！");
         }
     }
@@ -314,8 +328,6 @@
         else{
             console.log("购买数量为: "+buynum);
             //插入订单
-            sessionStorage.getItem("shoppingcar");
-            //加入购物车
             var i=0,keylist = [];
             var charac = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678";
             for(; i<buynum;i++){
@@ -329,12 +341,7 @@
                 keylist.push(key);
                 console.log("生成的key为: " + key )
             }
-            console.log("key为: "+keylist);
             var myDate = new Date();
-            console.log("当前时间:" + myDate);
-            console.log(myDate.toLocaleString());
-            console.log(myDate.toLocaleTimeString());
-            console.log(myDate.toLocaleDateString());
             var orDetails = [{
                 gid : GAMEID,
                 klist : keylist,
@@ -354,7 +361,20 @@
                     console.log(result);
                 }
             )
-            console.log(orderContent);
+            var gids = [];
+            gids.push(parseInt(GAMEID));
+            var data = {
+                uid : 1,
+                gid : JSON.stringify(gids),
+                mode : 1
+            }
+            console.log(JSON.stringify(gids));
+            $.post(
+                "/person/updateGameListById",data,
+                function (result){
+                    console.log(result);
+                }
+            );
             window.alert("购买成功！");
         }
     }
@@ -368,8 +388,11 @@
                 console.log(result);
                 wishlist = result.resultMap.wishList;
                 console.log(wishlist);
-                var i=0,length=wishlist.length,exist=0;
-                for( ;i<length;i++){
+                var i=0,exist=0;
+                if(wishlist==null);
+                else {
+                   var length=wishlist.length;
+                    for( ;i<length;i++){
                     console.log(wishlist[i].gid);
                     console.log(GAMEID);
                     if(GAMEID==wishlist[i].gid)
@@ -378,13 +401,15 @@
                         break;
                     }
                 }
+                }
                 if(exist==1){
                     window.alert("已在心愿单中！请勿重复添加");
                 }
                 else {
                     var data = {
                         uid : 1,
-                        gid : GAMEID
+                        gid : GAMEID,
+                        mode : 1
                     }
                     $.post(
                         "/person/updateWishListById", data,
@@ -411,7 +436,8 @@
             $.get("store/gameDetailShow", data,
                 function (result){
                     game = result.resultMap.game;
-                    //console.log(result);
+                    //
+                    console.log(result);
                     document.getElementById("title").innerText=game.gname;
                     document.getElementById("detail").innerText=game.detail;
                     document.getElementById("cover").src=game.chref;
@@ -439,6 +465,8 @@
                     document.getElementById("developer").innerText=game.developer;
                     document.getElementById("publisher").innerText=game.publisher;
                     document.getElementById("realeasedate").innerText=game.realeasedate.substr(0,10);
+                    var time = game.realeasedate;
+                    console.log("发行时间:" + time);
                     console.log(typeof  game.realeasedate);
                     var temp = JSON.parse(game.platform);
                     document.getElementById("platform").innerText=temp;
@@ -550,40 +578,43 @@
             };
             //查询是否有此游戏
             $.get("/person/getUserById", data,
-            function (result){
-                //获取游戏ID
-                var loc = location.href;
-                var n1 = loc.length;
-                var n2 = loc.indexOf('=');
-                var txt = decodeURI(loc.substr(n2+1,n1-n2));
+                function (result){
+                    //获取游戏ID
+                    var loc = location.href;
+                    var n1 = loc.length;
+                    var n2 = loc.indexOf('=');
+                    var txt = decodeURI(loc.substr(n2+1,n1-n2));
 
-                console.log("游戏ID: " + txt);
-                gamelist = result.resultMap.user.gamelist;
-                console.log(gamelist);
-                var i=0,j=gamelist.length,ok=0;
-                for( ;i<j;i++){
-                    if(txt == gamelist[i])
-                    {
-                        ok=1;//用户拥有此游戏
-                        break;
+                    console.log("游戏ID: " + txt);
+                    gamelist = JSON.parse(result.resultMap.user.gamelist);
+                    console.log(gamelist);
+                    var i=0,j=gamelist.length,ok=0;
+                    for( ;i<j;i++){
+                        console.log("查找到的游戏ID: "+gamelist[i])
+                        if(txt == gamelist[i])
+                        {
+                            ok=1;//用户拥有此游戏
+                            console.log("用户拥有此游戏");
+                            break;
+                        }
                     }
-                }
-                if(ok==1){
-                    //查找用户是否评论过
-                    var data = {
-                        gid : txt,
-                        uid : 1
+                    if(ok==1){
+                        //查找用户是否评论过
+                        var data = {
+                            gid : txt,
+                            uid : 1
+                        }
+                        $.get(
+                            "store/searchEvaluationByUidAndGid", data,
+                            function (result){
+                                if(result.status == 0){
+                                    //添加入口
+                                    console.log("用户暂未评论");
+                                    $("#addContent").show();
+                                }
+                            })
                     }
-                    $.get(
-                        "store/searchEvaluationByUidAndGid", data,
-                        function (result){
-                            if(result.status == 0){
-                                //添加入口
-                                $("#addContent").show();
-                            }
-                        })
-                }
-            })
+                })
         }
         $("#submit").click(function (){
             //获取游戏ID
