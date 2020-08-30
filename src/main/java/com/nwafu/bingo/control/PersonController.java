@@ -9,6 +9,7 @@ import com.nwafu.bingo.service.MailService;
 import com.nwafu.bingo.service.PersonService;
 import com.nwafu.bingo.service.StoreService;
 import com.nwafu.bingo.utils.Result;
+import com.nwafu.bingo.utils.Search;
 import com.nwafu.bingo.utils.Status;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -264,5 +265,22 @@ public class PersonController {
         mailService.sendSimpleEmail(umail, subject, text);
 
         return new Result(Status.SUCCESS, null);
+    }
+
+    @RequestMapping("getUserPage")
+    public Result getUserPage(Search search) throws Exception {
+        Result result;
+        List<User> list= personService.getUserPage(search.getPageIndex(),search.getPageCount());
+        if(list==null){
+            result = new Result(Status.FAILURE);
+            result.getResultMap().put("getUserpage", "获取失败");
+        }else {
+            result = new Result();
+            Integer searchNum = personService.getUserCount(search);
+            result.getResultMap().put("searchList", list);
+            result.getResultMap().put("allSearchNum",searchNum);
+            result.setStatus(Status.SUCCESS);
+        }
+        return result;
     }
 }

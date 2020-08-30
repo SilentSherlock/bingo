@@ -34,14 +34,22 @@
     <script type="text/javascript" src="/js/index.js"></script>
     <style type="text/css">
 
+        body,html{
+            width: 100%;
+            height: 100%;
+        }
         .navbar-brand{
+            position: relative;
+            top: 10px;
+            left: 20px;
             height: 70px;
             padding: 0px;
         }
         .left-nav{
+            position: fixed;
             margin-left: 0px;
             width: 15%;
-            height: 800px;
+            height: 100%;
             padding-top: 0px;
             background-color: black;
             float: left;
@@ -61,13 +69,14 @@
         .nav-second>li>a,
         .nav-second>li>a:focus,
         .nav-second>li>a:hover{
-            background-color: #f5222d;
-            color: #dbdbdb;
+            background-color: #177ddc;/*#f5222d;*/
+            color:white;
+
         }
 
         .nav-pills>li>a:focus,
         .nav-pills>li>a:hover{
-            color: #dbdbdb;
+            color: white;
             background-color: black;
             border-color: #333;
         }
@@ -75,6 +84,7 @@
             color: #9d9d9d;
             background-color: #333;
             border-color: #333;
+            text-align: left;
         }
         .nav>li>a:focus,
         .nav>li>a:hover{
@@ -93,13 +103,12 @@
         }
         .contain-div{
             width: 85%;
-            height: 800px;
+            min-height: 920px;
             padding-top: 0px;
             float: right;
         }
         .contain-nav{
             width: 100%;
-
             height: 75px;
             border-bottom-width: 1px;
             border-bottom-style: solid;
@@ -108,7 +117,7 @@
         }
         .main-contain{
             width: 100%;
-            height: 725px;
+            min-height: 845px;
             padding: 0;
 
         }
@@ -124,33 +133,34 @@
         }
         .info-content-out{
             width: 100%;
-            height: 605px;
+            min-height: 745px;
             background-color: #dbdbdb;
+
         }
         .info-content{
             width: 90%;
-            height: 90%;
+            min-height: 625px;
             position: relative;
             left: 5%;
-            top:5%;
+            top:25px;
             background-color: white;
         }
         .object-operator{
             position: relative;
             width: 100%;
             height: 10%;
-
+            z-index:5;
         }
         .object-search{
             position: relative;
-            top: 10px;
+            top: 20px;
             left: 10px;
             float: left;
             padding-left: 20px;
         }
         .object-search-button{
             position: relative;
-            top:10px;
+            top:20px;
             left: 10px;
             float: left;
             padding-left: 5px;
@@ -160,7 +170,7 @@
         .btn-default:hover,
         .btn:hover,
         .btn:focus{
-            background-color: #f5222d;
+            background-color: #177ddc;/*#f5222d;*/
             color: white;
             border-style: none;
         }
@@ -169,7 +179,8 @@
             height: 80%;
             position: relative;
             left: 20px;
-            top:5px;
+            top:30px;
+            z-index:3;
         }
         .table-head{
             background-color: #fafafa;
@@ -181,24 +192,44 @@
         .rows:hover{
             background-color: #fef1f0;
         }
-        .edit{
-            color: red;
-            font-family: 微软雅黑;
-        }
 
+        .delete,
+        .delete:link,
+        .delete:visited,
+        .delete:active,
+        .delete:hover{
+            color: #177ddc;/*red;*/
+            font-family: 微软雅黑;
+            text-decoration:none;
+        }
+        .edit,
         .edit:link,
         .edit:visited,
-        .edit:visited,
         .edit:active{
-            color: red;
+            color: #177ddc;/*red;*/
+            text-decoration:none;
+            font-family: 微软雅黑;
+        }
+        .more,
+        .more:link,
+        .edit:visited,
+        .edit:active,
+        .edit:hover{
+            color: #177ddc;/*red;*/
+            text-decoration:none;
+            font-family: 微软雅黑;
         }
         .pages{
             position: relative;
+            top: 10px;
             bottom: 10px;
             width: 100%;
         }
-        .modal-dialog{
+        .modal-game{
             width: 1000px;
+        }
+        .modal-user{
+            width: 600px;
         }
         .edit-game{
             position: relative;
@@ -213,16 +244,110 @@
             color: white;
             background-color: #f5222d;
         }
+        .add-table{
+            position: relative;
+            top: 30px;
+            /*left: 70px;*/
+
+        }
+        .add-button{
+            position: relative;
+            left: 700px;
+        }
+
+        .nav-second-a{
+            text-align: center;
+        }
+        .unique-code,
+        .unique-code:hover,
+        .unique-code:link,
+        .unique-code:visited,
+        .unique-code:active{
+            color: black;
+            text-decoration:none
+        }
+        .admin-info{
+            position: absolute;
+            right: 15px;
+            height: 70px;
+            width: 200px;
+            top:2px;
+        }
+        .admin-avator{
+            position: absolute;
+            top:12px;
+            left: 40px;
+            float: left;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+        }
+        .admin-avator img{
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .admin-id,
+        .admin-id:focus,
+        .admin-id:active{
+            position: relative;
+            left: 40px;
+            color: black;
+            top: 10px;
+        }
+        /*.admin-id>a{
+            color: black;
+            text-decoration:none
+        }*/
+        .get-help{
+            position: relative;
+            top: 25px;
+            float: left;
+        }
+        .get-help>a{
+            color: black;
+            text-decoration:none
+        }
+        .user-detail{
+            width: 175px;
+        }
+        .admin-set:hover{
+            background-color: #007bff;
+        }
+        .nav-admin{
+            width: 180px;
+        }
+        .nav-admin>li>a{
+            background-color: #F6F6F6;
+            border-color: #F6F6F6;
+            position: relative;
+            text-align: center;
+            color: black;
+        }
+        .nav-admin>li>a:link,
+        .nav-admin>li>a:active,
+        .nav-admin>li>a:focus,
+        .nav-admin>li>a:hover{
+            background-color: #F6F6F6;
+        }
     </style>
 
     <script type="text/javascript">
         let currentPage = 1;
-        let currentIndex = 1;
+        let currentIndex = 0;
         let countpage = 0;
         let updategid;
         let search_game_name;
+        let game_order = "desc";
+        let sort_types;
+
+        let uerCurrentPage = 1;
+        let userCurrentIndex = 0;
+        let userCountPage = 0;
+
         /*实现翻页*/
-        function ChangePage(index, search_name,gtype){
+        function ChangePage(index, search_name,gtype,games_order , sort_type){
             let html = "";
             let pageHtml = "";
             $.ajax({
@@ -232,7 +357,9 @@
                     name: search_name,
                     category:gtype,
                     pageIndex:index,
-                    pageCount:10,
+                    pageCount:12,
+                    order:games_order,
+                    sort:sort_type,
                 },
                 dataType:'json',
                 success:function (Result) {
@@ -241,10 +368,18 @@
 
                         html += "<table class='table '>" +
                             "<tr class='table-head'>" +
-                            "<th scope='col'>唯一识别码</th>" +
+                            "<th scope='col'><a class='unique-code' id='unique-id' role='button'>唯一识别码&nbsp;<svg id='id-down' width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-down-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                            "  <path d=\"M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\"/>\n" +
+                            "</svg><svg id = 'id-up'width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                            "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
+                            "</svg></a></th>" +
                             "<th scope='col'>游戏名称</th>" +
                             "<th scope='col'>游戏类型</th>" +
-                            "<th scope='col'>售价</th>" +
+                            "<th scope='col'><a class='unique-code' id='sail-id' role='button'>售价(折扣价)&nbsp;<svg id='sail-down' width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-down-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                            "  <path d=\"M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\"/>\n" +
+                            "</svg><svg id = 'sail-up'width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                            "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
+                            "</svg></a></th>" +
                             "<th colspan='2'>操作</th>" +
                             "</tr>"
                         for(let key in Result.resultMap.searchList){
@@ -253,13 +388,45 @@
                             "<td scope='col'>" + Result.resultMap.searchList[key].gid + "</td>" +
                             "<td scope='col'>" + Result.resultMap.searchList[key].gname + "</td>" +
                             "<td scope='col'>" + Result.resultMap.searchList[key].gtype + "</td>" +
-                            "<td scope='col'>" + Result.resultMap.searchList[key].gprice + "</td>" +
-                            "<td scope='col'> <a class='edit' role='button' data-toggle='modal' href='#myModal' id='"+ Result.resultMap.searchList[key].gid+"'>编辑</a></td>"+
-                            "<td scope='col'> <a class='more' role='button' data-toggle='modal' href='#myModal'>更多</a></td>"+
+                            "<td scope='col'>" + Result.resultMap.searchList[key].gprice * Result.resultMap.searchList[key].discount+ "</td>" +
+                            "<td scope='col'> <a class='edit'   role='button' data-toggle='modal' href='#myModal' id='"+ Result.resultMap.searchList[key].gid+"'>编辑</a></td>"+
+                            "<td scope='col'> <a class='delete' role='button' data-toggle='modal' id='delete_btn-"+ Result.resultMap.searchList[key].gid + "'>删除</a></td>"+
                             "</tr>"
                     }
                         html += "</table>";
                         $(".object-show").html(html);
+                        if(sort_types == "price"){
+                            $("#id-down").hide();
+                            $("#id-up").hide();
+                            if(game_order=="desc"){
+                                $("#sail-down").show();
+                                $("#sail-up").hide();
+                            }else {
+                                $("#sail-down").hide();
+                                $("#sail-up").show();
+                            }
+                        }else {
+                            $("#sail-down").hide();
+                            $("#sail-up").hide();
+                            if(game_order=="desc"){
+                                $("#id-down").show();
+                                $("#id-up").hide();
+                            }else {
+                                $("#id-down").hide();
+                                $("#id-up").show();
+                            }
+                        }
+
+                    }
+                    else{
+                        $(".object-show").html("<table class='table '>" +
+                            "<tr class='table-head'>" +
+                            "<th scope='col'>唯一识别码</th>" +
+                            "<th scope='col'>游戏名称</th>" +
+                            "<th scope='col'>游戏类型</th>" +
+                            "<th scope='col'>售价</th>" +
+                            "<th colspan='2'>操作</th>" +
+                            "</tr>");
                     }
                     console.dir(Result);
                     pageHtml +=
@@ -296,9 +463,9 @@
                             break;
                         }
                         if(pages[page] == currentPage){
-                            pageHtml +="<li class='active'><a class='to-page'>"+pages[page]+"</a></li>"
+                            pageHtml +="<li class='active'><a class='to-page' href=\"#\">"+pages[page]+"</a></li>"
                         }else {
-                            pageHtml +="<li ><a class='to-page'>"+pages[page]+"</a></li>"
+                            pageHtml +="<li ><a class='to-page' href=\"#\">"+pages[page]+"</a></li>"
                         }
                     }
                     pageHtml +=
@@ -313,11 +480,110 @@
                 }
             })
         }
+        function ChangeUserPage(index){
+            let html = "";
+            let pageHtml = "";
+            $.ajax({
+                url:"/person/getUserPage",
+                type:"post",
+                data:{
+                    pageIndex:index,
+                    pageCount:12,
+                },
+                dataType:'json',
+                success:function (Result) {
+                    console.dir(Result);
+                    if(Result.status == 1){
+
+                        html += "<table class='table '>" +
+                            "<tr class='table-head'>" +
+                            "<th scope='col'><a class='unique-code' id='unique-id' role='button'>唯一识别码"+
+                            "<th scope='col'>用户名</th>" +
+                            "<th scope='col'>用户昵称</th>" +
+                            "<th scope='col'><a class='unique-code' id='sail-id' role='button'>性别"+
+                            "<th colspan='2'>操作</th>" +
+                            "</tr>"
+                        for(let key in Result.resultMap.searchList){
+                            html +=
+                                "<tr class='rows'>" +
+                                "<td scope='col'>" + Result.resultMap.searchList[key].uid + "</td>" +
+                                "<td scope='col'>" + Result.resultMap.searchList[key].uname + "</td>" +
+                                "<td scope='col'>" + Result.resultMap.searchList[key].ualias + "</td>" +
+                                "<td scope='col'>" + Result.resultMap.searchList[key].usex + "</td>" +
+                                "<td scope='col'> <a class='more' role='button' data-toggle='modal' href='#user-Modal' id='more-"+ Result.resultMap.searchList[key].uid+"'>更多</a></td>"+
+                                 "</tr>"
+                        }
+                        html += "</table>";
+                        $(".object-show").html(html);
+                    }
+                    else{
+                        $(".object-show").html("<table class='table '>" +
+                            "<tr class='table-head'>" +
+                            "<th scope='col'>唯一识别码</th>" +
+                            "<th scope='col'>用户名</th>" +
+                            "<th scope='col'>用户昵称</th>" +
+                            "<th scope='col'>性别</th>" +
+                            "<th colspan='2'>操作</th>" +
+                            "</tr>");
+                    }
+                    pageHtml +=
+                        "<nav aria-label=\"Page navigation\">\n" +
+                        "  <ul class=\"pagination \">\n" +
+                        "    <li>\n" +
+                        "      <a class='to-page-user' href=\"#\" aria-label=\"Previous\">\n" +
+                        "        <span aria-hidden=\"true\">&laquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>"
+                    userCountPage = Result.resultMap.allSearchNum;
+                    let pages = new Array();
+                    if(uerCurrentPage>3){
+                        if(uerCurrentPage<uerCurrentPage-3){
+                            pages.push(uerCurrentPage-3);
+                            pages.push(uerCurrentPage-2);
+                            pages.push(uerCurrentPage-1);
+                            pages.push(uerCurrentPage*1);
+                            pages.push(uerCurrentPage*1+1);
+                            pages.push(uerCurrentPage*1+2);
+                        }else{
+                            for(let i =  userCountPage-6;i <  userCountPage;i++){
+                                pages.push(i+1);
+                            }
+                        }
+                    }else{
+                        for(let i = 0;i < 6;i++){
+                            pages.push(i+1);
+                        }
+                    }
+                    for(let i = 0; i < pages.length;i++){
+                        let page = i;
+                        if(pages[page]> userCountPage){
+                            break;
+                        }
+                        if(pages[page] == uerCurrentPage){
+                            pageHtml +="<li class='active'><a class='to-page-user' href=\"#\">"+pages[page]+"</a></li>"
+                        }else {
+                            pageHtml +="<li ><a class='to-page-user' href=\"#\">"+pages[page]+"</a></li>"
+                        }
+                    }
+                    pageHtml +=
+                        "<li>\n" +
+                        "      <a class='to-page-user' href=\"#\" aria-label=\"Next\">\n" +
+                        "        <span aria-hidden=\"true\">&raquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>\n" +
+                        "  </ul>\n" +
+                        "</nav>"
+                    $(".pages").html(pageHtml);
+                }
+            })
+        }
         /*页面初始化*/
         $(document).ready(function () {
             $("#home-content").show();
             $("#edit-query-game").hide();
             $("#add-game-content").hide();
+            $("#query-user-info").hide();
+            $("#other-operator").hide();
         })
     </script>
 </head>
@@ -339,17 +605,33 @@
         <div class="">
             <ul class="nav nav-pills nav-stacked">
                 <!--首页-->
-                <li role="presentation" ><a href="#" style="text-align: center" id="home">首页</a></li>
+                <li role="presentation" >
+                    <a class="btn "role="button" href="#"  id="home">
+                        &nbsp;&nbsp;&nbsp;<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                            <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                        </svg>
+                        首页
+                    </a>
+                </li>
                 <!--游戏管理-->
                 <li role="presentation" >
                     <a  class="btn "role="button" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
-                    游戏
+                        &nbsp;&nbsp;
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-controller" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.119 2.693c.904.19 1.75.495 2.235.98.407.408.779 1.05 1.094 1.772.32.733.599 1.591.805 2.466.206.875.34 1.78.364 2.606.024.815-.059 1.602-.328 2.21a1.42 1.42 0 0 1-1.445.83c-.636-.067-1.115-.394-1.513-.773a11.307 11.307 0 0 1-.739-.809c-.126-.147-.25-.291-.368-.422-.728-.804-1.597-1.527-3.224-1.527-1.627 0-2.496.723-3.224 1.527-.119.131-.242.275-.368.422-.243.283-.494.576-.739.81-.398.378-.877.705-1.513.772a1.42 1.42 0 0 1-1.445-.83c-.27-.608-.352-1.395-.329-2.21.024-.826.16-1.73.365-2.606.206-.875.486-1.733.805-2.466.315-.722.687-1.364 1.094-1.772.486-.485 1.331-.79 2.235-.98.932-.196 2.03-.292 3.119-.292 1.089 0 2.187.096 3.119.292zm-6.032.979c-.877.185-1.469.443-1.733.708-.276.276-.587.783-.885 1.465a13.748 13.748 0 0 0-.748 2.295 12.351 12.351 0 0 0-.339 2.406c-.022.755.062 1.368.243 1.776a.42.42 0 0 0 .426.24c.327-.034.61-.199.929-.502.212-.202.4-.423.615-.674.133-.156.276-.323.44-.505C4.861 9.97 5.978 9.026 8 9.026s3.139.943 3.965 1.855c.164.182.307.35.44.505.214.25.403.472.615.674.318.303.601.468.929.503a.42.42 0 0 0 .426-.241c.18-.408.265-1.02.243-1.776a12.354 12.354 0 0 0-.339-2.406 13.753 13.753 0 0 0-.748-2.295c-.298-.682-.61-1.19-.885-1.465-.264-.265-.856-.523-1.733-.708-.85-.179-1.877-.27-2.913-.27-1.036 0-2.063.091-2.913.27z"/>
+                            <path d="M11.5 6.026a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1 1a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm2 0a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1 1a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-7-2.5h1v3h-1v-3z"/>
+                            <path d="M3.5 6.526h3v1h-3v-1zM3.051 3.26a.5.5 0 0 1 .354-.613l1.932-.518a.5.5 0 0 1 .258.966l-1.932.518a.5.5 0 0 1-.612-.354zm9.976 0a.5.5 0 0 0-.353-.613l-1.932-.518a.5.5 0 1 0-.259.966l1.932.518a.5.5 0 0 0 .612-.354z"/>
+                        </svg>&nbsp;游戏&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <svg font-size="1em" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
                     </a>
                     <div class="collapse" id="collapseExample1">
                         <div >
                             <ul class="nav nav-second ">
-                                <li role="presentation" ><a href="#"  id="search-edit-game">查询编辑游戏</a></li>
-                                <li role="presentation" ><a href="#"  id="add-game">添加游戏</a></li>
+                                <li role="presentation" ><a class="nav-second-a"  href="#"  id="search-edit-game">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查询编辑游戏</a></li>
+                                <li role="presentation" ><a class="nav-second-a" href="#"  id="add-game">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加游戏</a></li>
                             </ul>
                         </div>
                     </div>
@@ -357,28 +639,65 @@
                 <!--用户管理-->
                 <li role="presentation" >
                     <a class="btn " role="button" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
-                        用户
+                        &nbsp;&nbsp;
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        </svg>&nbsp;用户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
                     </a>
                     <div class="collapse" id="collapseExample2">
-                        <ul class="nav nav-second ">
-                            <li role="presentation" ><a href="#">查看用户信息</a></li>
-                            <li role="presentation" ><a href="#">修改用户信息</a></li>
+                        <div>
+                            <ul class="nav nav-second ">
+                                <li role="presentation" ><a class="nav-second-a" href="#"  id="query-user">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查看用户信息</a></li>
 
-                        </ul>
+                                <!--<li role="presentation" ><a class="nav-second-a" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改用户信息</a></li>-->
+                            </ul>
+                        </div>
                     </div>
                 </li>
                 <!--订单管理-->
                 <li role="presentation" >
                     <a class="btn " role="button" data-toggle="collapse" href="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
-                        订单
+                        &nbsp;&nbsp;
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-text" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                            <path fill-rule="evenodd" d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+                        </svg>&nbsp;订单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
                     </a>
                     <div class="collapse" id="collapseExample3">
                         <ul class="nav nav-second ">
-                            <li role="presentation" ><a href="#">查询订单</a></li>
-                            <li role="presentation" ><a href="#">修改订单</a></li>
+                            <li role="presentation" ><a class="nav-second-a" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查询订单</a></li>
+                            <li role="presentation" ><a class="nav-second-a" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改订单</a></li>
                         </ul>
                     </div>
                 </li>
+                <!--系统设置-->
+                <li role="presentation" >
+                    <a class="btn " role="button" data-toggle="collapse" href="#collapseExample4" aria-expanded="false" aria-controls="collapseExample">
+                        &nbsp;&nbsp;
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 0 1 4.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 0 1-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 0 1 1.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 0 1 2.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 0 1 2.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 0 1 1.116-2.693l.318-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 0 1-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 0 1 8.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 0 0 1.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 0 0 .52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 0 0-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 0 0-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 0 0-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 0 0-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 0 0 .52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 0 0 1.255-.52l.094-.319z"/>
+                            <path fill-rule="evenodd" d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z"/>
+                        </svg>
+
+                        设置&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </a>
+                    <div class="collapse" id="collapseExample4">
+                        <ul class="nav nav-second ">
+                            <li role="presentation" ><a class="nav-second-a" href="#" id="system-manage">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;系统管理</a></li>
+                            <li role="presentation" ><a class="nav-second-a" href="#" id="other-sets">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他设置</a></li>
+                        </ul>
+                    </div>
+                </li>
+
             </ul>
         </div>
     </nav>
@@ -387,7 +706,44 @@
 <div class="contain-div">
     <!--内容页菜单栏-->
     <div class="contain-nav">
+        <div class="">
 
+        </div>
+
+        <!--账户设置-->
+        <div class="admin-info">
+            <div class="get-help">
+                <a tabindex="0" id = "exam"class="" role="button" data-toggle="popover" data-trigger="focus" title="帮助" data-placement="bottom" data-content="如果您对本系统有任何疑问，请随时联系客服">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <ul class="nav navbar-nav nav-admin">
+                <li class="dropdown" style="width: 180px">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img class="admin-avator" src="src/avatar_default.png"><span class="admin-id" id="admin">Administrator</span> </img>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">个人中心</a></li>
+                        <li><a href="#">消息</a></li>
+                        <li><a href="#">账号设置</a></li>
+                        <li><a href="#">意见反馈</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+
+            <div class="admin-set"role="button" href="#">
+
+
+            </div>
+
+        </div>
     </div>
     <!--主要内容-->
     <div class="main-contain">
@@ -399,13 +755,13 @@
         </div>
         <!--当前页面内容描述-->
         <div class="contain-des">
-            <h2>查询电影</h2>
-            <h5>一些与电影相关的信息</h5>
+            <h2 >数据分析</h2>
+            <h5 >一些与游戏销量相关的信息</h5>
         </div>
         <!--主要内容-->
         <div class="info-content-out">
             <!--首页内容-->
-            <div class="info-content" id="home-content">首页</div>
+
             <!--编辑查询游戏-->
             <div class="info-content" id="edit-query-game">
                 <div class="object-operator">
@@ -431,32 +787,12 @@
                     </div>
                 </div>
                 <div class="object-show">
-                    <table class="table ">
-                        <tr class="table-head">
-                        <th scope="col">唯一识别码</th>
-                        <th scope="col">游戏名称</th>
-                        <th scope="col">游戏类型</th>
-                        <th scope="col">售价</th>
-                        <th colspan="2" >操作</th>
-
-                        </tr>
-
-                        <tr class="rows">
-                            <td scope="col">5</td>
-                            <td scope="col">lol</td>
-                            <td scope="col">moba</td>
-                            <td scope="col">5$</td>
-                            <td scope="col"><a class="edit" role="button" data-toggle="modal" href="#myModal">编辑</a></td>
-                            <td scope="col"><a class="edit" role="button" data-toggle="modal" href="#myModal">更多</a></td>
-                        </tr>
-                    </table>
-
                 </div>
                 <div class="pages" align="center"></div>
             </div>
             <!--添加游戏-->
             <div class="info-content" id="add-game-content">
-                <div class="add-table">
+                <div class="add-table" align="center">
                     <table>
                         <tr>
                             <td>
@@ -482,22 +818,22 @@
                             <td><span>游戏类型：</span></td>
                             <td>
                                 <label class=" ">
-                                    <input type="checkbox"  autocomplete="off" name="types" value="动作"> 动作
+                                    <input type="checkbox"  autocomplete="off" name="types-add" value="动作"> 动作
                                 </label>
                                 <label class="">
-                                    <input type="checkbox" autocomplete="off" name="types"value="冒险"> 冒险
+                                    <input type="checkbox" autocomplete="off" name="types-add"value="冒险"> 冒险
                                 </label>
                                 <label class="">
-                                    <input type="checkbox" class="" autocomplete="off"name="types" value="多人">多人
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="多人">多人
                                 </label>
                                 <label class="">
-                                    <input type="checkbox" class="" autocomplete="off"name="types" value="射击">射击
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="射击">射击
                                 </label>
                                 <label class="">
-                                    <input type="checkbox" class="" autocomplete="off"name="types" value="休闲">休闲
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="休闲">休闲
                                 </label>
                                 <label class="">
-                                    <input type="checkbox" class="" autocomplete="off"name="types" value="模拟">模拟
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="模拟">模拟
                                 </label>
                             </td>
                         </tr>
@@ -522,19 +858,19 @@
                             <td><span>选择语言：</span></td>
                             <td>
                                 <label class=" ">
-                                    <input type="checkbox" autocomplete="off" name="languages" value="中文">中文
+                                    <input type="checkbox" autocomplete="off" name="languages-add" value="中文">中文
                                 </label>
                                 <label class="">
-                                    <input type="checkbox" autocomplete="off" name="languages" value="英文">英文
+                                    <input type="checkbox" autocomplete="off" name="languages-add" value="英文">英文
                                 </label>
                                 <label class="">
-                                    <input type="checkbox" autocomplete="off" name="languages" value="法语">法语
+                                    <input type="checkbox" autocomplete="off" name="languages-add" value="法语">法语
                                 </label>
                                 <label class="">
-                                    <input type="checkbox" autocomplete="off" name="languages" value="意大利语">意大利语
+                                    <input type="checkbox" autocomplete="off" name="languages-add" value="意大利语">意大利语
                                 </label>
                                 <label class="">
-                                    <input type="checkbox" autocomplete="off" name="languages" value="日文">日文
+                                    <input type="checkbox" autocomplete="off" name="languages-add" value="日文">日文
                                 </label>
                             </td>
                         </tr>
@@ -555,10 +891,30 @@
                             <td><span>封面资料链接：</span></td>
                             <td colspan="4"><label><textarea cols="88" class="form-control" placeholder="请输入封面图片链接" id="game-face-add"></textarea></label></td>
                         </tr>
+
+                        <tr >
+                            <td colspan="5">
+                                <div class="add-button">
+                                    <button type="button" class="btn btn-default" id="add-btn">添加</button>
+                                </div>
+                            </td>
+                        </tr>
                     </table>
                 </div>
 
             </div>
+            <!--用户信息-->
+            <div class="info-content" id="user-info"    >
+                <div class="object-operator">
+
+                </div>
+                <div class="object-show">
+
+                </div>
+                <div class="pages" align="center"></div>
+            </div>
+
+            <div class="info-content" id="other-operator"></div>
         </div>
     </div>
 
@@ -566,7 +922,7 @@
 
 <!--模态框-实现编辑游戏功能-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-game" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -682,17 +1038,92 @@
         </div>
     </div>
 </div>
+<!-- Modal-实现显示用户的详细信息 -->
+<div class="modal fade" id="user-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-user" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2">用户信息</h4>
+            </div>
+            <div class="modal-body">
+                <div align="center" >
+                    <table >
+                        <tr>
+                            <td nowrap="nowarp">用户名：</td>
+                            <td><label><input type="text" class="form-control user-detail" id="user-name"></label></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td colspan="1" rowspan="3">头像：</td>
+                            <td colspan="2" rowspan="3">
+                                <div class="row">
+                                    <div class="col-xs-8 col-md-8">
+                                        <a href="#" class="thumbnail">
+                                            <img id="user-avator"src="" alt="...">
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>邮箱：</td>
+                            <td><label><input type="text" class="form-control user-detail" id="user-mail"></label></td>
+                        </tr>
+                        <tr>
+                            <td>昵称：</td>
+                            <td><label><input type="text" class="form-control user-detail" id="user-alias"></label></td>
+                        </tr>
+                        <tr>
+                            <td>性别：</td>
+                            <td><label><input type="text" class="form-control user-detail" id="user-sex"></label></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td nowrap="nowarp">出生日期：</td>
+                            <td><label><input type="text" class="form-control user-detail" id="user-birthday"></label></td>
+                        </tr>
+                        <tr>
+                            <td nowrap="nowarp">个人简介：</td>
+                            <td colspan="4"><label><textarea cols="88"class="form-control " id="user-profile"></textarea></label></td>
+                        </tr>
+                        <!--<tr>
+                            <td>游戏单：</td>
+                            <td colspan="5"><label><input type="text" class="form-control"></label></td>
+                        </tr>
+                        <tr>
+                            <td>愿望单：</td>
+                            <td colspan="5"><label><input type="text" class="form-control"></label></td>
+                        </tr>-->
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script type="text/javascript">
 
+    let check_language;
+    let check_types;
+    let search_types;
     /*跳转至首页*/
     $("#home").on("click",function () {
         let bread_html="";
         bread_html +=
-            "<li class='active'><首页</li>";
+            "<li class='active'>首页</li>";
         $(".breadcrumb").html(bread_html);
+        let html_title="";
+        html_title +=
+            "<h2>数据分析</h2>"+
+            "<h5>一些与游戏销量相关的信息</h5>";
+        $(".contain-des").html(html_title);
         $("#home-content").show();
         $("#add-game-content").hide()
         $("#edit-query-game").hide();
+        $("#user-info").hide();
+        $("#other-operator").hide();
     })
     /*跳转至编辑查询游戏页面*/
     $("#search-edit-game").on("click",function () {
@@ -701,8 +1132,15 @@
             "<li><a href=>首页</a></li>" +
             "<li><a href=>游戏</a></li>" +
             "<li class='active'>查询编辑游戏</li>";
-        $(".breadcrumb").html(bread_html)
+        $(".breadcrumb").html(bread_html);
+        let html_title="";
+        html_title +=
+            "<h2>查询编辑游戏</h2>"+
+            "<h5>一些与游戏相关的信息</h5>";
+        $(".contain-des").html(html_title);
         ChangePage(currentIndex);
+        $("#other-operator").hide();
+        $("#user-info").hide();
         $("#home-content").hide();
         $("#add-game-content").hide()
         $("#edit-query-game").show();
@@ -715,40 +1153,170 @@
             "<li><a href=>游戏</a></li>" +
             "<li class='active'>添加游戏</li>";
         $(".breadcrumb").html(bread_html)
+        let html_title="";
+        html_title +=
+            "<h2>添加游戏</h2>"+
+            "<h5>一些与游戏相关的信息</h5>";
+        $(".contain-des").html(html_title);
+        $("#add-game-content").show();
         $("#home-content").hide();
         $("#edit-query-game").hide();
-        $("#add-game-content").show();
-
+        $("#user-info").hide();
+        $("#other-operator").hide();
     })
-
+    /*跳转到查看用户信息界面*/
+    $("#query-user").on("click",function () {
+        let bread_html = "";
+        bread_html +=
+            "<li><a href=>首页</a></li>" +
+            "<li><a href=>用户</a></li>" +
+            "<li class='active'>查看用户信息</li>";
+        $(".breadcrumb").html(bread_html)
+        let html_title="";
+        html_title +=
+            "<h2>查看用户信息</h2>"+
+            "<h5>一些与用户相关的信息</h5>";
+        $(".contain-des").html(html_title);
+        ChangeUserPage(userCurrentIndex);
+        $("#add-game-content").hide();
+        $("#home-content").hide();
+        $("#edit-query-game").hide();
+        $("#user-info").show();
+        $("#other-operator").hide();
+    })
+    /*通过折扣价排序*/
+    $(document).on("click","#sail-id",function () {
+        if(sort_types != "price"){
+            sort_types = "price";
+            game_order="desc";
+        }else{
+            if(game_order == "desc"){
+                game_order="asc";
+            }else{
+                game_order="desc";
+            }
+            sort_types = "price";
+        }
+        ChangePage(currentIndex,search_game_name,search_types,game_order,sort_types);
+    })
+    /*通过id排序*/
+    $(document).on("click","#unique-id",function () {
+        console.dir(game_order);
+        if(game_order == "desc"){
+            game_order="asc";
+        }else{
+            game_order="desc";
+        }
+        sort_types = "";
+        console.dir(game_order);
+        ChangePage(currentIndex,search_game_name,search_types,game_order);
+    })
     /*查询游戏*/
     $("#search-btn").on("click",function () {
         currentPage = 1;
+        currentIndex = 0;
         search_game_name = $("#search-game").val();
         console.dir($("#game-type").val());
         let str = new String();
         str = "[\""+ $("#game-type").val()+"\"]";
-        ChangePage(currentPage,search_game_name,str);
+        search_types = str;
+        if(search_types == "[\"\"]"){
+            ChangePage(currentIndex,search_game_name);
+        }else {
+            ChangePage(currentIndex,search_game_name,search_types);
+        }
+
+    })
+    $("#add-btn").on("click",function () {
+        let str = new String();
+        str = $("#game-releasedate-add").val()
+        let str_array = new Array();
+        str_array = str.split('-');
+        let date = new String();
+        date = str_array[0] + "/"+str_array[1]+"/" + str_array[2];
+        $.ajax({
+            url:'/store/gameAddHandle',
+            type:'post',
+            data:{
+                gname:$("#game-name-add").val(),
+                gtype:check_types,
+                developer:$("#game-devoloper-add").val(),
+                publisher:$("#game-publisher-add").val(),
+                realeasedate:date,
+                gprice:$("#game-price-add").val(),
+                discount:$("#game-discount-add").val(),
+                language:check_language,
+                detail:$("#game-detail-add").val(),
+                vhref:$("#game-video-add").val(),
+                phref:$("#game-picture-add").val(),
+                chref:$("#game-face-add").val(),
+            },
+            dataType:'json',
+            success:function (Result) {
+                console.dir(Result);
+                if(Result.status == 1){
+                    alert("添加成功");
+                }
+
+            }
+        })
     })
     /**
-     *填充复选框中的内容
+     *填充复选框中修改的内容
      */
+    /*添加时的填充内容*/
+    $("input[name=types-add]").click(function () {
+        let arr = new Array();
+        $("input[name=types-add]:checked").each(function (key,value) {
+            arr[key]=$(value).val();
+        });
+        check_types = JSON.stringify(arr);
+        let str = new String();
+
+        for(let i = 0; i < arr.length; i++){
+            if(i==arr.length-1){
+                str = str+arr[i];
+            }else {
+                str = str + arr[i] + ","
+            }
+        }
+        $("#game-types-add").val(str);
+        /*$("#game-types").val(arr.join(","));*/
+    })
+    $("input[name=languages-add]").click(function () {
+        let arr = new Array();
+        $("input[name=languages-add]:checked").each(function (key,value) {
+            arr[key]=$(value).val();
+        });
+        check_language = JSON.stringify(arr);
+        let str = new String();
+
+        for(let i = 0; i < arr.length; i++){
+            if(i==arr.length-1){
+                str = str+arr[i];
+            }else {
+                str = str+ arr[i] + ","
+            }
+        }
+        $("#game-language-add").val(str);
+
+    })
+    /*编辑时的填充内容*/
     $("input[name=types]").click(function () {
         let arr = new Array();
         $("input[name=types]:checked").each(function (key,value) {
             arr[key]=$(value).val();
         });
+        check_types = JSON.stringify(arr);
         let str = new String();
-        str = "[\"";
+
         for(let i = 0; i < arr.length; i++){
             if(i==arr.length-1){
-                str = str+arr[i]+"\"";
+                str = str+arr[i];
             }else {
-                str = str+ arr[i] + "\",\""
+                str = str + arr[i] + ","
             }
         }
-        str = str+"]"
-
         $("#game-types").val(str);
         /*$("#game-types").val(arr.join(","));*/
     })
@@ -757,17 +1325,16 @@
         $("input[name=languages]:checked").each(function (key,value) {
             arr[key]=$(value).val();
         });
+        check_language = JSON.stringify(arr);
         let str = new String();
-        str = "[\"";
+
         for(let i = 0; i < arr.length; i++){
             if(i==arr.length-1){
-                str = str+arr[i]+"\"";
+                str = str+arr[i];
             }else {
-                str = str+ arr[i] + "\",\""
+                str = str+ arr[i] + ","
             }
         }
-        str = str+"]"
-
         $("#game-language").val(str);
 
     })
@@ -788,14 +1355,14 @@
             data:{
                 gid:updategid,
                 gname:$("#game-name").val(),
-                gtype:$("#game-types").val(),
+                gtype:check_types,
                 developer:$("#game-devoloper").val(),
                 publisher:$("#game-publisher").val(),
                 realeasedate:date,
                 gprice:$("#game-price").val(),
                 discount:$("#game-discount").val(),
                 gscore:$("#game-score").val(),
-                language:$("#game-language").val(),
+                language:check_language,
                 detail:$("#game-detail").val(),
                 vhref:$("#game-video").val(),
                 phref:$("#game-picture").val(),
@@ -806,6 +1373,12 @@
                 if(Result.status == 1){
                     alert("更新成功")
                     $("#close-editor").trigger('click');
+                    console.dir(currentIndex);
+                    console.dir(search_game_name);
+                    console.dir(search_types);
+                    check_language ="";
+                    check_types ="";
+                    ChangePage(currentIndex,search_game_name,search_types);
                 }
 
             }
@@ -836,15 +1409,38 @@
         }else {
             currentPage = this.innerText
         }
-        currentIndex = 10 * (currentPage-1);
-        ChangePage(currentIndex,search_game_name);
+        currentIndex = 12 * (currentPage-1);
+        ChangePage(currentIndex,search_game_name,search_types,game_order,sort_types);
+    })
+
+    $(document).on("click",".to-page-user",function () {
+        /*console.dir(currentPage)
+        console.dir(this.innerText)*/
+        if(this.innerText=="»"){
+            uerCurrentPage++;
+            if(uerCurrentPage > userCountPage){
+                uerCurrentPage = userCountPage;
+            }else {
+                uerCurrentPage = uerCurrentPage;
+            }
+        }else if(this.innerText=="«"){
+            uerCurrentPage--;
+            if(uerCurrentPage == 0){
+                uerCurrentPage = 1;
+            }else {
+                uerCurrentPage = uerCurrentPage;
+            }
+        }else {
+            uerCurrentPage = this.innerText
+        }
+        userCurrentIndex = 12 * (uerCurrentPage-1);
+        ChangeUserPage(userCurrentIndex);
     })
     /**
      *编辑框填充内容
      */
     $(document).on("click",".edit",function () {
         console.dir(this.id);
-
         $.ajax({
             url:"/store/gameDetailShow",
             type:'post',
@@ -855,10 +1451,13 @@
             success:function (Result) {
 
                 let str = new String();
+                str = Result.resultMap.game.realeasedate;
                 let times = new Array();
+
                 times = str.split('T');
                 $("#game-name").val(Result.resultMap.game.gname);
                 $("#game-types").val(Result.resultMap.game.gtype);
+                check_types=Result.resultMap.game.gtype;
                 $("#game-devoloper").val(Result.resultMap.game.developer);
                 $("#game-publisher").val(Result.resultMap.game.publisher);
                 $("#game-releasedate").val(times[0]);
@@ -866,6 +1465,7 @@
                 $("#game-discount").val(Result.resultMap.game.discount);
                 $("#game-score").val(Result.resultMap.game.gscore);
                 $("#game-language").val(Result.resultMap.game.language);
+                check_language=Result.resultMap.game.language;
                 $("#game-detail").val(Result.resultMap.game.detail);
                 $("#game-video").val(Result.resultMap.game.vhref);
                 $("#game-picture").val(Result.resultMap.game.phref);
@@ -876,6 +1476,63 @@
 
     })
 
+    $(document).on("click",".more",function () {
+        console.dir(this.id);
+        let str_id = new String();
+        str_id = this.id;
+        let arr = new Array();
+        arr = str_id.split("-");
+        console.dir(arr[1]);
+        $.ajax({
+            url:'/person/getUserById',
+            type:'post',
+            data:{
+                uid:arr[1],
+            },
+            dataType:'json',
+            success:function (Result) {
+                console.dir(Result);
+                console.dir(Result.resultMap.user.uname);
+                if(Result.status == 1){
+                    $("#user-name").val(Result.resultMap.user.uname);
+
+                    $("#user-mail").val(Result.resultMap.user.umail);
+                    $("#user-avator").attr("src",Result.resultMap.user.uavatar);
+
+                    $("#user-alias").val(Result.resultMap.user.ualias);
+                    $("#user-sex").val(Result.resultMap.user.usex);
+                    $("#user-birthday").val(Result.resultMap.user.ubirthday);
+                    $("#user-profile").val(Result.resultMap.user.uprofile);
+                }
+            }
+        })
+
+    })
+    /*删除游戏*/
+    $(document).on("click",".delete",function () {
+        let arr = new Array();
+        let str = new String();
+        str = this.id;
+        arr = str.split("-");
+        console.dir(arr[1]);
+
+        $.ajax({
+            url:'/store/gameDeleteHandle',
+            type:'post',
+            data:{
+                gid:arr[1],
+            },
+            dataType:'json',
+            success:function (Result) {
+                console.dir(Result);
+                if(Result.status == 1){
+                    alert("删除成功");
+                    ChangePage(currentIndex,search_game_name,search_types);
+                }
+            }
+        })
+
+    })
 
     $("#many-person").on("click",function () {
         $("#game-type").val("多人");
@@ -888,6 +1545,10 @@
     })
     $("#first").on("click",function () {
         $("#game-type").val("第一人称");
+    })
+
+    $(function () {
+        $('[data-toggle="popover"]').popover()
     })
 </script>
 
