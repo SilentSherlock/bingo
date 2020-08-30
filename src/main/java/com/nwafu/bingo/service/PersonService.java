@@ -5,6 +5,7 @@ import com.nwafu.bingo.dao.UserDao;
 import com.nwafu.bingo.entity.Admin;
 import com.nwafu.bingo.entity.Post;
 import com.nwafu.bingo.entity.User;
+import com.nwafu.bingo.utils.Search;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -56,7 +57,6 @@ public class PersonService {
                     break;
                 }
             }
-
             if(result instanceof Admin){
                 System.out.println("Validate success");
             }else {
@@ -168,7 +168,18 @@ public class PersonService {
         }else log(status + " Parameter null or wrong type");
     }
 
+    public List<User> getUserPage(Integer current_index, Integer size) throws Exception {
+        List<User> list = userDao.getUserPage(current_index,size);
+        if(list.size() == 0){
+            return null;
+        }else {
+            return list;
+        }
+    }
+
     private void log(String status) {
         System.out.println(CLASSNAME + " " + status);
     }
+
+
 }
