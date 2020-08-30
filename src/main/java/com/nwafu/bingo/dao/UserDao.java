@@ -1,6 +1,7 @@
 package com.nwafu.bingo.dao;
 
 import com.nwafu.bingo.entity.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

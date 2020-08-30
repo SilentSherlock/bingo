@@ -8,6 +8,7 @@ import com.nwafu.bingo.entity.User;
 import com.nwafu.bingo.service.MailService;
 import com.nwafu.bingo.service.PersonService;
 import com.nwafu.bingo.service.StoreService;
+import com.nwafu.bingo.service.TextSearchService;
 import com.nwafu.bingo.utils.Result;
 import com.nwafu.bingo.utils.Status;
 import org.springframework.util.ResourceUtils;
@@ -36,6 +37,8 @@ public class PersonController {
     private StoreService storeService;
     @Resource
     private MailService mailService;
+    @Resource
+    private TextSearchService textSearchService;
     private String code = "";
 
     @RequestMapping("/adminValidate")
@@ -205,7 +208,7 @@ public class PersonController {
 
         if (file != null) {
             int uid = user.getUid();
-            String imgSrc = "/src/uinfo" + uid + ".jpg";
+            String imgSrc = "/src/uinfo/" + uid + ".jpg";
             String imgPath = ResourceUtils.getURL("classpath:").getPath() + "static" + imgSrc;
             File img = new File(imgPath);
             if (img.exists()) {
