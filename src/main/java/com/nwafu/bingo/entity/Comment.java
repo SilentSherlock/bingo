@@ -1,5 +1,7 @@
 package com.nwafu.bingo.entity;
 
+import java.util.Date;
+
 /**
  * Date: 2020/8/19
  * Description: 评论类，根据ctype分为对帖子的回复和对回复的回复
@@ -10,7 +12,7 @@ public class Comment {
     private Integer uid;
     private Integer pid;
     private String content;
-    private String ctime;
+    private Date ctime;
     private Integer ctype;
     private Integer tocid;
     private Integer touid;
@@ -47,14 +49,6 @@ public class Comment {
         this.content = content;
     }
 
-    public String getCtime() {
-        return ctime;
-    }
-
-    public void setCtime(String ctime) {
-        this.ctime = ctime;
-    }
-
     public Integer getCtype() {
         return ctype;
     }
@@ -77,5 +71,13 @@ public class Comment {
 
     public void setTouid(Integer touid) {
         this.touid = touid;
+    }
+
+    public Date getCtime() {
+        return ctime;
+    }
+
+    public void setCtime(Date ctime) {
+        this.ctime = ctime;
     }
 }
