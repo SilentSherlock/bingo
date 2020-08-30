@@ -178,10 +178,7 @@ public class PersonService {
             return list;
         }
     }
-    public Integer getUserCount(Search search){
-        Integer allSearchNum = userDao.getUserCount(search);
-        return (int)Math.ceil((double)allSearchNum / (double)search.getPageCount());
-    }
+
     private void log(String status) {
         System.out.println(CLASSNAME + " " + status);
     }

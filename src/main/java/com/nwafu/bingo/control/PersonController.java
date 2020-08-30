@@ -267,20 +267,5 @@ public class PersonController {
         return new Result(Status.SUCCESS, null);
     }
 
-    @RequestMapping("getUserPage")
-    public Result getUserPage(Search search) throws Exception {
-        Result result;
-        List<User> list= personService.getUserPage(search.getPageIndex(),search.getPageCount());
-        if(list==null){
-            result = new Result(Status.FAILURE);
-            result.getResultMap().put("getUserpage", "获取失败");
-        }else {
-            result = new Result();
-            Integer searchNum = personService.getUserCount(search);
-            result.getResultMap().put("searchList", list);
-            result.getResultMap().put("allSearchNum",searchNum);
-            result.setStatus(Status.SUCCESS);
-        }
-        return result;
-    }
+
 }
