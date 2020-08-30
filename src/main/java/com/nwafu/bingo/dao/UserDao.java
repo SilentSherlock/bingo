@@ -1,6 +1,7 @@
 package com.nwafu.bingo.dao;
 
 import com.nwafu.bingo.entity.User;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -18,4 +19,8 @@ public interface UserDao {
     User getById(Integer id) throws Exception;
     List<User> getAll() throws Exception;
     void update(User user) throws Exception;
+
+    List<User> getUserPage(@Param("current_index") Integer current_index, @Param("size") Integer size) throws Exception;
+
+
 }

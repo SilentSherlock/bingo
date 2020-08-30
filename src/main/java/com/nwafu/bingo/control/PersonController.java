@@ -10,6 +10,7 @@ import com.nwafu.bingo.service.PersonService;
 import com.nwafu.bingo.service.StoreService;
 import com.nwafu.bingo.service.TextSearchService;
 import com.nwafu.bingo.utils.Result;
+import com.nwafu.bingo.utils.Search;
 import com.nwafu.bingo.utils.Status;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
