@@ -1,7 +1,6 @@
 package com.nwafu.bingo.entity;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Date: 2020/8/19

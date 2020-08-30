@@ -71,4 +71,11 @@
             limit #{current_index} ,#{size}
 
     </select>
+
+    <select id="getUserCount" resultType="Integer">
+        SELECT
+            count(*)
+        FROM
+            user
+    </select>
 </mapper>

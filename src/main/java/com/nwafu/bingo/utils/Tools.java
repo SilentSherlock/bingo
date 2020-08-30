@@ -1,11 +1,13 @@
 package com.nwafu.bingo.utils;
 
+import com.nwafu.bingo.entity.Admin;
+import com.nwafu.bingo.entity.Post;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -30,6 +32,50 @@ public class Tools {
         multipartFile.transferTo(uploadFilePath);
     }
 
+   /* public static void main(String[] args) throws Exception {
+        Tools tools = new Tools();
+        Post post = new Post();
+        Admin admin = new Admin();
+        admin.setAid(2121);
+        admin.setAname("fdafd");
+        admin.setPassword("");
+        boolean result = tools.validateObject(admin);
+        System.out.println(result);
+    }*/
+    /**
+     * 校验对象属性是否都被赋值
+     */
+    public boolean validateObject(Object object) throws Exception {
+        if (object == null) return false;
+
+        Field[] fields = object.getClass().getDeclaredFields();
+        String[] propTypes = new String[fields.length];
+        String[] propNames = new String[fields.length];
+
+        for (int i = 0; i < fields.length; i++) {
+            propTypes[i] = fields[i].getType().toString();
+            System.out.println("type: " + propTypes[i]);
+            propNames[i] = fields[i].getName().substring(0,1).toUpperCase() + fields[i].getName().substring(1);
+        }
+
+        //其他不同属性检测可继续添加
+        for (int i = 0; i < propTypes.length; i++) {
+            Method method = object.getClass().getMethod("get" + propNames[i]);
+            switch (propTypes[i]){
+                case "class java.lang.Integer":
+                    Integer intValue = (Integer) method.invoke(object);
+                    if (intValue == null) return false;
+                    break;
+                case "class java.lang.String":
+                    String strValue = (String) method.invoke(object);
+                    if (strValue == null || "".equals(strValue)) return false;
+                    break;
+                default:
+                    throw new Exception("Tools validateObject get unknown property type");
+            }
+        }
+        return true;
+    }
     /**
     * @MethodName getDays
     * @Description 获取两个Date之间的天数差
