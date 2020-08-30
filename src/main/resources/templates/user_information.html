@@ -372,6 +372,7 @@
     var templateDiv = $("#choose1")
     var thisUser
     var uid=1
+    var haveError=false;
     $(document).ready(function () {
         //获取用户信息
         function getUser() {
@@ -441,14 +442,17 @@
                 $(".form-error-msg").show()
                 $(".form-right-msg").hide()
                 $(".form-error-msg").text("不要超过10个字符")
+                haveError=true;
             }else if(temp==0){
                 $(".form-error-msg").show()
                 $(".form-right-msg").hide()
                 $(".form-error-msg").text("昵称不能为空")
+                haveError=true;
             }else{
                 $(".form-error-msg").hide()
                 $(".form-right-msg").show()
                 $(".form-right-msg").text("昵称符合要求")
+                haveError=false;
             }
         })
         $("#select-month").click(function () {
@@ -510,12 +514,19 @@
     })
     $(".submit").click(function () {
         let submitData = new FormData();
+        let url;
         let files = $("#image").get(0).files[0];
         submitData.append("uname",thisUser.uname);
         submitData.append("umail",thisUser.umail);
         submitData.append("uprofile",$(".user-describe").val())
         submitData.append("ualias",$("#user-name").val())
-        submitData.append("avatar",files);
+
+        if(files==null){
+            url='/person/updateUserNoPhoto';
+        }else{
+            url='/person/updateUser';
+            submitData.append("avatar",files);
+        }
         submitData.append("uid",thisUser.uid);
         let year =$("#select-year option:selected").val();
         let month = $("#select-month option:selected").val();
@@ -536,20 +547,28 @@
         }
         console.log(sex)
         submitData.append("usex",sex)
+        submitData.append("password",thisUser.password);
+        submitData.append("gamelist",thisUser.gamelist);
+        submitData.append("wishlist",thisUser.wishlist);
         JSON.stringify(submitData)
-        $.ajax({
-            url:'/person/updateUser',
-            type:'post',
-            data:submitData,
-            processData:false,
-            contentType: false,
-            cache : false,
-            async:false,
-            success:function (data) {
-                console.dir(data)
-                alert("修改成功")
-            }
-        })
+        if(!haveError){
+            $.ajax({
+                url:url,
+                type:'post',
+                data:submitData,
+                processData:false,
+                contentType: false,
+                cache : false,
+                async:false,
+                success:function (data) {
+                    console.dir(data)
+                    alert("修改成功")
+                }
+            })
+        }else{
+            alert("请填写符合要求的昵称");
+        }
+
     })
     function  change_photo() {
         var oFReader = new FileReader();
@@ -560,6 +579,17 @@
             $("#user-photo").attr("src",src);
         }
     }
+    // function getOriginalPhoto(){
+    //     var oFReader = new FileReader();
+    //     var file = document.getElementById("image").files[0];
+    //     oFReader.readAsDataURL(file);
+    //     var src;
+    //     oFReader.onloadend = function(oFRevent) {
+    //         src = oFRevent.target.result;
+    //         console.log("original is "+src);
+    //     }
+    //     return src;
+    // }
 
 
 </script>
