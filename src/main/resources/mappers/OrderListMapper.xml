@@ -3,46 +3,27 @@
 <mapper namespace="com.nwafu.bingo.dao.OrderlistDao">
 
     <resultMap id="BaseOrderListMap" type="com.nwafu.bingo.entity.Orderlist">
-        <id column="oid" property="oid" jdbcType="INTEGER"/>
+        <result column="oid" property="oid" jdbcType="VARCHAR"/>
         <result column="uid" property="uid" jdbcType="INTEGER"/>
-        <result column="detail" property="orderDetails" jdbcType="VARCHAR"/>
-        <result column="otime" property="otime" jdbcType="DATE"/>
-
+        <result column="allprice" property="allprice" jdbcType="FLOAT"/>
+        <result column="otime" property="otime" jdbcType="TIMESTAMP"/>
     </resultMap>
-
-    <insert id="add" parameterType="com.nwafu.bingo.entity.OrderDetail" useGeneratedKeys="true">
-        INSERT INTO
-            orderlist(uid,detail,otime)
-        VALUES
-            (#{uid},#{orderDetails},#{otime})
-    </insert>
-
-    <delete id="delete" parameterType="com.nwafu.bingo.entity.Orderlist">
-        DELETE FROM
-            orderlist
+    
+    <select id="selectOrderListByUid" resultMap="BaseOrderListMap">
+        SELECT
+            *
+        FROM
+            orderList
         WHERE
-            oid = #{oid}
-    </delete>
-
-    <select id="getById"  resultMap="BaseOrderListMap">
-        SELECT
-            *
-        FROM
-            orderlist
-        WHERE ${idType} = #{idValue}
+            uid = #{uid}
+        LIMIT #{pageIndex}, #{pageCount}
     </select>
-    <select id="getAll" resultMap="BaseOrderListMap">
+    <select id="getOrderListByUidCount" resultType="Integer">
         SELECT
-            *
+            count(*)
         FROM
-            orderlist
-    </select>
-    <select id="getByCurTime" resultMap="BaseOrderListMap">
-        SELECT
-            *
-        FROM
-            orderlist
+            orderList
         WHERE
-            otime BETWEEN DATE_SUB(CURDATE(), INTERVAL 30 DAY) and CURDATE()
+            uid = #{uid}
     </select>
 </mapper>
