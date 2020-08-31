@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nwafu.bingo.dao.GameSaleDao">
+
+    <resultMap id="BaseGameSaleMap" type="com.nwafu.bingo.entity.GameSale">
+        <result column="gid" property="gid" jdbcType="INTEGER"/>
+        <result column="gname" property="gname" jdbcType="VARCHAR"/>
+        <result column="cursale" property="cursale" jdbcType="INTEGER"/>
+        <result column="increaserate" property="increaserate" jdbcType="FLOAT"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="BaseGameSaleMap">
+        SELECT
+            *
+        FROM
+            gameDataAnalysis
+        ORDER BY
+        <choose>
+            <when test="sort == 0">
+                gid
+            </when>
+            <when test="sort == 1">
+                cursale
+            </when>
+            <otherwise>
+                increaserate
+            </otherwise>
+        </choose>
+        <choose>
+            <when test="order == 'desc'">
+                desc
+            </when>
+            <otherwise>
+                asc
+            </otherwise>
+        </choose>
+        LIMIT #{pageIndex}, #{pageCount}
+    </select>
+    <select id="getAllCount" resultType="Integer">
+        SELECT
+            count(*)
+        FROM
+            gameDataAnalysis
+    </select>
+</mapper>

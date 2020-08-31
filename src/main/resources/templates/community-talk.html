@@ -3,7 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>community-talk</title>
+    <script type="text/javascript" src="extlib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
     <style>
+        textarea{
+            resize: none;
+            border: none;
+            width: 100%;
+            display: inline-block;
+            height: 90px;
+            padding: 10px;
+            box-sizing: border-box;
+            outline: none;
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            color: -internal-light-dark-color(black, white);
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            text-align: start;
+            -webkit-appearance: textarea;
+            background-color: -internal-light-dark-color(white, black);
+            -webkit-rtl-ordering: logical;
+            flex-direction: column;
+        }
         body{
             background: #202539;
         }
@@ -214,6 +238,11 @@
         .community-talk-item{
             background: transparent;
             padding: 20px 0;
+            border-bottom: 1px solid #0f0f0f;
+        }
+        .community-talk-item-child{
+            background: #202539;
+            padding: 20px 0;
         }
         .avatar-wrapper{
             float: left;
@@ -280,85 +309,349 @@
     </style>
 </head>
 <body>
-    <div class="community-container">
-        <div class="community-content">
-            <div class="community-middle">
-                <div class="community-post-content">
-                    <!--发布的内容-->
-                </div>
-                <div class="community-block-wrapper">
-                    <div class="community-comment-block" style="height: 160px">
-                        <h1>评论</h1>
-                        <div class="comment-wrapper">
-                            <img src="../templates/image/user.jpg">
-                            <div class="textarea-block-wrapper">
-                                <div class="textarea-block">
-                                    <div class="textarea-block-inner" id="textarea-block">
-                                        <span class="login-button">登录</span>
-                                        <span>参与评论</span>
-                                    </div>
-                                    <ul class="search-users-list">
-                                        <li class="user-block">输入小伙伴名字查找</li>
-                                    </ul>
-                                </div>
-                                <div class="button">
-                                    <button class="image-button">
-                                        <div class="child">
-                                            <i class="fa">文件</i>
-                                            <input type="file">
-                                        </div>
-                                    </button>
-                                    <button class="mention-button">@</button>
-                                    <span class="submit">评论</span>
-                                    <div class="word-block">
-                                        还可以输入<span>140</span>字
-                                    </div>
+<div class="community-container">
+    <div class="community-content">
+        <div class="community-middle">
+            <div class="community-post-content">
+                <!--发布的内容-->
+            </div>
+            <div class="community-block-wrapper" id="content">
+                <div class="community-comment-block" style="height: 160px">
+                    <h1>评论</h1>
+                    <div class="comment-wrapper">
+                        <img src="../templates/image/user.jpg" id="user-Avatar" hidden>
+                        <div class="textarea-block-wrapper">
+                            <div class="textarea-block">
+                                <div class="textarea-block-inner" id="textarea-block">
+                                    <span class="login-button">登录</span>
+                                    <span>参与评论</span>
+                                    <!--<textarea style="width: 100%"  id="content-txt" maxlength="150" oninput="change()">输入评论内容</textarea>-->
                                 </div>
                             </div>
-                        </div>
-
-                    </div>
-                    <div class="community-talk-item">
-                        <div class="avatar-wrapper">
-                            <a target="_blank" href="#">
-                                <img src="../templates/image/user1.jpg">
-                            </a>
-                        </div>
-                        <div class="comment-content">
-                            <div class="user-name">
-                                <a target="_blank" href="#">user1</a>
-                                <span>发表于2020-8-21 09.30.45</span>
-                            </div>
-                            <div class="content">评论内容</div>
-                            <div class="action">
-                                <button class="reply">回复</button>
-                                <button class="like"><i class="fa">赞</i>0</button>
-                                <button class="report">举报</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="community-talk-item">
-                        <div class="avatar-wrapper">
-                            <a target="_blank" href="#">
-                                <img src="../templates/image/user1.jpg">
-                            </a>
-                        </div>
-                        <div class="comment-content">
-                            <div class="user-name">
-                                <a target="_blank" href="#">user1</a>
-                                <span>发表于2020-8-21 09.30.45</span>
-                            </div>
-                            <div class="content">评论内容</div>
-                            <div class="action">
-                                <button class="reply">回复</button>
-                                <button class="like"><i class="fa">赞</i>0</button>
-                                <button class="report">举报</button>
+                            <div class="button">
+                                <span class="submit" id="submit" onclick="addComment()">评论</span>
+                                <div class="word-block">
+                                    还可以输入<span id="limit">150</span>字
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--<div class="community-talk-item">
+                    <div class="avatar-wrapper">
+                        <a target="_blank" href="#">
+                            <img src="../templates/image/user1.jpg">
+                        </a>
+                    </div>
+                    <div class="comment-content">
+                        <div class="user-name">
+                            <a target="_blank" href="#">user1</a>
+                            <span>发表于2020-8-21 09.30.45</span>
+                        </div>
+                        <div class="content">评论内容</div>
+                        <div class="action">
+                            <button class="reply">回复</button>
+                        </div>
+                        <div class="community-talk-item-child">
+                            <div class="avatar-wrapper">
+                                <a target="_blank" href="#">
+                                    <img src="../templates/image/user1.jpg">
+                                </a>
+                            </div>
+                            <div class="comment-content">
+                                <div class="user-name">
+                                    <a target="_blank" href="#">user1</a>:
+                                    <span class="content">评论内容</span>
+                                </div>
+                                <div class="action">
+                                    <span>发表于2020-8-21 09.30.45</span>
+                                    <button class="reply">回复</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="community-talk-item-child">
+                            <div class="avatar-wrapper">
+                                <a target="_blank" href="#">
+                                    <img src="../templates/image/user1.jpg">
+                                </a>
+                            </div>
+                            <div class="comment-content">
+                                <div class="user-name">
+                                    <a target="_blank" href="#">user1</a>:
+                                    <span class="content">评论内容</span>
+                                </div>
+                                <div class="action">
+                                    <span>发表于2020-8-21 09.30.45</span>
+                                    <button class="reply">回复</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
             </div>
         </div>
     </div>
+</div>
 </body>
+<script type="text/javascript">
+    //pid和uid获取
+    //pid和uid获取
+    //pid和uid获取
+    //pid和uid获取
+
+
+    //实时监测还剩余多少字可以输入
+    function change(){
+        txt = $("#content-txt").val();
+        var length = 150 - txt.length;
+        document.getElementById("limit").innerText = length;
+    }
+    //增加帖子的评论
+    function addComment(){
+        var txt = $("#content-txt").val();
+        if(txt.length == 0){
+            alert("评论内容不可以为空！");
+        }
+        else{
+            var myDate =  new Date();
+            console.log(myDate);
+            var data = {
+                uid : 1,
+                pid : 1,
+                content : txt,
+                ctime : myDate,
+                ctype : 0,
+                tocid : -1,
+                touid : -1
+            }
+            $.post(
+                "/community/addComment",data,
+                function (result){
+                    // console.log("插入结果:" + result);
+                }
+            )
+        }
+        window.location.reload();
+    }
+    function Reply1(comment){
+        var txt = window.prompt("输入回复内容");
+        if(txt.length == 0){
+            alert("评论内容不可以为空！");
+        }
+        else{
+            var myDate =  new Date();
+            console.log(myDate);
+            var data = {
+                uid : 2,
+                pid : 1,
+                content : txt,
+                ctime : myDate,
+                ctype : 1,
+                tocid : $(comment).attr("id"),
+                touid : -1
+            }
+            $.post(
+                "/community/addComment",data,
+                function (result){
+                    // console.log("插入结果:" + result);
+                }
+            )
+        }
+        window.location.reload();
+    }
+    function Reply2(comment){
+        var txt = window.prompt("输入回复内容");
+        if(txt.length == 0){
+            alert("评论内容不可以为空！");
+        }
+        else{
+            var myDate =  new Date();
+            console.log(myDate);
+            var data = {
+                uid : 2,
+                pid : 1,
+                content : txt,
+                ctime : myDate,
+                ctype : 1,
+                tocid : $(comment).attr("id"),
+                touid : $(comment).attr("name")
+            }
+            console.log("发送的数据tocid"+data.tocid +" touid"+data.touid)
+            $.post(
+                "/community/addComment",data,
+                function (result){
+                    // console.log("插入结果:" + result);
+                }
+            )
+        }
+        window.location.reload();
+    }
+    $(document).ready(function () {
+        //判断是否登录
+        function UnlockComment(){
+            //if(userInfo.uid === undefined)
+            if(0)
+                return ;
+            else {
+                var data = {
+                    uid : 1
+                }
+                $.get(
+                    "/person/getUserById",data,
+                    function (result){
+                        console.log(result);
+                        var user = result.resultMap.user;
+                        document.getElementById("user-Avatar").src = user.uavatar;
+                    }
+                )
+                $("#user-Avatar").show();
+                var html = "";
+                html += "<textarea style=\"width: 100%\"  id=\"content-txt\" maxlength=\"150\" oninput=\"change()\">输入评论内容</textarea>";
+                $("#textarea-block").html(html)
+            }
+        }
+        //加载评论区和当前用户头像
+        function loadComment(){
+            var data = {
+                idType : "pid",
+                idValue : 1
+            }
+            $.get(
+                "/community/getCommentsById",data,
+                function (result){
+                    var commemtList = result.resultMap.CommentBypid;
+                    console.log(commemtList);
+                    //未找到评论则不加载
+                    if(commemtList === undefined)
+                        return ;
+                    var html="",i=commemtList.length,j=1;
+                    //加载回复帖子的评论
+                    for(;j<=i;j++) {
+                        if (commemtList[j - 1].ctype == 0) {
+                            var data = {
+                                uid: commemtList[j - 1].uid
+                            }
+                            $.ajax({
+                                url: "/person/getUserById",
+                                data: data,
+                                type: 'get',
+                                async: false,
+                                success: function (userResult) {
+                                    html += "<div class=\"community-talk-item\" >\n" +
+                                        "                        <div class=\"avatar-wrapper\">\n" +
+                                        "                            <a target=\"_blank\" href=\"#\">\n";
+                                    html += "<img src=" + userResult.resultMap.user.uavatar + ">\n" +
+                                        "                            </a>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"comment-content\" id=" +"F" +commemtList[j - 1].cid + ">\n" +
+                                        "                            <div class=\"user-name\">\n" +
+                                        "                                <a target=\"_blank\" href=\"#\">" + userResult.resultMap.user.uname + "</a>\n"
+                                    html += "<span>发表于" + commemtList[j - 1].ctime.substr(0, 19) + "</span>\n" +
+                                        "                            </div>\n" +
+                                        "                            <div class=\"content\">" + commemtList[j - 1].content + "</div>\n" +
+                                        "                            <div class=\"action\">\n" +
+                                        "                                <button class=\"reply\" id=" +commemtList[j - 1].cid + " "+"name="+commemtList[j - 1].uid+" "+ "onclick=Reply1(this)"+">回复</button>\n" +
+                                        "                            </div>\n" +
+                                        "                        </div>\n" +
+                                        "                    </div>";
+                                }
+                            })
+                        }
+                    }
+                    $("#content").append(html);
+
+                    i=commemtList.length,j=1;
+                    for(;j<=i;j++) {
+                        if (commemtList[j - 1].ctype == 1) {
+                            //加载回复帖子的评论的回复
+                            if (commemtList[j - 1].touid == -1) {
+                            html = "";
+                            var data = {
+                                uid: commemtList[j - 1].uid
+                            }
+                            $.ajax({
+                                url: "/person/getUserById",
+                                data: data,
+                                type: 'get',
+                                async: false,
+                                success: function (userResult) {
+                                    html += "<div class=\"community-talk-item-child\">\n" +
+                                        "                            <div class=\"avatar-wrapper\">\n" +
+                                        "                                <a target=\"_blank\" href=\"#\">\n" +
+                                        "<img src=" + userResult.resultMap.user.uavatar + ">\n" +
+                                        "                                </a>\n" +
+                                        "                            </div>\n" +
+                                        "                            <div class=\"comment-content\">\n" +
+                                        "                                <div class=\"user-name\">\n" +
+                                        "                                    <a target=\"_blank\" href=\"#\">" + userResult.resultMap.user.uname + ":</a>" +
+                                        "                                    <span class=\"content\">" + commemtList[j - 1].content + "</span>\n" +
+                                        "                                </div>\n" +
+                                        "                                <div class=\"action\">\n" +
+                                        "                                    <span>发表于" + commemtList[j - 1].ctime.substr(0, 19) + "</span>\n" +
+                                        "                                    <button class=\"reply\" id=" +commemtList[j - 1].tocid + " "+"name="+commemtList[j - 1].uid+" "+ "onclick='Reply2(this)'>回复</button>\n" +
+                                        "                                </div>\n" +
+                                        "                            </div>\n" +
+                                        "                        </div>";
+                                }
+                            })
+                            var fid = "#F" + commemtList[j - 1].tocid;
+                            $(fid).append(html);
+                        }
+                            //加载回复帖子的评论的回复的回复
+                            else{
+                                html = "";
+                                var data = {
+                                    uid: commemtList[j - 1].uid
+                                }
+                                $.ajax({
+                                    url: "/person/getUserById",
+                                    data: data,
+                                    type: 'get',
+                                    async: false,
+                                    success: function (userResult) {
+                                        html += "<div class=\"community-talk-item-child\">\n" +
+                                            "                            <div class=\"avatar-wrapper\">\n" +
+                                            "                                <a target=\"_blank\" href=\"#\">\n" +
+                                            "<img src=" + userResult.resultMap.user.uavatar + ">\n" +
+                                            "                                </a>\n" +
+                                            "                            </div>\n" +
+                                            "                            <div class=\"comment-content\">\n" +
+                                            "                                <div class=\"user-name\">\n" +
+                                            "                                    <a target=\"_blank\" href=\"#\">" + userResult.resultMap.user.uname + ":</a>" +
+                                            "                                    <span class=\"content\">"+"回复@";
+                                        var dataChild = {
+                                             uid: commemtList[j - 1].touid
+                                        }
+                                        $.ajax({
+                                            url: "/person/getUserById",
+                                            data: dataChild,
+                                            type: 'get',
+                                            async: false,
+                                            success: function (uResult) {
+                                                html +=uResult.resultMap.user.uname+":";
+                                            }
+                                        })
+                                          html  += commemtList[j - 1].content + "</span>\n" +
+                                            "                                </div>\n" +
+                                            "                                <div class=\"action\">\n" +
+                                            "                                    <span>发表于" + commemtList[j - 1].ctime.substr(0, 19) + "</span>\n" +
+                                            "                                    <button class=\"reply\" id=" +commemtList[j - 1].tocid + " "+"name="+commemtList[j - 1].uid+" "+ "onclick='Reply2(this)'>回复</button>\n" +
+                                            "                                </div>\n" +
+                                            "                            </div>\n" +
+                                            "                        </div>";
+                                    }
+                                })
+                                var fid = "#F" + commemtList[j - 1].tocid;
+                                $(fid).append(html);
+                            }
+                        }
+                    }
+                }
+            )
+        }
+        UnlockComment()
+        loadComment();
+        change();
+    })
+</script>
 </html>

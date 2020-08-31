@@ -13,12 +13,10 @@ import java.util.List;
  */
 @Repository
 public interface OrderlistDao {
-
-    void add(Orderlist orderlist) throws Exception;
-    void delete(Orderlist orderlist) throws Exception;
     /*根据不同的id来查询comment
      * idType的值应为oid,uid*/
-    List<Orderlist> getById(@Param("idType") String idType, @Param("idValue") Integer idValue) throws Exception;
-    List<Orderlist> getAll() throws Exception;
-    List<Orderlist> getByCurTime() throws Exception;
+    List<Orderlist> selectOrderListByUid(@Param(value = "uid") Integer uid,
+                                               @Param(value = "pageIndex") Integer pageIndex,
+                                               @Param(value = "pageCount") Integer pageCount) throws Exception;
+    Integer getOrderListByUidCount(Integer uid) throws Exception;
 }
