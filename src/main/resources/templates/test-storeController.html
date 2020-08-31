@@ -7,39 +7,89 @@
 </head>
 <body>
 <form >
-    排序：<input type="text" id="order"><br>
-    排序种类：<input type="text" id="sort"><br>
-    地区：<input type="text" id="area"><br>
-    类别：<input type="text" id="category"><br>
-    标签：<input type="text" id="tag"><br>
-    语言：<input type="text" id="language"><br>
-    最小价格：<input type="text" id="minPrice"><br>
-    最大价格：<input type="text" id="maxPrice"><br>
-    页码：<input type="text" id="pageIndex"><br>
-    <input type="button" id="register-btn" value="注册">
+<!--    排序：<input type="text" id="order"><br>-->
+<!--    排序种类：<input type="text" id="sort"><br>-->
+<!--    地区：<input type="text" id="area"><br>-->
+<!--    类别：<input type="text" id="category"><br>-->
+<!--    标签：<input type="text" id="tag"><br>-->
+<!--    语言：<input type="text" id="language"><br>-->
+<!--    最小价格：<input type="text" id="minPrice"><br>-->
+<!--    最大价格：<input type="text" id="maxPrice"><br>-->
+<!--    页码：<input type="text" id="pageIndex"><br>-->
+<!--    <input type="button" id="register-btn" value="注册">-->
+    用户id：<input type="text" id="uid"><br>
+    游戏id：<input type="text" id="gid"><br>
+    折扣：<input type="text" id="discount"><br>
+    <input type="button" id="register-btn" value="提交">
 </form>
 <script>
+    // $("#register-btn").on("click",function () {
+    //
+    //     let formData = new FormData();
+    //
+    //     var pageIndex = $("#pageIndex").val();
+    //     var page = (pageIndex - 1) * 10;
+    //     var category = [];
+    //     var tag = [];
+    //     formData.append("order",$("#order").val());
+    //     formData.append("sort",$("#sort").val());
+    //     formData.append("area",$("#area").val());
+    //     formData.append("category", JSON.stringify(category))
+    //     formData.append("tag", JSON.stringify(tag));
+    //     formData.append("language",$("#language").val());
+    //     formData.append("minPrice",$("#minPrice").val());
+    //     formData.append("maxPrice",$("#maxPrice").val());
+    //     formData.append("pageIndex", page);
+    //     console.log(JSON.stringify(Object.assign({}, category)));
+    //
+    //     $.ajax({
+    //         url:'/store/search',
+    //         type:'post',
+    //         data: formData,
+    //         processData: false,
+    //         contentType: false,
+    //         cache : false,
+    //         dataType: 'json',
+    //         success:function (data) {
+    //             console.dir(data)
+    //         }
+    //     })
+    //
+    // })
+
+    $.ajax({
+        url:'/store/getOrderListByUid',
+        type:'post',
+        data: {
+            uid : 1,
+            pageIndex : 0,
+            pageCount : 10
+        },
+        dataType: 'json',
+        success:function (data) {
+            console.dir(data)
+        }
+    })
+
     $("#register-btn").on("click",function () {
 
         let formData = new FormData();
-
-        var pageIndex = $("#pageIndex").val();
-        var page = (pageIndex - 1) * 10;
-        var category = ["多人", "策略"];
-        var tag = [];
-        formData.append("order",$("#order").val());
-        formData.append("sort",$("#sort").val());
-        formData.append("area",$("#area").val());
-        formData.append("category", JSON.stringify(category))
-        formData.append("tag", JSON.stringify(tag));
-        formData.append("language",$("#language").val());
-        formData.append("minPrice",$("#minPrice").val());
-        formData.append("maxPrice",$("#maxPrice").val());
-        formData.append("pageIndex", page);
-        console.log(JSON.stringify(Object.assign({}, category)));
+        let klist = ["dsadqef", "sdafrrqesd"];
+        let knum = 2;
+        let oid = "dsadwe11";   //自行生成10位随机字符串，此处仅进行测试
+        console.log(JSON.stringify(klist));
+        console.log($("#otime").val());
+        formData.append("oid",oid);
+        formData.append("uid",$("#uid").val());
+        formData.append("gid",$("#gid").val());
+        formData.append("klist", JSON.stringify(klist));
+        formData.append("knum", knum);
+        formData.append("discount",$("#discount").val());
+        formData.append("otime", new Date());
+        console.log(formData);
 
         $.ajax({
-            url:'/store/search',
+            url:'/store/insertOrderDetail',
             type:'post',
             data: formData,
             processData: false,

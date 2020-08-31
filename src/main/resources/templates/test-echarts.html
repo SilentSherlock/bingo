@@ -2,16 +2,300 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>彬果游戏(Bingo)—管理系统</title>
+    <!-- 引入网页图标 -->
+    <link rel="icon" href="/src/icon.png">
+    <!--引入bootstrap默认css样式-->
+    <link rel="stylesheet" href="https://lwh147.github.io/src/bootstrap-3.3.7/css/bootstrap.min.css">
+    <!--引入bootstrapValidator默认css样式-->
+    <link rel="stylesheet"
+          href="https://lwh147.github.io/src/bootstrapvalidator-0.5.3/css/bootstrapValidator.min.css">
+    <!--注意：因为bootstrap和bootstrapValidator的js插件使用了jquery，所以jquery的引用必须放到bootstrap的js插件引用之前-->
+    <script type="text/javascript" src="https://lwh147.github.io/src/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="https://lwh147.github.io/src/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+            src="https://lwh147.github.io/src/bootstrapvalidator-0.5.3/js/bootstrapValidator.min.js"></script>
+    <!--jquery.fileupload插件-->
+    <script type="text/javascript"
+            src="https://lwh147.github.io/src/jquery.fileupload/js/vendor/jquery.ui.widget.min.js"></script>
+    <script type="text/javascript"
+            src="https://lwh147.github.io/src/jquery.fileupload/js/jquery.iframe-transport.min.js"></script>
+    <script type="text/javascript"
+            src="https://lwh147.github.io/src/jquery.fileupload/js/jquery.fileupload.min.js"></script>
+    <!--jqueryMD5加密插件-->
+    <script type="text/javascript" src="https://lwh147.github.io/src/jquery.md5/md5.js"></script>
+    <!-- vue.js -->
+    <script type="text/javascript" src="https://lwh147.github.io/src/vue-2.6.11/vue.js"></script>
+    <!-- 引入自己的css库文件 -->
+    <!--<link rel="stylesheet" href="/css/index.css">-->
+    <!-- 引入自己的js库文件 -->
+    <script type="text/javascript" src="/js/reusable.js"></script>
+    <script type="text/javascript" src="/js/globalVars.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    <style type="text/css">
+
+        .navbar-brand{
+            height: 70px;
+            padding: 0px;
+        }
+        .left-nav{
+            margin-left: 0px;
+            width: 15%;
+            height: 800px;
+            padding-top: 0px;
+            background-color: black;
+            float: left;
+        }
+        .nav-pills>li.active>a,
+        .nav-pills>li.active>a:focus,
+        .nav-pills>li.active>a:hover{
+            color: #dbdbdb;
+            background-color:black;/*#177ddc*/
+        }
+        .nav-second>li.active>a,
+        .nav-second>li.active>a:focus,
+        .nav-second>li.active>a:hover{
+            background-color: #177ddc;
+        }
+        .nav-second>li>a,
+        .nav-second>li>a:focus,
+        .nav-second>li>a:hover{
+            background-color: #f5222d;
+            color: #dbdbdb;
+        }
+
+        .nav-pills>li>a:focus,
+        .nav-pills>li>a:hover{
+            color: #dbdbdb;
+            background-color: black;
+            border-color: #333;
+        }
+        .nav>li>a{
+            color: #9d9d9d;
+            background-color: #333;
+            border-color: #333;
+        }
+
+        .navbar-title{
+            height: 70px;
+            width: 100%;
+            background-color: black;
+        }
+        .navbar-contain{
+            width: 100%;
+            top: 20px;
+            position: relative;
+        }
+        .contain-div{
+            width: 85%;
+            height: 800px;
+            padding-top: 0px;
+            float: right;
+        }
+        .contain-nav{
+            width: 100%;
+
+            height: 75px;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-color: #dbdbdb;
+
+        }
+        .main-contain{
+            width: 100%;
+            height: 725px;
+            padding: 0;
+
+        }
+        .main-nav{
+            width: 100%;
+            height: 30px;
+        }
+        .contain-des{
+            width: 100%;
+            height: 70px;
+            left: 20px;
+            position: relative;
+        }
+        .info-content-out{
+            width: 100%;
+            height: 605px;
+            background-color: #dbdbdb;
+        }
+        .info-content{
+            width: 90%;
+            min-height: 90%;
+            position: relative;
+            left: 5%;
+            top:5%;
+            background-color: white;
+        }
+        .object-operator{
+            position: relative;
+            width: 100%;
+            height: 10%;
+            z-index: 1;
+        }
+        .object-search{
+            position: relative;
+            top: 10px;
+            left: 10px;
+            float: left;
+            padding-left: 20px;
+        }
+        .object-search-button{
+            position: relative;
+            top:10px;
+            left: 10px;
+            float: left;
+            padding-left: 5px;
+
+        }
+        .btn-default:focus
+        .btn-default:hover,
+        .btn:hover,
+        .btn:focus{
+            background-color: #f5222d;
+            color: white;
+            border-style: none;
+        }
+        .object-show{
+            width: 95%;
+            height: 80%;
+            position: relative;
+            left: 20px;
+            top:5px;
+        }
+        .table-head{
+            background-color: #fafafa;
+            font-size: 15px;
+        }
+        .rows{
+            font-size: 15px;
+        }
+        .rows:hover{
+            background-color: #fef1f0;
+        }
+        .edit{
+            color: red;
+            font-family: 微软雅黑;
+        }
+
+        .edit:link,
+        .edit:visited,
+        .edit:visited,
+        .edit:active{
+            color: red;
+        }
+        .pages{
+            /*position: relative;*/
+            /*!*bottom: 10px;*!*/
+            width: 100%;
+        }
+        .modal-dialog{
+            width: 1000px;
+        }
+        .edit-game{
+            position: relative;
+            left: 50px;
+        }
+        .edit-game>span{
+            text-align: right;
+            display: inline-block;
+            width: 100px;
+        }
+        .type-checkbox:checked{
+            color: white;
+            background-color: #f5222d;
+        }
+    </style>
+
+    <script type="text/javascript">
+        let currentPage = 1;
+        let currentIndex = 0;
+        let countpage = 0;
+        let updategid;
+        let curSearch = null;
+        let curOrder = 'asc';
+        let curSort = 0;
+        /*页面初始化*/
+        $(document).ready(function () {
+            $("#home-content").show();
+            $("#edit-query-game").hide();
+            $("#add-game-content").hide();
+        })
+    </script>
     <!-- 引入 ECharts 文件 -->
-    <script type="text/javascript" src="/extlib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
     <title>Title</title>
 </head>
 <body>
-    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="width:800px;height:600px;"></div>
-
+<!--    yolia-->
+<!--主要内容-->
+<div class="main-contain">
+        <!--首页内容-->
+        <div class="info-content" id="home-content">
+            <div class="object-operator">
+                <div class="object-search">
+                    游戏：<label><input type="text" class="form-control" placeholder="请输入游戏名称" id="search-game"></label>
+                </div>
+                <div class="object-search-button">
+                    <button type="button" class="btn btn-default" id="search-btn">查询</button>
+                </div>
+            </div>
+            <div class="object-show" id="object-show">
+                <table class="table ">
+                    <tr class="table-head">
+                        <th scope="col"></th>
+                        <th scope="col" style="text-align: center">
+                            <a id="uniqueId" style="text-decoration-line: none">
+                                唯一识别码
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-up-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                </svg>
+                            </a>
+                        </th>
+                        <th scope="col">游戏名称</th>
+                        <th scope="col" style="text-align: center">
+                            <a id="cursale" style="text-decoration-line: none">
+                                本日销量
+                            </a>
+                        </th>
+                        <th scope="col" style="text-align: center">
+                            <a id="increaserate" style="text-decoration-line: none">
+                                同比增长
+                            </a>
+                        </th>
+                    </tr>
+                    <tbody class="table-body" id="table-body"></tbody>
+                </table>
+            </div>
+            <div class="pages" align="center"></div>
+        </div>
+</div>
+<!-- yolia -->
     <script type="text/javascript">
+        $(document).ready(function(){
+            ChangeIndexPage(0, curSearch);
+            $('#table-body').on('click','tr', function() {
+                var gid = $(this).closest("tr").find("td").eq(1).text();
+                var state = document.getElementById(gid).getAttribute('class');
+                if(state === 'collapse'){
+                    $(this).closest("tr").find("td").eq(0).html("<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-arrows-angle-contract\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                        "  <path fill-rule=\"evenodd\" d=\"M9.5 2.036a.5.5 0 0 1 .5.5v3.5h3.5a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5z\"/>\n" +
+                        "  <path fill-rule=\"evenodd\" d=\"M14.354 1.646a.5.5 0 0 1 0 .708l-4.5 4.5a.5.5 0 1 1-.708-.708l4.5-4.5a.5.5 0 0 1 .708 0zm-7.5 7.5a.5.5 0 0 1 0 .708l-4.5 4.5a.5.5 0 0 1-.708-.708l4.5-4.5a.5.5 0 0 1 .708 0z\"/>\n" +
+                        "  <path fill-rule=\"evenodd\" d=\"M2.036 9.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V10h-3.5a.5.5 0 0 1-.5-.5z\"/>\n" +
+                        "</svg>");
+                    getECharts(gid);
+                }else{
+                    $(this).closest("tr").find("td").eq(0).html("<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-arrows-angle-expand\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                        "  <path fill-rule=\"evenodd\" d=\"M1.5 10.036a.5.5 0 0 1 .5.5v3.5h3.5a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5z\"/>\n" +
+                        "  <path fill-rule=\"evenodd\" d=\"M6.354 9.646a.5.5 0 0 1 0 .708l-4.5 4.5a.5.5 0 0 1-.708-.708l4.5-4.5a.5.5 0 0 1 .708 0zm8.5-8.5a.5.5 0 0 1 0 .708l-4.5 4.5a.5.5 0 0 1-.708-.708l4.5-4.5a.5.5 0 0 1 .708 0z\"/>\n" +
+                        "  <path fill-rule=\"evenodd\" d=\"M10.036 1.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 1 1-1 0V2h-3.5a.5.5 0 0 1-.5-.5z\"/>\n" +
+                        "</svg>");
+                }
+            });
+        });
         function DateToTime(date) {
             //时间戳为10位(s)需*1000，时间戳为13位(ms)的话不需乘1000，默认时间戳单位为ms
             //yyyy
@@ -20,98 +304,328 @@
             let D = (date.getDate() + 1 < 10 ? '0' + (date.getDate()) : date.getDate());
             return Y + M + D;
         }
-    </script>
-    <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
-
-        var time = new Date();
-        var timeData = [];
-        for(var i = 29; i >=0; i--){
-            console.log(DateToTime(new Date(time.getTime() - i * 24 * 3600 * 1000)));
-            timeData.push(DateToTime(new Date(time.getTime() - i * 24 * 3600 * 1000)));
-        }
-
-        var gid = {
-            gid : 1
-        };
-        var data = [];
-        $.ajax({url:'/store/getSale2DateByGId',
+        function getECharts(id){
+            echarts.init(document.getElementById('main_' + id)).clear();
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main_' + id));
+            var time = new Date();
+            var timeData = [];
+            for(var i = 29; i >=0; i--){
+                timeData.push(DateToTime(new Date(time.getTime() - i * 24 * 3600 * 1000)));
+            }
+            var gid = {
+                gid : id
+            }
+            var data = [];
+            $.ajax({url:'/store/getSale2DateByGId',
                 type:'post',
                 data: gid,
                 async: false,
                 success:function (result) {
                     data = result.resultMap.sales;
                 }});
-        console.log(data);
-        option = {
-            title: {
-                text: '游戏销量关系图',
-                subtext: '七天之内的销量',
-                left: 'center'
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    animation: false
-                }
-            },
-            legend: {
-                data: ['销量'],
-                left: 10
-            },
-            toolbox: {
-                feature: {
-                    dataZoom: {
-                        yAxisIndex: 'none'
-                    },
-                    restore: {},
-                    saveAsImage: {}
-                }
-            },
-            axisPointer: {
-                link: {xAxisIndex: 'all'}
-            },
-            dataZoom: [
-                {
-                    show: true,
-                    realtime: true,
-                    start: 100 - (7 / 30) * 100 + 1,
-                    end: 100,
-                    xAxisIndex: [0]
+            option = {
+                title: {
+                    text: '游戏销量关系图',
+                    subtext: '七天之内的销量',
+                    left: 'center'
                 },
-                {
-                    type: 'inside',
-                    realtime: true,
-                    start: 100 - (7 / 30) * 100 + 1,
-                    end: 100,
-                    xAxisIndex: [0]
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        animation: false
+                    }
+                },
+                legend: {
+                    data: ['销量'],
+                    left: 10
+                },
+                toolbox: {
+                    feature: {
+                        dataZoom: {
+                            yAxisIndex: 'none'
+                        },
+                        restore: {},
+                        saveAsImage: {}
+                    }
+                },
+                axisPointer: {
+                    link: {xAxisIndex: 'all'}
+                },
+                dataZoom: [
+                    {
+                        show: true,
+                        realtime: true,
+                        start: 100 - (7 / 30) * 100 + 1,
+                        end: 100,
+                        xAxisIndex: [0]
+                    },
+                    {
+                        type: 'inside',
+                        realtime: true,
+                        start: 100 - (7 / 30) * 100 + 1,
+                        end: 100,
+                        xAxisIndex: [0]
+                    }
+                ],
+                grid: {
+                    left: 50,
+                    right: 50,
+                    height: '70%'
+                },
+                xAxis:{
+                    type: 'category',
+                    boundaryGap: false,
+                    data: timeData
+                },
+                yAxis: {
+                    name: '销量(份)',
+                    type: 'value',
+                },
+                series:{
+                    name: '销量',
+                    type: 'line',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    symbolSize: 8,
+                    hoverAnimation: false,
+                    data: data
                 }
-            ],
-            grid: {
-                left: 50,
-                right: 50,
-                height: '50%'
-            },
-            xAxis:{
-                type: 'category',
-                boundaryGap: false,
-                data: timeData
-            },
-            yAxis: {
-                name: '销量(份)',
-                type: 'value',
-            },
-            series:{
-                name: '销量',
-                type: 'line',
-                symbolSize: 8,
-                hoverAnimation: false,
-                data: data
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option, true);
+        }
+        function ChangeIndexPage(index, search){
+            let html = "";
+            let pageHtml = "";
+            $.ajax({
+                url:"/store/getAllGameSaleData",
+                type:"post",
+                data:{
+                    order : curOrder,
+                    sort : curSort,
+                    pageIndex : currentIndex,
+                    pageCount : 10,
+                },
+                dataType:'json',
+                success:function (result) {
+                    if(result.status == 1){
+                        let gameSaleData = result.resultMap.gameSaleData;
+                        for(let key in gameSaleData){
+                            console.log(result.resultMap.gameSaleData[key])
+                            html +=
+                                "<tr class='rows' data-toggle='collapse' href='#" + result.resultMap.gameSaleData[key].gid + "' aria-expanded='false' aria-controls='collapseExample'>" +
+                                "<td scope='col'style='text-align: center'><svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-arrows-angle-expand\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                                "  <path fill-rule=\"evenodd\" d=\"M1.5 10.036a.5.5 0 0 1 .5.5v3.5h3.5a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5z\"/>\n" +
+                                "  <path fill-rule=\"evenodd\" d=\"M6.354 9.646a.5.5 0 0 1 0 .708l-4.5 4.5a.5.5 0 0 1-.708-.708l4.5-4.5a.5.5 0 0 1 .708 0zm8.5-8.5a.5.5 0 0 1 0 .708l-4.5 4.5a.5.5 0 0 1-.708-.708l4.5-4.5a.5.5 0 0 1 .708 0z\"/>\n" +
+                                "  <path fill-rule=\"evenodd\" d=\"M10.036 1.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 1 1-1 0V2h-3.5a.5.5 0 0 1-.5-.5z\"/>\n" +
+                                "</svg></td>" +
+                                "<td scope='col'style='text-align: center'>" + result.resultMap.gameSaleData[key].gid + "</td>" +
+                                "<td scope='col'>" + result.resultMap.gameSaleData[key].gname + "</td>" +
+                                "<td scope='col'style='text-align: center'>" + result.resultMap.gameSaleData[key].cursale + "</td>";
+                            if(result.resultMap.gameSaleData[key].increaserate === 0){
+                                html += "<td scope='col' style='text-align: center'>" + result.resultMap.gameSaleData[key].increaserate * 100 + "%" + "&nbsp;&nbsp;<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-list\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                                    "  <path fill-rule=\"evenodd\" d=\"M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z\"/>\n" +
+                                    "</svg></td>";
+                            }else if(result.resultMap.gameSaleData[key].increaserate < 0){
+                                html += "<td scope='col' style='text-align: center;background-color: #faa1a1'>" + result.resultMap.gameSaleData[key].increaserate * 100 + "%" + "&nbsp;&nbsp;<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-arrow-down\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                                    "  <path fill-rule=\"evenodd\" d=\"M4.646 9.646a.5.5 0 0 1 .708 0L8 12.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z\"/>\n" +
+                                    "  <path fill-rule=\"evenodd\" d=\"M8 2.5a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-1 0V3a.5.5 0 0 1 .5-.5z\"/>\n" +
+                                    "</svg></td>";
+                            }else{
+                                html += "<td scope='col' style='text-align: center;background-color: #8fd19e'>" + result.resultMap.gameSaleData[key].increaserate * 100 + "%" + "&nbsp;&nbsp;<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-arrow-up\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                                    "  <path fill-rule=\"evenodd\" d=\"M8 3.5a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z\"/>\n" +
+                                    "  <path fill-rule=\"evenodd\" d=\"M7.646 2.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8 3.707 5.354 6.354a.5.5 0 1 1-.708-.708l3-3z\"/>\n" +
+                                    "</svg></td>";
+                            }
+                            html += "</tr> <tr class='collapse' id='" + result.resultMap.gameSaleData[key].gid + "'>'" +
+                                "<td class='well' id='main_" + result.resultMap.gameSaleData[key].gid + "' style='width:800px;height:400px;' colspan='5'></td></tr>";
+                        }
+                        $(".table-body").html(html);
+                    }
+                    pageHtml +=
+                        "<nav aria-label=\"Page navigation\">\n" +
+                        "  <ul class=\"pagination \">\n" +
+                        "    <li>\n" +
+                        "      <a class='to-page' href=\"#\" aria-label=\"Previous\">\n" +
+                        "        <span aria-hidden=\"true\">&laquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>"
+                    countpage = result.resultMap.gameSaleDataCount;
+                    let pages = new Array();
+                    if(currentPage>3){
+                        if(currentPage<countpage-3){
+                            pages.push(currentPage-3);
+                            pages.push(currentPage-2);
+                            pages.push(currentPage-1);
+                            pages.push(currentPage*1);
+                            pages.push(currentPage*1+1);
+                            pages.push(currentPage*1+2);
+                        }else{
+                            for(let i = countpage-6;i < countpage;i++){
+                                pages.push(i+1);
+                            }
+                        }
+                    }else{
+                        for(let i = 0;i < 6;i++){
+                            pages.push(i+1);
+                        }
+                    }
+                    for(let i = 0; i < pages.length;i++){
+                        let page = i;
+                        if(pages[page]>countpage){
+                            break;
+                        }
+                        if(pages[page] == currentPage){
+                            pageHtml +="<li class='active'><a class='to-page'>"+pages[page]+"</a></li>"
+                        }else {
+                            pageHtml +="<li ><a class='to-page'>"+pages[page]+"</a></li>"
+                        }
+                    }
+                    pageHtml +=
+                        "<li>\n" +
+                        "      <a class='to-page' href=\"#\" aria-label=\"Next\">\n" +
+                        "        <span aria-hidden=\"true\">&raquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>\n" +
+                        "  </ul>\n" +
+                        "</nav>"
+                    $(".pages").html(pageHtml);
+                }
+            })
+        }
+        function ClearOtherSort(src){
+            if(src === 0){
+                $("#cursale").html("本日销量");
+                $("#increaserate").html("同比增长");
+            }else if(src === 1){
+                $("#uniqueId").html("唯一识别码");
+                $("#increaserate").html("同比增长");
+            }else if(src === 2){
+                $("#uniqueId").html("唯一识别码");
+                $("#cursale").html("本日销量");
             }
-        };
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+
+        }
+        $('#uniqueId').click(function (){
+            if(curSort == 0){
+                if(curOrder === 'desc'){
+                    curOrder = 'asc';
+                    ChangeIndexPage(currentIndex,null);
+                    $(this).html("唯一识别码<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                        "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
+                        "</svg>");
+                }else{
+                    curOrder = 'desc';
+                    ChangeIndexPage(currentIndex,null);
+                    $(this).html("唯一识别码<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-down-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                        "  <path d=\"M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\"/>\n" +
+                        "</svg>");
+                }
+            }else{
+                //清除其他
+                ClearOtherSort(0);
+                //
+                curSort = 0;
+                curOrder = 'asc';
+                ChangeIndexPage(currentIndex,null);
+                $(this).html("唯一识别码<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
+                    "</svg>");
+            }
+        })
+        $('#cursale').click(function (){
+            if(curSort == 1){
+                if(curOrder === 'desc'){
+                    curOrder = 'asc';
+                    ChangeIndexPage(currentIndex,null);
+                    $(this).html("本日销量<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                        "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
+                        "</svg>");
+                }else{
+                    curOrder = 'desc';
+                    ChangeIndexPage(currentIndex,null);
+                    $(this).html("本日销量<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-down-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                        "  <path d=\"M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\"/>\n" +
+                        "</svg>");
+                }
+            }else{
+                //清除其他
+                ClearOtherSort(1);
+                //
+                curSort = 1;
+                curOrder = 'asc';
+                ChangeIndexPage(currentIndex,null);
+                $(this).html("本日销量<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
+                    "</svg>");
+            }
+        })
+        $('#increaserate').click(function (){
+            if(curSort == 2){
+                if(curOrder === 'desc'){
+                    curOrder = 'asc';
+                    ChangeIndexPage(currentIndex,null);
+                    $(this).html("同比增长<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                        "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
+                        "</svg>");
+                }else{
+                    curOrder = 'desc';
+                    ChangeIndexPage(currentIndex,null);
+                    $(this).html("同比增长<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-down-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                        "  <path d=\"M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\"/>\n" +
+                        "</svg>");
+                }
+            }else{
+                //清除其他
+                ClearOtherSort(2);
+                //
+                curSort = 2;
+                curOrder = 'asc';
+                ChangeIndexPage(currentIndex,null);
+                $(this).html("同比增长<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
+                    "</svg>");
+            }
+        })
+    </script>
+<!---->
+    <script type="text/javascript">
+        /*查询游戏*/
+        $("#search-btn").on("click",function () {
+            currentPage = 1;
+            currentIndex = (currentPage - 1) * 10;
+            curSearch = $("#search-game").val()
+            ChangeIndexPage(currentIndex,curSearch);
+        })
+        /**
+         *翻页
+         */
+        $(document).on("click",".to-page",function () {
+            if(this.innerText=="»"){
+                currentPage++;
+                if(currentPage > countpage){
+                    currentPage = countpage;
+                }else {
+                    currentPage = currentPage;
+                }
+            }else if(this.innerText=="«"){
+                currentPage--;
+                if(currentPage == 0){
+                    currentPage = 1;
+                }else {
+                    currentPage = currentPage;
+                }
+            }else {
+                currentPage = this.innerText
+            }
+            currentIndex = 10 * (currentPage-1);
+            ChangeIndexPage(currentIndex, curSearch, curOrder);
+        })
     </script>
 </body>
 </html>
