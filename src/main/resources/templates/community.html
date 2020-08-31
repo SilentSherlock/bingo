@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" >
     <title>community</title>
     <style>
         body{
@@ -185,7 +185,7 @@
             background: #292E41;
             padding: 0;
         }
-        .type{
+        .type1,.type2{
             display: inline-block;
             width: 124px;
             height: 65px;
@@ -284,7 +284,7 @@
             font-weight: normal;
         }
 
-        button{
+        button,a{
             -webkit-writing-mode: horizontal-tb !important;
             text-rendering: auto;
             letter-spacing: normal;
@@ -317,33 +317,33 @@
                     <div class="slider-block">
                         <div class="image-list">
                             <div class="slider-item" id="show1">
-                                <a href="#" target="_blank">
-                                    <img id="show-img" src="../templates/image/img1.jpg">
+                                <a id="link" href="#" target="_blank">
+                                    <img id="show-img" src="">
                                     <span id="show-msg">这是第一条信息</span>
                                 </a>
                             </div>
                             <div class="slider-item" id="show2">
-                                <a href="#" target="_blank">
-                                    <img src="../templates/image/img2.jpg">
-                                    <span>这是第二条信息</span>
+                                <a id="link2" href="#" target="_blank">
+                                    <img id="show-img2" src="">
+                                    <span id="show-msg2">这是第二条信息</span>
                                 </a>
                             </div>
                             <div class="slider-item" id="show3">
-                                <a href="#" target="_blank">
-                                    <img src="../templates/image/img3.jpg">
-                                    <span>这是第三条信息</span>
+                                <a id="link3" href="#" target="_blank">
+                                    <img id="show-img3" src="">
+                                    <span id="show-msg3">这是第三条信息</span>
                                 </a>
                             </div>
                             <div class="slider-item" id="show4">
-                                <a href="#" target="_blank">
-                                    <img src="../templates/image/img4.jpg">
-                                    <span>这是第四条信息</span>
+                                <a id="link4" href="#" target="_blank">
+                                    <img id="show-img4" src="">
+                                    <span id="show-msg4">这是第四条信息</span>
                                 </a>
                             </div>
                             <div class="slider-item" id="show5">
-                                <a href="#" target="_blank">
-                                    <img src="../templates/image/img5.jpg">
-                                    <span>这是第五条信息</span>
+                                <a id="link5" href="#" target="_blank">
+                                    <img id="show-img5" src="">
+                                    <span id="show-msg5">这是第五条信息</span>
                                 </a>
                             </div>
                         </div>
@@ -363,59 +363,21 @@
                     <span class="title-text">社区要闻</span>
                 </div>
                 <ul class="community-news-list">
-                    <li>
-                        <a href="#"><span class="content-title"><span class="text">【#####】%%%%%%%%</span></span></a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="content-title"><span class="text">【#####】%%%%%%%%</span></span></a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="content-title"><span class="text">【#####】%%%%%%%%</span></span></a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="content-title"><span class="text">【#####】%%%%%%%%</span></span></a>
-                    </li>
+<!--                    这里是社区要闻的显示-->
                 </ul>
             </div>
             </div>
             <div class="community-content">
-                <a class="post-button">发布帖子</a>
+                <a class="post-button" onclick="new_post()">发布帖子</a>
                 <div class="block-container">
                     <div class="block-types">
-                        <a class="type" id="tie1" href="#">最新帖子</a>
-                        <a class="type" href="#">最热帖子</a>
+                        <a class="type1" id="tie1" href="#">最新帖子</a>
+                        <a class="type2" href="#">最热帖子</a>
                     </div>
                     <div class="block-contents">
                         <div class="topic-list-container">
                             <div class="community-post-detail">
-                                <div class="item-wrap">
-                                    <div class="header"><div class="btn"></div><h1 class="h1-in-header">这是标题</h1></div>
-                                    <h2 class="h2-in-header">要问八月份有什么比暑促钱包成功瘦身更让人兴奋的事儿~？嘿，那必须是即将到来的杉果π哇！！硬核玩家的集会！各路游戏厂商的线上试玩，应有尽有~！而硬核玩家更能在其中赚取海量积分哦~！那么，检验硬核的唯一标准是？鉴定标准不如就让你来指定~  说说你心中想对硬核玩家发出的真题试炼！你对鉴定“头号玩家”又有怎样...</h2>
-                                    <div class="bottom">
-                                        <div class="left">
-                                            <img src="#"><a class="nick-name" href="#" target="_blank">用户名</a>
-                                            <span class="time">2020年8月21日&nbsp;&nbsp;<span>发表于<a target="_blank" href="#">名字</a></span></span>
-                                        </div>
-                                        <div class="btn-wrapper">
-                                            <button><i class="fa"></i>"37"</button>
-                                            <button><i>回复</i>"213"</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item-wrap">
-                                    <div class="header"><div class="btn"></div><h1 class="h1-in-header">这是标题</h1></div>
-                                    <h2 class="h2-in-header">要问八月份有什么比暑促钱包成功瘦身更让人兴奋的事儿~？嘿，那必须是即将到来的杉果π哇！！硬核玩家的集会！各路游戏厂商的线上试玩，应有尽有~！而硬核玩家更能在其中赚取海量积分哦~！那么，检验硬核的唯一标准是？鉴定标准不如就让你来指定~  说说你心中想对硬核玩家发出的真题试炼！你对鉴定“头号玩家”又有怎样...</h2>
-                                    <div class="bottom">
-                                        <div class="left">
-                                            <img src="#"><a class="nick-name" href="#" target="_blank">用户名</a>
-                                            <span class="time">2020年8月21日&nbsp;&nbsp;<span>发表于<a target="_blank" href="#">名字</a></span></span>
-                                        </div>
-                                        <div class="btn-wrapper">
-                                            <button><i class="fa"></i>"37"</button>
-                                            <button><i>回复</i>"213"</button>
-                                        </div>
-                                    </div>
-                                </div>
+<!--                               这里是帖子的内容-->
                             </div>
                         </div>
                     </div>
@@ -423,35 +385,206 @@
             </div>
         </div>
     </div>
-    <script src="../static/extlib/jquery-3.5.1/jquery-3.5.1.js"></script>
+    <script src="extlib/jquery-3.5.1/jquery-3.5.1.js"></script>
     <script type="text/javascript">
+        var list;
         var tempShowDiv = $("#show1")
+        var sortType="time";
+        var thisUser;
         $(document).ready(function () {
+
+            function getUser(uid) {
+                let user1 = null;
+                $.ajax({
+                    url:'/person/getUserById?uid='.concat(uid),
+                    type:'get',
+                    async:false,
+                    success:function (user) {
+                        user1 =  user.resultMap.user;
+                        thisUser = user1;
+                    }
+                });
+                return user1;
+            }
+
+            //根据指定的帖子pid获取相关的评论内容
+            function getComments(pid){
+                let commentList = null;
+                let formData={
+                    "idType":"pid",
+                    "idValue":parseInt(pid),
+                }
+               // console.log(formData)
+                $.ajax({
+                    url:'community/getCommentsById',
+                    data: formData,
+                    type:'get',
+                    async:false,
+                    success:function (comments) {
+                       commentList=comments.resultMap.CommentBypid;
+                    }
+                });
+                return commentList;
+            }
+
+            //获取所有帖子的内容
             function getPostList(){
                 $.get(
-                    "community/allPosts",
+                    "/community/allPosts",
                     function (AllPosts) {
-                        var list=AllPosts.resultMap.AllPost;
-                        var html="";
-                        for(var i=0;i<list.length;i++){
-                            html+=
-                                "<div class="+"item-wrap"+">"+
-                                    "<div class="+"header"+"><div class="+"btn"+"></div><h1 class="+"h1-in-header"+">"+list[i].title+"</h1></div>"+
-                                    "<h2 class="+"h2-in-header"+">"+list[i].content+"</h2>"+
-                                        "<div class="+"left"+">"+
-                                            "<img src="+"#"+"><a class="+"nick-name"+" "+"href="+"#"+" " +"target="+"_blank"+">"+list[i].uid+"</a>"+
-                                            "<span class="+"time"+">"+list[i].ptime +"&nbsp;&nbsp;"+"<span>发表于<a target="+"_blank" +" "+"href="+"#"+">"+list[i].uid+"</a></span></span>"+
-                                        "</div>"+
-                                        "<div class="+"btn-wrapper"+">"+
-                                            "<button><i class="+"fa"+"></i>"+list[i].plikenum+"</button>"+
-                                            "<button><i>"+"回复"+"</i>"+" "+"</button>"+
-                                        "</div>"+
-                                    "</div>"+
-                                "</div>"
-                        }
+                        list=AllPosts.resultMap.AllPost;
+                        //console.log(list)
+                        setHeader();
+                        setPosts(sortType);
+                        setScreen()
                     }
                 )
             }
+            function setScreen() {
+                //$("#show-img").attr("src",gameList[0].chref);
+                $("#show-msg").text("【"+list[0].ptheme+"】"+list[0].title);
+                $("#link").attr("href","community-talk.html?pid=1")
+                for(var i = 2;i<=5;i++){
+                    //$("#show-img"+i).attr("src",gameList[i].chref);
+                    $("#show-msg"+i).text("【"+list[i].ptheme+"】"+list[i].title);
+                    $("#link").attr("href","community-talk.html?pid="+i);
+                }
+            }
+
+            //设置顶部“社区要闻”处的帖子内容
+            function setHeader() {
+                var html="";
+                $(".community-news-list").empty();
+                for(var i=(4<list.length?4:list.length);i>0;i--){
+                    html+=
+                        "<li>"+
+                        "<a href="+"community-talk.html?pid="+list[i-1].pid+"><span class="+"content-title"+"><span class="+"text"+">"+"【"+list[i-1].ptheme+"】"+list[i-1].title+"</span></span></a>"+
+                        "</li>"
+                }
+                $(".community-news-list").html(html);
+            }
+
+            //设置下方的帖子内容
+            //type为对帖子进行排序的方式
+            //time:按时间倒序
+            //hot:按热度倒序
+            //默认为time
+            function setPosts(type){
+                var html="";
+                $(".community-post-detail").empty();
+                if(type=="time"){
+                    list=list.sort(function (a,b) {
+                        a = a.ptime.substring(0,10);
+                        b = b.ptime.substring(0,10);
+                        var list_a = a.split("-");
+                        var list_b = b.split("-")
+                        if(parseInt(list_a[0])>parseInt(list_b[0])) {
+                            return 1;
+                        }else if(parseInt(list_a[0])>parseInt(list_b[0])){
+                            return -1;
+                        }else{
+                            if(parseInt(list_a[1])>parseInt(list_b[1])){
+                                return 1;
+                            }else if(parseInt(list_a[1])<parseInt(list_b[1])){
+                                return -1;
+                            }else{
+                                if(parseInt(list_a[2])>parseInt(list_b[2])){
+                                    return 1;
+                                }else if(parseInt(list_a[2])<parseInt(list_b[2])){
+                                    return -1;
+                                }else{
+                                    return 0;
+                                }
+                            }
+                        }
+
+                    })
+                }else if(type=="hot"){
+                    list=list.sort(function (a,b) {
+                        return a.plikenum-b.plikenum;
+                    })
+                }
+                for(var i=list.length-1;i>=0;i--){
+                    var curent = getUser(list[i].uid);
+                    var comments = getComments(list[i].pid);
+                    html+=
+                        "<div class="+"item-wrap"+">"+
+                        "<div class="+"header"+"><div class="+"btn"+"></div><a href="+"community-talk.html?pid="+list[i].pid+"><h1 class="+"h1-in-header"+">"+"【"+list[i].ptheme+"】"+list[i].title+"</h1></a></div>"+
+                        "<h2 class="+"h2-in-header"+">"+list[i].content+"</h2>"+
+                        "<div class="+"left"+">"+
+                        "<img src="+curent.uavatar+"><a class="+"nick-name"+" "+"href="+"see_user_info.html?uid="+list[i].uid+" " +"target="+"_blank"+">"+curent.ualias+"</a>"+
+                        "<span class="+"time"+">"+list[i].ptime.substring(0,10) +"&nbsp;&nbsp;"+"<span>发表于<a href="+"see_user_info.html?uid="+list[i].uid+" target="+"_blank" +" "+"href="+"#"+">"+curent.ualias+"</a></span></span>"+
+                        "</div>"+
+                        "<div class="+"btn-wrapper"+">"+
+                        "<button class='up' "+"id="+list[i].pid+"><a>"+"点赞"+list[i].plikenum+"</a></button>"+
+                        "<button class='reply'><a href="+"community-talk.html?pid="+list[i].pid+">"+"回复"+comments.length+"</a>"+"</button>"+
+                        "</div>"+
+                        "</div>"+
+                        "</div>"
+                }
+                $(".community-post-detail").html(html);
+            }
+
+            //切换帖子排序方式：点击事件
+            $(".type1").click(function () {
+                //样式修改
+                var tempTie = $(".active1")
+                var tag = $(this)
+                tempTie.removeClass("active1")
+                tag.addClass("active1")
+                console.log($(this).val())
+                //功能代码
+                sortType="time";
+                setPosts(sortType);
+            })
+            $(".type2").click(function () {
+                //样式修改
+                var tempTie = $(".active1")
+                var tag = $(this)
+                tempTie.removeClass("active1")
+                tag.addClass("active1")
+                console.log($(this).val())
+                //功能代码
+                sortType="hot";
+                setPosts(sortType);
+            })
+
+            //点赞
+            $(document).on("click",".up",function () {
+                var thisPid = $(this).attr("id")
+                //console.log("click")
+                var thisPost;
+                for(var i=0;i<list.length;i++){
+                    if(list[i].pid==thisPid){
+                        thisPost=list[i];
+                        console.log(thisPost)
+                    }
+                }
+                var thisformData=new FormData();
+
+                thisformData.append("pid",parseInt(thisPid));
+                //console.log("pid Type: " + typeof parseInt(thisPid));
+                thisformData.append("propName","plikenum");
+                let postValue = Number(thisPost.plikenum) + 1;
+                //console.log("postValue: " + typeof postValue);
+                thisformData.append("propValue",postValue);
+                //console.log(thisPost.plikenum+1);
+
+                JSON.stringify(thisformData);
+
+                $.ajax({
+                    url:'/community/updatePostProp',
+                    data: thisformData,
+                    type:'post',
+                    processData:false,
+                    contentType: false,
+                    cache : false,
+                    async:true,
+                    success:function (result) {
+                        getPostList();
+                    }
+                });
+            })
             $("#choose1").removeClass("close")
             $("#choose1").addClass("active")
             $("#tie1").addClass("active1")
@@ -460,7 +593,10 @@
             $("#show3").hide()
             $("#show4").hide()
             $("#show5").hide()
+            getPostList()
         })
+
+        //根据鼠标位置显示不同的主页内容
         $(".close").hover(function () {
             var tempChoose =$(".active")
             var tag =$(this)
@@ -472,12 +608,12 @@
             $("#show"+tag.text()).show()
             tempShowDiv=$("#show"+tag.text())
         })
-        $(".type").click(function () {
-            var tempTie = $(".active1")
-            var tag = $(this)
-            tempTie.removeClass("active1")
-            tag.addClass("active1")
-        })
+
+        //发帖子
+        function new_post() {
+            window.location.href="new_post.html?uid=".concat(thisUser.uid);
+        }
+
     </script>
 </body>
 </html>
