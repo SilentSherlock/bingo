@@ -2,10 +2,14 @@
 $(document).ready(function () {
     //根据用户是否登录显示页面
     isLogin();
-    //为超链接设置点击监听
+    //为导航栏导航超链接标签设置点击监听
     setAClickListener();
     //为搜索表单注册验证和其他监听函数
     setSearchFormValidateLisener();
+    //激活首页标签
+    $("nav.navbar ul.navbar-nav:first-of-type > li:first-of-type").addClass("active");
+    //加载首页
+    index_body();
 });
 
 /**
@@ -66,11 +70,12 @@ function setSearchFormValidateLisener() {
         e.preventDefault();
         //更改搜索按钮的登陆状态
         $("#navbar-search-form-submit-button").button("loading");
-        //获取bootstrapValidator实例
-        //let bv = $(e.target).data("bootstrapValidator");
+
         let keywords = $("#navbar-search-form-keyword-input").val();
         keywords = keywords || "";
+
         console.log("保存搜索内容: " + keywords);
+
         //使用ajax提交搜索内容
         $.get(requestmap.store_search, {keywords: keywords}, function (data) {
             if (data.code === 1) {
@@ -127,43 +132,23 @@ function updateBreadcrumb() {
 
 /**
  * 作者: lwh
- * 时间: 2020.8.21
- * 描述: 清空面包屑导航地址
- */
-function cleanBreadcrumb() {
-    console.log("清空面包屑导航地址");
-}
-
-/**
- * 作者: lwh
- * 时间: 2020.8.21
- * 描述: 展示指定游戏信息
- */
-function showGameDetail(ginfo) {
-
-}
-
-/**
- * 作者: lwh
- * 时间: 2020.8.21
- * 描述: 展示所有游戏
- */
-function showAllGame() {
-
-}
-
-/**
- * 作者: lwh
  * 时间: 2020.8.22
  * 描述: 加载用户登录页面
  */
 function user_login() {
-    if ($("#" + components.component_user_login.cid).length === 0) {
-        $.get(components.component_user_login.curl, function (data) {
-            if (data !== undefined || data !== "") {
-                $("#body-container").html(data);
-            } else
-                alert("加载用户登录页面失败！");
+    if ($("#" + static_components.component_user_login.cid).length === 0) {
+        loadingAnimation("#body-container").then(function () {
+            $.get(
+                static_components.component_user_login.curl,
+                function (data) {
+                    if (data !== undefined || data !== "") {
+                        $("#body-container").html(data);
+                    } else
+                        ajaxNoContent("#body-container");
+                }
+            ).fail(function () {
+                ajaxFailed("#body-container")
+            });
         });
     }
 }
@@ -174,12 +159,65 @@ function user_login() {
  * 描述: 加载用户注册页面
  */
 function user_register() {
-    if ($("#" + components.component_user_register.cid).length === 0) {
-        $.get(components.component_user_register.curl, function (data) {
-            if (data !== undefined || data !== "") {
-                $("#body-container").html(data);
-            } else
-                alert("加载用户注册页面失败！");
+    if ($("#" + static_components.component_user_register.cid).length === 0) {
+        loadingAnimation("#body-container").then(function () {
+            $.get(
+                static_components.component_user_register.curl,
+                function (data) {
+                    if (data !== undefined || data !== "") {
+                        $("#body-container").html(data);
+                    } else
+                        ajaxNoContent("#body-container");
+                }
+            ).fail(function () {
+                ajaxFailed("#body-container");
+            });
+        });
+    }
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.8.25
+ * 描述: 加载首页
+ */
+function index_body() {
+    if ($("#" + static_components.component_index.cid).length === 0) {
+        loadingAnimation("#body-container").then(function () {
+            $.get(
+                static_components.component_index.curl,
+                function (data) {
+                    if (data !== undefined || data !== "") {
+                        $("#body-container").html(data);
+                    } else
+                        ajaxNoContent("#body-container");
+                }
+            ).fail(function () {
+                ajaxFailed("#body-container");
+            });
+        });
+    }
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.8.27
+ * 描述: 加载所有游戏及分类的页面
+ */
+function showAllGame() {
+    if ($("#" + static_components.component_all_game.cid).length === 0) {
+        loadingAnimation("#body-container").then(function () {
+            $.get(
+                static_components.component_all_game.curl,
+                function (data) {
+                    if (data !== undefined || data !== "") {
+                        $("#body-container").html(data);
+                    } else
+                        ajaxNoContent("#body-container");
+                }
+            ).fail(function () {
+                ajaxFailed("#body-container");
+            });
         });
     }
 }

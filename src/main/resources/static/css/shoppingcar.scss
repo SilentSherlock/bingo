@@ -1,3 +1,108 @@
+//region 列表开始
+.myorder-elem{
+  height: 120px;
+  padding-top:  20px;
+  padding-left: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+.column1{
+  height: 85px;
+  width: 425px;
+  float: left;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  overflow-x: auto;
+}
+
+.game-title{
+  width: 400px;
+  height: 80px;
+  overflow: hidden;
+  position: relative;
+  float: left;
+  cursor: pointer;
+}
+.column1-img {
+  display: inline;
+  float: left;
+  height: 80px;
+  line-height: 80px;
+  padding-left: 50px;
+}
+.column1-txt{
+  display: inline;
+  float: left;
+  height: 80px;
+  width: 120px;
+  padding-top: 30px;
+  padding-left: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.column1-elem img{
+  width: 135px;
+  height: 85px;
+}
+.row3{
+  width: 120px;
+  float: left;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.price{
+  width: 80px;
+  float: left;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}.row3{
+   width: 120px;
+   float: left;
+   text-align: center;
+   position: relative;
+   top: 50%;
+   transform: translateY(-50%);
+ }
+.price{
+  width: 80px;
+  float: left;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.num{
+  width: 30px;
+  background-color: #28669A;
+  border: 1px solid #245269;
+}
+.operate{
+  height: 80px;
+  width: 120px;
+  float: left;
+  text-align: center;
+  position: relative;
+  top: 60%;
+  transform: translateY(-50%);
+  background-color: #28669A;
+}
+.sum1 :hover{
+  color: #28669A;
+  background-color: olivedrab;
+}
+.da{
+  width: 80px;
+  border: 0;
+  background-color: #28669A;
+}
+//endregion
 .community-content{
   padding: 130px 0 40px;
   width: 1200px;
@@ -39,95 +144,10 @@
   top: 50%;
   transform: translateY(-50%);
 }
-.row3{
-  width: 120px;
-  float: left;
-  text-align: center;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.price{
-  width: 80px;
-  float: left;
-  text-align: center;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.myorder-elem{
-  height: 120px;
-  padding-top:  20px;
-  padding-left: 20px;
-  box-sizing: border-box;
-  position: relative;
-}
 .che-buy{
   margin-top: 30px;
   display: inline;
   float: left;
-}
-.column1{
-  height: 85px;
-  width: 425px;
-  float: left;
-  text-align: center;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  overflow-x: auto;
-}
-.game-title{
-  width: 400px;
-  height: 80px;
-  overflow: hidden;
-  position: relative;
-  float: left;
-  cursor: pointer;
-}
-.column1-img {
-  display: inline;
-  float: left;
-  height: 80px;
-  line-height: 80px;
-  padding-left: 50px;
-}
-.column1-txt{
-  display: inline;
-  float: left;
-  height: 80px;
-  width: 120px;
-  padding-top: 30px;
-  padding-left: 50px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.column1-elem img{
-  width: 135px;
-  height: 85px;
-}
-.operate{
-  height: 80px;
-  width: 120px;
-  float: left;
-  text-align: center;
-  position: relative;
-  top: 60%;
-  transform: translateY(-50%);
-  background-color: #28669A;
-}
-.sum1 :hover{
-  color: #28669A;
-  background-color: olivedrab;
-}
-
-.da{
-  width: 80px;
-  border: 0;
-  background-color: #28669A;
-}
-.da :hover{
 }
 .sum{
   padding-left: 20px;
@@ -152,11 +172,6 @@
   float: right;
   font-size: 15px;
   background-color:#1c7430;
-}
-.num{
-  width: 30px;
-  background-color: #28669A;
-  border: 1px solid #245269;
 }
 .addwish{
   border: 0;

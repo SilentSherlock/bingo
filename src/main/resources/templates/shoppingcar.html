@@ -48,6 +48,7 @@
     var gnum = [],price = [],num = 0,sumprice = 0;
     function buy(){//购买，向后台发送插入订单请求
         var orDetails=[];
+        var gids = [];
 
         var shoppingcar = JSON.parse(localStorage.getItem("shoppingcar"));
         var i=0,length=shoppingcar.length,html="";
@@ -67,23 +68,26 @@
                     var temp5= Math.random()*57;
                     key += charac.charAt(temp1) + charac.charAt(temp2)+ charac.charAt(temp3)+ charac.charAt(temp4)+ charac.charAt(temp5);
                     keylist.push(key);
-                    console.log("生成的key为: " + key);
                 }
+                console.log("生成的keylist为: " + keylist);
+                gids.push(shoppingcar[i].gid);
                 orDetails.push({
                     gid : shoppingcar[i].gid,
                     klist : keylist,
                     discount : shoppingcar[i].discount,
-                    price : shoppingcar[i].gprice
+                    price : shoppingcar[i].price
                 });
+                console.log("单价:" + shoppingcar[i].price)
             }
         }
+        //插入订单
         var myDate = new Date();
         var orderContent = {
             uid : 1,
             otime : myDate,
             orderDetails : JSON.stringify(orDetails)
         }
-        orderContent = JSON.stringify(orderContent);
+        // orderContent = JSON.stringify(orderContent);
         console.log("购买记录:" + orderContent);
         console.log("购买记录:" + typeof orderContent);
         $.post(
@@ -93,6 +97,19 @@
                 console.log(result);
             }
         )
+        console.log("gids: "+ gids);
+        //更改用户游戏列表
+        var data = {
+            uid : 1,
+            gid : JSON.stringify(gids),
+            mode : 1
+        }
+        $.post(
+            "/person/updateGameListById",data,
+            function (result){
+                console.log(result);
+            }
+        );
         console.log(orderContent);
         window.alert("购买成功！");
     }
@@ -151,7 +168,8 @@
                 else {
                     var data = {
                         uid : 1,
-                        gid : GAMEID
+                        gid : GAMEID,
+                        mode : 1
                     }
                     $.post(
                         "/person/updateWishListById", data,
@@ -168,10 +186,7 @@
         function setInfo(){
             if(localStorage.getItem("shoppingcar")==null || (
                 (JSON.parse(localStorage.getItem("shoppingcar")))[0]==null
-                && (JSON.parse(localStorage.getItem("shoppingcar")))[1]==null) )
-            {
-                window.alert("购物车中没有游戏了，快去添加喜爱的游戏吧！");
-            }
+                && (JSON.parse(localStorage.getItem("shoppingcar")))[1]==null) );
             var shoppingcar = JSON.parse(localStorage.getItem("shoppingcar"));
             var i=0,length=shoppingcar.length,html="";
             for(;i<length;i++){
@@ -191,7 +206,7 @@
                         "                </span>\n" +
                         "                <div class=\"price\" id=\"\">￥" +shoppingcar[i].price+ "</div>\n" +
                         "                <div class=\"row3\" id=\"\">\n" +
-                        "                    <input type=\"number\" step='1'  onchange='pricesum(this)'  class=\"num\" id=" +i + " onkeydown=\"return false;\"  min=\"1\" value=\"1\">" +
+                        "                    <input type=\"number\" step='1'  onchange='pricesum(this)'  class=\"num\" id=" +i + " onkeydown=\"return false;\" max=\"10\" min=\"1\" value=\"1\">" +
                         "                </div>\n" +
                         "<div class=\"operate\">\n" +
                         "                    <div class=\"sum1\"><button class=\"da\" onclick='deleteCar(this) 'id=" +shoppingcar[i].gid+ ">删除</button></div>\n" +

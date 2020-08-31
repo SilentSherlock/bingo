@@ -50,8 +50,7 @@ public class CommunityService {
             }else if (object instanceof Comment) {
                 commentDao.add((Comment) object);
             }
-        }
-        log(status + " wrong object null");
+        }else log(status + " wrong object null");
     }
 
     public void updatePost(Post post) throws Exception {
@@ -91,7 +90,6 @@ public class CommunityService {
         }else if (type == 1) {
             commentDao.deleteById(idType, idValue);
             log(CLASSNAME + " " + status + " comment");
-        }
-        log(CLASSNAME + " wrong type");
+        } else log(CLASSNAME + " wrong type");
     }
 }
