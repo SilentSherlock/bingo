@@ -185,7 +185,7 @@
             background: #292E41;
             padding: 0;
         }
-        .type{
+        .type1,.type2{
             display: inline-block;
             width: 124px;
             height: 65px;
@@ -317,33 +317,33 @@
                     <div class="slider-block">
                         <div class="image-list">
                             <div class="slider-item" id="show1">
-                                <a href="#" target="_blank">
+                                <a id="link" href="#" target="_blank">
                                     <img id="show-img" src="">
                                     <span id="show-msg">这是第一条信息</span>
                                 </a>
                             </div>
                             <div class="slider-item" id="show2">
-                                <a href="#" target="_blank">
-                                    <img src="">
-                                    <span>这是第二条信息</span>
+                                <a id="link2" href="#" target="_blank">
+                                    <img id="show-img2" src="">
+                                    <span id="show-msg2">这是第二条信息</span>
                                 </a>
                             </div>
                             <div class="slider-item" id="show3">
-                                <a href="#" target="_blank">
-                                    <img src="">
-                                    <span>这是第三条信息</span>
+                                <a id="link3" href="#" target="_blank">
+                                    <img id="show-img3" src="">
+                                    <span id="show-msg3">这是第三条信息</span>
                                 </a>
                             </div>
                             <div class="slider-item" id="show4">
-                                <a href="#" target="_blank">
-                                    <img src="">
-                                    <span>这是第四条信息</span>
+                                <a id="link4" href="#" target="_blank">
+                                    <img id="show-img4" src="">
+                                    <span id="show-msg4">这是第四条信息</span>
                                 </a>
                             </div>
                             <div class="slider-item" id="show5">
-                                <a href="#" target="_blank">
-                                    <img src="">
-                                    <span>这是第五条信息</span>
+                                <a id="link5" href="#" target="_blank">
+                                    <img id="show-img5" src="">
+                                    <span id="show-msg5">这是第五条信息</span>
                                 </a>
                             </div>
                         </div>
@@ -371,8 +371,8 @@
                 <a class="post-button" onclick="new_post()">发布帖子</a>
                 <div class="block-container">
                     <div class="block-types">
-                        <a class="type" id="tie1" href="#">最新帖子</a>
-                        <a class="type" href="#">最热帖子</a>
+                        <a class="type1" id="tie1" href="#">最新帖子</a>
+                        <a class="type2" href="#">最热帖子</a>
                     </div>
                     <div class="block-contents">
                         <div class="topic-list-container">
@@ -406,6 +406,8 @@
                 });
                 return user1;
             }
+
+            //根据指定的帖子pid获取相关的评论内容
             function getComments(pid){
                 let commentList = null;
                 let formData={
@@ -419,12 +421,13 @@
                     type:'get',
                     async:false,
                     success:function (comments) {
-                        //console.log(comments);
                        commentList=comments.resultMap.CommentBypid;
                     }
                 });
                 return commentList;
             }
+
+            //获取所有帖子的内容
             function getPostList(){
                 $.get(
                     "/community/allPosts",
@@ -433,20 +436,39 @@
                         //console.log(list)
                         setHeader();
                         setPosts(sortType);
+                        setScreen()
                     }
                 )
             }
+            function setScreen() {
+                //$("#show-img").attr("src",gameList[0].chref);
+                $("#show-msg").text("【"+list[0].ptheme+"】"+list[0].title);
+                $("#link").attr("href","community-talk.html?pid=1")
+                for(var i = 2;i<=5;i++){
+                    //$("#show-img"+i).attr("src",gameList[i].chref);
+                    $("#show-msg"+i).text("【"+list[i].ptheme+"】"+list[i].title);
+                    $("#link").attr("href","community-talk.html?pid="+i);
+                }
+            }
+
+            //设置顶部“社区要闻”处的帖子内容
             function setHeader() {
                 var html="";
                 $(".community-news-list").empty();
                 for(var i=(4<list.length?4:list.length);i>0;i--){
                     html+=
                         "<li>"+
-                        "<a href="+"community_talk.html?pid="+list[i-1].pid+"><span class="+"content-title"+"><span class="+"text"+">"+"【"+list[i-1].ptheme+"】"+list[i-1].title+"</span></span></a>"+
+                        "<a href="+"community-talk.html?pid="+list[i-1].pid+"><span class="+"content-title"+"><span class="+"text"+">"+"【"+list[i-1].ptheme+"】"+list[i-1].title+"</span></span></a>"+
                         "</li>"
                 }
                 $(".community-news-list").html(html);
             }
+
+            //设置下方的帖子内容
+            //type为对帖子进行排序的方式
+            //time:按时间倒序
+            //hot:按热度倒序
+            //默认为time
             function setPosts(type){
                 var html="";
                 $(".community-post-detail").empty();
@@ -476,13 +498,9 @@
                             }
                         }
 
-                        // var start=new Date(a.replace("-","/").replace("-","/"));
-                        // var end=new Date(b.replace("-","/").replace("-","/"));
-                        // return start-end;
                     })
                 }else if(type=="hot"){
                     list=list.sort(function (a,b) {
-                        //console.log(a.plikenum+" "+b.plikenum)
                         return a.plikenum-b.plikenum;
                     })
                 }
@@ -491,7 +509,7 @@
                     var comments = getComments(list[i].pid);
                     html+=
                         "<div class="+"item-wrap"+">"+
-                        "<div class="+"header"+"><div class="+"btn"+"></div><a href="+"community_talk.html?pid="+list[i].pid+"><h1 class="+"h1-in-header"+">"+"【"+list[i].ptheme+"】"+list[i].title+"</h1></a></div>"+
+                        "<div class="+"header"+"><div class="+"btn"+"></div><a href="+"community-talk.html?pid="+list[i].pid+"><h1 class="+"h1-in-header"+">"+"【"+list[i].ptheme+"】"+list[i].title+"</h1></a></div>"+
                         "<h2 class="+"h2-in-header"+">"+list[i].content+"</h2>"+
                         "<div class="+"left"+">"+
                         "<img src="+curent.uavatar+"><a class="+"nick-name"+" "+"href="+"see_user_info.html?uid="+list[i].uid+" " +"target="+"_blank"+">"+curent.ualias+"</a>"+
@@ -499,31 +517,39 @@
                         "</div>"+
                         "<div class="+"btn-wrapper"+">"+
                         "<button class='up' "+"id="+list[i].pid+"><a>"+"点赞"+list[i].plikenum+"</a></button>"+
-                        "<button class='reply'><a href="+"community_talk.html?pid="+list[i].pid+">"+"回复"+comments.length+"</a>"+"</button>"+
+                        "<button class='reply'><a href="+"community-talk.html?pid="+list[i].pid+">"+"回复"+comments.length+"</a>"+"</button>"+
                         "</div>"+
                         "</div>"+
                         "</div>"
                 }
                 $(".community-post-detail").html(html);
             }
-            $(".type").click(function () {
+
+            //切换帖子排序方式：点击事件
+            $(".type1").click(function () {
                 //样式修改
                 var tempTie = $(".active1")
                 var tag = $(this)
                 tempTie.removeClass("active1")
                 tag.addClass("active1")
-
+                console.log($(this).val())
                 //功能代码
-                if(sortType=="time"){
-                    sortType="hot";
-                    setPosts(sortType);
-                }else if(sortType=="hot"){
-                    sortType="time";
-                    setPosts(sortType);
-                }else{
-                    setPosts(sortType);
-                }
+                sortType="time";
+                setPosts(sortType);
             })
+            $(".type2").click(function () {
+                //样式修改
+                var tempTie = $(".active1")
+                var tag = $(this)
+                tempTie.removeClass("active1")
+                tag.addClass("active1")
+                console.log($(this).val())
+                //功能代码
+                sortType="hot";
+                setPosts(sortType);
+            })
+
+            //点赞
             $(document).on("click",".up",function () {
                 var thisPid = $(this).attr("id")
                 //console.log("click")
@@ -535,23 +561,15 @@
                     }
                 }
                 var thisformData=new FormData();
-                //console.log(thisPid+" "+thisPost.uid+" "+thisPost.ptime)
+
                 thisformData.append("pid",parseInt(thisPid));
-                console.log("pid Type: " + typeof parseInt(thisPid));
-                //thisformData.append("uid",thisPost.uid)
-                // var date = new Date(thisPost.ptime);
-                // console.log("date is "+date);
-                // thisformData.append("ptime",date)
-                // thisformData.append("ptheme",thisPost.ptheme)
-                // console.log(thisPost.plikenum)
+                //console.log("pid Type: " + typeof parseInt(thisPid));
                 thisformData.append("propName","plikenum");
                 let postValue = Number(thisPost.plikenum) + 1;
-                console.log("postValue: " + typeof postValue);
+                //console.log("postValue: " + typeof postValue);
                 thisformData.append("propValue",postValue);
-                console.log(thisPost.plikenum+1);
-                // thisformData.append("content",thisPost.content)
-                // thisformData.append("title",thisPost.title)
-                // console.log(thisformData)
+                //console.log(thisPost.plikenum+1);
+
                 JSON.stringify(thisformData);
 
                 $.ajax({
@@ -577,6 +595,8 @@
             $("#show5").hide()
             getPostList()
         })
+
+        //根据鼠标位置显示不同的主页内容
         $(".close").hover(function () {
             var tempChoose =$(".active")
             var tag =$(this)
@@ -588,6 +608,8 @@
             $("#show"+tag.text()).show()
             tempShowDiv=$("#show"+tag.text())
         })
+
+        //发帖子
         function new_post() {
             window.location.href="new_post.html?uid=".concat(thisUser.uid);
         }
