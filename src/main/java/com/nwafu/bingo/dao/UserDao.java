@@ -4,6 +4,9 @@ import com.nwafu.bingo.entity.User;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import com.nwafu.bingo.utils.Search;
+
+
 
 import java.util.List;
 
@@ -22,5 +25,5 @@ public interface UserDao {
 
     List<User> getUserPage(@Param("current_index") Integer current_index, @Param("size") Integer size) throws Exception;
 
-
+    Integer getUserCount(Search search);
 }
