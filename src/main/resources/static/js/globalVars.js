@@ -5,17 +5,17 @@ let static_components = {
     component_index: {
         cname: "首页",
         cid: "index-body",
-        curl: "/page/component_index"
+        curl: "/page/component_index",
     },
     component_user_login: {
         cname: "登录",
         cid: "user-login",
-        curl: "/page/component_user_login"
+        curl: "/page/component_user_login",
     },
     component_user_register: {
         cname: "注册",
         cid: "user-register",
-        curl: "/page/component_user_register"
+        curl: "/page/component_user_register",
     },
     component_loading_animation: {
         cname: "正在加载动画",
@@ -35,12 +35,17 @@ let static_components = {
     component_all_game: {
         cname: "所有游戏",
         cid: "all-game",
-        curl: "/page/component_all_game"
+        curl: "/page/component_all_game",
     },
     component_alert: {
         cname: "提示模态框",
         cid: "alert",
         curl: "/page/alert"
+    },
+    component_user_information: {
+        cname: "我的信息",
+        cid: "user-information",
+        curl: "/page/component_user_information"
     },
 };
 
@@ -63,35 +68,47 @@ let requestmap = {
     user_register_validate_code: "/person/user_register_code",
     user_register_validate_uname: "/person/validateNameLegality",
     user_register_send_code: "/person/user_register_send_code",
-    store_search: "/store/search"
+    store_search: "/store/search",
+    store_search_keywords: "store/searchGameByName"
 };
 
 //用户信息
-let userInfo;
+let userInfo = {
+    gamelist: undefined,
+    password: undefined,
+    ualias: undefined,
+    uavatar: undefined,
+    ubirthday: undefined,
+    uid: undefined,
+    umail: undefined,
+    uname: undefined,
+    uprofile: undefined,
+    usex: undefined,
+    wishlist: undefined,
+};
 
-//用户当前位置
-let uposition = [];
+//当前展示的用户信息
+let showUserPage;
 
-//复用搜索处理的默认参数
+//导航栏搜索框搜索条件
+let isSearchResult = false;
+let searchKeywords;
+
+//首页搜索处理的默认参数
 let index_pageCount = 12;
 let index_pageIndex = 0;
 
-//所有游戏页面
-let minPrice;
-let maxPrice;
-let area;
-let language;
-let formData;
-let sort;
-let order = "desc";
-let pageIndex = 0;
-let price_sort = 0;//初始为从高到低
-let category = [];
-let tag = [];
 
-let firstFormData = {
-    pageIndex: pageIndex,
-    order: order,
-    category: JSON.stringify(category),
-    tag: JSON.stringify(tag),
+//默认搜索全部游戏
+let searchCondition = {
+    order: undefined,
+    sort: undefined,
+    area: undefined,
+    category: undefined,
+    tag: undefined,
+    language: undefined,
+    minPrice: undefined,
+    maxPrice: undefined,
+    pageIndex: 0,
+    pageCount: undefined
 };
