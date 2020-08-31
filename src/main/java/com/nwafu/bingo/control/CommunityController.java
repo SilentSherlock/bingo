@@ -6,14 +6,11 @@ import com.nwafu.bingo.service.CommunityService;
 import com.nwafu.bingo.utils.Result;
 import com.nwafu.bingo.utils.Status;
 import com.nwafu.bingo.utils.Tools;
-import org.apache.hadoop.ha.HAServiceProtocol;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.lang.reflect.Field;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
