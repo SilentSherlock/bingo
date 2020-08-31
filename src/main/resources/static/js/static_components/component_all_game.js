@@ -1,92 +1,192 @@
 //所有游戏页面初始化
 $(document).ready(function () {
-    formData = firstFormData;
+    formData = searchCondition;
+
+    let sort;
+    let order = "desc";
+    let pageIndex = 0;
+    let price_sort = 0;//初始为从高到低
+    let category = [];
+    let tag = [];
+    let minPrice;
+    let maxPrice;
+    let area;
+    let language;
 
     function getGameList() {
-        $.post(
-            "/store/search",
-            formData,
-            function (gameList) {
-                let gamel = gameList.resultMap.searchList;
-                let page = gameList.resultMap.allSearchNum;
-                let html = "";
+        console.log("查询条件：", formData);
+        console.log("issearchResult", isSearchResult);
+        if (isSearchResult === true) {
+            $.post(
+                requestmap.store_search_keywords,
+                searchKeywords,
+                function (gameList) {
+                    console.log("gameList:", gameList);
+                    let gamel = gameList.resultMap.searchGameListByName;
+                    let html = "";
 
-                $('#game-list').empty();
+                    $('#game-list').empty();
 
-                if (gameList.status === 0)
-                    return;
-                for (let i = 0; i < gamel.length; i++) {
+                    if (gameList.status === 0)
+                        return;
+                    for (let i = 0; i < gamel.length; i++) {
 
-                    let game = gamel[i]
-                    let temp = (parseFloat(game.gprice) * (parseFloat(game.discount))).toString();
-                    if (temp.length > 6) {
-                        temp.substr(0, 6);
-                    }
-                    //得到游戏类别数组
-                    let typelist = game.gtype;
-                    typelist = (typelist != null ? typelist.substring(1, typelist.length - 1) : "");
-
-                    typelist = typelist.split(",")
-                    //得到游戏语言数组
-                    let languagelist = game.language;
-                    languagelist = (languagelist != null ? languagelist.substring(1, languagelist.length - 1) : "")
-
-                    languagelist = languagelist.split(",")
-                    for (let j = 0; j < languagelist.length; j++) {
-                        //console.log(languagelist[j])
-                        languagelist[j].substring(1, languagelist[j].length - 1)
-                    }
-
-
-                    html +=
-                        "<li>" +
-                        "<a href=" + "game_detail.html?gid=game.gid" + " class=" + "game-click" + ">" +
-                        "<div class=" + "left" + "><img src=" + game.chref + "></div>" +
-                        "<div class=" + "right" + ">"
-                    if (game.discount != 1 && game.discount != null) {
-                        html +=
-                            "<span class=" + "game-discount" + ">" + game.discount + "</span>" +
-                            "<span class=" + "game-origin-price" + ">￥" + game.gprice + "</span>"
-                    }
-                    html +=
-                        "<span class=" + "game-sale-price" + ">￥" + temp + "</span>" +
-                        "</div>" +
-                        "<div class=" + "middle" + ">" +
-                        "<p class=" + "title" + ">" +
-                        game.gname
-
-                    if (game.discount != 1) {
-                        html += "<span class=" + "title-tag" + ">促销</span>"
-                    }
-                    var china = false;
-                    for (var start = 0; start < languagelist.length; start++) {
-                        if (languagelist[start] === "\"中文\"" && languagelist.length == 1) {
-                            html += "<span class=" + "title-area" + ">中国站</span>";
-                            china = true;
-                            break;
+                        let game = gamel[i]
+                        let temp = (parseFloat(game.gprice) * (parseFloat(game.discount))).toString();
+                        if (temp.length > 6) {
+                            temp.substr(0, 6);
                         }
-                    }
-                    if (!china) {
+                        //得到游戏类别数组
+                        let typelist = game.gtype;
+                        typelist = (typelist != null ? typelist.substring(1, typelist.length - 1) : "");
 
-                        html += "<span class=" + "title-area" + ">国际站</span>"
-                    }
+                        typelist = typelist.split(",")
+                        //得到游戏语言数组
+                        let languagelist = game.language;
+                        languagelist = (languagelist != null ? languagelist.substring(1, languagelist.length - 1) : "")
 
-                    html += "</p>" +
-                        "<p class='date'>发行于" + (game.realeasedate != null ? game.realeasedate.substring(0, 10) : ' ') + "</p>" +
-                        "<p class='tags'>"
-                    for (j = 0; j < typelist.length; j++) {
+                        languagelist = languagelist.split(",")
+                        for (let j = 0; j < languagelist.length; j++) {
+                            //console.log(languagelist[j])
+                            languagelist[j].substring(1, languagelist[j].length - 1)
+                        }
+
+
                         html +=
-                            "<span class=" + "tag-block" + ">" + (typelist[j] != null ? typelist[j].substring(1, typelist[j].length - 1) : ' ') + "</span>"
+                            "<li>" +
+                            "<a href=" + "/game_detail.html?gid=" + game.gid + " class=" + "game-click" + " target=" + "_black>" +
+                            "<div class=" + "left" + "><img src=" + game.chref + "></div>" +
+                            "<div class=" + "right" + ">"
+                        if (game.discount != 1 && game.discount != null) {
+                            html +=
+                                "<span class=" + "game-discount" + ">" + "-" + ((1 - game.discount) * 100).toFixed() + "%</span>" +
+                                "<span class=" + "game-origin-price" + ">￥" + game.gprice + "</span>"
+                        }
+                        html +=
+                            "<span class=" + "game-sale-price" + ">￥" + temp + "</span>" +
+                            "</div>" +
+                            "<div class=" + "middle" + ">" +
+                            "<p class=" + "title" + ">" +
+                            game.gname
+
+                        if (game.discount != 1) {
+                            html += "<span class=" + "title-tag" + ">促销</span>"
+                        }
+                        var china = false;
+                        for (var start = 0; start < languagelist.length; start++) {
+                            if (languagelist[start] === "\"中文\"" && languagelist.length == 1) {
+                                html += "<span class=" + "title-area" + ">中国站</span>";
+                                china = true;
+                                break;
+                            }
+                        }
+                        if (!china) {
+
+                            html += "<span class=" + "title-area" + ">国际站</span>"
+                        }
+
+                        html += "</p>" +
+                            "<p class='date'>发行于" + (game.realeasedate != null ? game.realeasedate.substring(0, 10) : ' ') + "</p>" +
+                            "<p class='tags'>"
+                        for (j = 0; j < typelist.length; j++) {
+                            html +=
+                                "<span class=" + "tag-block" + ">" + (typelist[j] != null ? typelist[j].substring(1, typelist[j].length - 1) : ' ') + "</span>"
+                        }
+                        html += "</p>" +
+                            "</div>" +
+                            "</a>" +
+                            "</li>"
                     }
-                    html += "</p>" +
-                        "</div>" +
-                        "</a>" +
-                        "</li>"
+                    $("#game-list").html(html)
+                });
+            isSearchResult = false;
+        } else {
+            $.post(
+                requestmap.store_search,
+                formData,
+                function (gameList) {
+                    let gamel = gameList.resultMap.searchList;
+                    let page = gameList.resultMap.allSearchNum;
+                    let html = "";
+
+                    $('#game-list').empty();
+
+                    if (gameList.status === 0)
+                        return;
+                    for (let i = 0; i < gamel.length; i++) {
+
+                        let game = gamel[i]
+                        let temp = (parseFloat(game.gprice) * (parseFloat(game.discount))).toString();
+                        if (temp.length > 6) {
+                            temp.substr(0, 6);
+                        }
+                        //得到游戏类别数组
+                        let typelist = game.gtype;
+                        typelist = (typelist != null ? typelist.substring(1, typelist.length - 1) : "");
+
+                        typelist = typelist.split(",")
+                        //得到游戏语言数组
+                        let languagelist = game.language;
+                        languagelist = (languagelist != null ? languagelist.substring(1, languagelist.length - 1) : "")
+
+                        languagelist = languagelist.split(",")
+                        for (let j = 0; j < languagelist.length; j++) {
+                            //console.log(languagelist[j])
+                            languagelist[j].substring(1, languagelist[j].length - 1)
+                        }
+
+
+                        html +=
+                            "<li>" +
+                            "<a href=" + "/game_detail.html?gid=" + game.gid + " class=" + "game-click" + " target='_blank'>" +
+                            "<div class=" + "left" + "><img src=" + game.chref + "></div>" +
+                            "<div class=" + "right" + ">"
+                        if (game.discount != 1 && game.discount != null) {
+                            html +=
+                                "<span class=" + "game-discount" + ">" + "-" + ((1 - game.discount) * 100).toFixed() + "%</span>" +
+                                "<span class=" + "game-origin-price" + ">￥" + game.gprice + "</span>"
+                        }
+                        html +=
+                            "<span class=" + "game-sale-price" + ">￥" + temp + "</span>" +
+                            "</div>" +
+                            "<div class=" + "middle" + ">" +
+                            "<p class=" + "title" + ">" +
+                            game.gname
+
+                        if (game.discount != 1) {
+                            html += "<span class=" + "title-tag" + ">促销</span>"
+                        }
+                        var china = false;
+                        for (var start = 0; start < languagelist.length; start++) {
+                            if (languagelist[start] === "\"中文\"" && languagelist.length == 1) {
+                                html += "<span class=" + "title-area" + ">中国站</span>";
+                                china = true;
+                                break;
+                            }
+                        }
+                        if (!china) {
+
+                            html += "<span class=" + "title-area" + ">国际站</span>"
+                        }
+
+                        html += "</p>" +
+                            "<p class='date'>发行于" + (game.realeasedate != null ? game.realeasedate.substring(0, 10) : ' ') + "</p>" +
+                            "<p class='tags'>"
+                        for (j = 0; j < typelist.length; j++) {
+                            html +=
+                                "<span class=" + "tag-block" + ">" + (typelist[j] != null ? typelist[j].substring(1, typelist[j].length - 1) : ' ') + "</span>"
+                        }
+                        html += "</p>" +
+                            "</div>" +
+                            "</a>" +
+                            "</li>"
+                    }
+                    $("#game-list").html(html)
+                    setPage(page)
                 }
-                $("#game-list").html(html)
-                setPage(page)
-            }
-        )
+            )
+        }
+
     }
 
     function setPage(pageNumber) {
@@ -417,5 +517,5 @@ $(document).ready(function () {
         formData = thisFormData;
         getGameList()
     })
-    getGameList()
+    getGameList();
 })

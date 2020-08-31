@@ -113,6 +113,7 @@ a:active {
 /****************************下拉菜单***********************/
 .dropdown-menu {
   background-color: #33394d;
+  border: none;
   padding: 0;
 }
 
@@ -197,6 +198,21 @@ a:active {
   background-color: #ff6900;
 }
 
+/****************************ali iconfont***********************/
+@font-face {
+  font-family: 'iconfont';
+  /* project id 1823585 */
+  src: url("//at.alicdn.com/t/font_1823585_ewfcw4aupt.eot");
+  src: url("//at.alicdn.com/t/font_1823585_ewfcw4aupt.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_1823585_ewfcw4aupt.woff2") format("woff2"), url("//at.alicdn.com/t/font_1823585_ewfcw4aupt.woff") format("woff"), url("//at.alicdn.com/t/font_1823585_ewfcw4aupt.ttf") format("truetype"), url("//at.alicdn.com/t/font_1823585_ewfcw4aupt.svg#iconfont") format("svg");
+}
+.iconfont {
+  font-family: "iconfont", serif;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   background-color: #202539;
   color: #7a80a2;
@@ -207,7 +223,7 @@ nav.navbar {
   border-radius: 0;
   padding: 0 50px;
   margin: 0;
-  background-color: #202539;
+  background-color: #171a29;
   color: #7a80a2;
   font-size: 20px;
 }
@@ -232,13 +248,13 @@ nav.navbar ul.navbar-nav > li > a {
   height: 70px;
   padding: 0;
   line-height: 70px;
-  font-size: 16px;
+  font-size: 20px;
   text-align: center;
 }
 
 nav.navbar li.active > a {
   background-color: #33394d !important;
-  color: #b9c0ef !important;
+  color: #ff6900 !important;
 }
 
 nav.navbar li.dropdown.open > a {
@@ -262,31 +278,9 @@ nav.navbar #navbar-uinfo .dropdown-toggle > img {
   transform: translateZ(0);
 }
 
-.breadcrumb {
-  border-radius: 0;
-  padding: 3px 50px;
-  background-color: #33394d;
-  height: 25px;
-  margin-bottom: 0;
-}
-
-.breadcrumb > li {
-  font-size: 13px;
-  color: #7a80a2;
-}
-
-.breadcrumb > li + li::before {
-  color: #7a80a2;
-  content: ">";
-}
-
-.breadcrumb > li + li:last-of-type {
-  color: #b9c0ef;
-}
-
 #body-container {
   min-height: 800px;
-  margin-top: 95px;
+  margin-top: 70px;
 }
 
 #foot-container {

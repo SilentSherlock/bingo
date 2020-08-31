@@ -15,22 +15,12 @@
     <script type="text/javascript" src="/extlib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript"
             src="/extlib/bootstrapvalidator-0.5.3/js/bootstrapValidator.min.js"></script>
-    <!--jquery.fileupload插件-->
-    <script type="text/javascript"
-            src="/extlib/jquery.fileupload/js/vendor/jquery.ui.widget.min.js"></script>
-    <script type="text/javascript"
-            src="/extlib/jquery.fileupload/js/jquery.iframe-transport.min.js"></script>
-    <script type="text/javascript"
-            src="/extlib/jquery.fileupload/js/jquery.fileupload.min.js"></script>
-    <!--jqueryMD5加密插件-->
-    <script type="text/javascript" src="/extlib/jquery.md5/md5.js"></script>
-    <!-- vue.js -->
-    <script type="text/javascript" src="/extlib/vue-2.6.11/vue.js"></script>
     <!-- 引入自己的css库文件 -->
     <link rel="stylesheet" href="/css/index.css">
     <!-- 引入自己的js库文件 -->
-    <script type="text/javascript" src="/js/reusable.js"></script>
     <script type="text/javascript" src="/js/globalVars.js"></script>
+    <script type="text/javascript" src="/js/reusable.js"></script>
+    <script type="text/javascript" src="/js/navbar.js"></script>
     <script type="text/javascript" src="/js/index.js"></script>
 </head>
 <body>
@@ -74,7 +64,7 @@
                             <li><a class="dropdown-item" href="javascript:void(0)">独立</a></li>
                             <li><a class="dropdown-item" href="javascript:void(0)">角色扮演</a></li>
                             <li role="separator" class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="javascript:void(0)" onclick="showAllGame()">所有游戏</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0)">所有游戏</a></li>
                         </ul>
                     </li>
                     <li><a href="javascript:void(0)">社区</a></li>
@@ -111,7 +101,7 @@
                             </li>
                             <li role="separator" class="dropdown-divider"></li>
                             <li>
-                                <a class="dropdown-item" href="javascript:void(0)">
+                                <a class="dropdown-item" href="javascript:void(0)" onclick="logout()">
                                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;退出
                                 </a>
                             </li>
@@ -120,8 +110,9 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right" id="navbar-nologged">
-                    <li><a href="javascript:void(0)" onclick="user_login()">登录</a></li>
-                    <li><a href="javascript:void(0)" onclick="user_register()">注册</a></li>
+                    <li><a href="javascript:void(0)" onclick="user_login()"><i class="iconfont">&#xe6f0;</i>登录</a></li>
+                    <li><a href="javascript:void(0)" onclick="user_register()"><i class="iconfont">&#xe71c;</i>注册</a>
+                    </li>
                 </ul>
 
                 <form class="nav navbar-form navbar-right" role="search" id="navbar-search-form">
@@ -135,34 +126,28 @@
                             data-loading-text="<span class='glyphicon glyphicon-search' aria-hidden='true'></span> 搜索中...">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 搜索商店
                     </button>
-                    <div class="form-group">
-                        <div class="dropdown" id="navbar-search-form-result">
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="javascript:void(0)">
-                                        sadf
-                                    </a>
-                                </li>
-                                <li role="separator" class="dropdown-divider"></li>
-                                <li>
-                                    <a class="dropdown-item" href="javascript:void(0)">
-                                        sadf
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <div class="form-group" id="search-form-error-tip" style="display: none;"></div>
+                    <!--                    <div class="form-group">-->
+                    <!--                        <div class="dropdown" id="navbar-search-form-result">-->
+                    <!--                            <ul class="dropdown-menu">-->
+                    <!--                                <li>-->
+                    <!--                                    <a class="dropdown-item" href="javascript:void(0)">-->
+                    <!--                                        sadf-->
+                    <!--                                    </a>-->
+                    <!--                                </li>-->
+                    <!--                                <li role="separator" class="dropdown-divider"></li>-->
+                    <!--                                <li>-->
+                    <!--                                    <a class="dropdown-item" href="javascript:void(0)">-->
+                    <!--                                        sadf-->
+                    <!--                                    </a>-->
+                    <!--                                </li>-->
+                    <!--                            </ul>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </form>
             </div>
         </div>
     </nav>
-    <!-- 面包屑导航 -->
-    <ol class="breadcrumb">
-        <li>您的位置：<a href="javascript:void(0)" onclick="index_body()">首页</a></li>
-        <li><a href="javascript:void(0)">游戏</a></li>
-        <li><a href="javascript:void(0)">FPS</a></li>
-        <li>Borderland3</li>
-    </ol>
 </div>
 
 <!-- 网页主体容器-->

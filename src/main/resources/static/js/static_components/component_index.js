@@ -1,9 +1,12 @@
 //首页组件初始化
 $(document).ready(function () {
-    //初始化
-    getRecommendationGameCardHtml().then(function (value) {
-        //首页初始化
-        index_init(value);
+    //显示加载动画
+    loadingAnimation(".recommendation-body-container").then(function () {
+        //获取游戏展示所需的模板
+        getRecommendationGameCardHtml().then(function (value) {
+            //首页初始化
+            index_init(value);
+        });
     });
 });
 
@@ -16,6 +19,13 @@ function index_init(game_recommendation_card_html) {
 
     /*对首页幻灯片相关的初始化可以在这里完成*/
 
+    //还原搜索条件
+    restoreSearchConditonDefault();
+
+    //首页的所有查询页码和一页显示数量都固定
+    searchCondition.pageIndex = index_pageIndex;
+    searchCondition.pageCount = index_pageCount;
+
     //展示推荐的促销游戏
     showGameByPromotion(game_recommendation_card_html);
     //展示高评价游戏
@@ -26,6 +36,53 @@ function index_init(game_recommendation_card_html) {
     showNewGame(game_recommendation_card_html);
     //展示即将上线游戏
     showPreGame(game_recommendation_card_html);
+
+    //为更多超链接注册监听
+    setListenerForMoreA();
+
+    //还原默认查询条件
+    searchCondition.pageIndex = 0;
+    searchCondition.pageCount = undefined;
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.8.28
+ * 描述: 为更多超链接设置监听
+ */
+function setListenerForMoreA() {
+    $(".recommendation-title-container > span:last-of-type > a").on("click", function () {
+        let type = $(this).parent().prev().text().split("】")[1];
+        console.log("更多的种类：", type);
+        //恢复默认搜索条件
+        restoreSearchConditonDefault();
+        //设置搜索条件
+        switch (type) {
+            case "正在促销":
+                searchCondition.sort = "discount";
+                break;
+            case "高评价":
+                searchCondition.sort = "score";
+                break;
+            case "免费游戏":
+                searchCondition.minPrice = 0;
+                searchCondition.maxPrice = 0;
+                break;
+            case "新上线":
+                searchCondition.tag = JSON.stringify(["newsale"]);
+                break;
+            case "即将上线":
+                searchCondition.tag = JSON.stringify(["presale"]);
+                break;
+            default:
+                break;
+        }
+        console.log("更多-展示所有游戏前的查询条件：", JSON.stringify(searchCondition));
+        $("nav.navbar ul.navbar-nav:eq(0) > li:eq(0)").removeClass("active");
+        $("nav.navbar ul.navbar-nav:eq(0) > li:eq(1) > a").html(type + "<span class='caret'></span>");
+        $("nav.navbar ul.navbar-nav:eq(0) > li:eq(1)").addClass("active");
+        showAllGame();
+    });
 }
 
 /**
@@ -37,9 +94,12 @@ function index_init(game_recommendation_card_html) {
  */
 function getRecommendationGameCardHtml() {
     return new Promise(function (resolve) {
-        $.get(dynamic_components.component_game_recommendation_card.curl, function (data) {
-            resolve(data);
-        });
+        $.get(
+            dynamic_components.component_game_recommendation_card.curl,
+            function (data) {
+                resolve(data);
+            }
+        );
     });
 }
 
@@ -49,21 +109,18 @@ function getRecommendationGameCardHtml() {
  * 描述: 获取并显示促销游戏
  */
 function showGameByPromotion(game_recommendation_card_html) {
-    let data = {
-        pageCount: index_pageCount,
-        pageIndex: index_pageIndex,
-        sort: "discount"
-    };
+    //设置特殊搜索条件
+    searchCondition.sort = "discount";
 
-    $.post(
-        requestmap.store_search,
-        data,
+    searchGame(searchCondition).then(
         function (data) {
             if (data.status === 1) {
                 let finalHtml = "";
 
                 $.each(data.resultMap.searchList, function (key, value) {
                     let html = $(game_recommendation_card_html);
+                    //设置点击事件
+                    html.find(".index-game-card-cover-container > a").attr("href", "/game_detail.html?gid=" + value.gid);
                     //设置封面
                     html.find(".index-game-card-cover-container img").attr("src", value.chref);
                     //设置游戏名称
@@ -74,6 +131,7 @@ function showGameByPromotion(game_recommendation_card_html) {
                     //设置原价
                     html.find(".index-game-card-info-price-container > div > span:first-of-type").text("￥" + value.gprice);
                     //设置现价
+                    html.find(".index-game-card-info-price-container > div > span:last-of-type").css("color", "rgb(255, 105, 0)");
                     html.find(".index-game-card-info-price-container > div > span:last-of-type").text("￥" + value.gprice * value.discount);
 
                     finalHtml += html.html();
@@ -83,10 +141,14 @@ function showGameByPromotion(game_recommendation_card_html) {
             } else {
                 ajaxNoContent("#recommendation-promotion");
             }
+        },
+        function () {
+            ajaxFailed("#recommendation-promotion");
         }
-    ).fail(function () {
-        ajaxFailed("#recommendation-promotion");
-    });
+    );
+
+    //恢复默认搜索条件
+    searchCondition.sort = undefined;
 }
 
 /**
@@ -95,21 +157,17 @@ function showGameByPromotion(game_recommendation_card_html) {
  * 描述: 获取并显示高评价游戏
  */
 function showGameByScore(game_recommendation_card_html) {
-    let data = {
-        pageCount: index_pageCount,
-        pageIndex: index_pageIndex,
-        sort: "score"
-    };
+    searchCondition.sort = "score";
 
-    $.post(
-        requestmap.store_search,
-        data,
+    searchGame(searchCondition).then(
         function (data) {
             if (data.status === 1) {
                 let finalHtml = "";
 
                 $.each(data.resultMap.searchList, function (key, value) {
                     let html = $(game_recommendation_card_html);
+                    //设置点击事件
+                    html.find(".index-game-card-cover-container > a").attr("href", "/game_detail.html?gid=" + value.gid);
                     //设置封面
                     html.find(".index-game-card-cover-container img").attr("src", value.chref);
                     //设置游戏名称
@@ -123,6 +181,7 @@ function showGameByScore(game_recommendation_card_html) {
                         //设置原价
                         html.find(".index-game-card-info-price-container > div > span:first-of-type").hide();
                         //设置现价
+                        html.find(".index-game-card-info-price-container > div > span:last-of-type").css("color", "rgb(255, 105, 0)");
                         html.find(".index-game-card-info-price-container > div > span:last-of-type").css("margin-top", "15px");
                         html.find(".index-game-card-info-price-container > div > span:last-of-type").text("免费");
                     } else {
@@ -144,6 +203,7 @@ function showGameByScore(game_recommendation_card_html) {
                             //设置原价
                             html.find(".index-game-card-info-price-container > div > span:first-of-type").text("￥" + value.gprice);
                             //设置现价
+                            html.find(".index-game-card-info-price-container > div > span:last-of-type").css("color", "rgb(255, 105, 0)");
                             html.find(".index-game-card-info-price-container > div > span:last-of-type").text("￥" + value.gprice * value.discount);
                         }
                     }
@@ -154,10 +214,14 @@ function showGameByScore(game_recommendation_card_html) {
             } else {
                 ajaxNoContent("#recommendation-score");
             }
+        },
+        function () {
+            ajaxFailed("#recommendation-score");
         }
-    ).fail(function () {
-        ajaxFailed("#recommendation-score");
-    });
+    );
+
+    //恢复默认搜索条件
+    searchCondition.sort = undefined;
 }
 
 /**
@@ -166,22 +230,18 @@ function showGameByScore(game_recommendation_card_html) {
  * 描述: 获取并显示免费游戏
  */
 function showFreeGame(game_recommendation_card_html) {
-    let data = {
-        pageCount: index_pageCount,
-        pageIndex: index_pageIndex,
-        minPrice: 0,
-        maxPrice: 0
-    };
+    searchCondition.minPrice = 0;
+    searchCondition.maxPrice = 0;
 
-    $.post(
-        requestmap.store_search,
-        data,
+    searchGame(searchCondition).then(
         function (data) {
             if (data.status === 1) {
                 let finalHtml = "";
 
                 $.each(data.resultMap.searchList, function (key, value) {
                     let html = $(game_recommendation_card_html);
+                    //设置点击事件
+                    html.find(".index-game-card-cover-container > a").attr("href", "/game_detail.html?gid=" + value.gid);
                     //设置封面
                     html.find(".index-game-card-cover-container img").attr("src", value.chref);
                     //设置游戏名称
@@ -193,6 +253,7 @@ function showFreeGame(game_recommendation_card_html) {
                     //设置原价
                     html.find(".index-game-card-info-price-container > div > span:first-of-type").hide();
                     //设置现价
+                    html.find(".index-game-card-info-price-container > div > span:last-of-type").css("color", "rgb(255, 105, 0)");
                     html.find(".index-game-card-info-price-container > div > span:last-of-type").css("margin-top", "15px");
                     html.find(".index-game-card-info-price-container > div > span:last-of-type").text("免费");
 
@@ -203,10 +264,15 @@ function showFreeGame(game_recommendation_card_html) {
             } else {
                 ajaxNoContent("#recommendation-free");
             }
+        },
+        function () {
+            ajaxFailed("#recommendation-free");
         }
-    ).fail(function () {
-        ajaxFailed("#recommendation-free");
-    });
+    );
+
+    //恢复默认搜索条件
+    searchCondition.minPrice = undefined;
+    searchCondition.maxPrice = undefined;
 }
 
 /**
@@ -215,21 +281,17 @@ function showFreeGame(game_recommendation_card_html) {
  * 描述: 获取并显示新上线游戏
  */
 function showNewGame(game_recommendation_card_html) {
-    let data = {
-        pageCount: index_pageCount,
-        pageIndex: index_pageIndex,
-        tag: JSON.stringify(["newsale"])
-    };
+    searchCondition.tag = JSON.stringify(["newsale"]);
 
-    $.post(requestmap.store_search,
-        data,
+    searchGame(searchCondition).then(
         function (data) {
             if (data.status === 1) {
                 let finalHtml = "";
 
                 $.each(data.resultMap.searchList, function (key, value) {
                     let html = $(game_recommendation_card_html);
-
+                    //设置点击事件
+                    html.find(".index-game-card-cover-container > a").attr("href", "/game_detail.html?gid=" + value.gid);
                     //设置封面
                     html.find(".index-game-card-cover-container img").attr("src", value.chref);
                     //设置游戏名称
@@ -243,6 +305,7 @@ function showNewGame(game_recommendation_card_html) {
                         //设置原价
                         html.find(".index-game-card-info-price-container > div > span:first-of-type").hide();
                         //设置现价
+                        html.find(".index-game-card-info-price-container > div > span:last-of-type").css("color", "rgb(255, 105, 0)");
                         html.find(".index-game-card-info-price-container > div > span:last-of-type").css("margin-top", "15px");
                         html.find(".index-game-card-info-price-container > div > span:last-of-type").text("免费");
                     } else {
@@ -264,6 +327,7 @@ function showNewGame(game_recommendation_card_html) {
                             //设置原价
                             html.find(".index-game-card-info-price-container > div > span:first-of-type").text("￥" + value.gprice);
                             //设置现价
+                            html.find(".index-game-card-info-price-container > div > span:last-of-type").css("color", "rgb(255, 105, 0)");
                             html.find(".index-game-card-info-price-container > div > span:last-of-type").text("￥" + value.gprice * value.discount);
                         }
                     }
@@ -273,10 +337,14 @@ function showNewGame(game_recommendation_card_html) {
             } else {
                 ajaxNoContent("#recommendation-new");
             }
+        },
+        function () {
+            ajaxFailed("#recommendation-new");
         }
-    ).fail(function () {
-        ajaxFailed("#recommendation-new");
-    });
+    );
+
+    //恢复默认搜索条件
+    searchCondition.tag = undefined;
 }
 
 /**
@@ -285,21 +353,17 @@ function showNewGame(game_recommendation_card_html) {
  * 描述: 获取并显示即将上线游戏
  */
 function showPreGame(game_recommendation_card_html) {
-    let data = {
-        pageCount: index_pageCount,
-        pageIndex: index_pageIndex,
-        tag: JSON.stringify(["presale"])
-    };
+    searchCondition.tag = JSON.stringify(["presale"]);
 
-    $.post(
-        requestmap.store_search,
-        data,
+    searchGame(searchCondition).then(
         function (data) {
             if (data.status === 1) {
                 let finalHtml = "";
 
                 $.each(data.resultMap.searchList, function (key, value) {
                     let html = $(game_recommendation_card_html);
+                    //设置点击事件
+                    html.find(".index-game-card-cover-container > a").attr("href", "/game_detail.html?gid=" + value.gid);
                     //设置封面
                     html.find(".index-game-card-cover-container img").attr("src", value.chref);
                     //设置游戏名称
@@ -320,8 +384,12 @@ function showPreGame(game_recommendation_card_html) {
             } else {
                 ajaxNoContent("#recommendation-pre");
             }
+        },
+        function () {
+            ajaxFailed("#recommendation-pre");
         }
-    ).fail(function () {
-        ajaxFailed("#recommendation-pre");
-    });
+    );
+
+    //恢复默认搜索条件
+    searchCondition.tag = undefined;
 }

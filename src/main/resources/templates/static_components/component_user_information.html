@@ -1,32 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>user_information</title>
-</head>
-<body>
-<div class="community-content">
+<div class="community-content" id="user-information">
     <div class="tabs-container">
         <div class="left-menu-tabs">
-            <div class="first-title tags-button">订单中心</div>
-            <div class="tags-button">
-                <a class="close" id="choose1" href="#">我的订单</a>
-            </div>
-            <div class="tags-button">
-                <a class="close" href="#">我的点评</a>
-            </div>
-            <div class="tags-button">
-                <a class="close" href="#">我的游戏</a>
-            </div>
             <div class="first-title tags-button">我的账户</div>
             <div class="tags-button">
-                <a class="close" href="#">基本信息</a>
+                <a class="close" id="choose1" href="#">基本信息</a>
             </div>
             <div class="tags-button">
                 <a class="close" href="#">购物车</a>
             </div>
             <div class="tags-button">
                 <a class="close" href="#">心愿单</a>
+            </div>
+            <div class="first-title tags-button">订单中心</div>
+            <div class="tags-button">
+                <a class="close" href="#">我的订单</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="#">我的点评</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="#">我的游戏</a>
             </div>
         </div>
         <div class="center-user-tabs">
@@ -45,27 +38,27 @@
                     </div>
                 </div>
                 <div class="form-block" style="width:100%;margin-left:0;">
-                    <div class="label-name">真实姓名：</div>
-                    <div class="form-control" id="user-true-name">***</div>
+                    <div class="label-name">用户名：</div>
+                    <div id="user-true-name">***</div>
                 </div>
                 <div class="form-block" style="width:100%;margin-left:0;">
                     <div class="label-name">昵称：</div>
-                    <input id="user-name" type="text" class="form-control" placeholder="不要超过10个字符">
-                    <div class="form-error-msg">
+                    <input id="user-name" type="text" placeholder="不要超过10个字符">
+                    <span class="form-error-msg">
                         <i class="fa"></i>
-                    </div>
-                    <div class="form-right-msg">
+                    </span>
+                    <span class="form-right-msg">
                         <i class="fa"></i>
-                    </div>
+                    </span>
                 </div>
                 <div class="form-block" style="width:100%;margin-left:0;">
                     <div class="label-name">电子邮箱：</div>
-                    <div class="form-control" id="user-email">18211111509@777.com</div>
+                    <div id="user-email">18211111509@777.com</div>
                 </div>
 
                 <div class="form-block" style="width:100%;margin-left:0;">
                     <div class="label-name">姓别：</div>
-                    <select class="form-control" id="select-sex">
+                    <select id="select-sex">
                         <option value="0">男</option>
                         <option value="1">女</option>
                         <option value="2">保密</option>
@@ -91,10 +84,8 @@
             </div>
         </div>
     </div>
+    <!-- 引入该部分的css库文件-->
+    <link rel="stylesheet" href="/css/static_components/component_user_information.css">
+    <!-- 引入该部分的js库文件-->
+    <script type="text/javascript" src="/js/static_components/component_user_information.js"></script>
 </div>
-<script src="extlib/jquery-3.5.1/jquery-3.5.1.js"></script>
-<script type="text/javascript">
-
-</script>
-</body>
-</html>

@@ -60,6 +60,11 @@ public class PageController {
         return "static_components/component_all_game";
     }
 
+    @RequestMapping("component_user_information")
+    public String component_user_information() {
+        return "static_components/component_user_information";
+    }
+
 
     //动态组件----------------------------
     @RequestMapping("component_game_recommendation_card")
