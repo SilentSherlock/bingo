@@ -4,20 +4,19 @@ import java.util.Date;
 
 /**
  * Date: 2020/8/19
- * Description: 订单类
+ * Description: 订单列表类
  */
 public class Orderlist {
-
-    private Integer oid;
+    private String oid;
     private Integer uid;
+    private Float allprice;
     private Date otime;
-    private String orderDetails;//由list类型的OrderDetail转换
 
-    public Integer getOid() {
+    public String getOid() {
         return oid;
     }
 
-    public void setOid(Integer oid) {
+    public void setOid(String oid) {
         this.oid = oid;
     }
 
@@ -29,19 +28,19 @@ public class Orderlist {
         this.uid = uid;
     }
 
+    public Float getAllprice() {
+        return allprice;
+    }
+
+    public void setAllprice(Float allprice) {
+        this.allprice = allprice;
+    }
+
     public Date getOtime() {
         return otime;
     }
 
     public void setOtime(Date otime) {
         this.otime = otime;
-    }
-
-    public String getOrderDetails() {
-        return orderDetails;
-    }
-
-    public void setOrderDetails(String orderDetails) {
-        this.orderDetails = orderDetails;
     }
 }

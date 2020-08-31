@@ -1,17 +1,13 @@
 package com.nwafu.bingo.service;
 
-import com.nwafu.bingo.dao.EvaluationDao;
-import com.nwafu.bingo.dao.GameDao;
-import com.nwafu.bingo.dao.OrderlistDao;
-import com.nwafu.bingo.dao.SystemReqDao;
-import com.nwafu.bingo.entity.Evaluation;
-import com.nwafu.bingo.entity.Game;
-import com.nwafu.bingo.entity.Orderlist;
-import com.nwafu.bingo.entity.SystemReq;
+import com.nwafu.bingo.dao.*;
+import com.nwafu.bingo.entity.*;
+import com.nwafu.bingo.utils.Result;
 import com.nwafu.bingo.utils.Search;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +32,11 @@ public class StoreService {
     @Resource
     private OrderlistDao orderlistDao;
     @Resource
+    private OrderDetailDao orderDetailDao;
+    @Resource
     private SystemReqDao systemReqDao;
+    @Resource
+    private GameSaleDao gameSaleDao;
 
     //函数声明
     //region 游戏相关
@@ -154,59 +154,59 @@ public class StoreService {
 
     //region 订单相关
     /**
-    * @MethodName getAllOrderList
-    * @Description 获取所有订单
-    * @Param []
-    * @return List<Orderlist>
+    * @MethodName InsertOrderDetail
+    * @Description 插入订单数据
+    * @Param [orderDetail]
+    * @return int
     * @author yolia
-    * @Date 8:54 2020/8/21
+    * @Date 11:19 2020/8/30
     **/
-    public List<Orderlist> getAllOrderList() throws Exception {
-        return orderlistDao.getAll();
+    public int InsertOrderDetail(OrderDetail orderDetail) throws Exception {
+        return orderDetailDao.add(orderDetail);
     }
     /**
-    * @MethodName getOrderListById
-    * @Description 根据相应的id获取该id下的订单列表
-    * @Param [idType, idValue] ------ 根据不同的id来查询, idType的值应为oid,uid
-    * @return List<Orderlist>
+    * @MethodName GetOrderListByUid
+    * @Description 根据用户id查询订单id列表
+    * @Param [uid]
+    * @return java.util.List<com.nwafu.bingo.entity.OrderDetail>
     * @author yolia
-    * @Date 9:12 2020/8/21
+    * @Date 11:24 2020/8/30
     **/
-    public List<Orderlist> getOrderListById(String idType, Integer idValue) throws Exception {
-        return orderlistDao.getById(idType, idValue);
+    public List<OrderDetail> GetOrderDetailByOid(String oid) throws Exception {
+        return orderDetailDao.selectOidDistinctByOid(oid);
     }
     /**
-    * @MethodName getOrderListByCurTime
-    * @Description 查询当前时间，以及当前时间前30天内的订单列表
-    * @Param []
+    * @MethodName GetOrderListByOidAndUid
+    * @Description 根据订单id和用户id查询订单数据
+    * @Param [oid, uid]
+    * @return java.util.List<com.nwafu.bingo.entity.OrderDetail>
+    * @author yolia
+    * @Date 11:20 2020/8/30
+    **/
+    public List<OrderDetail> GetOrderDetailByOidAndUid(String oid, Integer uid) throws Exception {
+        return orderDetailDao.selectOrderListByOidAndUid(oid, uid);
+    }
+    /**
+    * @MethodName GetOrderListByUid
+    * @Description 根据Uid查询订单列表
+    * @Param [uid, pageIndex, pageCount]
     * @return java.util.List<com.nwafu.bingo.entity.Orderlist>
     * @author yolia
-    * @Date 14:12 2020/8/27
+    * @Date 17:43 2020/8/30
     **/
-    public List<Orderlist> getOrderListByCurTime() throws Exception {
-        return orderlistDao.getByCurTime();
+    public List<Orderlist> GetOrderListByUid(Integer uid, Integer pageIndex, Integer pageCount) throws Exception {
+        return orderlistDao.selectOrderListByUid(uid, pageIndex, pageCount);
     }
     /**
-    * @MethodName addOrderList
-    * @Description 向数据库中添加新的订单
-    * @Param [orderlist]
-    * @return []
+    * @MethodName getOrderListByUidCount
+    * @Description 获取Uid下的订单列表数量
+    * @Param [uid]
+    * @return java.lang.Integer
     * @author yolia
-    * @Date 9:16 2020/8/21
+    * @Date 17:44 2020/8/30
     **/
-    public void addOrderList(Orderlist orderlist) throws Exception {
-        orderlistDao.add(orderlist);
-    }
-    /**
-    * @MethodName deleteOrderList
-    * @Description 删除订单
-    * @Param [orderlist]
-    * @return []
-    * @author yolia
-    * @Date 9:15 2020/8/21
-    **/
-    public void deleteOrderList(Orderlist orderlist) throws Exception {
-        orderlistDao.delete(orderlist);
+    public Integer getOrderListByUidCount(Integer uid) throws Exception {
+        return orderlistDao.getOrderListByUidCount(uid);
     }
     //endregion
 
@@ -323,6 +323,31 @@ public class StoreService {
     **/
     public void updateEvaluation(Evaluation evaluation) throws Exception {
         evaluationDao.update(evaluation);
+    }
+    //endregion
+
+    //region 数据分析相关
+    /**
+    * @MethodName selectAllGameSaleData
+    * @Description 获取全部游戏销售数据相关信息
+    * @Param [pageIndex, pageCount]
+    * @return java.util.List<com.nwafu.bingo.entity.GameSale>
+    * @author yolia
+    * @Date 16:42 2020/8/30
+    **/
+    public List<GameSale> selectAllGameSaleData(String order, Integer sort, Integer pageIndex, Integer pageCount) throws Exception {
+        return gameSaleDao.selectAll(order, sort, pageIndex, pageCount);
+    }
+    /**
+    * @MethodName getAllCount
+    * @Description 获取全部数据总数
+    * @Param []
+    * @return java.lang.Integer
+    * @author yolia
+    * @Date 17:01 2020/8/30
+    **/
+    public Integer getAllCount() throws Exception {
+        return gameSaleDao.getAllCount();
     }
     //endregion
 }

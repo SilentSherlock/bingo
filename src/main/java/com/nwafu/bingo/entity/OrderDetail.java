@@ -1,14 +1,36 @@
 package com.nwafu.bingo.entity;
+
+import java.util.Date;
+
 /**
  * Date: 2020/8/19
- * Description: 从Orderlist类中分拆出来的类，用来代表用户订单中一个条目的详细信息
+ * Description:
+ * Writer: yolia
  */
 public class OrderDetail {
-
+    private String oid;
+    private Integer uid;
     private Integer gid;//游戏id
-    private String keys;//购买成功后发放给玩家的游戏key,list对象转换得到
+    private String klist;//购买成功后发放给玩家的游戏key,list对象转换得到
+    private Integer knum;//购买数量
     private Float discount;//购买时折扣
-    private Float price;//购买时价格
+    private Date otime; //购买时间
+
+    public String getOid() {
+        return oid;
+    }
+
+    public void setOid(String oid) {
+        this.oid = oid;
+    }
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
 
     public Integer getGid() {
         return gid;
@@ -18,12 +40,20 @@ public class OrderDetail {
         this.gid = gid;
     }
 
-    public String getKeys() {
-        return keys;
+    public String getKlist() {
+        return klist;
     }
 
-    public void setKeys(String keys) {
-        this.keys = keys;
+    public void setKlist(String klist) {
+        this.klist = klist;
+    }
+
+    public Integer getKnum() {
+        return knum;
+    }
+
+    public void setKnum(Integer knum) {
+        this.knum = knum;
     }
 
     public Float getDiscount() {
@@ -34,11 +64,11 @@ public class OrderDetail {
         this.discount = discount;
     }
 
-    public Float getPrice() {
-        return price;
+    public Date getOtime() {
+        return otime;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setOtime(Date otime) {
+        this.otime = otime;
     }
 }

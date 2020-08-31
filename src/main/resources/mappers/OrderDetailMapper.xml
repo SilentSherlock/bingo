@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nwafu.bingo.dao.OrderDetailDao">
+
+    <resultMap id="BaseOrderDetailMap" type="com.nwafu.bingo.entity.OrderDetail">
+        <id column="oid" property="oid" jdbcType="VARCHAR"/>
+        <id column="uid" property="uid" jdbcType="INTEGER"/>
+        <id column="gid" property="gid" jdbcType="INTEGER"/>
+        <result column="klist" property="klist" jdbcType="VARCHAR"/>
+        <result column="knum" property="knum" jdbcType="INTEGER"/>
+        <result column="discount" property="discount" jdbcType="FLOAT"/>
+        <result column="otime" property="otime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.nwafu.bingo.entity.OrderDetail">
+        INSERT INTO
+            orderDetail(oid, uid, gid, klist, knum, discount, otime)
+        VALUES
+            (#{oid}, #{uid}, #{gid}, #{klist}, #{knum}, #{discount}, #{otime})
+    </insert>
+
+    <select id="selectOidDistinctByOid" resultMap="BaseOrderDetailMap">
+        SELECT
+            *
+        FROM
+            orderDetail
+        WHERE
+            oid = #{oid}
+    </select>
+    <select id="selectOrderListByOidAndUid" resultMap="BaseOrderDetailMap">
+        SELECT
+            *
+        FROM
+            orderDetail
+        <where>
+            <if test="oid != null and oid != ''">
+                and oid = #{oid}
+            </if>
+            <if test="uid != null">
+                and uid = #{uid}
+            </if>
+        </where>
+    </select>
+</mapper>

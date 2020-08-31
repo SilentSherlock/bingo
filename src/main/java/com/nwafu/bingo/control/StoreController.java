@@ -34,39 +34,16 @@ public class StoreController {
         return (int)Math.ceil((double)allSearchNum / (double)search.getPageCount());
     }
     /**
-    * @MethodName searchOrderListByCurTime
-    * @Description 获取丛今天起，以及今天之前30天内的销量信息
-    * @Param []
-    * @return java.util.Map<java.util.Date,java.util.Map<java.lang.Integer,java.lang.Integer>>
+    * @MethodName getPageNum
+    * @Description 获取总页数
+    * @Param [allNum, pageCount]
+    * @return java.lang.Integer
     * @author yolia
-    * @Date 15:26 2020/8/27
+    * @Date 17:47 2020/8/30
     **/
-    private Map<Date, Map<Integer, Integer>> searchOrderListByCurTime() throws Exception {
-        List<Orderlist> orderlists = storeService.getOrderListByCurTime();
-        Map<Date, Map<Integer, Integer>> sale2Date = new HashMap<>();
-        for(Orderlist orderlist : orderlists){
-            Date curOrderTime = orderlist.getOtime();
-            JSONArray array = JSON.parseArray(orderlist.getOrderDetails());
-            if(array == null || array.size() == 0) continue;;
-            for(int i = 0; i < array.size(); i++){
-                Integer gid = array.getJSONObject(i).getInteger("gid");
-                Integer saleNum  = array.getJSONObject(i).getJSONArray("klist").size();
-                if(sale2Date.containsKey(curOrderTime)){
-                    if(sale2Date.get(curOrderTime).containsKey(gid)){
-                        sale2Date.get(curOrderTime).put(gid, sale2Date.get(curOrderTime).get(gid) + saleNum);
-                    }else{
-                        sale2Date.get(curOrderTime).put(gid, saleNum);
-                    }
-                }else{
-                    Map<Integer, Integer> id2Sale = new HashMap<>();
-                    id2Sale.put(gid, saleNum);
-                    sale2Date.put(curOrderTime, id2Sale);
-                }
-            }
-        }
-        return sale2Date;
+    private Integer getPageNum(Integer allNum, Integer pageCount){
+        return (int)Math.ceil((double)allNum / (double)pageCount);
     }
-
     //region 游戏相关
     /**
     * @MethodName gameShow
@@ -286,142 +263,50 @@ public class StoreController {
     //endregion
 
     //region 订单相关
-    /**
-    * @MethodName orderListShow
-    * @Description 根据相应的idType和idValue获取订单列表
-    * @Param [idType, idValue]  ---- idType有oid, uid。
-    * @return com.nwafu.bingo.utils.Result
-     * Result里存放状态值和键值对，状态值为SUCCESS时，数据获取成功，数据不为空
-     *                                FAILURE时，数据获取失败，数据为空
-     *                                当数据不为空时，返回订单列表，否则返回提示。
-    * @author yolia
-    * @Date 9:30 2020/8/22
-    **/
-    @RequestMapping("orderListShow")
-    public Result orderListShow(String idType, Integer idValue) throws Exception {
+    @RequestMapping("insertOrderDetail")
+    public Result insertOrderDetail(OrderDetail orderDetail) throws Exception {
         Result result = new Result();
-        //获取数据
-        List<Orderlist> orderlists = storeService.getOrderListById(idType, idValue);
-        //订单列表为空
+        //不查重
+        int insert = storeService.InsertOrderDetail(orderDetail);
+        if(insert != 1){
+            //插入失败
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("insertOrderDetail", "插入失败");
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("insertOrderDetail", orderDetail);
+        return result;
+    }
+
+    @RequestMapping("getOrderDetailByOid")
+    public Result getOrderDetailByOid(String oid) throws Exception {
+        Result result = new Result();
+        List<OrderDetail> orderDetails = storeService.GetOrderDetailByOid(oid);
+        if(orderDetails == null || orderDetails.size() == 0){
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("orderDetail", "无内容");
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("orderDetail", orderDetails);
+        return result;
+    }
+
+    @RequestMapping("getOrderListByUid")
+    public Result getOrderListByUid(@RequestParam(value = "uid") Integer uid,
+                                    @RequestParam(value = "pageIndex") Integer pageIndex,
+                                    @RequestParam(value = "pageCount") Integer pageCount) throws Exception {
+        Result result = new Result();
+        List<Orderlist> orderlists = storeService.GetOrderListByUid(uid, pageIndex, pageCount);
         if(orderlists == null || orderlists.size() == 0){
             result.setStatus(Status.FAILURE);
-            result.getResultMap().put("orderList_" + idType, "数据为空");
+            result.getResultMap().put("orderList", "无内容");
             return result;
         }
         result.setStatus(Status.SUCCESS);
-        result.getResultMap().put("orderList_" + idType, orderlists);
-        return result;
-    }
-    /**
-    * @MethodName orderListById
-    * @Description 根据id类型和id值获取订单列表，并计算每单的费用
-    * @Param [idType, idValue]
-    * @return com.nwafu.bingo.utils.Result
-     * Result包括状态值和键值对，状态值为SUCCESS时，数据查询成功，数据存在；
-     *                              FAILURE时，数据查询失败，数据不存在。
-     *                              数据查询成功，返回orderLists和orderListAllPrice；否则返回提示信息
-    * @author yolia
-    * @Date 8:31 2020/8/26
-    **/
-    @RequestMapping("orderListById")
-    public Result orderListById(String idType, Integer idValue) throws Exception {
-        Result result = new Result();
-        List<Orderlist> orderlists = storeService.getOrderListById(idType, idValue);
-        if(orderlists == null || orderlists.size() == 0){
-            result.setStatus(Status.FAILURE);
-            result.getResultMap().put("orderLists", "无内容");
-            return result;
-        }
-        List<Float> orderListAllPrice = new ArrayList<>();
-        for(Orderlist orderlist : orderlists){
-            JSONArray array = JSON.parseArray(orderlist.getOrderDetails());
-            if(array == null || array.size() == 0) continue;
-            Float curOrderListAllPrice = 0.0f;
-            for(int i = 0; i < array.size(); i++){
-                float price =  array.getJSONObject(i).getFloat("price");
-                float discount = array.getJSONObject(i).getFloat("discount");
-                curOrderListAllPrice += price * discount;
-            }
-            orderListAllPrice.add(curOrderListAllPrice);
-        }
-        //
-        if(orderListAllPrice.size() == 0){
-            result.getResultMap().put("orderListAllPrice", "订单列表为空");
-            result.setStatus(Status.FAILURE);
-            return result;
-        }
-        result.setStatus(Status.SUCCESS);
-        result.getResultMap().put("orderLists", orderlists);
-        result.getResultMap().put("orderListAllPrice", orderListAllPrice);
-        return result;
-    }
-    /**
-    * @MethodName getSale2DateByGId
-    * @Description 根据游戏ID获取30天内相应的销量
-    * @Param [gid]
-    * @return com.nwafu.bingo.utils.Result
-    * @author yolia
-    * @Date 15:39 2020/8/27
-    **/
-    @RequestMapping("getSale2DateByGId")
-    public Result getSale2DateByGId(Integer gid) throws Exception {
-        Result result = new Result();
-        Integer[] sales = new Integer[30];
-        Map<Date, Map<Integer, Integer>> sale2Date = searchOrderListByCurTime();
-        if(sale2Date == null){
-            result.setStatus(Status.FAILURE);
-            result.getResultMap().put("sales", "后台出错");
-            return result;
-        }
-        for(int i = 29; i >= 0; i--){
-            Date cur = new Date();
-            Date date = Tools.setHMS20(new Date(cur.getTime() - i * 24 * 3600 * 1000));
-            sales[29 - i] = sale2Date.containsKey(date) ? sale2Date.get(date).get(gid) : 0;
-        }
-        result.setStatus(Status.SUCCESS);
-        result.getResultMap().put("sales", sales);
-        return result;
-    }
-    /**
-    * @MethodName orderListAddHandle
-    * @Description 前端传入订单数据，后端插入数据库(不用查重)
-    * @Param [orderlist]
-    * @return com.nwafu.bingo.utils.Result
-     * Result存放状态值和键值对，状态值为SUCCESS时，数据插入成功
-     *                              FAILURE时，数据插入失败
-     *                              数据插入成功时，返回插入数据；否则返回错误信息。
-    * @author yolia
-    * @Date 9:35 2020/8/22
-    **/
-    @RequestMapping("orderListAddHandle")
-    public Result orderListAddHandle(Orderlist orderlist) throws Exception {
-        Result result = new Result();
-        //添加数据
-        storeService.addOrderList(orderlist);
-        result.setStatus(Status.SUCCESS);
-        result.getResultMap().put("addOrderListHandle", orderlist);
-        //返回封装数据
-        return result;
-    }
-    /**
-    * @MethodName orderListDeleteHandle
-    * @Description 前端传入订单数据，后端将其从数据库中删除
-    * @Param [orderlist]
-    * @return com.nwafu.bingo.utils.Result
-     * Result存放状态值和键值对，状态值为SUCCESS时，数据删除成功，
-     *                              FAILURE时，数据删除失败。
-     *                              数据删除成功，返回删除数据信息；否则返回错误信息。
-    * @author yolia
-    * @Date 9:39 2020/8/22
-    **/
-    @RequestMapping("orderListDeleteHandle")
-    public Result orderListDeleteHandle(Orderlist orderlist) throws Exception {
-        Result result = new Result();
-        //删除数据
-        storeService.deleteOrderList(orderlist);
-        result.setStatus(Status.SUCCESS);
-        result.getResultMap().put("deleteOrderListHandle", orderlist);
-        //返回封装数据
+        result.getResultMap().put("orderList", orderlists);
+        result.getResultMap().put("allPageNum", getPageNum(storeService.getOrderListByUidCount(uid), pageCount));
         return result;
     }
     //endregion
@@ -612,6 +497,37 @@ public class StoreController {
         storeService.deleteEvaluationById(idType, idValue);
         result.setStatus(Status.SUCCESS);
         result.getResultMap().put("deleteEvaluationHandle", idType + " " + idValue);
+        return result;
+    }
+    //endregion
+
+    //region 数据分析相关
+    /**
+    * @MethodName getAllGameSaleData
+    * @Description 获取游戏销售数据信息相关
+    * @Param [pageIndex, pageCount]
+    * @return com.nwafu.bingo.utils.Result
+     * Result包含状态值和键值对，状态值为SUCCESS时，数据查询成功，
+     *                              FAILURE时，数据查询失败。
+     *                              当数据查询成功时，返回gameSaleData。
+    * @author yolia
+    * @Date 16:45 2020/8/30
+    **/
+    @RequestMapping("getAllGameSaleData")
+    public Result getAllGameSaleData(@RequestParam(value = "order") String order,
+                                        @RequestParam(value = "sort") Integer sort,
+                                        @RequestParam(value = "pageIndex") Integer pageIndex,
+                                             @RequestParam(value = "pageCount") Integer pageCount) throws Exception {
+        Result result = new Result();
+        List<GameSale> gameSales = storeService.selectAllGameSaleData(order, sort, pageIndex, pageCount);
+        if(gameSales == null || gameSales.size() == 0){
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("gameSaleData", "查询失败");
+            return result;
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("gameSaleData", gameSales);
+        result.getResultMap().put("gameSaleDataCount", getPageNum(storeService.getAllCount(), pageCount));
         return result;
     }
     //endregion
