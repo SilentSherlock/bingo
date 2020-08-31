@@ -20,7 +20,7 @@ nav.navbar {
   border-radius: 0;
   padding: 0 $navbar-padding;
   margin: 0;
-  background-color: $background;
+  background-color: darken($background, 5);
   color: $font-color;
   font-size: $font-size-title;
 }
@@ -47,14 +47,14 @@ nav.navbar ul.navbar-nav > li > a {
   height: $navbar-height;
   padding: 0;
   line-height: $navbar-height;
-  font-size: $font-size-text;
+  font-size: $font-size-title;
   text-align: center;
 }
 
 //导航列表超链接被激活样式
 nav.navbar li.active > a {
   background-color: $background-light !important;
-  color: $font-color-light !important;
+  color: $orange !important;
 }
 
 nav.navbar li.dropdown.open > a {
@@ -78,32 +78,6 @@ nav.navbar #navbar-uinfo .dropdown-toggle > img {
   height: $navbar-avatar-width;
   border-radius: 50%;
   transform: translateZ(0);
-}
-
-//面包屑导航
-.breadcrumb {
-  border-radius: 0;
-  padding: 3px $navbar-padding;
-  background-color: $background-light;
-  height: $breadcrumb-height;
-  margin-bottom: 0;
-}
-
-//基本样式
-.breadcrumb > li {
-  font-size: $font-size-text-small;
-  color: $font-color;
-}
-
-//跟随于li之后的li的伪元素::before的样式
-.breadcrumb > li + li::before {
-  color: $font-color;
-  content: $breadcrumb-divider;
-}
-
-//最后一个，即当前所处路径的样式
-.breadcrumb > li + li:last-of-type {
-  color: $font-color-light;
 }
 
 //页面主体
