@@ -651,8 +651,7 @@ public class StoreController {
     }
     //endregion
 
-
-
+    //region 广告相关
     /**
      *添加广告
      */
@@ -696,6 +695,12 @@ public class StoreController {
         String imgFold = ResourceUtils.getURL("classpath:").getPath() +  "static/src/index_carousel/";
         File fold = new File(imgFold);
         File[] files = fold.listFiles();
+        if(files == null || files.length == 0){
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("gameList", "无内容");
+            result.getResultMap().put("picList", "无内容");
+            return result;
+        }
         List<String> list_str = new ArrayList<>();
         List<Integer> list = new ArrayList<>();
         for(int i = 0 ; i < files.length;i++){
@@ -738,4 +743,5 @@ public class StoreController {
         }
         return result;
     }
+    //endregion
 }
