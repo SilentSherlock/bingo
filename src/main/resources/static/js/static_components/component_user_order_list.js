@@ -22,8 +22,7 @@ function leave(typp) {
 function showCode(order) {
     for (let key in aCode) {
         if (aCode[key].orderoid == order.id) {
-            //window.alert(aCode[key].key);
-            myAlert(aCode[key].key);
+            window.alert(aCode[key].key);
             break;
         }
     }
@@ -101,8 +100,7 @@ function setinfo(defaultNum) {
                                     activeCode += gameitem.gname + "的激活码:  " + res.resultMap.orderDetail[key].klist;
                                 }
                             })
-                            //activeCode += "\n";//每个游戏换行一次
-                            activeCode += "<br/><br/>";//每个游戏换行一次
+                            activeCode += "\n";//每个游戏换行一次
                         }
                     }
                 })
