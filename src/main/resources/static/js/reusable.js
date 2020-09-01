@@ -13,14 +13,14 @@ function myAlert(message, hideEventHandler) {
             //显示模态框
             $("#alert").modal();
             //更改提示信息
-            $("#alert-message").html(message);
+            $("#alert-message").text(message);
             $("#alert").on("hide.bs.modal", hideEventHandler);
         });
     }
     //显示模态框
     $(alert).modal();
     //更改提示信息
-    $("#alert-message").html(message);
+    $("#alert-message").text(message);
     $(alert).on("hide.bs.modal", hideEventHandler);
 }
 
@@ -112,6 +112,9 @@ function getCookie(cname) {
     let cookieStr = document.cookie;
     if (cookieStr !== "") {
         let arr = cookieStr.match(reg);
+        if(arr === null){
+            return null;
+        }
         if (arr[2] !== "") {
             return arr[2];
         }

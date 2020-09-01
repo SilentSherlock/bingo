@@ -12,6 +12,7 @@ import com.nwafu.bingo.service.TextSearchService;
 import com.nwafu.bingo.utils.Result;
 import com.nwafu.bingo.utils.Search;
 import com.nwafu.bingo.utils.Status;
+import com.nwafu.bingo.utils.Tools;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -276,11 +277,11 @@ public class PersonController {
             else if (listType == 1) list = user.getWishlist();
 
             JSONArray jsonArray;
-            if (list == null || list.length() == 0) jsonArray = new JSONArray();
+            if (list == null || list.length() == 0 || "null".equals(list)) jsonArray = new JSONArray();
             else jsonArray = JSON.parseArray(list);
 
             if (mode == 1) {
-                if (!jsonArray.contains(gid)) {
+                if (jsonArray.isEmpty() || !jsonArray.contains(gid)) {
                     jsonArray.add(gid);
                     result.setStatus(Status.SUCCESS);
                 }else {
@@ -349,7 +350,8 @@ public class PersonController {
     }
 
     private List<Game> transform(String listStr) throws Exception {
-        if (listStr == null || "".equals(listStr)) return null;
+        System.out.println("str: " + listStr);
+        if (listStr == null || "".equals(listStr) || "null".equals(listStr)) return null;
         JSONArray array = JSONArray.parseArray(listStr);
         List<Game> games = new LinkedList<>();
         for(Object id:array){
