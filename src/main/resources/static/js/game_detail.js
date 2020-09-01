@@ -33,6 +33,10 @@ function star(score, string) {
 }
 
 function addCar() {//加入购物车
+    if (userInfo.uid === undefined) {
+        myAlert("请登录后进行操作!");
+        return;
+    }
     /* num = window.prompt("输入购买数量");
      if(isNaN(buynum=parseInt(num,10))){
          window.alert("请输入整数!!!");
@@ -91,6 +95,10 @@ function addCar() {//加入购物车
 }
 
 function buy() {//购买，向后台发送插入订单请求
+    if (userInfo.uid === undefined) {
+        myAlert("请登录后进行操作!");
+        return;
+    }
     var num, gnum = 1, buynum;
     num = window.prompt("输入购买数量");
     if (num === null)
@@ -167,6 +175,10 @@ function buy() {//购买，向后台发送插入订单请求
 }
 
 function addWishList() {
+    if (userInfo.uid === undefined) {
+        myAlert("请登录后进行操作!");
+        return;
+    }
     var data = {
         uid: userInfo.uid
     }
