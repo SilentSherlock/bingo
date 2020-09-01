@@ -1,6 +1,6 @@
 var templateDiv = $("#choose1")
 var thisUser
-var uid = 1
+var uid = userInfo.uid
 var haveError = false;
 $(document).ready(function () {
     //获取用户信息

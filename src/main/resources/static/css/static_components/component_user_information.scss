@@ -76,37 +76,14 @@
     text-decoration: none !important;
   }
 
-  .tags-button .active:link {
-
-  }
-
-  .tags-button .active:visited {
+  .tags-button .active {
     color: #ff6900 !important;
     background: #292e41 !important;
-  }
-
-  .tags-button .active:hover {
-    color: #ff6900 !important;
-    background: #292e41 !important;
-  }
-
-  .tags-button .active:active {
-
-  }
-
-  .tags-button a:link {
-
-  }
-
-  .tags-button a:visited {
   }
 
   .tags-button a:hover {
     color: #b9c0ef !important;
     background: #292e41 !important;
-  }
-
-  .tags-button a:active {
   }
 
   .active {
@@ -126,7 +103,7 @@
     background: #33394d;
     padding: 50px 110px 40px 100px;
     border-radius: 5px 5px 5px 5px;
-    height: 693px;
+    min-height: 550px;
   }
 
   .top-info {

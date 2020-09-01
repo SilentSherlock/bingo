@@ -65,6 +65,31 @@ public class PageController {
         return "static_components/component_user_information";
     }
 
+    @RequestMapping("component_user_shopping_cart")
+    public String component_user_shopping_cart() {
+        return "static_components/component_user_shopping_cart";
+    }
+
+    @RequestMapping("component_user_wish_list")
+    public String component_user_wish_list() {
+        return "static_components/component_user_wish_list";
+    }
+
+    @RequestMapping("component_user_order_list")
+    public String component_user_order_list() {
+        return "static_components/component_user_order_list";
+    }
+
+    @RequestMapping("component_user_game")
+    public String component_user_game() {
+        return "static_components/component_user_game";
+    }
+
+    @RequestMapping("component_user_evaluation")
+    public String component_user_evaluation() {
+        return "static_components/component_user_evaluation";
+    }
+
 
     //动态组件----------------------------
     @RequestMapping("component_game_recommendation_card")

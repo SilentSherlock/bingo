@@ -1,0 +1,361 @@
+/**
+ * 时间: 2020.8.31
+ * 描述：用户愿望单
+ */
+@import "../constant";
+
+.community-content {
+  padding: 30px 0 40px;
+  width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  min-height: 100vh;
+}
+
+#user-wish-list {
+  //region 控制侧边导航栏样式
+  .close {
+    float: unset;
+    font-weight: unset;
+    text-shadow: unset;
+    opacity: unset;
+  }
+
+  .tabs-container {
+    min-height: 603px;
+  }
+
+  .left-menu-tabs {
+    float: left;
+    width: 160px;
+    height: auto;
+    background: #33394d;
+    overflow: hidden;
+    border-radius: 5px 5px 5px 5px;
+  }
+
+  .first-title {
+    font-size: 18px;
+    color: #b9c0ef;
+    margin: 0 20px 5px 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #3f4760;
+    float: none;
+    border-top: none;
+    height: 42px;
+  }
+
+  .tags-button {
+    padding: 0;
+    float: none;
+    height: 42px;
+    font-size: 16px;
+    line-height: 54px;
+    border-width: 4px 0 0;
+    text-decoration: none;
+  }
+
+  .tags-button a {
+    color: #7a80a2 !important;
+    font-size: 16px !important;
+    display: block !important;
+    line-height: 42px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+  }
+
+  .tags-button .active:link {
+
+  }
+
+  .tags-button .active:visited {
+    color: #ff6900 !important;
+    background: #292e41 !important;
+  }
+
+  .tags-button .active:hover {
+    color: #ff6900 !important;
+    background: #292e41 !important;
+  }
+
+  .tags-button .active:active {
+
+  }
+
+  .tags-button a:link {
+
+  }
+
+  .tags-button a:visited {
+  }
+
+  .tags-button a:hover {
+    color: #b9c0ef !important;
+    background: #292e41 !important;
+  }
+
+  .tags-button a:active {
+  }
+
+  .active {
+    color: #ff6900 !important;
+    background: #292e41 !important;
+  }
+
+  .center-user-tabs {
+    margin-top: 0;
+    margin-left: 180px;
+    background: #33394d;
+    border-radius: 5px 5px 5px 5px;
+    min-height: 550px;
+  }
+
+  //endregion 控制侧边导航栏样式结束
+
+  body {
+    background: #202539;
+  }
+
+  div, body, p, h1, h2, input {
+    margin: 0;
+    padding: 0;
+  }
+
+  div {
+    display: block;
+  }
+
+  .tabs-container {
+    min-height: 603px;
+  }
+
+  /*.left-menu-tabs{*/
+  /*    float: left;*/
+  /*    width: 160px;*/
+  /*    height: auto;*/
+  /*    background: #33394d;*/
+  /*    overflow: hidden;*/
+  /*    border-radius: 5px 5px 5px 5px;*/
+  /*}*/
+  .left-menu-tabs {
+    float: left;
+    width: 160px;
+    height: auto;
+    background: #33394d;
+    overflow: hidden;
+    border-radius: 5px 5px 5px 5px;
+  }
+
+  .first-title {
+    font-size: 18px;
+    color: #b9c0ef;
+    margin: 0 20px 5px 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #3f4760;
+    float: none;
+    border-top: none;
+    height: 42px;
+  }
+
+  .tags-button {
+    padding: 0;
+    float: none;
+    height: 42px;
+    font-size: 16px;
+    line-height: 54px;
+    border-width: 4px 0 0;
+    text-decoration: none;
+  }
+
+  .tags-button a {
+    color: #7a80a2;
+    font-size: 16px;
+    display: block;
+    line-height: 42px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .tags-button .active {
+    color: #ff6900 !important;
+    background: #292e41 !important;
+  }
+
+  .tags-button a:link {
+
+  }
+
+  .tags-button a:visited {
+  }
+
+  .tags-button a:hover {
+    color: #b9c0ef;
+    background: #292e41;
+  }
+
+  .tags-button a:active {
+  }
+
+  .active {
+    color: #ff6900;
+    background: #292e41;
+  }
+
+  .community-wish-list {
+    //padding-left: 170px;
+    //padding-top: 0;
+    min-height: 550px;
+  }
+
+  .community-middle {
+    //float: left;
+    width: 100%;
+    min-height: 500px;
+  }
+
+  .wish-list-container {
+    background: #33394d;
+    padding: 0 20px;
+    min-height: 500px;
+  }
+
+  .wish-list-menu {
+    float: right;
+    color: #b9c0ef;
+    position: relative;
+    margin-top: 15px;
+    line-height: 30px;
+    cursor: pointer;
+  }
+
+  .wish-list-owner {
+    color: $font-color-light;
+    font-size: $font-size-title;
+    padding: 20px 0;
+    border-bottom: 2px solid $font-color;
+  }
+
+  .wish-tab {
+    height: 61px
+  }
+
+  .wish-list-count {
+    float: left;
+    font-size: $font-size-text;
+    padding: 20px 0;
+    color: $font-color;
+  }
+
+  .count {
+    color: $orange;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  .wish-list-content {
+    min-height: 200px;
+  }
+
+  .wish-list-block {
+    position: relative;
+    padding: 20px 0;
+    height: 150px;
+    line-height: 100px;
+    border-bottom: 1px black solid;
+  }
+
+  .image-wrapper {
+    display: inline-block;
+    height: 100px;
+    width: 20%;
+    vertical-align: middle;
+  }
+
+  img {
+    border: 0;
+    width: 165px;
+    height: 100px;
+  }
+
+  .title {
+    display: inline-block;
+    font-size: $font-size-text;
+    text-indent: 20px;
+    width: 40%;
+    vertical-align: middle;
+    color: $font-color;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  .percentage {
+    display: inline-block;
+    width: 70px;
+    text-align: right;
+  }
+
+  .list-price {
+    color: #7a80a2;
+    text-decoration: line-through;
+    font-size: 16px;
+    display: inline-block;
+    width: 70px;
+    text-align: right;
+  }
+
+  .sale-price {
+    color: #ff6900;
+    font-weight: bold;
+    font-size: 16px;
+    display: inline-block;
+    width: 20%;
+    text-align: right;
+    float: right;
+    padding-right: 25px;
+  }
+
+  .shopping-operator {
+    float: right;
+    display: inline;
+    width: 20%;
+  }
+
+  .button1, .button2 {
+    background: #ff6900;
+    outline: none;
+    border: none;
+    color: #ffffff;
+    padding: 0;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    margin: 0;
+    cursor: pointer;
+    appearance: button;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    font: 400 13px Arial;
+    border-radius: 2px;
+  }
+
+  ul {
+    margin-top: 20px;
+  }
+
+  li {
+    list-style-type: none;
+    height: 40px;
+  }
+}
