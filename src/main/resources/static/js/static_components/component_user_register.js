@@ -120,8 +120,9 @@ $(document).ready(function () {
         $.post(requestmap.user_register, data, function (data) {
             if (data.status === 1) {
                 //注册成功,跳转到登录页面
-                myAlert("注册成功！");
-                user_login();
+                myAlert("注册成功!");
+                //点击登录导航
+                $("nav.navbar ul.navbar-right:eq(1) > li > a:eq(0)").click();
             } else {
                 myAlert("啊欧，竟然注册失败了!");
                 $("#user-login-form-submit-button").button("reset");
@@ -159,7 +160,7 @@ $(document).ready(function () {
                         clearInterval(intervalId);
                     }, 61000);
                 } else
-                    myAlert("验证码发送失败，请稍后再试");
+                    myAlert("验证码发送失败，请稍后再试!");
             });
         }
     });

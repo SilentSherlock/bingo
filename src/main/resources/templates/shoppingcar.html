@@ -52,53 +52,64 @@
 
         var shoppingcar = JSON.parse(localStorage.getItem("shoppingcar"));
         var i=0,length=shoppingcar.length,html="";
+        //生成订单时间
+        var myDate = new Date();
+        //生成订单ID
+        let oid = "";
+        var charac = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678";
+        var temp1= Math.random() * 57;
+        var temp2= Math.random() * 57;
+        var temp3= Math.random() * 57;
+        var temp4= Math.random() * 57;
+        var temp5= Math.random() * 57;
+        let temp6 = Math.random() * 57;
+        let temp7 = Math.random() * 57;
+        let temp8 = Math.random() * 57;
+        let temp9 = Math.random() * 57;
+        let temp10 = Math.random() * 57;
+        oid += charac.charAt(temp1) + charac.charAt(temp2) + charac.charAt(temp3) + charac.charAt(temp4) + charac.charAt(temp5)
+            + charac.charAt(temp6) + charac.charAt(temp7) + charac.charAt(temp8) + charac.charAt(temp9) + charac.charAt(temp10);
+        console.log("生成的oid为: " + oid);
         for(;i<length;i++) {
             if ((JSON.parse(localStorage.getItem("shoppingcar")))[i] == null) ;
             else {
                 console.log("i为:" + i);
                 console.log("购买数量为:" + gnum[i]);
                 var item=0,keylist = [];
-                var charac = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678";
                 for(; item<gnum[i];item++){
                     var key = "";
-                    var temp1= Math.random()*57;
-                    var temp2= Math.random()*57;
-                    var temp3= Math.random()*57;
-                    var temp4= Math.random()*57;
-                    var temp5= Math.random()*57;
+                    temp1 = Math.random() * 57;
+                    temp2 = Math.random() * 57;
+                    temp3 = Math.random() * 57;
+                    temp4 = Math.random() * 57;
+                    temp5 = Math.random() * 57;
                     key += charac.charAt(temp1) + charac.charAt(temp2)+ charac.charAt(temp3)+ charac.charAt(temp4)+ charac.charAt(temp5);
                     keylist.push(key);
                 }
                 console.log("生成的keylist为: " + keylist);
                 gids.push(shoppingcar[i].gid);
-                orDetails.push({
-                    gid : shoppingcar[i].gid,
-                    klist : keylist,
-                    discount : shoppingcar[i].discount,
-                    price : shoppingcar[i].price
-                });
-                console.log("单价:" + shoppingcar[i].price)
+                var orderDetail = {
+                    oid: oid,
+                    uid: 1,
+                    gid: shoppingcar[i].gid,
+                    knum: gnum[i],
+                    klist: JSON.stringify(keylist),
+                    discount: shoppingcar[i].discount,
+                    otime: myDate,
+                }
+                console.log("订单详情\n oid:"+orderDetail.oid+"\n uid:"+orderDetail.uid+ "\n gid:" +orderDetail.gid+ "\n knum:" +orderDetail.knum
+                +"\n klist:" +orderDetail.klist+"\n discount:" +orderDetail.discount+"\n otime:" +orderDetail.otime)
+                $.post(
+                    "store/insertOrderDetail",
+                    orderDetail,
+                    function (result){
+                        console.log(result);
+                    }
+                )
+                console.log("gids: "+ gids);
             }
         }
-        //插入订单
-        var myDate = new Date();
-        var orderContent = {
-            uid : 1,
-            otime : myDate,
-            orderDetails : JSON.stringify(orDetails)
-        }
-        // orderContent = JSON.stringify(orderContent);
-        console.log("购买记录:" + orderContent);
-        console.log("购买记录:" + typeof orderContent);
-        $.post(
-            "store/orderListAddHandle",
-            orderContent,
-            function (result){
-                console.log(result);
-            }
-        )
-        console.log("gids: "+ gids);
-        //更改用户游戏列表
+        //更改user表的个人游戏列表数据
         var data = {
             uid : 1,
             gid : JSON.stringify(gids),
@@ -110,10 +121,9 @@
                 console.log(result);
             }
         );
-        console.log(orderContent);
         window.alert("购买成功！");
     }
-    //删除总价
+    //修改总价
     function pricesum(num){
         console.log("更前后的数量:" + gnum[$(num).attr("id")]);
         sumprice += ($(num).val()-gnum[$(num).attr("id")]) * price[$(num).attr("id")] ;
@@ -122,17 +132,19 @@
         console.log("单价:" + gnum[$(num).attr("id")]);
         $("#sumprice").text(sumprice);
     }
-    //删除商品
+    //从购物车中删除商品
     function deleteCar(game){
         var GAMEID=$(game).attr("id");
         var shoppingcar = JSON.parse(localStorage.getItem("shoppingcar"));
         var i=0,length=shoppingcar.length;
         for(;i<length;i++)
             if(JSON.parse(shoppingcar[i]==null)){
-                delete shoppingcar[i];
+                shoppingcar.splice(i,1);
+                // delete shoppingcar[i];
             }else
             if(GAMEID==shoppingcar[i].gid){//删除游戏
-                delete shoppingcar[i];
+                shoppingcar.splice(i,1);
+                // delete shoppingcar[i];
                 break;
             }
         localStorage.setItem("shoppingcar",JSON.stringify(shoppingcar));

@@ -1,0 +1,173 @@
+/**
+ * 时间: 2020.8.31
+ * 描述：用户游戏
+ */
+@import "../constant";
+
+.community-content {
+  padding: 30px 0 40px;
+  width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  min-height: 100vh;
+}
+
+#user-game {
+  //region 控制侧边导航栏样式
+  .close {
+    float: unset;
+    font-weight: unset;
+    text-shadow: unset;
+    opacity: unset;
+  }
+
+  .tabs-container {
+    min-height: 603px;
+  }
+
+  .left-menu-tabs {
+    float: left;
+    width: 160px;
+    height: auto;
+    background: #33394d;
+    overflow: hidden;
+    border-radius: 5px 5px 5px 5px;
+  }
+
+  .first-title {
+    font-size: 18px;
+    color: #b9c0ef;
+    margin: 0 20px 5px 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #3f4760;
+    float: none;
+    border-top: none;
+    height: 42px;
+  }
+
+  .tags-button {
+    padding: 0;
+    float: none;
+    height: 42px;
+    font-size: 16px;
+    line-height: 54px;
+    border-width: 4px 0 0;
+    text-decoration: none;
+  }
+
+  .tags-button a {
+    color: #7a80a2 !important;
+    font-size: 16px !important;
+    display: block !important;
+    line-height: 42px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+  }
+
+  .tags-button .active {
+    color: #ff6900 !important;
+    background: #292e41 !important;
+  }
+
+  .tags-button a:link {
+
+  }
+
+  .tags-button a:visited {
+  }
+
+  .tags-button a:hover {
+    color: #b9c0ef !important;
+    background: #292e41 !important;
+  }
+
+  .tags-button a:active {
+  }
+
+  .active {
+    color: #ff6900 !important;
+    background: #292e41 !important;
+  }
+
+  .center-user-tabs {
+    margin-top: 0;
+    margin-left: 180px;
+    background: #33394d;
+    border-radius: 5px 5px 5px 5px;
+    min-height: 550px;
+  }
+
+  //endregion 控制侧边导航栏样式结束
+
+  //region 列表开始
+  .myorder-elem {
+    height: 250px;
+    padding: 20px 50px;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  .game-elem {
+    width: 800px;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    float: left;
+    cursor: pointer;
+  }
+
+  .gameCover {
+    width: 350px;
+    height: 200px;
+  }
+
+  .elem-name {
+    margin-left: 370px;
+    height: 200px;
+    padding-top: 80px;
+    //line-height: 200px;
+    text-align: center;
+    color: $font-color;
+    font-size: $font-size-title;
+    position: absolute;
+    left: 0;
+  }
+
+  //endregion 列表结束
+  .order-main {
+    padding-left: 20px;
+    padding-right: 20px;
+    //margin-left: 450px;
+    //margin-top: 150px;
+    //background-color: #2b669a;
+    width: 100%;
+    //height: 100%;
+  }
+
+  .content-title {
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: normal;
+    color: #b9c0ef;
+  }
+
+  .condition {
+    display: inline;
+    float: right;
+    width: 200px;
+    height: 40px;
+    background-color: #28669A;
+    text-align: center;
+    position: relative;
+    top: 30%;
+    border: 1px solid #00ff11;
+  }
+
+  .condition :hover {
+    color: #28669A;
+    background-color: olivedrab;
+  }
+}

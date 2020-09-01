@@ -18,7 +18,7 @@ body > div.container-fluid {
   background-position: center 70px;
   background-repeat: no-repeat;
   background-size: cover;
-  transition: all 0.6s;
+  transition: all 0.6s ease-in-out;
 }
 
 /*页面高度*/
@@ -35,7 +35,7 @@ body > div.container-fluid {
   background-color: #33394d;
   color: #b9c0ef;
   box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.3);
-  transition: all 0.6s;
+  transition: all 0.6s ease-in-out;
 }
 
 /*登录框标题*/

@@ -1,0 +1,93 @@
+<div class="community-content" id="user-information">
+    <div class="tabs-container">
+        <div class="left-menu-tabs">
+            <div class="first-title tags-button">我的账户</div>
+            <div class="tags-button">
+                <a class="close" id="choose1" href="javascript:void(0)" onclick="showUserInfo(this)">我的信息</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="javascript:void(0)" onclick="showUserInfo(this)">我的购物车</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="javascript:void(0)" onclick="showUserInfo(this)">我的愿望单</a>
+            </div>
+            <div class="first-title tags-button">订单中心</div>
+            <div class="tags-button">
+                <a class="close" href="javascript:void(0)" onclick="showUserInfo(this)">我的订单</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="javascript:void(0)" onclick="showUserInfo(this)">我的点评</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="javascript:void(0)" onclick="showUserInfo(this)">我的游戏</a>
+            </div>
+        </div>
+        <div class="center-user-tabs">
+
+            <div class="center-user-info">
+                <div class="top-info">
+                    <div class="left-photo">
+                        <img id="user-photo" src="#">
+                        <div class="upload-photo">
+                            <input type="file" id="image" accept="image/gif,image/jpeg,image/jpg,image/png"
+                                   onchange="change_photo()">
+                        </div>
+                    </div>
+                    <div class=" form-block">
+                        <p>个人介绍</p>
+                        <textarea class="user-describe" placeholder="介绍一下自己吧"></textarea>
+                    </div>
+                </div>
+                <div class="form-block" style="width:100%;margin-left:0;">
+                    <div class="label-name">用户名：</div>
+                    <div id="user-true-name">***</div>
+                </div>
+                <div class="form-block" style="width:100%;margin-left:0;">
+                    <div class="label-name">昵称：</div>
+                    <input id="user-name" type="text" placeholder="不要超过10个字符">
+                    <span class="form-error-msg">
+                        <i class="fa"></i>
+                    </span>
+                    <span class="form-right-msg">
+                        <i class="fa"></i>
+                    </span>
+                </div>
+                <div class="form-block" style="width:100%;margin-left:0;">
+                    <div class="label-name">电子邮箱：</div>
+                    <div id="user-email">18211111509@777.com</div>
+                </div>
+
+                <div class="form-block" style="width:100%;margin-left:0;">
+                    <div class="label-name">姓别：</div>
+                    <select id="select-sex">
+                        <option value="0">男</option>
+                        <option value="1">女</option>
+                        <option value="2">保密</option>
+                    </select>
+                </div>
+                <div class="form-block" style="width:100%;margin-left:0;">
+                    <div class="label-name">你的生日：</div>
+                    <div class="data-choose">
+                        <select id="select-year">
+
+                        </select>
+                        <select id="select-month">
+
+                        </select>
+                        <select id="select-date">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="btn-wrap">
+                    <button class="submit">保存全部修改</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- 引入该部分的css库文件-->
+    <link rel="stylesheet" href="/css/static_components/component_user_information.css">
+    <!-- 引入该部分的js库文件-->
+    <script type="text/javascript" src="/js/static_components/component_user_information.js"></script>
+</div>
