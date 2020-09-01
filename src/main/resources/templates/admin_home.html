@@ -31,9 +31,16 @@
     <link rel="stylesheet" href="css/admin.css">
     <!-- 引入自己的js库文件 -->
 
-
-
     <script type="text/javascript" src="/js/admin.js"></script>
+
+<!--  yolia  -->
+    <!-- 引入 ECharts 文件 -->
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+    <script type="text/javascript" src="/js/static_dataAnalysis/dataAnalysis_EchartsData.js"></script>
+    <script type="text/javascript" src="/js/static_dataAnalysis/dataAnalysis_pageConfiguration.js"></script>
+    <script type="text/javascript" src="/js/static_dataAnalysis/dataAnalysis_tools.js"></script>
+    <link rel="stylesheet"
+          href="/css/static_dataAnalysis/dataAnalysis.css">
 
 </head>
 <body STYLE="background-color:#F6F6F6" STYLE="width: 100%"><!--STYLE="background-color: black  #17435f"-->
@@ -170,13 +177,11 @@
     </nav>
 
 </div>
-<div class="contain-div">
+<div class="contain-div" id="top">
     <!--内容页菜单栏-->
     <div class="contain-nav">
         <div class="">
-
         </div>
-
         <!--账户设置-->
         <div class="admin-info">
             <div class="get-help">
@@ -229,10 +234,71 @@
         <div class="info-content-out">
             <!--首页内容-->
             <div class="info-content" id="home-content">
-                <div class="jumbotron">
-                    <h1>Hello, world!</h1>
-                    <p>...</p>
-                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                <div class="toTop" id="toTop" hidden>
+                    <a id="jump" href="#top">
+                        <svg width="4em" height="4em" viewBox="0 0 16 16" class="bi bi-arrow-up-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div style="height: 700px">
+                    <div class="alert alert-success" role="alert">
+                        <h2 style="text-align: center;font-weight: bold">
+                            游戏销量-类型
+                        </h2>
+                    </div>
+                    <div>
+                        <div class="gameType" id="gameType"></div>
+                    </div>
+                    <!--            游戏类型喜好分析-->
+                    <div>
+                        <div class="gameTypeFav" id="gameTypeFav"></div>
+                    </div>
+                </div>
+
+                <!--            游戏销量分析-->
+                <div>
+                    <div class="alert alert-success" role="alert">
+                        <h2 style="text-align: center;font-weight: bold">
+                            30日游戏销量分析表
+                        </h2>
+                    </div>
+                    <div class="object-operator">
+                        <div class="object-search">
+                            游戏：<label><input type="text" class="form-control" placeholder="请输入游戏名称" id="dataAnalysis-search-game"></label>
+                        </div>
+                        <div class="object-search-button">
+                            <button type="button" class="btn btn-default" id="dataAnalysis_search-btn">查询</button>
+                        </div>
+                    </div>
+                    <div class="data-object-show" id="data-object-show">
+                        <table class="table ">
+                            <tr class="table-head">
+                                <th scope="col"></th>
+                                <th scope="col" style="text-align: center">
+                                    <a id="uniqueId" style="text-decoration-line: none; cursor: pointer">
+                                        唯一识别码
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-up-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                        </svg>
+                                    </a>
+                                </th>
+                                <th scope="col">游戏名称</th>
+                                <th scope="col" style="text-align: center">
+                                    <a id="cursale" style="text-decoration-line: none; cursor: pointer">
+                                        本日销量
+                                    </a>
+                                </th>
+                                <th scope="col" style="text-align: center">
+                                    <a id="increaserate" style="text-decoration-line: none; cursor: pointer">
+                                        同比增长
+                                    </a>
+                                </th>
+                            </tr>
+                            <tbody class="table-body" id="table-body"></tbody>
+                        </table>
+                    </div>
+                    <div class="data-pages" align="center"></div>
                 </div>
             </div>
             <!--编辑查询游戏-->
@@ -777,5 +843,98 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    loadStartEcharts();
+    anchorPointJump('toTop', 'jump')
+    //排序相关
+    $('#uniqueId').click(function (){
+        if(curSort == 0){
+            if(curOrder === 'desc'){
+                curOrder = 'asc';
+                ChangeIndexPage(dataCurrentIndex,null);
+                $(this).html("唯一识别码<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
+                    "</svg>");
+            }else{
+                curOrder = 'desc';
+                ChangeIndexPage(dataCurrentIndex,null);
+                $(this).html("唯一识别码<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-down-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "  <path d=\"M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\"/>\n" +
+                    "</svg>");
+            }
+        }else{
+            //清除其他
+            ClearOtherSort(0);
+            //
+            curSort = 0;
+            curOrder = 'asc';
+            ChangeIndexPage(dataCurrentIndex,null);
+            $(this).html("唯一识别码<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
+                "</svg>");
+        }
+    })
+    $('#cursale').click(function (){
+        if(curSort == 1){
+            if(curOrder === 'desc'){
+                curOrder = 'asc';
+                ChangeIndexPage(dataCurrentIndex,null);
+                $(this).html("本日销量<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
+                    "</svg>");
+            }else{
+                curOrder = 'desc';
+                ChangeIndexPage(dataCurrentIndex,null);
+                $(this).html("本日销量<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-down-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "  <path d=\"M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\"/>\n" +
+                    "</svg>");
+            }
+        }else{
+            //清除其他
+            ClearOtherSort(1);
+            //
+            curSort = 1;
+            curOrder = 'asc';
+            ChangeIndexPage(dataCurrentIndex,null);
+            $(this).html("本日销量<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
+                "</svg>");
+        }
+    })
+    $('#increaserate').click(function (){
+        if(curSort == 2){
+            if(curOrder === 'desc'){
+                curOrder = 'asc';
+                ChangeIndexPage(dataCurrentIndex,null);
+                $(this).html("同比增长<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
+                    "</svg>");
+            }else{
+                curOrder = 'desc';
+                ChangeIndexPage(dataCurrentIndex,null);
+                $(this).html("同比增长<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-down-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "  <path d=\"M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\"/>\n" +
+                    "</svg>");
+            }
+        }else{
+            //清除其他
+            ClearOtherSort(2);
+            //
+            curSort = 2;
+            curOrder = 'asc';
+            ChangeIndexPage(dataCurrentIndex,null);
+            $(this).html("同比增长<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
+                "</svg>");
+        }
+    })
+    /*查询游戏*/
+    $("#dataAnalysis_search-btn").on("click",function () {
+        dataCurrentPage = 1;
+        dataCurrentIndex = (dataCurrentPage - 1) * 10;
+        curSearch = $("#dataAnalysis-search-game").val()
+        ChangeIndexPage();
+    })
+</script>
 </body>
 </html>
