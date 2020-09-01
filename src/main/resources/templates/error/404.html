@@ -32,7 +32,7 @@
     <!-- 引入自己的js库文件 -->
     <script type="text/javascript" src="/js/reusable.js"></script>
     <script type="text/javascript" src="/js/globalVars.js"></script>
-    <script type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript" src="/js/navbar.js"></script>
 </head>
 <body>
 <div class="navbar-fixed-top">
@@ -56,7 +56,7 @@
 
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="/">首页</a></li>
+                    <li><a href="javascript:void(0)" onclick="index_body()">首页</a></li>
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button"
                            aria-haspopup="true" aria-expanded="false">游戏
@@ -78,7 +78,7 @@
                             <li><a class="dropdown-item" href="javascript:void(0)">所有游戏</a></li>
                         </ul>
                     </li>
-                    <li><a href="javascript:void(0)">社区</a></li>
+                    <li><a href="javascript:void(0)" onclick="community_index()">社区</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right" id="navbar-uinfo">
@@ -97,14 +97,10 @@
                             </li>
                             <li>
                                 <a class="dropdown-item" href="javascript:void(0)">
-                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;我的订单
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="javascript:void(0)">
                                     <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>&nbsp;我的购物车
                                 </a>
                             </li>
+
                             <li>
                                 <a class="dropdown-item" href="javascript:void(0)">
                                     <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>&nbsp;我的愿望单
@@ -113,6 +109,24 @@
                             <li role="separator" class="dropdown-divider"></li>
                             <li>
                                 <a class="dropdown-item" href="javascript:void(0)">
+                                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;我的订单
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0)">
+                                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;我的点评
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0)">
+                                    <span class="glyphicon glyphicon-gift" aria-hidden="true"></span>&nbsp;我的游戏
+                                </a>
+                            </li>
+                            <li role="separator" class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0)" onclick="logout()">
                                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;退出
                                 </a>
                             </li>
@@ -136,34 +150,28 @@
                             data-loading-text="<span class='glyphicon glyphicon-search' aria-hidden='true'></span> 搜索中...">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> 搜索商店
                     </button>
-                    <div class="form-group">
-                        <div class="dropdown" id="navbar-search-form-result">
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="javascript:void(0)">
-                                        sadf
-                                    </a>
-                                </li>
-                                <li role="separator" class="dropdown-divider"></li>
-                                <li>
-                                    <a class="dropdown-item" href="javascript:void(0)">
-                                        sadf
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <div class="form-group" id="search-form-error-tip" style="display: none;"></div>
+                    <!--                    <div class="form-group">-->
+                    <!--                        <div class="dropdown" id="navbar-search-form-result">-->
+                    <!--                            <ul class="dropdown-menu">-->
+                    <!--                                <li>-->
+                    <!--                                    <a class="dropdown-item" href="javascript:void(0)">-->
+                    <!--                                        sadf-->
+                    <!--                                    </a>-->
+                    <!--                                </li>-->
+                    <!--                                <li role="separator" class="dropdown-divider"></li>-->
+                    <!--                                <li>-->
+                    <!--                                    <a class="dropdown-item" href="javascript:void(0)">-->
+                    <!--                                        sadf-->
+                    <!--                                    </a>-->
+                    <!--                                </li>-->
+                    <!--                            </ul>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </form>
             </div>
         </div>
     </nav>
-    <!-- 面包屑导航 -->
-    <ol class="breadcrumb">
-        <li>您的位置：<a href="/">首页</a></li>
-        <li><a href="javascript:void(0)">游戏</a></li>
-        <li><a href="javascript:void(0)">FPS</a></li>
-        <li>Borderland3</li>
-    </ol>
 </div>
 
 <!-- 网页主体容器-->

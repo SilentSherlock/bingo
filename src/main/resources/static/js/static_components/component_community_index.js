@@ -164,6 +164,10 @@ $(document).ready(function () {
 
     //点赞
     $(document).on("click", "#community-index .up", function () {
+        if (userInfo.uid === undefined) {
+            myAlert("请登录后进行操作!");
+            return;
+        }
         var thisPid = $(this).attr("id")
         //console.log("click")
         var thisPost;
