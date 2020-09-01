@@ -6,11 +6,15 @@ import com.alibaba.fastjson.JSONArray;
 import com.nwafu.bingo.entity.*;
 import com.nwafu.bingo.service.StoreService;
 import com.nwafu.bingo.utils.*;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.*;
 
 @RestController
@@ -646,4 +650,92 @@ public class StoreController {
         return result;
     }
     //endregion
+
+
+
+    /**
+     *添加广告
+     */
+    @RequestMapping("addAdvertise")
+    public Result addAdvertise(@RequestParam("gid") Integer gid,@RequestParam("advertise_game_picture") MultipartFile file) throws Exception {
+        Result result = new Result();
+
+        Game game = storeService.getGameById(gid);
+        if(game == null){
+            result.setStatus(Status.FAILURE);
+        }else{
+            String imgFold = ResourceUtils.getURL("classpath:").getPath() +  "static/src/index_carousel/";
+            File foldPath = new File(imgFold);
+            if (!foldPath.exists()) {
+                foldPath.mkdirs();
+            }
+            File[] files = foldPath.listFiles();
+            int size = files.length;
+            if(size >= 6){
+                result.setStatus(Status.FAILURE);
+            }else {
+                String imgSrc = "/src/index_carousel/img-" + gid + ".jpg";
+                String imgPath = ResourceUtils.getURL("classpath:").getPath() + "static" + imgSrc;
+                File img = new File(imgPath);
+                if (img.exists()) {
+                    img.delete();
+                }
+                file.transferTo(img);
+                result.setStatus(Status.SUCCESS);
+            }
+        }
+        return result;
+    }
+    /**
+     *获取广告中的信息
+     */
+    @RequestMapping("getAllAdvertise")
+    public Result getAllAdvertise() throws Exception {
+        Result result =new Result();
+
+        String imgFold = ResourceUtils.getURL("classpath:").getPath() +  "static/src/index_carousel/";
+        File fold = new File(imgFold);
+        File[] files = fold.listFiles();
+        List<String> list_str = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0 ; i < files.length;i++){
+            String str1 = files[i].getName();
+            String[] strings = str1.split("-");
+            String[] strings1 = strings[1].split("\\.");
+            list.add(Integer.parseInt(strings1[0]));
+            list_str.add("src/index_carousel/"+str1);
+        }
+
+        List<Game> list_game = new ArrayList<>();
+        for(Integer integer: list){
+            Game game = storeService.getGameById(integer);
+            list_game.add(game);
+        }
+        result.getResultMap().put("gameList",list_game);
+        result.getResultMap().put("picList",list_str);
+        return result;
+    }
+
+    @RequestMapping("deleteAdvertise")
+    public Result deleteAdvertise(@RequestParam("gid") String gid) throws Exception{
+        Result result =new Result();
+        String imgFold = ResourceUtils.getURL("classpath:").getPath() +  "static/src/index_carousel/";
+        File fold = new File(imgFold);
+        File[] files = fold.listFiles();
+        int counts = 0;
+        for(int i = 0 ; i < files.length;i++){
+            if(("img-"+gid+".jpg").equals(files[i].getName())){
+                files[i].delete();
+                result.setStatus(Status.SUCCESS);
+                counts++;
+                break;
+            }else {
+                continue;
+            }
+        }
+        if(counts == 0){
+            result.setStatus(Status.SUCCESS);
+        }
+        return result;
+    }
 }
