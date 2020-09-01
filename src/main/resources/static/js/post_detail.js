@@ -312,11 +312,6 @@ $(document).ready(function () {
 })
 
 function thumb_up() {
-    if (userInfo.uid === undefined){
-        alert("请登录后进行操作");
-        window.location.href="/";
-        return;
-    }
     $(".up-count").text(thisPost[0].plikenum);
     let upFormData = new FormData();
 
