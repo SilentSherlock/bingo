@@ -1,0 +1,27 @@
+<div class="editor-content" id="community-new-post">
+    <div class="header-block">
+        <div class="header-content">
+            <div>发布帖子</div>
+            <div class="title-block">
+                <input id="input-title" placeholder="帖子标题" maxlength="30" oninput="input()">
+                <span class="word-count">30</span>
+            </div>
+            <div class="theme-name">
+                <input id="theme-name" placeholder="主题" maxlength="30">
+            </div>
+        </div>
+    </div>
+    <div class="content-block">
+        <div class="editor-block">
+            <div class="edit-body" contenteditable="true"></div>
+        </div>
+    </div>
+    <div class="editor-action">
+        <button class="save" onclick="save()">保存</button>
+        <button class="publish" onclick="publish()">发布</button>
+    </div>
+    <!-- 引入该组件的css库文件-->
+    <link rel="stylesheet" href="/css/static_components/component_community_new_post.css">
+    <!-- 引入该组件的js库文件-->
+    <script type="text/javascript" src="/js/static_components/component_community_new_post.js"></script>
+</div>
