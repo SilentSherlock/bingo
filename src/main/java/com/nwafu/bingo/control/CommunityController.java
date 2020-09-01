@@ -121,7 +121,7 @@ public class CommunityController {
                     posts.get(0).setPtheme((String) propValue);
                     break;
                 case "plikenum":
-                    posts.get(0).setPlikenum((Integer) propValue);
+                    posts.get(0).setPlikenum(Integer.parseInt((String) propValue));
                     break;
                 case "content":
                     posts.get(0).setContent((String) propValue);

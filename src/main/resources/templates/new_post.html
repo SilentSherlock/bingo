@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发布帖子</title>
+    <style>
+        body{
+            background: #202539;
+        }
+        div{
+            margin:0;
+            padding:0;
+            display: block;
+        }
+        .editor-content{
+            width: 895px;
+            margin: 120px auto 40px;
+            padding: 50px 50px 20px 50px;
+            height: auto;
+            min-height: 0;
+            background: #fff;
+            box-sizing: border-box;
+        }
+        .header-block{
+            float: none;
+            width: 795px;
+            background: transparent;
+            height: 100%;
+            overflow: hidden;
+        }
+        .header-content{
+            height: auto;
+            padding: 0;
+            overflow: visible;
+        }
+        .title-block{
+            background: #F4F4F4;
+            border: solid 1px #ddd;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        input{
+            height: 40px;
+            line-height: 40px;
+            font-size: 14px;
+            background: #f4f4f4;
+            color: #33394D;
+            width: 760px;
+            border: 0;
+            outline: none;
+            display: inline-block;
+            text-indent: 10px;
+        }
+        .word-count{
+            color: #33394D;
+            font-size: 14px;
+            line-height: 40px;
+            margin-top: 10px;
+            text-align: right;
+        }
+        .theme-name{
+            background: #F4F4F4;
+            border: solid 1px #ddd;
+            color: #33394D;
+            font-size: 14px;
+            position: relative;
+        }
+        .theme-name-inner{
+            height: 39px;
+            line-height: 40px;
+            background: #f4f4f4;
+            color: #33394D;
+            padding: 0 10px;
+            cursor: pointer;
+        }
+        .content-block{
+            margin: 0;
+            padding: 0;
+            height: auto;
+            overflow: visible;
+            background: white;
+        }
+        .editor-block{
+            margin: 21px auto 0;
+            border: solid 1px #ddd;
+            height: auto;
+        }
+        .edit-body{
+            padding: 20px 20px 50px 20px;
+            min-height: 309px;
+            font-size: 14px;
+            color: #333;
+            line-height: 24px;
+            background: #ffffff;
+            outline: none;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+        }
+       .editor-action{
+           height: 46px;
+           margin-top: 25px;
+       }
+        .save{
+            float: left;
+            background: #508BF3;
+            border: none;
+            width: 115px;
+            height: 46px;
+            line-height: 46px;
+            text-align: center;
+            box-sizing: border-box;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+        }
+        .publish{
+            float: left;
+            margin-left: 15px;
+            background: #FF6900;
+            border: none;
+            outline: none;
+            width: 115px;
+            height: 46px;
+            line-height: 46px;
+            text-align: center;
+            box-sizing: border-box;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="editor-content">
+        <div class="header-block">
+            <div class="header-content">
+                <div class="title-block">
+                    <input id="input-title" placeholder="文章标题" maxlength="30" oninput="input()">
+                    <span class="word-count">30</span>
+                </div>
+                <div class="theme-name">
+                    <input id="theme-name" placeholder="主题" maxlength="30">
+                </div>
+            </div>
+        </div>
+        <div class="content-block">
+            <div class="editor-block">
+                <div class="edit-body" contenteditable="true" ></div>
+            </div>
+        </div>
+        <div class="editor-action">
+            <button class="save" onclick="save()">保存</button>
+            <button class="publish" onclick="publish()">发布</button>
+        </div>
+    </div>
+<script src="extlib/jquery-3.5.1/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+    var thisUser;
+    $(document).ready(function () {
+        function getUser() {
+            var loc = location.href;
+            var n1 = loc.length;
+            var n2 = loc.indexOf('=');
+            var userId = decodeURI(loc.substr(n2+1,n1-n2));
+            thisUser = userId;
+
+        }
+        function getPost() {
+            if(localStorage.getItem("post")==null||localStorage.getItem("post")[0]==null){
+                return;
+            }else{
+                console.log("have")
+                var postInfo = JSON.parse(localStorage.getItem('post'));
+                console.log(postInfo)
+                $("#theme-name").val(postInfo.ptheme);
+                $(".edit-body").text(postInfo.content);
+                $("#input-title").val(postInfo.title);
+            }
+        }
+        getUser();
+        getPost();
+    })
+    function publish() {
+        let formData = new FormData();
+
+        var date = new Date();
+        console.log(date)
+        formData.append("ptime",date);
+        formData.append("ptheme",$("#theme-name").val());
+        formData.append("plikenum",0);
+        formData.append("content",$(".edit-body").text());
+        formData.append("title",$("#input-title").val())
+        formData.append("uid",thisUser);
+        JSON.stringify(formData);
+        $.ajax({
+            url:'/community/addPost',
+            data: formData,
+            type:'post',
+            processData:false,
+            contentType: false,
+            cache : false,
+            async:true,
+            success:function (result) {
+                alert("发帖成功");
+                window.location.reload();
+            }
+        });
+        let localFormData;
+        localFormData={
+            "ptheme":null,
+            "content":null,
+            "title":null,
+        }
+        localStorage.setItem("post",JSON.stringify(localFormData));
+    }
+    function save() {
+        let formData = new FormData();
+        formData={
+            "ptheme":$("#theme-name").val(),
+            "content":$(".edit-body").text(),
+            "title":$("#input-title").val()
+        }
+        localStorage.setItem("post",JSON.stringify(formData));
+        alert("保存成功");
+    }
+    function input() {
+        var count = $("#input-title").val().length;
+        $(".word-count").text(30-count);
+    }
+</script>
+</body>
+</html>
