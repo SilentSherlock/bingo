@@ -70,6 +70,9 @@ public class Tools {
                     String strValue = (String) method.invoke(object);
                     if (strValue == null || "".equals(strValue)) return false;
                     break;
+                case "class java.util.Date":
+                    Date date = (Date) method.invoke(object);
+                    if (date == null) return false;
                 default:
                     throw new Exception("Tools validateObject get unknown property type");
             }

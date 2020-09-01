@@ -1,0 +1,75 @@
+<div class="community-content" id="user-shopping-cart">
+    <div class="tabs-container">
+        <div class="left-menu-tabs">
+            <div class="first-title tags-button">我的账户</div>
+            <div class="tags-button">
+                <a class="close" href="javascript:void(0)" onclick="showUserInfo(this)">我的信息</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" id="choose1" href="javascript:void(0)" onclick="showUserInfo(this)">我的购物车</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="javascript:void(0)" onclick="showUserInfo(this)">我的愿望单</a>
+            </div>
+            <div class="first-title tags-button">订单中心</div>
+            <div class="tags-button">
+                <a class="close" href="javascript:void(0)" onclick="showUserInfo(this)">我的订单</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="javascript:void(0)" onclick="showUserInfo(this)">我的点评</a>
+            </div>
+            <div class="tags-button">
+                <a class="close" href="javascript:void(0)" onclick="showUserInfo(this)">我的游戏</a>
+            </div>
+        </div>
+        <div class="center-user-tabs">
+
+            <div class="center-sopping-cart">
+                <div class="order-main" id="order-main">
+                    <div class="order-title">
+                        <div class="row1">商品名称</div>
+                        <div class="price">价格</div>
+                        <div class="row3">数量</div>
+                        <div class="row3">操作</div>
+                    </div>
+                    <!--<div class="myorder-elem">
+                        <input type="checkbox" class="che-buy" onclick="">
+                        <span class="column1">
+                            <span class="game-title" id="1-1">
+                                <img class="column1-img" src="https://media.st.dl.pinyuncloud.com/steam/apps/552990/header.jpg?t=1597765218" id="">
+                                <span class="column1-txt">只狼</span>
+                            </span>
+                        </span>
+                        <div class="price" id="">￥80.00</div>
+                        <div class="row3" id="">
+                            <input type="number" value="1" class="num" id="content-score" onkeydown="return false;"  min="1" value="1">
+                        </div>
+                        <div class="operate">
+                            <div class="sum1"><button class="da">删除</button></div>
+                            <div class="sum1"><button class="da">加入心愿单</button></div>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="sum">
+                    <button class="sum-but btn-primary" onclick="buy()">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart3" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                        </svg>
+                        购买
+                    </button>
+                    <div class="sum-num">共<span id="num">0</span>款游戏&nbsp;&nbsp;&nbsp;&nbsp;总价￥<span
+                            id="sumprice">0</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- 引入该部分的css库文件-->
+    <link rel="stylesheet" href="/css/static_components/component_user_shopping_cart.css">
+    <!-- 引入该部分的js库文件-->
+    <script type="text/javascript" src="/js/static_components/component_user_shopping_cart.js"></script>
+</div>
+

@@ -3,7 +3,8 @@
  * 时间: 2020.8.27
  * 描述: 自定义提示框
  */
-function myAlert(message) {
+function myAlert(message, hideEventHandler) {
+    hideEventHandler = hideEventHandler || null;
     //判断是否已经加载提示框modal
     let alert = $("#alert");
     if ($(alert).length === 0) {
@@ -12,13 +13,15 @@ function myAlert(message) {
             //显示模态框
             $("#alert").modal();
             //更改提示信息
-            $("#alert-message").text(message);
+            $("#alert-message").html(message);
+            $("#alert").on("hide.bs.modal", hideEventHandler);
         });
     }
     //显示模态框
     $(alert).modal();
     //更改提示信息
-    $("#alert-message").text(message);
+    $("#alert-message").html(message);
+    $(alert).on("hide.bs.modal", hideEventHandler);
 }
 
 /**
@@ -58,11 +61,13 @@ function ajaxNoContent(noContentShowTagId) {
 function loadingAnimation(showTagId) {
     //加载动画
     return new Promise(function (resolve) {
-        $.get(static_components.component_loading_animation.curl, function (data) {
-            //显示加载动画
-            $(showTagId).html(data);
-            resolve();
-        });
+        $.get(
+            static_components.component_loading_animation.curl,
+            function (data) {
+                //显示加载动画
+                $(showTagId).html(data);
+                resolve();
+            });
     });
 }
 
@@ -112,4 +117,59 @@ function getCookie(cname) {
         }
     }
     return null;
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.8.28
+ * 描述: 搜索函数
+ */
+function searchGame(formData) {
+    let defaultSearchCondition = {
+        pageIndex: 0,
+    };
+
+    formData = formData || defaultSearchCondition;
+
+    console.log("搜索中的搜索条件:");
+    console.log(formData);
+
+    return new Promise(function (resolve, reject) {
+        $.post(
+            requestmap.store_search,
+            formData,
+            function (data) {
+                console.log("搜索结果:");
+                console.log(data);
+                resolve(data);
+            }
+        ).fail(function () {
+            reject();
+        });
+    });
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.8.28
+ * 描述: 一键还原搜索默认值
+ */
+function restoreSearchConditonDefault() {
+    $.each(searchCondition, function (key, value) {
+        if (key === "pageIndex")
+            searchCondition[key] = 0;
+        else
+            searchCondition[key] = undefined;
+    });
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.8.30
+ * 描述: 一键清空用户信息
+ */
+function clearUserInfo() {
+    $.each(userInfo, function (key, value) {
+        searchCondition[key] = undefined;
+    });
 }

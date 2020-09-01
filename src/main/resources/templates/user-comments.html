@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的评论和帖子</title>
+    <style>
+        body{
+            background: #202539;
+        }
+        div{
+            margin:0;
+            padding:0;
+            display: block;
+        }
+        .comments-container{
+            padding: 20px;
+            width: 800px;
+        }
+        .tabs-button-container{
+            height: 38px;
+            color: #b9c0ef;
+            background: #292e41;
+            border-bottom: 0;
+            box-sizing: border-box;
+        }
+        .tabs-button{
+            height: 38px;
+            line-height: 38px;
+            width: 395px;
+            border: 0;
+            padding: 0;
+            text-align: center;
+            float: left;
+
+        }
+        .tabs-button a{
+            display: block;
+            color: #b9c0ef;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        .active{
+            background: #7a80a2;
+        }
+        .tabs-content{
+            margin-top:20px;
+        }
+        .tabs-item{
+            width: 800px;
+            background-color: #33394d;
+        }
+        .no-data{
+            height: 580px;
+            text-align: center;
+            color: #7a80a2;
+            font-size: 16px;
+            box-sizing: border-box;
+            padding-top: 100px;
+        }
+        .no-data a{
+            display: block;
+            border: none;
+            text-align: center;
+            box-sizing: border-box;
+            background: #508bf3;
+            color: #ffffff;
+            cursor: pointer;
+            outline: none;
+            border-radius: 2px 2px 2px 2px;
+            width: 100px;
+            height: 32px;
+            line-height: 32px;
+            padding: 0;
+            margin: 50px auto 0 auto;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .item-wrap{
+            padding-left:15px;
+            color: #7A80A2;
+            font-size: 12px;
+            /*margin-bottom: 20px;*/
+            padding-bottom: 20px;
+            border-bottom: 1px solid #3f4760;
+            height:95px;
+        }
+        .header{
+            height: 40px;
+        }
+        .btn{
+            float: left;
+            margin-top: 2px;
+        }
+        .time{
+            float: left;
+        }
+        .time a{
+            margin-left: 5px;
+            color: #508BF3;
+        }
+        .h2-in-header{
+            margin-block-start: 0.83em;
+            margin-block-end: 0.83em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-size: 14px;
+            width: 740px;
+            margin-bottom: 10px;
+            margin-top: 0;
+            word-wrap: break-word;
+            cursor: pointer;
+            float:left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .h1-in-header{
+            float: left;
+            font-size: 18px;
+            color: #B9C0EF;
+            cursor: pointer;
+            max-width: 550px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="comments-container">
+        <div class="tabs-container">
+            <div class="tabs-button-container">
+                <div class="tabs-button active">
+                    <a id="button1" href="#">评论</a>
+                </div>
+                <div class="tabs-button">
+                    <a id="button2" href="#">帖子</a>
+                </div>
+            </div>
+            <div class="tabs-content">
+                <div class="tabs-item">
+
+                    <!--为空时的效果-->
+                    <div class="no-data">
+                        你还没有发布过评论
+                        <a href="#">前往社区</a>
+                        <!--此处的链接为前往社区-->
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+<script src="extlib/jquery-3.5.1/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+    //user的id，此处的1只用来测试
+      var thisUser = 1;
+      var postList;
+      var commentList;
+      var type="comment";
+      $(document).ready(function () {
+          function getPosts() {
+              let formData={
+                  "idType":"uid",
+                  "idValue":thisUser,
+              }
+              // console.log(formData)
+              $.ajax({
+                  url:'community/getPostsById',
+                  data: formData,
+                  type:'get',
+                  async:false,
+                  success:function (comments) {
+                      postList=comments.resultMap.postByuid;
+
+                  }
+              });
+          }
+          function getComments() {
+              let formData={
+                  "idType":"uid",
+                  "idValue":thisUser,
+              }
+              // console.log(formData)
+              $.ajax({
+                  url:'community/getCommentsById',
+                  data: formData,
+                  type:'get',
+                  async:false,
+                  success:function (comments) {
+                      commentList=comments.resultMap.CommentByuid;
+                  }
+              });
+          }
+          function set() {
+              let html="";
+              if(type=="comment"){
+                  console.log(commentList)
+                  if(commentList==null||commentList.status === 0){
+                      return;
+                  }
+                  $(".tabs-item").empty();
+                  for(let i=commentList.length-1;i>=0;i--) {
+                      html +=
+                          "<div class=" + "item-wrap" + " "+"style='height:65px;'>" +
+                          "<div class=" + "header" + "><a href=" + "community-talk.html?pid=" +commentList[i].pid + "><h2 class=" + "h1-in-header" + ">" + commentList[i].content + "</h2></a></div>" +
+                          "<div class=" + "left" + ">" +
+                          "<span class=" + "h2-in-header" + ">发表于" + commentList[i].ctime.substring(0, 10) + "&nbsp;&nbsp;" + "</span>" +
+                          "</div>" +
+                          "</div>" +
+                          "</div>"
+                  }
+                  $(".tabs-item").html(html);
+              }else if(type=="post"){
+                  console.log(postList)
+                  if(postList==null||postList.status === 0){
+                      return;
+                  }
+                  $(".tabs-item").empty();
+                  for(let i=postList.length-1;i>=0;i--) {
+                      html +=
+                          "<div class=" + "item-wrap" + ">" +
+                          "<div class=" + "header" + "><div class=" + "btn" + "></div><a href=" + "community-talk.html?pid=" +postList[i].pid + "><h1 class=" + "h1-in-header" + ">" + "【" + postList[i].ptheme + "】" + postList[i].title + "</h1></a></div>" +
+                          "<h2 class=" + "h2-in-header" + ">" + postList[i].content + "</h2>" +
+                          "<div class=" + "left" + ">" +
+                          "<span class=" + "time" + ">发表于" + postList[i].ptime.substring(0, 10) + "&nbsp;&nbsp;" + "</span>" +
+                          "</div>" +
+                          "</div>" +
+                          "</div>"
+                  }
+                  $(".tabs-item").html(html);
+              }else{
+
+              }
+          }
+          //切换帖子/评论排序方式：点击事件
+          $("#button1").click(function () {
+              //样式修改
+              var tempTie = $(".active")
+              var tag = $(this)
+              tempTie.removeClass("active")
+              tag.addClass("active")
+              console.log($(this).val())
+              //功能代码
+              type="comment";
+              set();
+          })
+          $("#button2").click(function () {
+              //样式修改
+              var tempTie = $(".active")
+              var tag = $(this)
+              tempTie.removeClass("active")
+              tag.addClass("active")
+              console.log($(this).val())
+              //功能代码
+              type="post";
+              set();
+          })
+          getPosts();
+          getComments();
+          set();
+      })
+</script>
+</body>
+</html>
