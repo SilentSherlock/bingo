@@ -596,6 +596,7 @@ public class StoreController {
         for(GameMouthSale gameMouthSale : gameMouthSales){
             gameMouthSale.setOtime(Tools.setHMS20(gameMouthSale.getOtime()));
             long index = (curDate.getTime() - gameMouthSale.getOtime().getTime()) / (24 * 3600 * 1000);
+            if(index > 29) continue;
             sales[29 - (int)index] = gameMouthSale.getSale();
         }
         result.setStatus(Status.SUCCESS);
@@ -716,6 +717,7 @@ public class StoreController {
             Game game = storeService.getGameById(integer);
             list_game.add(game);
         }
+        result.setStatus(Status.SUCCESS);
         result.getResultMap().put("gameList",list_game);
         result.getResultMap().put("picList",list_str);
         return result;
