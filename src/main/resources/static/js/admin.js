@@ -2,6 +2,7 @@ let currentPage = 1;
 let currentIndex = 0;
 let countpage = 0;
 let updategid;
+
 let search_game_name;
 let game_order = "desc";
 let sort_types;
@@ -9,6 +10,13 @@ let sort_types;
 let uerCurrentPage = 1;
 let userCurrentIndex = 0;
 let userCountPage = 0;
+
+let dataCurrentPage = 1;
+let dataCurrentIndex = 0;
+let dataCountPage = 0;
+let curSearch = null;
+let curOrder = 'asc';
+let curSort = 0;
 
 let check_language;
 let check_types;
