@@ -4,10 +4,6 @@
  * 时间: 2020.4.10
  * 描述：错误页面定制样式
  */
-body {
-  background: #141019 radial-gradient(at 50% -20%, #908392, #0d060e) fixed;
-}
-
 #handboy {
   animation: swing ease-in-out 1.3s infinite alternate;
   transform-origin: 98% 98%;
