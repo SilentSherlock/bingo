@@ -79,10 +79,14 @@ class BingoApplicationTests {
 
 		//userDao.add(user);
 
-		List<User> list = userDao.getUserPage(2,3);
-		for(User u : list){
-			System.out.println(u.getUname());
-		}
+
+
+		//List<User> list = userDao.getUserPage(2,3);
+//		for(User u : list){
+//			System.out.println(u.getUname());
+//		}
+
+
 		/*List<User> list2 = userDao.getByName("程冰");
 		for(User u : list2){
 			System.out.println(u.getUname());
@@ -135,7 +139,7 @@ class BingoApplicationTests {
 	void testCommetn() throws Exception {
 		Comment comment = new Comment();
 		comment.setContent("tests");
-		comment.setCtime("2018/1/17");
+		//comment.setCtime("2018/1/17");
 		comment.setCtype(0);
 
 		comment.setPid(5);
@@ -178,7 +182,7 @@ class BingoApplicationTests {
 		post.setContent("fdafafdafafa");
 		post.setPlikenum(45);
 		post.setPtheme("诸神");
-		post.setPtime("1999/12/1");
+		//post.setPtime("1999/12/1");
 		post.setTitle("玄远");
 		post.setUid(2);
 		//post.setPid(1);
@@ -198,10 +202,10 @@ class BingoApplicationTests {
 	@Test
 	void testOrderlist() throws Exception{
 		Orderlist orderlist = new Orderlist();
-		orderlist.setOrderDetails("goumai");
+		//orderlist.setOrderDetails("goumai");
 		orderlist.setUid(2);
 		orderlist.setOtime(new Date());
-		orderlist.setOid(1);
+		//orderlist.setOid(1);
 		//orderlistDao.add(orderlist);
 
 		//List<Orderlist> list = orderlistDao.getAll();
@@ -210,7 +214,7 @@ class BingoApplicationTests {
 			System.out.println(l.getOrderDetails());
 		}
 		*/
-		orderlistDao.delete(orderlist);
+		//orderlistDao.delete(orderlist);
 	}
 	@Test
 	void testSystem() throws Exception {
@@ -287,7 +291,7 @@ class BingoApplicationTests {
 		post.setContent("神死魔灭");
 		post.setPlikenum(45);
 		post.setPtheme("诸神黄昏");
-		post.setPtime("1999/12/1");
+		//post.setPtime("1999/12/1");
 		post.setTitle("玄远");
 		post.setUid(2);
 		/*communityService.addPostOrComment(post);
