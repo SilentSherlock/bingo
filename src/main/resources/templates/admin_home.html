@@ -28,564 +28,13 @@
     <script type="text/javascript" src="https://lwh147.github.io/src/vue-2.6.11/vue.js"></script>
     <!-- 引入自己的css库文件 -->
     <!--<link rel="stylesheet" href="/css/index.css">-->
+    <link rel="stylesheet" href="css/admin.css">
     <!-- 引入自己的js库文件 -->
-    <script type="text/javascript" src="/js/reusable.js"></script>
-    <script type="text/javascript" src="/js/globalVars.js"></script>
-    <script type="text/javascript" src="/js/index.js"></script>
-    <style type="text/css">
 
-        body,html{
-            width: 100%;
-            height: 100%;
-        }
-        .navbar-brand{
-            position: relative;
-            top: 10px;
-            left: 20px;
-            height: 70px;
-            padding: 0px;
-        }
-        .left-nav{
-            position: fixed;
-            margin-left: 0px;
-            width: 15%;
-            height: 100%;
-            padding-top: 0px;
-            background-color: black;
-            float: left;
-        }
-        .nav-pills>li.active>a,
-        .nav-pills>li.active>a:focus,
-        .nav-pills>li.active>a:hover{
-            color: #dbdbdb;
-            background-color:black;/*#177ddc*/
 
-        }
-        /*.nav-second>li.active>a,
-        .nav-second>li.active>a:focus,
-        .nav-second>li.active>a:hover{
-            background-color: black;
-        }*/
-        .nav-second>li>a,
-        .nav-second>li>a:focus,
-        .nav-second>li>a:hover{
-            background-color: #177ddc;/*#f5222d;*/
-            color:white;
 
-        }
+    <script type="text/javascript" src="/js/admin.js"></script>
 
-        .nav-pills>li>a:focus,
-        .nav-pills>li>a:hover{
-            color: white;
-            background-color: black;
-            border-color: #333;
-        }
-        .nav>li>a{
-            color: #9d9d9d;
-            background-color: #333;
-            border-color: #333;
-            text-align: left;
-        }
-        .nav>li>a:focus,
-        .nav>li>a:hover{
-            border-color: black;
-        }
-
-        .navbar-title{
-            height: 70px;
-            width: 100%;
-            background-color: black;
-        }
-        .navbar-contain{
-            width: 100%;
-            top: 20px;
-            position: relative;
-        }
-        .contain-div{
-            width: 85%;
-            min-height: 920px;
-            padding-top: 0px;
-            float: right;
-        }
-        .contain-nav{
-            width: 100%;
-            height: 75px;
-            border-bottom-width: 1px;
-            border-bottom-style: solid;
-            border-color: #dbdbdb;
-
-        }
-        .main-contain{
-            width: 100%;
-            min-height: 845px;
-            padding: 0;
-
-        }
-        .main-nav{
-            width: 100%;
-            height: 30px;
-        }
-        .contain-des{
-            width: 100%;
-            height: 70px;
-            left: 20px;
-            position: relative;
-        }
-        .info-content-out{
-            width: 100%;
-            min-height: 745px;
-            background-color: #dbdbdb;
-
-        }
-        .info-content{
-            width: 90%;
-            min-height: 625px;
-            position: relative;
-            left: 5%;
-            top:25px;
-            background-color: white;
-        }
-        .object-operator{
-            position: relative;
-            width: 100%;
-            height: 10%;
-            z-index:5;
-        }
-        .object-search{
-            position: relative;
-            top: 20px;
-            left: 10px;
-            float: left;
-            padding-left: 20px;
-        }
-        .object-search-button{
-            position: relative;
-            top:20px;
-            left: 10px;
-            float: left;
-            padding-left: 5px;
-
-        }
-        .btn-default:focus
-        .btn-default:hover,
-        .btn:hover,
-        .btn:focus{
-            background-color: #177ddc;/*#f5222d;*/
-            color: white;
-            border-style: none;
-        }
-        .object-show{
-            width: 95%;
-            height: 80%;
-            position: relative;
-            left: 20px;
-            top:30px;
-            z-index:3;
-        }
-        .table-head{
-            background-color: #fafafa;
-            font-size: 15px;
-        }
-        .rows{
-            font-size: 15px;
-        }
-        .rows:hover{
-            background-color: #fef1f0;
-        }
-
-        .delete,
-        .delete:link,
-        .delete:visited,
-        .delete:active,
-        .delete:hover{
-            color: #177ddc;/*red;*/
-            font-family: 微软雅黑;
-            text-decoration:none;
-        }
-        .edit,
-        .edit:link,
-        .edit:visited,
-        .edit:active{
-            color: #177ddc;/*red;*/
-            text-decoration:none;
-            font-family: 微软雅黑;
-        }
-        .more,
-        .more:link,
-        .edit:visited,
-        .edit:active,
-        .edit:hover{
-            color: #177ddc;/*red;*/
-            text-decoration:none;
-            font-family: 微软雅黑;
-        }
-        .pages{
-            position: relative;
-            top: 10px;
-            bottom: 10px;
-            width: 100%;
-        }
-        .modal-game{
-            width: 1000px;
-        }
-        .modal-user{
-            width: 600px;
-        }
-        .edit-game{
-            position: relative;
-            left: 50px;
-        }
-        .edit-game>span{
-            text-align: right;
-            display: inline-block;
-            width: 100px;
-        }
-        .type-checkbox:checked{
-            color: white;
-            background-color: #f5222d;
-        }
-        .add-table{
-            position: relative;
-            top: 30px;
-            /*left: 70px;*/
-
-        }
-        .add-button{
-            position: relative;
-            left: 700px;
-        }
-
-        .nav-second-a{
-            text-align: center;
-        }
-        .unique-code,
-        .unique-code:hover,
-        .unique-code:link,
-        .unique-code:visited,
-        .unique-code:active{
-            color: black;
-            text-decoration:none
-        }
-        .admin-info{
-            position: absolute;
-            right: 15px;
-            height: 70px;
-            width: 200px;
-            top:2px;
-        }
-        .admin-avator{
-            position: absolute;
-            top:12px;
-            left: 40px;
-            float: left;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            overflow: hidden;
-        }
-        .admin-avator img{
-            width: 100%;
-            height: 100%;
-            vertical-align: middle;
-        }
-        .admin-id,
-        .admin-id:focus,
-        .admin-id:active{
-            position: relative;
-            left: 40px;
-            color: black;
-            top: 10px;
-        }
-        /*.admin-id>a{
-            color: black;
-            text-decoration:none
-        }*/
-        .get-help{
-            position: relative;
-            top: 25px;
-            float: left;
-        }
-        .get-help>a{
-            color: black;
-            text-decoration:none
-        }
-        .user-detail{
-            width: 175px;
-        }
-        .admin-set:hover{
-            background-color: #007bff;
-        }
-        .nav-admin{
-            width: 180px;
-        }
-        .nav-admin>li>a{
-            background-color: #F6F6F6;
-            border-color: #F6F6F6;
-            position: relative;
-            text-align: center;
-            color: black;
-        }
-        .nav-admin>li>a:link,
-        .nav-admin>li>a:active,
-        .nav-admin>li>a:focus,
-        .nav-admin>li>a:hover{
-            background-color: #F6F6F6;
-        }
-    </style>
-
-    <script type="text/javascript">
-        let currentPage = 1;
-        let currentIndex = 0;
-        let countpage = 0;
-        let updategid;
-        let search_game_name;
-        let game_order = "desc";
-        let sort_types;
-
-        let uerCurrentPage = 1;
-        let userCurrentIndex = 0;
-        let userCountPage = 0;
-
-        /*实现翻页*/
-        function ChangePage(index, search_name,gtype,games_order , sort_type){
-            let html = "";
-            let pageHtml = "";
-            $.ajax({
-                url:"/store/search",
-                type:"post",
-                data:{
-                    name: search_name,
-                    category:gtype,
-                    pageIndex:index,
-                    pageCount:12,
-                    order:games_order,
-                    sort:sort_type,
-                },
-                dataType:'json',
-                success:function (Result) {
-
-                    if(Result.status == 1){
-
-                        html += "<table class='table '>" +
-                            "<tr class='table-head'>" +
-                            "<th scope='col'><a class='unique-code' id='unique-id' role='button'>唯一识别码&nbsp;<svg id='id-down' width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-down-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-                            "  <path d=\"M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\"/>\n" +
-                            "</svg><svg id = 'id-up'width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-                            "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
-                            "</svg></a></th>" +
-                            "<th scope='col'>游戏名称</th>" +
-                            "<th scope='col'>游戏类型</th>" +
-                            "<th scope='col'><a class='unique-code' id='sail-id' role='button'>售价(折扣价)&nbsp;<svg id='sail-down' width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-down-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-                            "  <path d=\"M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\"/>\n" +
-                            "</svg><svg id = 'sail-up'width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
-                            "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
-                            "</svg></a></th>" +
-                            "<th colspan='2'>操作</th>" +
-                            "</tr>"
-                        for(let key in Result.resultMap.searchList){
-                            html +=
-                            "<tr class='rows'>" +
-                            "<td scope='col'>" + Result.resultMap.searchList[key].gid + "</td>" +
-                            "<td scope='col'>" + Result.resultMap.searchList[key].gname + "</td>" +
-                            "<td scope='col'>" + Result.resultMap.searchList[key].gtype + "</td>" +
-                            "<td scope='col'>" + Result.resultMap.searchList[key].gprice * Result.resultMap.searchList[key].discount+ "</td>" +
-                            "<td scope='col'> <a class='edit'   role='button' data-toggle='modal' href='#myModal' id='"+ Result.resultMap.searchList[key].gid+"'>编辑</a></td>"+
-                            "<td scope='col'> <a class='delete' role='button' data-toggle='modal' id='delete_btn-"+ Result.resultMap.searchList[key].gid + "'>删除</a></td>"+
-                            "</tr>"
-                    }
-                        html += "</table>";
-                        $(".object-show").html(html);
-                        if(sort_types == "price"){
-                            $("#id-down").hide();
-                            $("#id-up").hide();
-                            if(game_order=="desc"){
-                                $("#sail-down").show();
-                                $("#sail-up").hide();
-                            }else {
-                                $("#sail-down").hide();
-                                $("#sail-up").show();
-                            }
-                        }else {
-                            $("#sail-down").hide();
-                            $("#sail-up").hide();
-                            if(game_order=="desc"){
-                                $("#id-down").show();
-                                $("#id-up").hide();
-                            }else {
-                                $("#id-down").hide();
-                                $("#id-up").show();
-                            }
-                        }
-
-                    }
-                    else{
-                        $(".object-show").html("<table class='table '>" +
-                            "<tr class='table-head'>" +
-                            "<th scope='col'>唯一识别码</th>" +
-                            "<th scope='col'>游戏名称</th>" +
-                            "<th scope='col'>游戏类型</th>" +
-                            "<th scope='col'>售价</th>" +
-                            "<th colspan='2'>操作</th>" +
-                            "</tr>");
-                    }
-                    console.dir(Result);
-                    pageHtml +=
-                        "<nav aria-label=\"Page navigation\">\n" +
-                        "  <ul class=\"pagination \">\n" +
-                        "    <li>\n" +
-                        "      <a class='to-page' href=\"#\" aria-label=\"Previous\">\n" +
-                        "        <span aria-hidden=\"true\">&laquo;</span>\n" +
-                        "      </a>\n" +
-                        "    </li>"
-                    countpage = Result.resultMap.allSearchNum;
-                    let pages = new Array();
-                    if(currentPage>3){
-                        if(currentPage<countpage-3){
-                            pages.push(currentPage-3);
-                            pages.push(currentPage-2);
-                            pages.push(currentPage-1);
-                            pages.push(currentPage*1);
-                            pages.push(currentPage*1+1);
-                            pages.push(currentPage*1+2);
-                        }else{
-                            for(let i = countpage-6;i < countpage;i++){
-                                pages.push(i+1);
-                            }
-                        }
-                    }else{
-                        for(let i = 0;i < 6;i++){
-                            pages.push(i+1);
-                        }
-                    }
-                    for(let i = 0; i < pages.length;i++){
-                        let page = i;
-                        if(pages[page]>countpage){
-                            break;
-                        }
-                        if(pages[page] == currentPage){
-                            pageHtml +="<li class='active'><a class='to-page' href=\"#\">"+pages[page]+"</a></li>"
-                        }else {
-                            pageHtml +="<li ><a class='to-page' href=\"#\">"+pages[page]+"</a></li>"
-                        }
-                    }
-                    pageHtml +=
-                        "<li>\n" +
-                        "      <a class='to-page' href=\"#\" aria-label=\"Next\">\n" +
-                        "        <span aria-hidden=\"true\">&raquo;</span>\n" +
-                        "      </a>\n" +
-                        "    </li>\n" +
-                        "  </ul>\n" +
-                        "</nav>"
-                    $(".pages").html(pageHtml);
-                }
-            })
-        }
-        function ChangeUserPage(index){
-            let html = "";
-            let pageHtml = "";
-            $.ajax({
-                url:"/person/getUserPage",
-                type:"post",
-                data:{
-                    pageIndex:index,
-                    pageCount:12,
-                },
-                dataType:'json',
-                success:function (Result) {
-                    console.dir(Result);
-                    if(Result.status == 1){
-
-                        html += "<table class='table '>" +
-                            "<tr class='table-head'>" +
-                            "<th scope='col'><a class='unique-code' id='unique-id' role='button'>唯一识别码"+
-                            "<th scope='col'>用户名</th>" +
-                            "<th scope='col'>用户昵称</th>" +
-                            "<th scope='col'><a class='unique-code' id='sail-id' role='button'>性别"+
-                            "<th colspan='2'>操作</th>" +
-                            "</tr>"
-                        for(let key in Result.resultMap.searchList){
-                            html +=
-                                "<tr class='rows'>" +
-                                "<td scope='col'>" + Result.resultMap.searchList[key].uid + "</td>" +
-                                "<td scope='col'>" + Result.resultMap.searchList[key].uname + "</td>" +
-                                "<td scope='col'>" + Result.resultMap.searchList[key].ualias + "</td>" +
-                                "<td scope='col'>" + Result.resultMap.searchList[key].usex + "</td>" +
-                                "<td scope='col'> <a class='more' role='button' data-toggle='modal' href='#user-Modal' id='more-"+ Result.resultMap.searchList[key].uid+"'>更多</a></td>"+
-                                 "</tr>"
-                        }
-                        html += "</table>";
-                        $(".object-show").html(html);
-                    }
-                    else{
-                        $(".object-show").html("<table class='table '>" +
-                            "<tr class='table-head'>" +
-                            "<th scope='col'>唯一识别码</th>" +
-                            "<th scope='col'>用户名</th>" +
-                            "<th scope='col'>用户昵称</th>" +
-                            "<th scope='col'>性别</th>" +
-                            "<th colspan='2'>操作</th>" +
-                            "</tr>");
-                    }
-                    pageHtml +=
-                        "<nav aria-label=\"Page navigation\">\n" +
-                        "  <ul class=\"pagination \">\n" +
-                        "    <li>\n" +
-                        "      <a class='to-page-user' href=\"#\" aria-label=\"Previous\">\n" +
-                        "        <span aria-hidden=\"true\">&laquo;</span>\n" +
-                        "      </a>\n" +
-                        "    </li>"
-                    userCountPage = Result.resultMap.allSearchNum;
-                    let pages = new Array();
-                    if(uerCurrentPage>3){
-                        if(uerCurrentPage<uerCurrentPage-3){
-                            pages.push(uerCurrentPage-3);
-                            pages.push(uerCurrentPage-2);
-                            pages.push(uerCurrentPage-1);
-                            pages.push(uerCurrentPage*1);
-                            pages.push(uerCurrentPage*1+1);
-                            pages.push(uerCurrentPage*1+2);
-                        }else{
-                            for(let i =  userCountPage-6;i <  userCountPage;i++){
-                                pages.push(i+1);
-                            }
-                        }
-                    }else{
-                        for(let i = 0;i < 6;i++){
-                            pages.push(i+1);
-                        }
-                    }
-                    for(let i = 0; i < pages.length;i++){
-                        let page = i;
-                        if(pages[page]> userCountPage){
-                            break;
-                        }
-                        if(pages[page] == uerCurrentPage){
-                            pageHtml +="<li class='active'><a class='to-page-user' href=\"#\">"+pages[page]+"</a></li>"
-                        }else {
-                            pageHtml +="<li ><a class='to-page-user' href=\"#\">"+pages[page]+"</a></li>"
-                        }
-                    }
-                    pageHtml +=
-                        "<li>\n" +
-                        "      <a class='to-page-user' href=\"#\" aria-label=\"Next\">\n" +
-                        "        <span aria-hidden=\"true\">&raquo;</span>\n" +
-                        "      </a>\n" +
-                        "    </li>\n" +
-                        "  </ul>\n" +
-                        "</nav>"
-                    $(".pages").html(pageHtml);
-                }
-            })
-        }
-        /*页面初始化*/
-        $(document).ready(function () {
-            $("#home-content").show();
-            $("#edit-query-game").hide();
-            $("#add-game-content").hide();
-            $("#query-user-info").hide();
-            $("#other-operator").hide();
-        })
-    </script>
 </head>
 <body STYLE="background-color:#F6F6F6" STYLE="width: 100%"><!--STYLE="background-color: black  #17435f"-->
 <!--导航栏部分-->
@@ -671,8 +120,27 @@
                     </a>
                     <div class="collapse" id="collapseExample3">
                         <ul class="nav nav-second ">
-                            <li role="presentation" ><a class="nav-second-a" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查询订单</a></li>
-                            <li role="presentation" ><a class="nav-second-a" href="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;修改订单</a></li>
+                            <li role="presentation" ><a class="nav-second-a" href="#" id="query-orderList">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查询订单</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li role="presentation" >
+                    <a class="btn " role="button" data-toggle="collapse" href="#collapseExample5" aria-expanded="false" aria-controls="collapseExample">
+                        &nbsp;&nbsp;
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-people" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1h7.956a.274.274 0 0 0 .014-.002l.008-.002c-.002-.264-.167-1.03-.76-1.72C13.688 10.629 12.718 10 11 10c-1.717 0-2.687.63-3.24 1.276-.593.69-.759 1.457-.76 1.72a1.05 1.05 0 0 0 .022.004zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10c-1.668.02-2.615.64-3.16 1.276C1.163 11.97 1 12.739 1 13h3c0-1.045.323-2.086.92-3zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                        </svg>
+
+                        论坛&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </a>
+                    <div class="collapse" id="collapseExample5">
+                        <ul class="nav nav-second ">
+                            <li role="presentation" ><a class="nav-second-a" href="#" id="post-manage">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;帖子管理</a></li>
+                            <li role="presentation" ><a class="nav-second-a" href="#" id="announcement">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布公告</a></li>
                         </ul>
                     </div>
                 </li>
@@ -697,7 +165,6 @@
                         </ul>
                     </div>
                 </li>
-
             </ul>
         </div>
     </nav>
@@ -755,13 +222,19 @@
         </div>
         <!--当前页面内容描述-->
         <div class="contain-des">
-            <h2 >数据分析</h2>
-            <h5 >一些与游戏销量相关的信息</h5>
+
         </div>
+
         <!--主要内容-->
         <div class="info-content-out">
             <!--首页内容-->
-
+            <div class="info-content" id="home-content">
+                <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                    <p>...</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                </div>
+            </div>
             <!--编辑查询游戏-->
             <div class="info-content" id="edit-query-game">
                 <div class="object-operator">
@@ -815,8 +288,8 @@
                                 <label><input type="text" class="form-control" placeholder="请输入游戏类型" id="game-types-add"></label>
                             </td>
                             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td><span>游戏类型：</span></td>
-                            <td>
+                            <td><span>请选择：</span></td>
+                            <td width="550px">
                                 <label class=" ">
                                     <input type="checkbox"  autocomplete="off" name="types-add" value="动作"> 动作
                                 </label>
@@ -835,6 +308,50 @@
                                 <label class="">
                                     <input type="checkbox" class="" autocomplete="off"name="types-add" value="模拟">模拟
                                 </label>
+                                <label class=" ">
+                                    <input type="checkbox"  autocomplete="off" name="types-add" value="动漫"> 动漫
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" autocomplete="off" name="types-add"value="独立"> 独立
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="角色扮演">角色扮演
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="策略">策略
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="卡牌">卡牌
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="剧情">剧情
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="第三人称">第三人称
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="第一人称">第一人称
+                                </label>
+
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="恐怖">恐怖
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="单人">单人
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="开放世界">开放世界
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="开放世界">建造
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="开放世界">竞速
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types-add" value="开放世界">竞技
+                                </label>
+
                             </td>
                         </tr>
                         <tr>
@@ -876,6 +393,13 @@
                         </tr>
 
                         <tr>
+                            <td nowrap="nowarp"><span>游戏dlc：</span></td>
+                            <td><label><input type="text" class="form-control" placeholder="请输入dlc 输入格式为[“test”,“test”]" id="game-dlclist-add"></label></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td nowrap="nowarp"><span>游戏系统需求：</span></td>
+                            <td><label><input type="text" class="form-control" placeholder="请游戏系统配置要求" id="game-systemreq-add"></label></td>
+                        </tr>
+                        <tr>
                             <td><span>游戏详情：</span></td>
                             <td colspan="4"><label ><textarea  cols="88"rows="4" class="form-control" placeholder="请输入游戏详情" id="game-detail-add"></textarea></label></td>
                         </tr>
@@ -904,7 +428,7 @@
 
             </div>
             <!--用户信息-->
-            <div class="info-content" id="user-info"    >
+            <div class="info-content" id="user-info">
                 <div class="object-operator">
 
                 </div>
@@ -913,8 +437,48 @@
                 </div>
                 <div class="pages" align="center"></div>
             </div>
+            <!--订单信息-->
+            <div class="info-content" id="orderList-info">
+                <div class="object-operator">
+                    <div class="object-search">
+                        用户ID：<label><input type="text" class="form-control" placeholder="请输入用户ID" id="search-orderList"></label>
+                    </div>
+                    <div class="object-search-button">
+                        <button type="button" class="btn btn-default" id="search-orderList-btn">查询</button>
+                    </div>
+                </div>
+                <div class="object-show">
 
-            <div class="info-content" id="other-operator"></div>
+                </div>
+                <div class="pages" align="center"></div>
+            </div>
+            <!--帖子管理-->
+            <div class="info-content" id="posts-manage">
+
+                <div class="object-show">
+
+                </div>
+                <div class="pages" align="center"></div>
+            </div>
+            <!--发布公告-->
+            <div class="info-content" style="height: 700px" id="announce">
+                <div class="object-operator">
+                    <div class="object-search">
+                        游戏ID：<label><input type="text" class="form-control" placeholder="请输入游戏ID" id="advertise_game_id"></label>
+                    </div>
+                    <div class="object-search">
+                        游戏插图：<label><input type="file"  id="advertise_game_picture"></label>
+                    </div>
+                    <div class="object-search-button">
+                        <button type="button" class="btn btn-default" id="add_advertise">添加</button>
+                    </div>
+                </div>
+                <div class="object-show">
+                </div>
+            </div>
+            <div class="info-content" id="other-operator">
+
+            </div>
         </div>
     </div>
 
@@ -932,28 +496,28 @@
                 <div class="edit-game" >
                     <table>
                         <tr>
-                            <td>
+                            <td nowrap="nowarp">
                                 <span>游戏名称：</span>
                             </td>
                             <td>
                                 <label><input type="text" class="form-control" placeholder="请输入游戏名称" id="game-name"></label>
                             </td>
                             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td><span>游戏售价：</span></td>
+                            <td nowrap="nowarp"><span>游戏售价：</span></td>
                             <td><label><input type="text" class="form-control" placeholder="请输入游戏售价" id="game-price"></label></td>
                         </tr>
 
 
                         <tr>
-                            <td>
+                            <td nowrap="nowarp">
                                 <span>游戏类型：</span>
                             </td>
                             <td>
                                 <label><input type="text" class="form-control" placeholder="请输入游戏类型" id="game-types"></label>
                             </td>
                             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td><span>游戏类型：</span></td>
-                            <td>
+                            <td nowrap="nowarp"><span>请选择：</span></td>
+                            <td width="550px">
                                     <label class=" ">
                                         <input type="checkbox"  autocomplete="off" name="types" value="动作"> 动作
                                     </label>
@@ -972,13 +536,58 @@
                                     <label class="">
                                         <input type="checkbox" class="" autocomplete="off"name="types" value="模拟">模拟
                                     </label>
+                                    <label class=" ">
+                                        <input type="checkbox"  autocomplete="off" name="types" value="动漫"> 动漫
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" autocomplete="off" name="types"value="独立"> 独立
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" class="" autocomplete="off"name="types" value="角色扮演">角色扮演
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" class="" autocomplete="off"name="types" value="策略">策略
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" class="" autocomplete="off"name="types" value="卡牌">卡牌
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" class="" autocomplete="off"name="types" value="剧情">剧情
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" class="" autocomplete="off"name="types" value="第三人称">第三人称
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" class="" autocomplete="off"name="types" value="第一人称">第一人称
+                                    </label>
+
+                                    <label class="">
+                                        <input type="checkbox" class="" autocomplete="off"name="types" value="恐怖">恐怖
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" class="" autocomplete="off"name="types" value="单人">单人
+                                    </label>
+                                    <label class="">
+                                        <input type="checkbox" class="" autocomplete="off"name="types" value="开放世界">开放世界
+                                    </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types" value="开放世界">建造
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types" value="开放世界">竞速
+                                </label>
+                                <label class="">
+                                    <input type="checkbox" class="" autocomplete="off"name="types" value="开放世界">竞技
+                                </label>
+
                             </td>
                         </tr>
+
                         <tr>
-                            <td><span>游戏开发商：</span></td>
+                            <td nowrap="nowarp"><span>游戏开发商：</span></td>
                             <td><label><input type="text" class="form-control" placeholder="请输入游戏开发商" id="game-devoloper"></label></td>
                             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td><span>游戏发行商：</span></td>
+                            <td nowrap="nowarp"><span>游戏发行商：</span></td>
                             <td><label><input type="text" class="form-control" placeholder="请输入游戏发行商" id="game-publisher"></label></td>
                         </tr>
                         <tr>
@@ -989,10 +598,10 @@
                             <td><label><input type="text" class="form-control" placeholder="请输入折扣" id="game-discount"></label></td>
                         </tr>
                         <tr>
-                            <td><span>游戏语言：</span></td>
+                            <td nowrap="nowarp"><span>游戏语言：</span></td>
                             <td><label><input type="text" class="form-control" placeholder="请输入游戏支持的语言" id="game-language"></label></td>
                             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td><span>选择语言：</span></td>
+                            <td nowrap="nowarp"><span>选择语言：</span></td>
                             <td>
                                 <label class=" ">
                                     <input type="checkbox" autocomplete="off" name="languages" value="中文">中文
@@ -1011,21 +620,27 @@
                                 </label>
                             </td>
                         </tr>
-
                         <tr>
-                            <td><span>游戏详情：</span></td>
+                            <td nowrap="nowarp"><span>游戏dlc：</span></td>
+                            <td><label><input type="text" class="form-control" placeholder="请输入dlc 输入格式为[“test”,“test”]" id="game-dlclist"></label></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td nowrap="nowarp"><span>游戏系统需求：</span></td>
+                            <td><label><input type="text" class="form-control" placeholder="请游戏系统配置要求" id="game-systemreq"></label></td>
+                        </tr>
+                        <tr>
+                            <td nowrap="nowarp"><span>游戏详情：</span></td>
                             <td colspan="4"><label ><textarea  cols="88"rows="4" class="form-control" placeholder="请输入游戏详情" id="game-detail"></textarea></label></td>
                         </tr>
                         <tr>
-                            <td><span>视频资料链接：</span></td>
+                            <td nowrap="nowarp"><span>视频资料链接：</span></td>
                             <td colspan="4"><label><textarea cols="88" class="form-control" placeholder="请输入视频链接" id="game-video"></textarea></label></td>
                         </tr>
                         <tr>
-                            <td><span>图片资料链接：</span></td>
+                            <td nowrap="nowarp"><span>图片资料链接：</span></td>
                             <td colspan="4"><label><textarea cols="88" class="form-control" placeholder="请输入图片链接" id="game-picture"></textarea></label></td>
                         </tr>
                         <tr>
-                            <td><span>封面资料链接：</span></td>
+                            <td nowrap="nowarp"><span>封面资料链接：</span></td>
                             <td colspan="4"><label><textarea cols="88" class="form-control" placeholder="请输入封面图片链接" id="game-face"></textarea></label></td>
                         </tr>
                     </table>
@@ -1091,6 +706,7 @@
                             <td>愿望单：</td>
                             <td colspan="5"><label><input type="text" class="form-control"></label></td>
                         </tr>-->
+
                     </table>
                 </div>
             </div>
@@ -1101,456 +717,65 @@
         </div>
     </div>
 </div>
+<!--显示订单详细信息-->
+<div class="modal fade" id="order-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-order" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel3">订单信息</h4>
+            </div>
+            <div class="modal-body">
+                <div align="center" class="order-detail-table">
+                    <table class="table">
+                        <tr>
+                            <td colspan="2" nowrap="nowarp">用户名：<span></span></td>
+                            <td colspan="3" nowrap="nowarp">订单编号:<span>213132141</span></td>
+                        </tr>
+                        <tr class="rows">
+                            <td scope="col">已购买游戏</td>
+                            <td scope="col">购买数量</td>
+                            <td scope="col">游戏折扣</td>
+                            <td scope="col">购买时间</td>
+                            <td scope="col">游戏激活码</td>
+                        </tr>
+                        <tr>
+                        </tr>
+                    </table>
 
 
-<script type="text/javascript">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 
-    let check_language;
-    let check_types;
-    let search_types;
-    /*跳转至首页*/
-    $("#home").on("click",function () {
-        let bread_html="";
-        bread_html +=
-            "<li class='active'>首页</li>";
-        $(".breadcrumb").html(bread_html);
-        let html_title="";
-        html_title +=
-            "<h2>数据分析</h2>"+
-            "<h5>一些与游戏销量相关的信息</h5>";
-        $(".contain-des").html(html_title);
-        $("#home-content").show();
-        $("#add-game-content").hide()
-        $("#edit-query-game").hide();
-        $("#user-info").hide();
-        $("#other-operator").hide();
-    })
-    /*跳转至编辑查询游戏页面*/
-    $("#search-edit-game").on("click",function () {
-        let bread_html="";
-        bread_html +=
-            "<li><a href=>首页</a></li>" +
-            "<li><a href=>游戏</a></li>" +
-            "<li class='active'>查询编辑游戏</li>";
-        $(".breadcrumb").html(bread_html);
-        let html_title="";
-        html_title +=
-            "<h2>查询编辑游戏</h2>"+
-            "<h5>一些与游戏相关的信息</h5>";
-        $(".contain-des").html(html_title);
-        ChangePage(currentIndex);
-        $("#other-operator").hide();
-        $("#user-info").hide();
-        $("#home-content").hide();
-        $("#add-game-content").hide()
-        $("#edit-query-game").show();
-    })
-    /*跳转至添加游戏页面*/
-    $("#add-game").on("click",function () {
-        let bread_html = "";
-        bread_html +=
-            "<li><a href=>首页</a></li>" +
-            "<li><a href=>游戏</a></li>" +
-            "<li class='active'>添加游戏</li>";
-        $(".breadcrumb").html(bread_html)
-        let html_title="";
-        html_title +=
-            "<h2>添加游戏</h2>"+
-            "<h5>一些与游戏相关的信息</h5>";
-        $(".contain-des").html(html_title);
-        $("#add-game-content").show();
-        $("#home-content").hide();
-        $("#edit-query-game").hide();
-        $("#user-info").hide();
-        $("#other-operator").hide();
-    })
-    /*跳转到查看用户信息界面*/
-    $("#query-user").on("click",function () {
-        let bread_html = "";
-        bread_html +=
-            "<li><a href=>首页</a></li>" +
-            "<li><a href=>用户</a></li>" +
-            "<li class='active'>查看用户信息</li>";
-        $(".breadcrumb").html(bread_html)
-        let html_title="";
-        html_title +=
-            "<h2>查看用户信息</h2>"+
-            "<h5>一些与用户相关的信息</h5>";
-        $(".contain-des").html(html_title);
-        ChangeUserPage(userCurrentIndex);
-        $("#add-game-content").hide();
-        $("#home-content").hide();
-        $("#edit-query-game").hide();
-        $("#user-info").show();
-        $("#other-operator").hide();
-    })
-    /*通过折扣价排序*/
-    $(document).on("click","#sail-id",function () {
-        if(sort_types != "price"){
-            sort_types = "price";
-            game_order="desc";
-        }else{
-            if(game_order == "desc"){
-                game_order="asc";
-            }else{
-                game_order="desc";
-            }
-            sort_types = "price";
-        }
-        ChangePage(currentIndex,search_game_name,search_types,game_order,sort_types);
-    })
-    /*通过id排序*/
-    $(document).on("click","#unique-id",function () {
-        console.dir(game_order);
-        if(game_order == "desc"){
-            game_order="asc";
-        }else{
-            game_order="desc";
-        }
-        sort_types = "";
-        console.dir(game_order);
-        ChangePage(currentIndex,search_game_name,search_types,game_order);
-    })
-    /*查询游戏*/
-    $("#search-btn").on("click",function () {
-        currentPage = 1;
-        currentIndex = 0;
-        search_game_name = $("#search-game").val();
-        console.dir($("#game-type").val());
-        let str = new String();
-        str = "[\""+ $("#game-type").val()+"\"]";
-        search_types = str;
-        if(search_types == "[\"\"]"){
-            ChangePage(currentIndex,search_game_name);
-        }else {
-            ChangePage(currentIndex,search_game_name,search_types);
-        }
+            </div>
+        </div>
+    </div>
+</div>
 
-    })
-    $("#add-btn").on("click",function () {
-        let str = new String();
-        str = $("#game-releasedate-add").val()
-        let str_array = new Array();
-        str_array = str.split('-');
-        let date = new String();
-        date = str_array[0] + "/"+str_array[1]+"/" + str_array[2];
-        $.ajax({
-            url:'/store/gameAddHandle',
-            type:'post',
-            data:{
-                gname:$("#game-name-add").val(),
-                gtype:check_types,
-                developer:$("#game-devoloper-add").val(),
-                publisher:$("#game-publisher-add").val(),
-                realeasedate:date,
-                gprice:$("#game-price-add").val(),
-                discount:$("#game-discount-add").val(),
-                language:check_language,
-                detail:$("#game-detail-add").val(),
-                vhref:$("#game-video-add").val(),
-                phref:$("#game-picture-add").val(),
-                chref:$("#game-face-add").val(),
-            },
-            dataType:'json',
-            success:function (Result) {
-                console.dir(Result);
-                if(Result.status == 1){
-                    alert("添加成功");
-                }
+<div class="modal fade" id="advertise-add-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 
-            }
-        })
-    })
-    /**
-     *填充复选框中修改的内容
-     */
-    /*添加时的填充内容*/
-    $("input[name=types-add]").click(function () {
-        let arr = new Array();
-        $("input[name=types-add]:checked").each(function (key,value) {
-            arr[key]=$(value).val();
-        });
-        check_types = JSON.stringify(arr);
-        let str = new String();
+    <div class="modal-dialog modal-advertise" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel4">广告信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="advertise-add">
 
-        for(let i = 0; i < arr.length; i++){
-            if(i==arr.length-1){
-                str = str+arr[i];
-            }else {
-                str = str + arr[i] + ","
-            }
-        }
-        $("#game-types-add").val(str);
-        /*$("#game-types").val(arr.join(","));*/
-    })
-    $("input[name=languages-add]").click(function () {
-        let arr = new Array();
-        $("input[name=languages-add]:checked").each(function (key,value) {
-            arr[key]=$(value).val();
-        });
-        check_language = JSON.stringify(arr);
-        let str = new String();
+                    <span>游戏ID：</span><label><input type="text" class="form-control" id="advertise-game-id"></label><br>
+                    <span>广告插图：</span><label><input type="file" class="form-control" id="advertise-picture"></label>
 
-        for(let i = 0; i < arr.length; i++){
-            if(i==arr.length-1){
-                str = str+arr[i];
-            }else {
-                str = str+ arr[i] + ","
-            }
-        }
-        $("#game-language-add").val(str);
-
-    })
-    /*编辑时的填充内容*/
-    $("input[name=types]").click(function () {
-        let arr = new Array();
-        $("input[name=types]:checked").each(function (key,value) {
-            arr[key]=$(value).val();
-        });
-        check_types = JSON.stringify(arr);
-        let str = new String();
-
-        for(let i = 0; i < arr.length; i++){
-            if(i==arr.length-1){
-                str = str+arr[i];
-            }else {
-                str = str + arr[i] + ","
-            }
-        }
-        $("#game-types").val(str);
-        /*$("#game-types").val(arr.join(","));*/
-    })
-    $("input[name=languages]").click(function () {
-        let arr = new Array();
-        $("input[name=languages]:checked").each(function (key,value) {
-            arr[key]=$(value).val();
-        });
-        check_language = JSON.stringify(arr);
-        let str = new String();
-
-        for(let i = 0; i < arr.length; i++){
-            if(i==arr.length-1){
-                str = str+arr[i];
-            }else {
-                str = str+ arr[i] + ","
-            }
-        }
-        $("#game-language").val(str);
-
-    })
-
-    /**
-     *保存修改内容
-     */
-    $("#save").on("click",function () {
-        let str = new String();
-        str = $("#game-releasedate").val()
-        let str_array = new Array();
-        str_array = str.split('-');
-        let date = new String();
-        date = str_array[0] + "/"+str_array[1]+"/" + str_array[2];
-        $.ajax({
-            url:"/store/gameUpdateHandle",
-            type:'post',
-            data:{
-                gid:updategid,
-                gname:$("#game-name").val(),
-                gtype:check_types,
-                developer:$("#game-devoloper").val(),
-                publisher:$("#game-publisher").val(),
-                realeasedate:date,
-                gprice:$("#game-price").val(),
-                discount:$("#game-discount").val(),
-                gscore:$("#game-score").val(),
-                language:check_language,
-                detail:$("#game-detail").val(),
-                vhref:$("#game-video").val(),
-                phref:$("#game-picture").val(),
-                chref:$("#game-face").val(),
-            },
-            dataType:'json',
-            success:function (Result) {
-                if(Result.status == 1){
-                    alert("更新成功")
-                    $("#close-editor").trigger('click');
-                    console.dir(currentIndex);
-                    console.dir(search_game_name);
-                    console.dir(search_types);
-                    check_language ="";
-                    check_types ="";
-                    ChangePage(currentIndex,search_game_name,search_types);
-                }
-
-            }
-
-        })
-    })
-
-    /**
-     *翻页
-     */
-    $(document).on("click",".to-page",function () {
-        /*console.dir(currentPage)
-        console.dir(this.innerText)*/
-        if(this.innerText=="»"){
-            currentPage++;
-            if(currentPage > countpage){
-                currentPage = countpage;
-            }else {
-                currentPage = currentPage;
-            }
-        }else if(this.innerText=="«"){
-            currentPage--;
-            if(currentPage == 0){
-                currentPage = 1;
-            }else {
-                currentPage = currentPage;
-            }
-        }else {
-            currentPage = this.innerText
-        }
-        currentIndex = 12 * (currentPage-1);
-        ChangePage(currentIndex,search_game_name,search_types,game_order,sort_types);
-    })
-
-    $(document).on("click",".to-page-user",function () {
-        /*console.dir(currentPage)
-        console.dir(this.innerText)*/
-        if(this.innerText=="»"){
-            uerCurrentPage++;
-            if(uerCurrentPage > userCountPage){
-                uerCurrentPage = userCountPage;
-            }else {
-                uerCurrentPage = uerCurrentPage;
-            }
-        }else if(this.innerText=="«"){
-            uerCurrentPage--;
-            if(uerCurrentPage == 0){
-                uerCurrentPage = 1;
-            }else {
-                uerCurrentPage = uerCurrentPage;
-            }
-        }else {
-            uerCurrentPage = this.innerText
-        }
-        userCurrentIndex = 12 * (uerCurrentPage-1);
-        ChangeUserPage(userCurrentIndex);
-    })
-    /**
-     *编辑框填充内容
-     */
-    $(document).on("click",".edit",function () {
-        console.dir(this.id);
-        $.ajax({
-            url:"/store/gameDetailShow",
-            type:'post',
-            data:{
-                id:this.id,
-            },
-            dataType:'json',
-            success:function (Result) {
-
-                let str = new String();
-                str = Result.resultMap.game.realeasedate;
-                let times = new Array();
-
-                times = str.split('T');
-                $("#game-name").val(Result.resultMap.game.gname);
-                $("#game-types").val(Result.resultMap.game.gtype);
-                check_types=Result.resultMap.game.gtype;
-                $("#game-devoloper").val(Result.resultMap.game.developer);
-                $("#game-publisher").val(Result.resultMap.game.publisher);
-                $("#game-releasedate").val(times[0]);
-                $("#game-price").val(Result.resultMap.game.gprice);
-                $("#game-discount").val(Result.resultMap.game.discount);
-                $("#game-score").val(Result.resultMap.game.gscore);
-                $("#game-language").val(Result.resultMap.game.language);
-                check_language=Result.resultMap.game.language;
-                $("#game-detail").val(Result.resultMap.game.detail);
-                $("#game-video").val(Result.resultMap.game.vhref);
-                $("#game-picture").val(Result.resultMap.game.phref);
-                $("#game-face").val(Result.resultMap.game.chref)
-                updategid = Result.resultMap.game.gid;
-            }
-        })
-
-    })
-
-    $(document).on("click",".more",function () {
-        console.dir(this.id);
-        let str_id = new String();
-        str_id = this.id;
-        let arr = new Array();
-        arr = str_id.split("-");
-        console.dir(arr[1]);
-        $.ajax({
-            url:'/person/getUserById',
-            type:'post',
-            data:{
-                uid:arr[1],
-            },
-            dataType:'json',
-            success:function (Result) {
-                console.dir(Result);
-                console.dir(Result.resultMap.user.uname);
-                if(Result.status == 1){
-                    $("#user-name").val(Result.resultMap.user.uname);
-
-                    $("#user-mail").val(Result.resultMap.user.umail);
-                    $("#user-avator").attr("src",Result.resultMap.user.uavatar);
-
-                    $("#user-alias").val(Result.resultMap.user.ualias);
-                    $("#user-sex").val(Result.resultMap.user.usex);
-                    $("#user-birthday").val(Result.resultMap.user.ubirthday);
-                    $("#user-profile").val(Result.resultMap.user.uprofile);
-                }
-            }
-        })
-
-    })
-    /*删除游戏*/
-    $(document).on("click",".delete",function () {
-        let arr = new Array();
-        let str = new String();
-        str = this.id;
-        arr = str.split("-");
-        console.dir(arr[1]);
-
-        $.ajax({
-            url:'/store/gameDeleteHandle',
-            type:'post',
-            data:{
-                gid:arr[1],
-            },
-            dataType:'json',
-            success:function (Result) {
-                console.dir(Result);
-                if(Result.status == 1){
-                    alert("删除成功");
-                    ChangePage(currentIndex,search_game_name,search_types);
-                }
-            }
-        })
-
-    })
-
-    $("#many-person").on("click",function () {
-        $("#game-type").val("多人");
-    })
-    $("#action").on("click",function () {
-        $("#game-type").val("动作");
-    })
-    $("#venture").on("click",function () {
-        $("#game-type").val("冒险");
-    })
-    $("#first").on("click",function () {
-        $("#game-type").val("第一人称");
-    })
-
-    $(function () {
-        $('[data-toggle="popover"]').popover()
-    })
-</script>
-
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-default" id="save-advertise">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
