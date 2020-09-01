@@ -124,9 +124,15 @@
   font-size: 16px;
   color: #7a80a2;
   margin-left: 10px;
-  height: 80px;
-  line-height: 80px;
+  /*    height: 80px;
+      line-height: 80px;*/
   text-align: center;
+  display: -moz-inline-box;
+  display: inline-block;
+  width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 #user-evaluation .game-elem {
   width: 800px;
