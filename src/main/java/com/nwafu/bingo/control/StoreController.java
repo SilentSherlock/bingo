@@ -5,15 +5,16 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.nwafu.bingo.entity.*;
 import com.nwafu.bingo.service.StoreService;
-import com.nwafu.bingo.utils.Result;
-import com.nwafu.bingo.utils.Search;
-import com.nwafu.bingo.utils.Status;
-import com.nwafu.bingo.utils.Tools;
+import com.nwafu.bingo.utils.*;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.*;
 
 @RestController
@@ -263,6 +264,17 @@ public class StoreController {
     //endregion
 
     //region 订单相关
+    /**
+    * @MethodName insertOrderDetail
+    * @Description 插入订单数据
+    * @Param [orderDetail]
+    * @return com.nwafu.bingo.utils.Result
+     * Result包括状态值和键值对，状态值为SUCCESS时，插入数据成功，
+     *                              FAILURE时，插入数据失败；
+     *                              返回相关信息。
+    * @author yolia
+    * @Date 11:38 2020/9/1
+    **/
     @RequestMapping("insertOrderDetail")
     public Result insertOrderDetail(OrderDetail orderDetail) throws Exception {
         Result result = new Result();
@@ -278,7 +290,17 @@ public class StoreController {
         result.getResultMap().put("insertOrderDetail", orderDetail);
         return result;
     }
-
+    /**
+    * @MethodName getOrderDetailByOid
+    * @Description 根据订单id获取订单详情
+    * @Param [oid]
+    * @return com.nwafu.bingo.utils.Result
+     * Result包括状态值和键值对，状态值为SUCCESS时，查询成功，
+     *                              FAILURE时，查询失败；
+     *                              查询成功时，返回orderDetails。
+    * @author yolia
+    * @Date 11:38 2020/9/1
+    **/
     @RequestMapping("getOrderDetailByOid")
     public Result getOrderDetailByOid(String oid) throws Exception {
         Result result = new Result();
@@ -292,7 +314,17 @@ public class StoreController {
         result.getResultMap().put("orderDetail", orderDetails);
         return result;
     }
-
+    /**
+    * @MethodName getOrderListByUid
+    * @Description 根据Uid获取订单列表数据
+    * @Param [uid, pageIndex, pageCount]
+    * @return com.nwafu.bingo.utils.Result
+     * Result包括状态值和键值对，状态值为SUCCESS时，获取数据成功，
+     *                              FAILURE时，获取数据失败；
+     *                              获取数据成功时，返回orderList, allPageNum。
+    * @author yolia
+    * @Date 11:38 2020/9/1
+    **/
     @RequestMapping("getOrderListByUid")
     public Result getOrderListByUid(@RequestParam(value = "uid") Integer uid,
                                     @RequestParam(value = "pageIndex") Integer pageIndex,
@@ -516,10 +548,11 @@ public class StoreController {
     @RequestMapping("getAllGameSaleData")
     public Result getAllGameSaleData(@RequestParam(value = "order") String order,
                                         @RequestParam(value = "sort") Integer sort,
+                                        @RequestParam(value = "gname") String gname,
                                         @RequestParam(value = "pageIndex") Integer pageIndex,
                                              @RequestParam(value = "pageCount") Integer pageCount) throws Exception {
         Result result = new Result();
-        List<GameSale> gameSales = storeService.selectAllGameSaleData(order, sort, pageIndex, pageCount);
+        List<GameSale> gameSales = storeService.selectAllGameSaleData(order, sort, gname, pageIndex, pageCount);
         if(gameSales == null || gameSales.size() == 0){
             result.setStatus(Status.FAILURE);
             result.getResultMap().put("gameSaleData", "查询失败");
@@ -527,8 +560,182 @@ public class StoreController {
         }
         result.setStatus(Status.SUCCESS);
         result.getResultMap().put("gameSaleData", gameSales);
-        result.getResultMap().put("gameSaleDataCount", getPageNum(storeService.getAllCount(), pageCount));
+        result.getResultMap().put("gameSaleDataCount", getPageNum(storeService.getAllCount(gname), pageCount));
+        return result;
+    }
+    /**
+    * @MethodName getSale2DateByGId
+    * @Description 根据gid获取相对应的30天内的销售记录
+    * @Param [gid]
+    * @return com.nwafu.bingo.utils.Result
+     * Result包括状态值和键值对，状态值为SUCCESS时，数据获取成功，
+     *                              FAILURE时，数据获取失败。
+     *                              数据获取成功，返回sales。
+    * @author yolia
+    * @Date 14:07 2020/9/1
+    **/
+    @RequestMapping("getSale2DateByGId")
+    public Result getSale2DateByGId(Integer gid) throws Exception {
+        Result result = new Result();
+        List<GameMouthSale> gameMouthSales = storeService.getSale2DateByGId(gid);
+        if(gameMouthSales == null){
+            result.getResultMap().put("sales", "查询失败");
+            result.setStatus(Status.FAILURE);
+            return result;
+        }
+        //设置相对应的销量数组
+        Integer[] sales = new Integer[30];
+        //赋初值
+        for(int i = 0; i < 30; i++){
+            sales[i] = 0;
+        }
+        //获取当天日期
+        Date curDate = new Date();
+        //处理时分秒
+        curDate = Tools.setHMS20(curDate);
+        for(GameMouthSale gameMouthSale : gameMouthSales){
+            gameMouthSale.setOtime(Tools.setHMS20(gameMouthSale.getOtime()));
+            long index = (curDate.getTime() - gameMouthSale.getOtime().getTime()) / (24 * 3600 * 1000);
+            sales[29 - (int)index] = gameMouthSale.getSale();
+        }
+        result.setStatus(Status.SUCCESS);
+        result.getResultMap().put("sales", sales);
+        return result;
+    }
+    /**
+    * @MethodName getFavType
+    * @Description 获取类型对应的全部销量，及最热门的类型
+    * @Param []
+    * @return com.nwafu.bingo.utils.Result
+     * Result包括状态值和键值对，状态值为SUCCESS时，数据获取成功，
+     *                              FAILURE时，数据获取失败。
+     *                              数据获取成功时，返回favType和sortFavType。
+    * @author yolia
+    * @Date 14:08 2020/9/1
+    **/
+    @RequestMapping("getFavType")
+    public Result getFavType() throws Exception {
+        Result result = new Result();
+        List<GameSaleHelper> gameSaleHelpers = storeService.getAllGameSale();
+        if(gameSaleHelpers == null){
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("favType", "后台出错");
+            return result;
+        }
+        HashMap<String, Integer> typeFav = new HashMap<>();
+        for(GameSaleHelper gameSaleHelper : gameSaleHelpers){
+            Integer gid = gameSaleHelper.getGid();
+            Game game = storeService.getGameById(gid);
+            JSONArray array = JSON.parseArray(game.getGtype());
+            for(int i = 0; i < array.size(); i++){
+                String type = array.getString(i);
+                if(typeFav.containsKey(type)){
+                    typeFav.put(type, typeFav.get(type) + gameSaleHelper.getSales());
+                }else{
+                    typeFav.put(type, gameSaleHelper.getSales());
+                }
+            }
+        }
+        result.setStatus(Status.FAILURE);
+        result.getResultMap().put("favType", typeFav);
+        //排序
+        List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(typeFav.entrySet());
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+        });
+        result.getResultMap().put("sortFavType", list);
         return result;
     }
     //endregion
+
+
+
+    /**
+     *添加广告
+     */
+    @RequestMapping("addAdvertise")
+    public Result addAdvertise(@RequestParam("gid") Integer gid,@RequestParam("advertise_game_picture") MultipartFile file) throws Exception {
+        Result result = new Result();
+
+        Game game = storeService.getGameById(gid);
+        if(game == null){
+            result.setStatus(Status.FAILURE);
+        }else{
+            String imgFold = ResourceUtils.getURL("classpath:").getPath() +  "static/src/index_carousel/";
+            File foldPath = new File(imgFold);
+            if (!foldPath.exists()) {
+                foldPath.mkdirs();
+            }
+            File[] files = foldPath.listFiles();
+            int size = files.length;
+            if(size >= 6){
+                result.setStatus(Status.FAILURE);
+            }else {
+                String imgSrc = "/src/index_carousel/img-" + gid + ".jpg";
+                String imgPath = ResourceUtils.getURL("classpath:").getPath() + "static" + imgSrc;
+                File img = new File(imgPath);
+                if (img.exists()) {
+                    img.delete();
+                }
+                file.transferTo(img);
+                result.setStatus(Status.SUCCESS);
+            }
+        }
+        return result;
+    }
+    /**
+     *获取广告中的信息
+     */
+    @RequestMapping("getAllAdvertise")
+    public Result getAllAdvertise() throws Exception {
+        Result result =new Result();
+
+        String imgFold = ResourceUtils.getURL("classpath:").getPath() +  "static/src/index_carousel/";
+        File fold = new File(imgFold);
+        File[] files = fold.listFiles();
+        List<String> list_str = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0 ; i < files.length;i++){
+            String str1 = files[i].getName();
+            String[] strings = str1.split("-");
+            String[] strings1 = strings[1].split("\\.");
+            list.add(Integer.parseInt(strings1[0]));
+            list_str.add("src/index_carousel/"+str1);
+        }
+
+        List<Game> list_game = new ArrayList<>();
+        for(Integer integer: list){
+            Game game = storeService.getGameById(integer);
+            list_game.add(game);
+        }
+        result.getResultMap().put("gameList",list_game);
+        result.getResultMap().put("picList",list_str);
+        return result;
+    }
+
+    @RequestMapping("deleteAdvertise")
+    public Result deleteAdvertise(@RequestParam("gid") String gid) throws Exception{
+        Result result =new Result();
+        String imgFold = ResourceUtils.getURL("classpath:").getPath() +  "static/src/index_carousel/";
+        File fold = new File(imgFold);
+        File[] files = fold.listFiles();
+        int counts = 0;
+        for(int i = 0 ; i < files.length;i++){
+            if(("img-"+gid+".jpg").equals(files[i].getName())){
+                files[i].delete();
+                result.setStatus(Status.SUCCESS);
+                counts++;
+                break;
+            }else {
+                continue;
+            }
+        }
+        if(counts == 0){
+            result.setStatus(Status.SUCCESS);
+        }
+        return result;
+    }
 }

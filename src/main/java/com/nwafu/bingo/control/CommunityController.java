@@ -4,6 +4,7 @@ import com.nwafu.bingo.entity.Comment;
 import com.nwafu.bingo.entity.Post;
 import com.nwafu.bingo.service.CommunityService;
 import com.nwafu.bingo.utils.Result;
+import com.nwafu.bingo.utils.Search;
 import com.nwafu.bingo.utils.Status;
 import com.nwafu.bingo.utils.Tools;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -154,6 +155,27 @@ public class CommunityController {
             }else {
                 result.setStatus(Status.FAILURE);
             }
+        }
+        return result;
+    }
+
+
+    /**
+     * 帖子分页
+     */
+    @RequestMapping("/getPostPage")
+    public Result getPostPage(Search search) throws Exception {
+        Result result;
+        List<Post> list= communityService.getPostPage(search.getPageIndex(),search.getPageCount());
+        if(list==null){
+            result = new Result(Status.FAILURE);
+            result.getResultMap().put("getUserpage", "获取失败");
+        }else {
+            result = new Result();
+            Integer searchNum = communityService.getPostCount(search);
+            result.getResultMap().put("searchList", list);
+            result.getResultMap().put("allSearchNum",searchNum);
+            result.setStatus(Status.SUCCESS);
         }
         return result;
     }

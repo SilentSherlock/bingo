@@ -41,4 +41,20 @@
         WHERE pid = #{pid}
     </update>
 
+
+    <select id="getPostPage"  resultMap="BasePostMap">
+        SELECT
+            *
+        FROM
+            post
+            limit #{current_index} ,#{size}
+
+    </select>
+
+    <select id="getPostCount" resultType="Integer">
+        SELECT
+            count(*)
+        FROM
+            post
+    </select>
 </mapper>
