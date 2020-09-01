@@ -14,6 +14,11 @@
             *
         FROM
             gameDataAnalysis
+        <where>
+            <if test="gname != null and gname != ''">
+                gname like CONCAT('%', #{gname}, '%')
+            </if>
+        </where>
         ORDER BY
         <choose>
             <when test="sort == 0">
@@ -41,5 +46,10 @@
             count(*)
         FROM
             gameDataAnalysis
+        <where>
+            <if test="gname != null and gname != ''">
+                gname like CONCAT('%', #{gname}, '%')
+            </if>
+        </where>
     </select>
 </mapper>

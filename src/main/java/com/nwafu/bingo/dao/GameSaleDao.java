@@ -11,7 +11,8 @@ public interface GameSaleDao {
     //查询
     List<GameSale> selectAll(@Param(value = "order") String order,
                              @Param(value = "sort") Integer sort,
+                             @Param(value = "gname") String gname,
                              @Param(value = "pageIndex") Integer pageIndex,
                              @Param(value = "pageCount") Integer pageCount) throws Exception;
-    Integer getAllCount() throws Exception;
+    Integer getAllCount(String gname) throws Exception;
 }

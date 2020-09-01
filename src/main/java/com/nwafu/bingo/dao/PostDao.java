@@ -1,6 +1,8 @@
 package com.nwafu.bingo.dao;
 
 import com.nwafu.bingo.entity.Post;
+import com.nwafu.bingo.entity.User;
+import com.nwafu.bingo.utils.Search;
 import org.apache.ibatis.annotations.Param;
 import org.omg.PortableServer.POA;
 import org.springframework.stereotype.Repository;
@@ -22,4 +24,8 @@ public interface PostDao {
     void deleteById(@Param("idType") String idType, @Param("idValue") Integer idValue) throws Exception;
     void update(Post post) throws Exception;
     List<Post> getAll() throws Exception;
+
+    List<Post> getPostPage(@Param("current_index") Integer current_index, @Param("size") Integer size) throws Exception;
+
+    Integer getPostCount(Search search);
 }
