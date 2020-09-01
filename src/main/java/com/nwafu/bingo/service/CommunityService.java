@@ -4,6 +4,7 @@ import com.nwafu.bingo.dao.CommentDao;
 import com.nwafu.bingo.dao.PostDao;
 import com.nwafu.bingo.entity.Comment;
 import com.nwafu.bingo.entity.Post;
+import com.nwafu.bingo.utils.Search;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -91,5 +92,19 @@ public class CommunityService {
             commentDao.deleteById(idType, idValue);
             log(CLASSNAME + " " + status + " comment");
         } else log(CLASSNAME + " wrong type");
+    }
+
+
+    public List<Post> getPostPage(Integer current_index, Integer size) throws Exception {
+        List<Post> list = postDao.getPostPage(current_index,size);
+        if(list.size() == 0){
+            return null;
+        }else {
+            return list;
+        }
+    }
+    public Integer getPostCount(Search search){
+        Integer allSearchNum = postDao.getPostCount(search);
+        return (int)Math.ceil((double)allSearchNum / (double)search.getPageCount());
     }
 }
