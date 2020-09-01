@@ -158,6 +158,7 @@ $(document).ready(function () {
                 }
             )
             $("#user-Avatar").show();
+            $(".textarea-block-wrapper").css("width", "90%");
             var html = "";
             html += "<textarea style=\"width: 100%\"  id=\"content-txt\" maxlength=\"150\" oninput=\"change()\">输入评论内容</textarea>";
             $("#textarea-block").html(html)
@@ -312,6 +313,10 @@ $(document).ready(function () {
 })
 
 function thumb_up() {
+    if (userInfo.uid === undefined) {
+        myAlert("请登录后进行操作!");
+        return;
+    }
     $(".up-count").text(thisPost[0].plikenum);
     let upFormData = new FormData();
 
@@ -335,4 +340,8 @@ function thumb_up() {
         }
     });
 
+}
+
+function to_user_login() {
+    $("nav.navbar ul.navbar-right:eq(1) > li:first-of-type > a").click();
 }

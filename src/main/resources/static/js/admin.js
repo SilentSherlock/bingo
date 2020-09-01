@@ -1021,7 +1021,7 @@ function ChangeUserPage(index) {
             userCountPage = Result.resultMap.allSearchNum;
             let pages = new Array();
             if (uerCurrentPage > 3) {
-                if (uerCurrentPage < uerCurrentPage - 3) {
+                if (uerCurrentPage < userCountPage - 3) {
                     pages.push(uerCurrentPage - 3);
                     pages.push(uerCurrentPage - 2);
                     pages.push(uerCurrentPage - 1);
@@ -1131,7 +1131,7 @@ function ChangeOrderPage(index,user_id) {
                 search_orderCountPage = Result.resultMap.allPageNum;
                 let pages = new Array();
                 if (search_orderPage > 3) {
-                    if (search_orderPage < search_orderPage - 3) {
+                    if (search_orderPage < search_orderCountPage - 3) {
                         pages.push(search_orderPage - 3);
                         pages.push(search_orderPage - 2);
                         pages.push(search_orderPage - 1);
@@ -1242,7 +1242,7 @@ function ChangePostPage(index) {
             PostCountPage = Result.resultMap.allSearchNum;
             let pages = new Array();
             if (PostCurrentPage > 3) {
-                if (PostCurrentPage < PostCurrentPage - 3) {
+                if (PostCurrentPage < PostCountPage - 3) {
                     pages.push(PostCurrentPage - 3);
                     pages.push(PostCurrentPage - 2);
                     pages.push(PostCurrentPage - 1);
