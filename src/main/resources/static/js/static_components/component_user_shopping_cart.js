@@ -128,13 +128,16 @@ function addWishList(game) {
             console.log(result);
             wishlist = result.resultMap.wishList;
             console.log(wishlist);
-            var i = 0, length = wishlist.length, exist = 0;
-            for (; i < length; i++) {
-                /*console.log(wishlist[i].gid);
-                console.log(GAMEID);*/
-                if (GAMEID == wishlist[i].gid) {
-                    exist = 1;
-                    break;
+            if(wishlist === null);
+            else{
+                var i = 0, length = wishlist.length, exist = 0;
+                for (; i < length; i++) {
+                    /*console.log(wishlist[i].gid);
+                    console.log(GAMEID);*/
+                    if (GAMEID == wishlist[i].gid) {
+                        exist = 1;
+                        break;
+                    }
                 }
             }
             if (exist == 1) {
