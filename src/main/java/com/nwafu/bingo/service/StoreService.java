@@ -2,6 +2,8 @@ package com.nwafu.bingo.service;
 
 import com.nwafu.bingo.dao.*;
 import com.nwafu.bingo.entity.*;
+import com.nwafu.bingo.utils.GameMouthSale;
+import com.nwafu.bingo.utils.GameSaleHelper;
 import com.nwafu.bingo.utils.Result;
 import com.nwafu.bingo.utils.Search;
 import org.springframework.stereotype.Service;
@@ -330,24 +332,46 @@ public class StoreService {
     /**
     * @MethodName selectAllGameSaleData
     * @Description 获取全部游戏销售数据相关信息
-    * @Param [pageIndex, pageCount]
+    * @Param [order, sort, gname, pageIndex, pageCount]
     * @return java.util.List<com.nwafu.bingo.entity.GameSale>
     * @author yolia
-    * @Date 16:42 2020/8/30
+    * @Date 11:10 2020/9/1
     **/
-    public List<GameSale> selectAllGameSaleData(String order, Integer sort, Integer pageIndex, Integer pageCount) throws Exception {
-        return gameSaleDao.selectAll(order, sort, pageIndex, pageCount);
+    public List<GameSale> selectAllGameSaleData(String order, Integer sort, String gname, Integer pageIndex, Integer pageCount) throws Exception {
+        return gameSaleDao.selectAll(order, sort, gname, pageIndex, pageCount);
     }
     /**
     * @MethodName getAllCount
     * @Description 获取全部数据总数
-    * @Param []
+    * @Param [gname]
     * @return java.lang.Integer
     * @author yolia
-    * @Date 17:01 2020/8/30
+    * @Date 11:10 2020/9/1
     **/
-    public Integer getAllCount() throws Exception {
-        return gameSaleDao.getAllCount();
+    public Integer getAllCount(String gname) throws Exception {
+        return gameSaleDao.getAllCount(gname);
+    }
+    /**
+    * @MethodName getSale2DateByGId
+    * @Description 根据gid获取一个月内的销量信息
+    * @Param [gid]
+    * @return java.util.List<com.nwafu.bingo.utils.GameMouthSale>
+    * @author yolia
+    * @Date 8:33 2020/8/31
+    **/
+    public List<GameMouthSale> getSale2DateByGId(Integer gid) throws Exception {
+        return orderDetailDao.getOneMouthSalesByGid(gid);
+    }
+    /**
+    * @MethodName getAllGameSale
+    * @Description 获取所有gid的全部销量
+    * @Param []
+    * @return java.util.List<com.nwafu.bingo.utils.GameSaleHelper>
+    * @author yolia
+    * @Date 15:47 2020/8/31
+    **/
+    public List<GameSaleHelper> getAllGameSale() throws Exception {
+        return orderDetailDao.getAllGameSale();
     }
     //endregion
 }
