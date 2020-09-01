@@ -1,11 +1,11 @@
 //引入全局变量
-let currentPage = 1;
-let currentIndex = 0;
-let countpage = 0;
-let updategid;
-let curSearch = null;
-let curOrder = 'asc';
-let curSort = 0;
+// let dataCurrentPage = 1;
+// let dataCurrentIndex = 0;
+// let dataCountPage = 0;
+// let updategid;
+// let curSearch = null;
+// let curOrder = 'asc';
+// let curSort = 0;
 /*页面初始化*/
 $(document).ready(function () {
     $("#home-content").show();
@@ -32,7 +32,28 @@ $(document).ready(function () {
         }
     });
 })
-
+/***翻页*/
+$(document).on("click",".dataAnalysis-to-page",function () {
+    if(this.innerText=="»"){
+        dataCurrentPage++;
+        if(dataCurrentPage > dataCountPage){
+            dataCurrentPage = dataCountPage;
+        }else {
+            dataCurrentPage = dataCurrentPage;
+        }
+    }else if(this.innerText=="«"){
+        dataCurrentPage--;
+        if(dataCurrentPage == 0){
+            dataCurrentPage = 1;
+        }else {
+            dataCurrentPage = dataCurrentPage;
+        }
+    }else {
+        dataCurrentPage = this.innerText
+    }
+    dataCurrentIndex = 10 * (dataCurrentPage-1);
+    ChangeIndexPage();
+})
 //获取数据分析页面加载时需要显示的图表
 function loadStartEcharts(){
     var data = [];
@@ -113,7 +134,7 @@ function ChangeIndexPage(){
             order : curOrder,
             sort : curSort,
             gname: curSearch,
-            pageIndex : currentIndex,
+            pageIndex : dataCurrentIndex,
             pageCount : 10,
         },
         dataType:'json',
@@ -155,23 +176,23 @@ function ChangeIndexPage(){
                 "<nav aria-label=\"Page navigation\">\n" +
                 "  <ul class=\"pagination \">\n" +
                 "    <li>\n" +
-                "      <a class='to-page' href=\"#\" aria-label=\"Previous\">\n" +
+                "      <a class='dataAnalysis-to-page' href=\"#\" aria-label=\"Previous\">\n" +
                 "        <span aria-hidden=\"true\">&laquo;</span>\n" +
                 "      </a>\n" +
                 "    </li>"
-            countpage = result.resultMap.gameSaleDataCount;
-            console.log(countpage);
+            dataCountPage = result.resultMap.gameSaleDataCount;
+            console.log(dataCountPage);
             let pages = new Array();
-            if(currentPage>3){
-                if(currentPage<countpage-3){
-                    pages.push(currentPage-3);
-                    pages.push(currentPage-2);
-                    pages.push(currentPage-1);
-                    pages.push(currentPage*1);
-                    pages.push(currentPage*1+1);
-                    pages.push(currentPage*1+2);
+            if(dataCurrentPage>3){
+                if(dataCurrentPage<dataCountPage-3){
+                    pages.push(dataCurrentPage-3);
+                    pages.push(dataCurrentPage-2);
+                    pages.push(dataCurrentPage-1);
+                    pages.push(dataCurrentPage*1);
+                    pages.push(dataCurrentPage*1+1);
+                    pages.push(dataCurrentPage*1+2);
                 }else{
-                    for(let i = countpage-6;i < countpage;i++){
+                    for(let i = dataCountPage-6;i < dataCountPage;i++){
                         pages.push(i+1);
                     }
                 }
@@ -182,24 +203,24 @@ function ChangeIndexPage(){
             }
             for(let i = 0; i < pages.length;i++){
                 let page = i;
-                if(pages[page]>countpage){
+                if(pages[page]>dataCountPage){
                     break;
                 }
-                if(pages[page] == currentPage){
-                    pageHtml +="<li class='active'><a class='to-page'>"+pages[page]+"</a></li>"
+                if(pages[page] == dataCurrentPage){
+                    pageHtml +="<li class='active'><a class='dataAnalysis-to-page'>"+pages[page]+"</a></li>"
                 }else {
-                    pageHtml +="<li ><a class='to-page'>"+pages[page]+"</a></li>"
+                    pageHtml +="<li ><a class='dataAnalysis-to-page'>"+pages[page]+"</a></li>"
                 }
             }
             pageHtml +=
                 "<li>\n" +
-                "      <a class='to-page' href=\"#\" aria-label=\"Next\">\n" +
+                "      <a class='dataAnalysis-to-page' href=\"#\" aria-label=\"Next\">\n" +
                 "        <span aria-hidden=\"true\">&raquo;</span>\n" +
                 "      </a>\n" +
                 "    </li>\n" +
                 "  </ul>\n" +
                 "</nav>"
-            $(".pages").html(pageHtml);
+            $(".data-pages").html(pageHtml);
         }
     })
 }
