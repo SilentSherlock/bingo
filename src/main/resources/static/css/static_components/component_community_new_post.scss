@@ -1,0 +1,163 @@
+/**
+ * 时间: 2020.9.1
+ * 描述：社区主页
+ */
+@import "../constant";
+
+#community-new-post {
+  margin: 30px auto;
+  width: 1200px;
+  background-color: $background-light;
+  min-height: 600px;
+  border-radius: 5px;
+  padding-top: 1px;
+  padding-bottom: 30px;
+
+  body {
+    background: #202539;
+  }
+
+  div {
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+
+  .editor-content {
+    width: 895px;
+    margin: 120px auto 40px;
+    padding: 50px 50px 20px 50px;
+    height: auto;
+    min-height: 0;
+    background: #fff;
+    box-sizing: border-box;
+  }
+
+  .header-block {
+    margin: 30px auto;
+    width: 800px;
+    background: transparent;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .header-content {
+    height: auto;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .header-content > div:first-of-type {
+    font-size: $font-size-title-larger;
+    color: $font-color-light;
+    margin-bottom: 30px;
+  }
+
+  .title-block {
+    background: #F4F4F4;
+    border: solid 1px #ddd;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  input {
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    background: #f4f4f4;
+    color: #33394D;
+    width: 760px;
+    border: 0;
+    outline: none;
+    display: inline-block;
+    text-indent: 10px;
+  }
+
+  .word-count {
+    color: #33394D;
+    font-size: 14px;
+    line-height: 40px;
+    margin-top: 10px;
+    text-align: right;
+  }
+
+  .theme-name {
+    background: #F4F4F4;
+    border: solid 1px #ddd;
+    color: #33394D;
+    font-size: 14px;
+    position: relative;
+  }
+
+  .theme-name-inner {
+    height: 39px;
+    line-height: 40px;
+    background: #f4f4f4;
+    color: #33394D;
+    padding: 0 10px;
+    cursor: pointer;
+  }
+
+  .content-block {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    overflow: visible;
+    background: unset;
+  }
+
+  .editor-block {
+    margin: 30px auto;
+    border: solid 1px #ddd;
+    height: auto;
+    width: 800px;
+  }
+
+  .edit-body {
+    padding: 20px 20px 50px 20px;
+    min-height: 309px;
+    font-size: 14px;
+    color: #333;
+    line-height: 24px;
+    background: #ffffff;
+    outline: none;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+  }
+
+  .editor-action {
+    height: 46px;
+    width: 250px;
+    margin: 30px auto;
+  }
+
+  .save {
+    float: left;
+    background: #508BF3;
+    border: none;
+    width: 115px;
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 14px;
+    cursor: pointer;
+    color: white;
+  }
+
+  .publish {
+    float: left;
+    margin-left: 15px;
+    background: #FF6900;
+    border: none;
+    outline: none;
+    width: 115px;
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 14px;
+    cursor: pointer;
+    color: white;
+  }
+}

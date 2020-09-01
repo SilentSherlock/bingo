@@ -213,6 +213,26 @@ a:active {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/****************************覆盖bootstrap原始样式***********************/
+.close {
+  float: unset;
+  font-size: unset;
+  font-weight: unset;
+  line-height: unset;
+  color: unset;
+  text-shadow: unset;
+  filter: unset;
+  opacity: unset;
+}
+
+textarea {
+  line-height: normal;
+  margin: unset;
+  font-size: inherit;
+  overflow: unset;
+  color: unset;
+}
+
 body {
   background-color: #202539;
   color: #7a80a2;
