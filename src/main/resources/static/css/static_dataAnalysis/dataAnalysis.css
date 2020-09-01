@@ -1,0 +1,19 @@
+.toTop{
+    bottom: 20px;
+    right: 3px;
+    position: fixed;
+}
+
+.gameType{
+    width: 50%;
+    height: 600px;
+    float: left;
+    z-index: 1;
+}
+/*游戏类别喜好分析*/
+.gameTypeFav{
+    width: 50%;
+    height: 600px;
+    float: left;
+    z-index: 1;
+}
