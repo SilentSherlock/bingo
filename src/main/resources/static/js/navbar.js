@@ -110,10 +110,8 @@ function setAClickListener() {
         $(this).parent().parent().parent().addClass("active");
         let type = $(this).text();
         $(this).parent().parent().prev().html(type + "<span class='caret'></span>");
-        console.log("导航栏游戏标签-导航栏游戏标签类别：", type);
         //还原默认搜索条件
         restoreSearchConditonDefault();
-        console.log("导航栏游戏标签-还原默认后的搜索条件：", searchCondition);
         //设置新的搜索条件
         switch (type) {
             case "免费游戏":
@@ -152,7 +150,6 @@ function setAClickListener() {
             default:
                 break;
         }
-        console.log("导航栏游戏标签-展示所有游戏前的查询条件：", JSON.stringify(searchCondition));
         //展示游戏
         showAllGame();
     });
@@ -174,8 +171,7 @@ function setAClickListener() {
         $("nav.navbar ul.navbar-nav > li").removeClass("active");
         let type = $(this).text();
         //设置要展示的用户信息界面
-        console.log("要展示的用户信息界面种类", type);
-        showUserPage = type;
+        showUserPage = type.toString().replace(/\s/g, "");
         //展示用户信息界面
         showUserInfo();
     });
@@ -276,10 +272,44 @@ function showAllGame() {
  * 时间: 2020.8.30
  * 描述: 展示用户信息界面
  */
-function showUserInfo() {
+function showUserInfo(type) {
+    type = type || 0;
+
+    if (type !== 0) {
+        console.log($(type));
+        let temp = $(type).text();
+        console.log("temp:", temp);
+        //设置要展示的用户信息界面
+        showUserPage = temp.toString().replace(/\s/g, "");
+        console.log("showUserpage", showUserPage);
+    }
+
     loadingAnimation("#body-container").then(function () {
+        let showComponent;
+        switch (showUserPage) {
+            case "我的信息":
+                showComponent = static_components.component_user_information;
+                break;
+            case "我的购物车":
+                showComponent = static_components.component_user_shopping_cart;
+                break;
+            case "我的愿望单":
+                showComponent = static_components.component_user_wish_list;
+                break;
+            case "我的订单":
+                showComponent = static_components.component_user_order_list;
+                break;
+            case "我的点评":
+                showComponent = static_components.component_user_evaluation;
+                break;
+            case "我的游戏":
+                showComponent = static_components.component_user_game;
+                break;
+            default:
+                return;
+        }
         $.get(
-            static_components.component_user_information.curl,
+            showComponent.curl,
             function (data) {
                 if (data !== undefined || data !== "") {
                     $("#body-container").html(data);
