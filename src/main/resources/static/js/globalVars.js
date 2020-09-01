@@ -47,6 +47,41 @@ let static_components = {
         cid: "user-information",
         curl: "/page/component_user_information"
     },
+    component_user_shopping_cart: {
+        cname: "我的购物车",
+        cid: "user-shopping-cart",
+        curl: "/page/component_user_shopping_cart"
+    },
+    component_user_wish_list: {
+        cname: "我的愿望单",
+        cid: "user-wish-list",
+        curl: "/page/component_user_wish_list"
+    },
+    component_user_order_list: {
+        cname: "我的订单",
+        cid: "user-order-list",
+        curl: "/page/component_user_order_list"
+    },
+    component_user_evaluation: {
+        cname: "我的点评",
+        cid: "user-evaluation",
+        curl: "/page/component_user_evaluation"
+    },
+    component_user_game: {
+        cname: "我的游戏",
+        cid: "user-game",
+        curl: "/page/component_user_game"
+    },
+    component_community_index: {
+        cname: "社区",
+        cid: "community-index",
+        curl: "/page/component_community_index"
+    },
+    component_community_new_post: {
+        cname: "发布帖子",
+        cid: "community-new-post",
+        curl: "/page/component_community_new_post"
+    },
 };
 
 //动态组件信息，展示游戏的卡片等依赖具体数据实现的组件

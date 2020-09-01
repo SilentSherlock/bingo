@@ -73,11 +73,7 @@
   text-align: center !important;
   text-decoration: none !important;
 }
-#user-information .tags-button .active:visited {
-  color: #ff6900 !important;
-  background: #292e41 !important;
-}
-#user-information .tags-button .active:hover {
+#user-information .tags-button .active {
   color: #ff6900 !important;
   background: #292e41 !important;
 }
@@ -99,7 +95,7 @@
   background: #33394d;
   padding: 50px 110px 40px 100px;
   border-radius: 5px 5px 5px 5px;
-  height: 693px;
+  min-height: 550px;
 }
 #user-information .top-info {
   height: 100px;

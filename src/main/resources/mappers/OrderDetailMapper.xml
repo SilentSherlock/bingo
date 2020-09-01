@@ -41,4 +41,22 @@
             </if>
         </where>
     </select>
+    <select id="getOneMouthSalesByGid" resultType="com.nwafu.bingo.utils.GameMouthSale">
+        SELECT
+            gid, sum(knum) AS sale, otime
+        FROM
+            orderdetail
+        WHERE
+            gid = #{gid} and
+            TO_DAYS(otime) BETWEEN TO_DAYS(DATE_SUB(CURDATE(),INTERVAL 30 DAY)) AND TO_DAYS(CURDATE())
+        GROUP BY
+            TO_DAYS(otime)
+    </select>
+    <select id="getAllGameSale" resultType="com.nwafu.bingo.utils.GameSaleHelper">
+        SELECT
+            gid, sum(knum) AS sales
+        FROM
+            orderdetail
+        GROUP BY gid
+    </select>
 </mapper>

@@ -1,6 +1,8 @@
 package com.nwafu.bingo.dao;
 
 import com.nwafu.bingo.entity.OrderDetail;
+import com.nwafu.bingo.utils.GameMouthSale;
+import com.nwafu.bingo.utils.GameSaleHelper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +22,6 @@ public interface OrderDetailDao {
     List<OrderDetail> selectOidDistinctByOid(String oid) throws Exception;
     List<OrderDetail> selectOrderListByOidAndUid(@Param(value = "oid") String oid,
                                                  @Param(value = "uid") Integer uid) throws Exception;
+    List<GameMouthSale> getOneMouthSalesByGid(Integer gid) throws Exception;
+    List<GameSaleHelper> getAllGameSale() throws Exception;
 }

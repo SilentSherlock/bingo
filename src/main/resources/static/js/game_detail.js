@@ -113,24 +113,37 @@ function buy() {//购买，向后台发送插入订单请求
             keylist.push(key);
             console.log("生成的key为: " + key)
         }
+
+        //生成订单ID
+        let oid = "";
+        temp1 = Math.random() * 57;
+        temp2 = Math.random() * 57;
+        temp3 = Math.random() * 57;
+        temp4 = Math.random() * 57;
+        temp5 = Math.random() * 57;
+        let temp6 = Math.random() * 57;
+        let temp7 = Math.random() * 57;
+        let temp8 = Math.random() * 57;
+        let temp9 = Math.random() * 57;
+        let temp10 = Math.random() * 57;
+        oid += charac.charAt(temp1) + charac.charAt(temp2) + charac.charAt(temp3) + charac.charAt(temp4) + charac.charAt(temp5)
+            + charac.charAt(temp6) + charac.charAt(temp7) + charac.charAt(temp8) + charac.charAt(temp9) + charac.charAt(temp10);
+        console.log("生成的oid为: " + oid);
+
         var myDate = new Date();
-        var orDetails = [{
-            oid: new Date().getTime().toString().substring(3),
-            knum: num,
-            gid: GAMEID,
-            klist: keylist,
-            discount: game.discount,
-            price: game.gprice
-        }]
-        var orderContent = {
+        var orDetails = {
+            oid: oid,
             uid: userInfo.uid,
+            gid: GAMEID,
+            knum: num,
+            klist: JSON.stringify(keylist),
+            discount: game.discount,
             otime: myDate,
-            orderDetails: JSON.stringify(orDetails)
         }
-        console.log(orderContent);
+        console.log(orDetails);
         $.post(
-            "store/orderListAddHandle",
-            orderContent,
+            "store/insertOrderDetail",
+            orDetails,
             function (result) {
                 console.log(result);
             }
