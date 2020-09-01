@@ -69,6 +69,9 @@ $(document).ready(function () {
     }
 
     $(document).click(function () {
+        if($("#user-name").val()==null){
+            return;
+        }
         var temp = $("#user-name").val().length
         if (temp > 10) {
             $(".form-error-msg").show()
@@ -195,7 +198,7 @@ $(".submit").click(function () {
             async: false,
             success: function (data) {
                 console.dir(data)
-                alert("修改成功")
+                myAlert("修改成功")
             }
         })
     } else {
@@ -204,14 +207,36 @@ $(".submit").click(function () {
 
 })
 
-function change_photo() {
-    var oFReader = new FileReader();
-    var file = document.getElementById("image").files[0];
-    oFReader.readAsDataURL(file);
-    oFReader.onloadend = function (oFRevent) {
-        var src = oFRevent.target.result;
-        $("#user-photo").attr("src", src);
+function change_photo(file) {
+    var fileSize = 0;
+    var fileMaxSize = 2048;
+    var filePath = file.value;
+    if(filePath){
+        fileSize = file.files[0].size;
+        var size = fileSize/2048;
+        console.log(size);
+        if (size>fileMaxSize) {
+            myAlert("文件的大小不要超过2M!");
+            file.value="";
+            return false;
+        }else if(size<=0){
+            myAlert("文件的大小不能为0M!");
+            file.value="";
+            return false;
+        }else{
+            var oFReader = new FileReader();
+            var file = document.getElementById("image").files[0];
+            oFReader.readAsDataURL(file);
+            oFReader.onloadend = function (oFRevent) {
+                var src = oFRevent.target.result;
+                $("#user-photo").attr("src", src);
+            }
+        }
+    }else{
+        return false;
     }
+
+
 }
 
 // function getOriginalPhoto(){
