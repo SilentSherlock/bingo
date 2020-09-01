@@ -197,7 +197,7 @@ public class PersonController {
     @RequestMapping("/updateUserNoPhoto")
     public Result updateUserNoPhoto(User user) throws Exception {
         Result result = new Result();
-
+        personService.updatePerson(user);
         result.setStatus(Status.SUCCESS);
         return result;
     }
