@@ -158,6 +158,7 @@ function setAClickListener() {
     $("nav.navbar ul.navbar-nav:eq(0) > li:eq(2) > a").on("click", function () {
         $("nav.navbar ul.navbar-nav > li").removeClass("active");
         $(this).parent().addClass("active");
+
     });
 
     //导航栏登录注册导航标签
@@ -255,6 +256,48 @@ function showAllGame() {
     loadingAnimation("#body-container").then(function () {
         $.get(
             static_components.component_all_game.curl,
+            function (data) {
+                if (data !== undefined || data !== "") {
+                    $("#body-container").html(data);
+                } else
+                    ajaxNoContent("#body-container");
+            }
+        ).fail(function () {
+            ajaxFailed("#body-container");
+        });
+    });
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.9.1
+ * 描述: 加载社区
+ */
+function community_index() {
+    loadingAnimation("#body-container").then(function () {
+        $.get(
+            static_components.component_community_index.curl,
+            function (data) {
+                if (data !== undefined || data !== "") {
+                    $("#body-container").html(data);
+                } else
+                    ajaxNoContent("#body-container");
+            }
+        ).fail(function () {
+            ajaxFailed("#body-container");
+        });
+    });
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.9.1
+ * 描述: 加载发布帖子
+ */
+function community_new_post() {
+    loadingAnimation("#body-container").then(function () {
+        $.get(
+            static_components.component_community_new_post.curl,
             function (data) {
                 if (data !== undefined || data !== "") {
                     $("#body-container").html(data);

@@ -128,13 +128,16 @@ function addWishList(game) {
             console.log(result);
             wishlist = result.resultMap.wishList;
             console.log(wishlist);
-            var i = 0, length = wishlist.length, exist = 0;
-            for (; i < length; i++) {
-                /*console.log(wishlist[i].gid);
-                console.log(GAMEID);*/
-                if (GAMEID == wishlist[i].gid) {
-                    exist = 1;
-                    break;
+            if(wishlist === null);
+            else{
+                var i = 0, length = wishlist.length, exist = 0;
+                for (; i < length; i++) {
+                    /*console.log(wishlist[i].gid);
+                    console.log(GAMEID);*/
+                    if (GAMEID == wishlist[i].gid) {
+                        exist = 1;
+                        break;
+                    }
                 }
             }
             if (exist == 1) {
@@ -168,7 +171,7 @@ $(document).ready(function () {
             if ((JSON.parse(localStorage.getItem("shoppingcar")))[i] == null) ;
             else {
                 gnum[i] = 1;
-                price[i] = shoppingcar[i].price;
+                price[i] = shoppingcar[i].price * shoppingcar[i].discount;
                 //读取购物车
                 console.log("读取购物车");
                 console.log(shoppingcar[i]);
@@ -179,7 +182,7 @@ $(document).ready(function () {
                     "                        <span class=\"column1-txt\">" + shoppingcar[i].gname + "</span>\n" +
                     "                    </span>\n" +
                     "                </span>\n" +
-                    "                <div class=\"price\" id=\"\">￥" + shoppingcar[i].price + "</div>\n" +
+                    "                <div class=\"price\" id=\"\">￥" + shoppingcar[i].price * shoppingcar[i].discount + "</div>\n" +
                     "                <div class=\"row3\" id=\"\">\n" +
                     "                    <input type=\"number\" step='1'  onchange='pricesum(this)'  class=\"num\" id=" + i + " onkeydown=\"return false;\" max=\"10\" min=\"1\" value=\"1\">" +
                     "                </div>\n" +
@@ -188,7 +191,7 @@ $(document).ready(function () {
                     "                    <div class=\"sum1\"><button class=\"da btn-info\" onclick='addWishList(this)' id=" + shoppingcar[i].gid + ">加入心愿单</button></div>\n" +
                     "                </div></div>";
                 num++;
-                sumprice += shoppingcar[i].price;
+                sumprice += shoppingcar[i].price * shoppingcar[i].discount;
             }
         }
         $("#order-main").append(html);

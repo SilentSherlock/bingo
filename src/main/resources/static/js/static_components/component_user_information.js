@@ -155,6 +155,7 @@ $(".submit").click(function () {
 
     if (files == null) {
         url = '/person/updateUserNoPhoto';
+        submitData.append("uavatar",$("#user-photo").attr("src"));
     } else {
         url = '/person/updateUser';
         submitData.append("avatar", files);

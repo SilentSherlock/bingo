@@ -256,7 +256,7 @@
                 </div>
                 <div class="object-operator">
                     <div class="object-search">
-                        游戏：<label><input type="text" class="form-control" placeholder="请输入游戏名称" id="search-game"></label>
+                        游戏：<label><input type="text" class="form-control" placeholder="请输入游戏名称" id="dataAnalysis-search-game"></label>
                     </div>
                     <div class="object-search-button">
                         <button type="button" class="btn btn-default" id="dataAnalysis_search-btn">查询</button>
@@ -302,13 +302,13 @@
             if(curSort == 0){
                 if(curOrder === 'desc'){
                     curOrder = 'asc';
-                    ChangeIndexPage(currentIndex,null);
+                    ChangeIndexPage(dataCurrentIndex,null);
                     $(this).html("唯一识别码<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
                         "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
                         "</svg>");
                 }else{
                     curOrder = 'desc';
-                    ChangeIndexPage(currentIndex,null);
+                    ChangeIndexPage(dataCurrentIndex,null);
                     $(this).html("唯一识别码<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-down-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
                         "  <path d=\"M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\"/>\n" +
                         "</svg>");
@@ -319,7 +319,7 @@
                 //
                 curSort = 0;
                 curOrder = 'asc';
-                ChangeIndexPage(currentIndex,null);
+                ChangeIndexPage(dataCurrentIndex,null);
                 $(this).html("唯一识别码<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
                     "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
                     "</svg>");
@@ -329,13 +329,13 @@
             if(curSort == 1){
                 if(curOrder === 'desc'){
                     curOrder = 'asc';
-                    ChangeIndexPage(currentIndex,null);
+                    ChangeIndexPage(dataCurrentIndex,null);
                     $(this).html("本日销量<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
                         "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
                         "</svg>");
                 }else{
                     curOrder = 'desc';
-                    ChangeIndexPage(currentIndex,null);
+                    ChangeIndexPage(dataCurrentIndex,null);
                     $(this).html("本日销量<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-down-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
                         "  <path d=\"M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\"/>\n" +
                         "</svg>");
@@ -346,7 +346,7 @@
                 //
                 curSort = 1;
                 curOrder = 'asc';
-                ChangeIndexPage(currentIndex,null);
+                ChangeIndexPage(dataCurrentIndex,null);
                 $(this).html("本日销量<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
                     "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
                     "</svg>");
@@ -356,13 +356,13 @@
             if(curSort == 2){
                 if(curOrder === 'desc'){
                     curOrder = 'asc';
-                    ChangeIndexPage(currentIndex,null);
+                    ChangeIndexPage(dataCurrentIndex,null);
                     $(this).html("同比增长<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
                         "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
                         "</svg>");
                 }else{
                     curOrder = 'desc';
-                    ChangeIndexPage(currentIndex,null);
+                    ChangeIndexPage(dataCurrentIndex,null);
                     $(this).html("同比增长<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-down-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
                         "  <path d=\"M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z\"/>\n" +
                         "</svg>");
@@ -373,46 +373,23 @@
                 //
                 curSort = 2;
                 curOrder = 'asc';
-                ChangeIndexPage(currentIndex,null);
+                ChangeIndexPage(dataCurrentIndex,null);
                 $(this).html("同比增长<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-caret-up-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
                     "  <path d=\"M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z\"/>\n" +
                     "</svg>");
             }
         })
+        /*查询游戏*/
+        $("#dataAnalysis_search-btn").on("click",function () {
+            datadataCurrentPage = 1;
+            datadataCurrentIndex = (datadataCurrentPage - 1) * 10;
+            curSearch = $("#dataAnalysis-search-game").val()
+            ChangeIndexPage();
+        })
     </script>
 <!---->
     <script type="text/javascript">
-        /*查询游戏*/
-        $("#dataAnalysis_search-btn").on("click",function () {
-            currentPage = 1;
-            currentIndex = (currentPage - 1) * 10;
-            curSearch = $("#search-game").val()
-            ChangeIndexPage();
-        })
-        /**
-         *翻页
-         */
-        $(document).on("click",".to-page",function () {
-            if(this.innerText=="»"){
-                currentPage++;
-                if(currentPage > countpage){
-                    currentPage = countpage;
-                }else {
-                    currentPage = currentPage;
-                }
-            }else if(this.innerText=="«"){
-                currentPage--;
-                if(currentPage == 0){
-                    currentPage = 1;
-                }else {
-                    currentPage = currentPage;
-                }
-            }else {
-                currentPage = this.innerText
-            }
-            currentIndex = 10 * (currentPage-1);
-            ChangeIndexPage();
-        })
+
     </script>
 </body>
 </html>

@@ -90,6 +90,15 @@ public class PageController {
         return "static_components/component_user_evaluation";
     }
 
+    @RequestMapping("component_community_index")
+    public String component_community_index() {
+        return "static_components/component_community_index";
+    }
+
+    @RequestMapping("component_community_new_post")
+    public String component_community_new_post() {
+        return "static_components/component_community_new_post";
+    }
 
     //动态组件----------------------------
     @RequestMapping("component_game_recommendation_card")

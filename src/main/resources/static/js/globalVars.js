@@ -72,6 +72,16 @@ let static_components = {
         cid: "user-game",
         curl: "/page/component_user_game"
     },
+    component_community_index: {
+        cname: "社区",
+        cid: "community-index",
+        curl: "/page/component_community_index"
+    },
+    component_community_new_post: {
+        cname: "发布帖子",
+        cid: "community-new-post",
+        curl: "/page/component_community_new_post"
+    },
 };
 
 //动态组件信息，展示游戏的卡片等依赖具体数据实现的组件

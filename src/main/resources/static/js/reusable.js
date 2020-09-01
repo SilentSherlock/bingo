@@ -112,6 +112,9 @@ function getCookie(cname) {
     let cookieStr = document.cookie;
     if (cookieStr !== "") {
         let arr = cookieStr.match(reg);
+        if(arr === null){
+            return null;
+        }
         if (arr[2] !== "") {
             return arr[2];
         }
