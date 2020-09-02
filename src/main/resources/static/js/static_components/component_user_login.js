@@ -104,17 +104,18 @@ $(document).ready(function () {
                         //没有已保存到cookie中的账户信息，设置cookie
                         let base64_cname = window.btoa(cname);
                         let base64_cvalue = window.btoa(uname) + "_" + window.btoa(password);
-                        setCookie(base64_cname, base64_cvalue, -1);
+                        setCookie(base64_cname, base64_cvalue, 72);
                     } else if (savedUname !== uname) {
                         //当前输入的账户信息与已保存到cookie中的账户信息不符，重新设置cookie保存新的账户信息
                         let base64_cname = window.btoa(cname);
                         let base64_cvalue = window.btoa(uname) + "_" + window.btoa(password);
-                        setCookie(base64_cname, base64_cvalue, -1);
+                        setCookie(base64_cname, base64_cvalue, 72);
                     } else {
                         //当前输入的账户信息与已保存到cookie中的账户信息相同，不必进行保存
                     }
                 }
                 //跳转到首页
+                savePage("首页");
                 $(window).attr("location", "/");
             } else {
                 myAlert("用户名或密码错误!");

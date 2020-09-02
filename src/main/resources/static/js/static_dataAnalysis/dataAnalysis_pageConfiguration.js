@@ -8,6 +8,10 @@
 // let curSort = 0;
 /*页面初始化*/
 $(document).ready(function () {
+    window.onresize = function () {
+        location.reload();
+    };
+
     $("#home-content").show();
     $("#edit-query-game").hide();
     $("#add-game-content").hide();
@@ -153,16 +157,16 @@ function ChangeIndexPage(){
                         "<td scope='col'>" + result.resultMap.gameSaleData[key].gname + "</td>" +
                         "<td scope='col'style='text-align: center'>" + result.resultMap.gameSaleData[key].cursale + "</td>";
                     if(result.resultMap.gameSaleData[key].increaserate === 0){
-                        html += "<td scope='col' style='text-align: center'>" + result.resultMap.gameSaleData[key].increaserate * 100 + "%" + "&nbsp;&nbsp;<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-list\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                        html += "<td scope='col' style='text-align: center'>" + (result.resultMap.gameSaleData[key].increaserate * 100).toFixed(2) + "%" + "&nbsp;&nbsp;<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-list\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
                             "  <path fill-rule=\"evenodd\" d=\"M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z\"/>\n" +
                             "</svg></td>";
                     }else if(result.resultMap.gameSaleData[key].increaserate < 0){
-                        html += "<td scope='col' style='text-align: center;background-color: #faa1a1'>" + result.resultMap.gameSaleData[key].increaserate * 100 + "%" + "&nbsp;&nbsp;<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-arrow-down\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                        html += "<td scope='col' style='text-align: center;background-color: #faa1a1'>" + (result.resultMap.gameSaleData[key].increaserate * 100).toFixed(2) + "%" + "&nbsp;&nbsp;<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-arrow-down\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
                             "  <path fill-rule=\"evenodd\" d=\"M4.646 9.646a.5.5 0 0 1 .708 0L8 12.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z\"/>\n" +
                             "  <path fill-rule=\"evenodd\" d=\"M8 2.5a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-1 0V3a.5.5 0 0 1 .5-.5z\"/>\n" +
                             "</svg></td>";
                     }else{
-                        html += "<td scope='col' style='text-align: center;background-color: #8fd19e'>" + result.resultMap.gameSaleData[key].increaserate * 100 + "%" + "&nbsp;&nbsp;<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-arrow-up\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                        html += "<td scope='col' style='text-align: center;background-color: #8fd19e'>" + (result.resultMap.gameSaleData[key].increaserate * 100).toFixed(2) + "%" + "&nbsp;&nbsp;<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-arrow-up\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
                             "  <path fill-rule=\"evenodd\" d=\"M8 3.5a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z\"/>\n" +
                             "  <path fill-rule=\"evenodd\" d=\"M7.646 2.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8 3.707 5.354 6.354a.5.5 0 1 1-.708-.708l3-3z\"/>\n" +
                             "</svg></td>";

@@ -14,8 +14,11 @@
             *
         FROM
             orderList
-        WHERE
-            uid = #{uid}
+        <where>
+            <if test="uid != null">
+                uid = #{uid}
+            </if>
+        </where>
         LIMIT #{pageIndex}, #{pageCount}
     </select>
     <select id="getOrderListByUidCount" resultType="Integer">
@@ -23,7 +26,10 @@
             count(*)
         FROM
             orderList
-        WHERE
-            uid = #{uid}
+        <where>
+            <if test="uid != null">
+                uid = #{uid}
+            </if>
+        </where>
     </select>
 </mapper>

@@ -256,6 +256,7 @@ public class StoreController {
         Result result = new Result();
         //进行游戏删除操作
         storeService.deleteGame(game);
+        deleteAdvertise(game.getGid());
         result.getResultMap().put("deleteGameHandle", game);
         result.setStatus(Status.SUCCESS);
         //返回封装数据
@@ -596,6 +597,7 @@ public class StoreController {
         for(GameMouthSale gameMouthSale : gameMouthSales){
             gameMouthSale.setOtime(Tools.setHMS20(gameMouthSale.getOtime()));
             long index = (curDate.getTime() - gameMouthSale.getOtime().getTime()) / (24 * 3600 * 1000);
+            if(index > 29) continue;
             sales[29 - (int)index] = gameMouthSale.getSale();
         }
         result.setStatus(Status.SUCCESS);
@@ -716,13 +718,14 @@ public class StoreController {
             Game game = storeService.getGameById(integer);
             list_game.add(game);
         }
+        result.setStatus(Status.SUCCESS);
         result.getResultMap().put("gameList",list_game);
         result.getResultMap().put("picList",list_str);
         return result;
     }
 
     @RequestMapping("deleteAdvertise")
-    public Result deleteAdvertise(@RequestParam("gid") String gid) throws Exception{
+    public Result deleteAdvertise(@RequestParam("gid") Integer gid) throws Exception{
         Result result =new Result();
         String imgFold = ResourceUtils.getURL("classpath:").getPath() +  "static/src/index_carousel/";
         File fold = new File(imgFold);

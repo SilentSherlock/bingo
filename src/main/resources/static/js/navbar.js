@@ -6,6 +6,8 @@ $(document).ready(function () {
     setAClickListener();
     //为搜索表单注册验证和其他监听函数
     setSearchFormValidateLisener();
+    //还原刷新前的页面
+    reloadBeforePage();
 });
 
 
@@ -184,6 +186,8 @@ function setAClickListener() {
  * 描述: 加载用户登录页面
  */
 function user_login() {
+    //记录用户当前访问的页面
+    savePage("登录");
     if ($("#" + static_components.component_user_login.cid).length === 0) {
         loadingAnimation("#body-container").then(function () {
             $.get(
@@ -207,6 +211,8 @@ function user_login() {
  * 描述: 加载用户注册页面
  */
 function user_register() {
+    //记录用户当前访问的页面
+    savePage("注册");
     if ($("#" + static_components.component_user_register.cid).length === 0) {
         loadingAnimation("#body-container").then(function () {
             $.get(
@@ -230,6 +236,8 @@ function user_register() {
  * 描述: 加载首页
  */
 function index_body() {
+    //记录用户当前访问的页面
+    savePage("首页");
     if ($("#" + static_components.component_index.cid).length === 0) {
         loadingAnimation("#body-container").then(function () {
             $.get(
@@ -253,6 +261,8 @@ function index_body() {
  * 描述: 加载所有游戏及分类的页面
  */
 function showAllGame() {
+    //记录用户当前访问的页面
+    savePage("所有游戏");
     loadingAnimation("#body-container").then(function () {
         $.get(
             static_components.component_all_game.curl,
@@ -274,6 +284,8 @@ function showAllGame() {
  * 描述: 加载社区
  */
 function community_index() {
+    //记录用户当前访问的页面
+    savePage("社区");
     loadingAnimation("#body-container").then(function () {
         $.get(
             static_components.component_community_index.curl,
@@ -295,6 +307,8 @@ function community_index() {
  * 描述: 加载发布帖子
  */
 function community_new_post() {
+    //记录用户当前访问的页面
+    savePage("发布帖子");
     loadingAnimation("#body-container").then(function () {
         $.get(
             static_components.component_community_new_post.curl,
@@ -317,15 +331,13 @@ function community_new_post() {
  */
 function showUserInfo(type) {
     type = type || 0;
-
     if (type !== 0) {
-        console.log($(type));
         let temp = $(type).text();
-        console.log("temp:", temp);
         //设置要展示的用户信息界面
         showUserPage = temp.toString().replace(/\s/g, "");
-        console.log("showUserpage", showUserPage);
     }
+    //记录用户当前访问的页面
+    savePage(showUserPage);
 
     loadingAnimation("#body-container").then(function () {
         let showComponent;
@@ -377,6 +389,7 @@ function logout() {
             if (data.status === 1) {
                 clearUserInfo();
                 myAlert("您已成功退出!", function () {
+                    savePage("首页");
                     $(window).attr("location", "/");
                 });
             } else
@@ -385,4 +398,78 @@ function logout() {
     ).fail(function () {
         ajaxFailed("#body-container");
     });
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.9.1
+ * 描述: 还原刷新前的页面 尽量
+ */
+function reloadBeforePage() {
+    let nowPage = location.href;
+    let lastPage = window.sessionStorage.getItem("lastPage");
+
+    //首次访问页面,转到主页
+    if (lastPage === null) {
+        $("nav.navbar ul.navbar-nav:eq(0) > li:eq(0) > a").click();
+        return;
+    }
+
+    //打开了新的标签页,根据内容激活对应标签
+    if (lastPage !== nowPage) {
+        if (nowPage.includes("game_detail")) {
+            $("nav.navbar ul.navbar-nav:eq(0) > li:eq(1)").addClass("active");
+            return;
+        } else if (nowPage.includes("other_profile")) {
+            return;
+        } else if (nowPage.includes("post_detail")) {
+            $("nav.navbar ul.navbar-nav:eq(0) > li:eq(2)").addClass("active");
+        } else
+            return;
+    }
+
+    //当前页内的跳转
+    if (nowPage === lastPage) {
+        let type = window.sessionStorage.getItem("lastType");
+
+        switch (type) {
+            case "首页":
+                $("nav.navbar ul.navbar-nav:eq(0) > li:eq(0) > a").click();
+                break;
+            case "登录":
+                $("nav.navbar ul.navbar-right:eq(1) > li:eq(0) > a").click();
+                break;
+            case "注册":
+                $("nav.navbar ul.navbar-right:eq(1) > li:eq(1) > a").click();
+                break;
+            case "所有游戏":
+                $("nav.navbar ul.navbar-nav:eq(0) > li:eq(1) > ul > li:last-of-type > a").click();
+                break;
+            case "社区":
+                $("nav.navbar ul.navbar-nav:eq(0) > li:eq(2) > a").click();
+                break;
+            case "发布帖子":
+                $("nav.navbar li.active").removeClass("active");
+                $("nav.navbar ul.navbar-nav:eq(0) > li:eq(2)").addClass("active");
+                community_new_post();
+                break;
+            default:
+                showUserPage = type;
+                showUserInfo();
+                break;
+        }
+    }
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.9.1
+ * 描述: 存储当前页面
+ */
+function savePage(type) {
+    let data = {
+        lastType: type,
+        lastPage: location.href
+    };
+    saveData2Ses(data);
 }

@@ -71,6 +71,34 @@ public class PersonController {
         return result;
     }
 
+    @RequestMapping("/isAdminLogin")
+    public Result isAdminLogin(HttpSession httpSession) {
+        Admin admin = (Admin) httpSession.getAttribute("loginAdmin");
+        Result result = new Result();
+        if (admin != null) {
+            result.setStatus(Status.SUCCESS);
+            result.getResultMap().put("loggedAdminInfo", admin);
+        }else {
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("msg", "admin is null");
+        }
+
+        return result;
+    }
+
+    @RequestMapping("/adminLogout")
+    public Result adminLogout(HttpSession httpSession) {
+        Result result = new Result();
+        Admin admin = (Admin) httpSession.getAttribute("loginAdmin");
+        if (admin != null) {
+            httpSession.removeAttribute("loginAdmin");
+            result.setStatus(Status.SUCCESS);
+        }else {
+            result.setStatus(Status.FAILURE);
+            result.getResultMap().put("msg", "logout failed, There's no admin");
+        }
+        return result;
+    }
     @RequestMapping("/isLogin")
     public Result isLogin(HttpSession httpSession) {
         User user = (User) httpSession.getAttribute("loginUser");

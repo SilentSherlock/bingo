@@ -112,7 +112,7 @@ function getCookie(cname) {
     let cookieStr = document.cookie;
     if (cookieStr !== "") {
         let arr = cookieStr.match(reg);
-        if(arr === null){
+        if (arr === null) {
             return null;
         }
         if (arr[2] !== "") {
@@ -121,6 +121,24 @@ function getCookie(cname) {
     }
     return null;
 }
+
+/**
+ * 作者: lwh
+ * 时间: 2020.4.11
+ * 描述: 将信息存入session(所给信息为JSON对象，存储格式也为键值对模式)
+ */
+function saveData2Ses(jsonObj) {
+    //遍历json对象并进行存储
+    $.each(jsonObj, function (key, value) {
+        //将键值对存入sessionStorage
+        if (value instanceof Object)
+            window.sessionStorage.setItem(key, JSON.stringify(value));
+        else
+            //将键值对存入sessionStorage
+            window.sessionStorage.setItem(key, value);
+    });
+}
+
 
 /**
  * 作者: lwh
