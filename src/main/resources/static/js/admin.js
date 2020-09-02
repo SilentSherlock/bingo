@@ -378,7 +378,7 @@ function setPaddingListener() {
                 str = Result.resultMap.game.realeasedate;
                 let times = new Array();
 
-                times = str.split('T');
+                times = str.split(' ');
                 $("#game-name").val(Result.resultMap.game.gname);
                 $("#game-types").val(Result.resultMap.game.gtype);
                 check_types = Result.resultMap.game.gtype;
@@ -594,6 +594,7 @@ function setBaseListener() {
             },
             dataType: 'json',
             success: function (Result) {
+                console.dir(Result);
                 if (Result.status == 1) {
                     $("#update-model").modal("show");
                     $("#close-editor").trigger('click');
