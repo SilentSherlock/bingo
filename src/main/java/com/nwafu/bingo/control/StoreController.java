@@ -256,6 +256,7 @@ public class StoreController {
         Result result = new Result();
         //进行游戏删除操作
         storeService.deleteGame(game);
+        deleteAdvertise(game.getGid());
         result.getResultMap().put("deleteGameHandle", game);
         result.setStatus(Status.SUCCESS);
         //返回封装数据
@@ -724,7 +725,7 @@ public class StoreController {
     }
 
     @RequestMapping("deleteAdvertise")
-    public Result deleteAdvertise(@RequestParam("gid") String gid) throws Exception{
+    public Result deleteAdvertise(@RequestParam("gid") Integer gid) throws Exception{
         Result result =new Result();
         String imgFold = ResourceUtils.getURL("classpath:").getPath() +  "static/src/index_carousel/";
         File fold = new File(imgFold);
