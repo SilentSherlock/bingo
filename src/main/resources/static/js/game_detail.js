@@ -4,6 +4,25 @@ let GAMEID
 let GAMEINFO
 let videohref
 
+/**
+ * 作者: lwh
+ * 时间: 2019.12.10
+ * 描述: 转换日期格式(时间戳转换为datetime格式yyyy:mm:dd hh:mm:ss)
+ */
+function timestampToTime(timestamp) {
+    //时间戳为10位(s)需*1000，时间戳为13位(ms)的话不需乘1000，默认时间戳单位为ms
+    let date = new Date(parseInt(timestamp));
+    //yyyy
+    let Y = date.getFullYear() + '-';
+    let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+    let D = date.getDate() + ' ';
+    let h = date.getHours() + ':';
+    let m = (date.getMinutes() < 10 ? '0' + (date.getMinutes()) : date.getMinutes()) + ':';
+    let s = (date.getSeconds() < 10 ? '0' + (date.getSeconds()) : date.getSeconds());
+    return Y + M + D + h + m + s;
+}
+
+
 //
 function change(typp) {
     console.log("点击元素:" + $(typp).attr("id"));
@@ -468,14 +487,15 @@ $(document).ready(function () {
 
         var myDate = new Date();
         if ($("#content-txt").val() != "" && $("#content-score").val() != "") {
+            console.log(myDate);
             var data = {
                 uid: userInfo.uid,
                 gid: txt,
                 content: $("#content-txt").val(),
                 score: $("#content-score").val(),
-                etime: myDate.toLocaleDateString()
+                etime: timestampToTime(myDate.getTime())
             }
-            $.get(
+            $.post(
                 "store/evaluationAddHandle", data,
                 function (result) {
                     console.log(result);
