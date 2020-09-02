@@ -1,0 +1,65 @@
+/**
+ * 作者: lwh
+ * 时间: 2020.7.15
+ * 描述：登陆页面定制css
+ */
+
+/*页面背景图片*/
+body {
+    background-image: url("/src/admin_login_background.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/*登录框所在区域*/
+#loginFormArea {
+    margin-top: 100px;
+    border-radius: 5px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: rgba(0, 0, 0, 0.61);
+    color: white;
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.2);
+}
+
+/*登录框标题*/
+#loginFormTitle {
+    margin: 20px -20px 20px -20px;
+    height: 30px;
+    border-bottom: 1px solid #cccccc;
+    text-align: center;
+    color: white;
+}
+
+/*登录、重置按钮*/
+#loginForm button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.has-error .form-control-feedback {
+    color: rgb(220, 53, 69);
+}
+
+.has-error .help-block {
+    color: rgb(220, 53, 69);
+}
+
+.has-error .control-label {
+    color: rgb(220, 53, 69);
+}
+
+.has-success .form-control-feedback {
+    color: rgb(40, 167, 69);
+}
+
+.has-success .help-block {
+    color: rgb(40, 167, 69);
+}
+
+.has-success .control-label {
+    color: rgb(40, 167, 69);
+}

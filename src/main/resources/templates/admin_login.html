@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>彬果游戏(Bingo)—全球最大的游戏在线销售平台</title>
+    <!-- 引入网页图标 -->
+    <link rel="icon" href="/src/icon.png">
+    <!--引入bootstrap默认css样式-->
+    <link rel="stylesheet" href="/extlib/bootstrap-3.3.7/css/bootstrap.min.css">
+    <!--引入bootstrapValidator默认css样式-->
+    <link rel="stylesheet"
+          href="/extlib/bootstrapvalidator-0.5.3/css/bootstrapValidator.min.css">
+    <!--注意：因为bootstrap和bootstrapValidator的js插件使用了jquery，所以jquery的引用必须放到bootstrap的js插件引用之前-->
+    <script type="text/javascript" src="/extlib/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="/extlib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+            src="/extlib/bootstrapvalidator-0.5.3/js/bootstrapValidator.min.js"></script>
+    <!-- 引入自己的css库文件 -->
+    <link rel="stylesheet" href="/css/admin_login.css">
+    <!-- 引入自己的js库文件 -->
+    <script type="text/javascript" src="/js/reusable.js"></script>
+    <script type="text/javascript" src="/js/admin_login.js"></script>
+</head>
+<body>
+<div class="container">
+    <!-- 登陆表单区域 -->
+    <div class="row">
+        <div class="col-lg-3 col-lg-offset-8
+                    col-md-4 col-md-offset-8
+                    col-xs-7 col-xs-offset-2" id="loginFormArea">
+
+            <div id="loginFormTitle">
+                <h4 id="loginFormTitleText">
+                    <strong>Bingo游戏商城管理系统</strong>
+                </h4>
+            </div>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+                    <label for="userNameInput">用户名</label>
+                    <input type="text" class="form-control" id="userNameInput" name="userNameInput">
+                </div>
+
+                <div class="form-group">
+                    <label for="passwordInput">密码</label>
+                    <input type="password" class="form-control" id="passwordInput" name="passwordInput">
+                </div>
+
+                <div class="checkbox">
+                    <label data-toggle="tooltip" data-placement="right" title="3天后失效">
+                        <input type="checkbox" name="rememberCheckbox" value="1">记住我
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="loginButton" data-loading-text="正在登录...">
+                    登录
+                </button>
+                <button type="button" class="btn btn-default" id="resetButton">重置</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
