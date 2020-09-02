@@ -33,6 +33,19 @@ let PostCurrentIndex = 0;
 let PostCountPage = 0;
 /*页面初始化*/
 $(document).ready(function () {
+    $.ajax({
+        url: "/person/isAdminLogin",
+        type: "get",
+        async: false,
+        success: function (data) {
+            if (data.status === 0)
+                $(window).attr("location", "/admin_login.html");
+        }
+    }).fail(function () {
+        $(window).attr("location", "/admin_login.html");
+    });
+
+
     ui_control();
     setJumpListener();
 
@@ -41,6 +54,21 @@ $(document).ready(function () {
     setBaseListener();
 });
 
+
+function admin_logout() {
+    $.ajax({
+        url: "/person/adminLogout",
+        type: "get",
+        async: false,
+        success: function (data) {
+            if (data.status === 1)
+                $(window).attr("location", "/admin_login.html");
+            else {
+                alert("退出失败！");
+            }
+        }
+    });
+}
 
 function ui_control() {
     $("#home-content").show();
@@ -143,7 +171,7 @@ function setJumpListener() {
         $("#announce").hide();
     })
     /*跳转到查询订单界面*/
-    $("#query-orderList").on("click",function () {
+    $("#query-orderList").on("click", function () {
         let bread_html = "";
         bread_html +=
             "<li><a href=>首页</a></li>" +
@@ -154,7 +182,7 @@ function setJumpListener() {
         html_title +=
             "<h2>查看订单信息</h2>" +
             "<h5>一些与订单相关的信息</h5>";
-        ChangeOrderPage(search_orderIndex,search_orderUid);
+        ChangeOrderPage(search_orderIndex, search_orderUid);
         $(".contain-des").html(html_title);
         $("#add-game-content").hide();
         $("#home-content").hide();
@@ -193,7 +221,7 @@ function setJumpListener() {
         $(".contain-des").show();
     })
     /*跳转到发布公告界面*/
-    $("#announcement").on("click",function () {
+    $("#announcement").on("click", function () {
         let bread_html = "";
         bread_html +=
             "<li><a href=>首页</a></li>" +
@@ -221,36 +249,37 @@ function setJumpListener() {
 
 
 function advertise_show() {
-    let html="";
+    let html = "";
     $.ajax({
-        url:'/store/getAllAdvertise',
-        type:'get',
-        dataType:'json',
-        success:function (Result) {
+        url: '/store/getAllAdvertise',
+        type: 'get',
+        dataType: 'json',
+        success: function (Result) {
             console.dir(Result);
-            html+="<table class=\"table\" >\n" +
+            html += "<table class=\"table\" >\n" +
                 "                        <tr>\n" +
                 "                            <th scope=\"col\">游戏ID</th>\n" +
                 "                            <th scope=\"col\">游戏名称</th>\n" +
                 "                            <th scope=\"col\">广告</th>\n" +
                 "                            <th scope=\"col\">广告插图</th>\n" +
-                "                            <th colspan=\"2\">操作</th>"+
+                "                            <th colspan=\"2\">操作</th>" +
                 "                        </tr>";
-            for(let key in Result.resultMap.gameList){
+            for (let key in Result.resultMap.gameList) {
                 html +=
-                    "<tr class='rows'>"+
-                        "<td scope='col'>"+Result.resultMap.gameList[key].gid+"</td>"+
-                        "<td scope='col'>"+Result.resultMap.gameList[key].gname+"</td>"+
-                        "<td scope='col'><textarea class='form-control'readonly='readonly' rows='3' cols='20' >"+Result.resultMap.gameList[key].detail+"</textarea></td>"+
-                        "<td scope='col'><img width='100px'height='70px' src='"+Result.resultMap.picList[key]+"'></td>"+
-                        "<td scope='col'><a class='delete-advertise'role='button' data-toggle='modal' id='advertise-" + Result.resultMap.gameList[key].gid + "'>删除</td>"+
+                    "<tr class='rows'>" +
+                    "<td scope='col'>" + Result.resultMap.gameList[key].gid + "</td>" +
+                    "<td scope='col'>" + Result.resultMap.gameList[key].gname + "</td>" +
+                    "<td scope='col'><textarea class='form-control'readonly='readonly' rows='3' cols='20' >" + Result.resultMap.gameList[key].detail + "</textarea></td>" +
+                    "<td scope='col'><img width='100px'height='70px' src='" + Result.resultMap.picList[key] + "'></td>" +
+                    "<td scope='col'><a class='delete-advertise'role='button' data-toggle='modal' id='advertise-" + Result.resultMap.gameList[key].gid + "'>删除</td>" +
                     "</tr>"
             }
-            html+="</table>";
+            html += "</table>";
             $(".object-show").html(html);
         }
     })
 }
+
 function setPaddingListener() {
     /**
      *填充复选框中修改的内容
@@ -424,7 +453,8 @@ function setPaddingListener() {
         $('[data-toggle="popover"]').popover()
     })
 }
-function setBaseListener(){
+
+function setBaseListener() {
     /*通过游戏折扣价排序*/
     $(document).on("click", "#sail-id", function () {
         if (sort_types != "price") {
@@ -492,8 +522,8 @@ function setBaseListener(){
                 vhref: $("#game-video-add").val(),
                 phref: $("#game-picture-add").val(),
                 chref: $("#game-face-add").val(),
-                systemreq:$("#game-systemreq-add").val(),
-                dlclist:$("#game-dlclist-add").val(),
+                systemreq: $("#game-systemreq-add").val(),
+                dlclist: $("#game-dlclist-add").val(),
             },
             dataType: 'json',
             success: function (Result) {
@@ -505,26 +535,26 @@ function setBaseListener(){
             }
         })
     })
-/*添加广告*/
-    $("#add_advertise").on("click",function () {
+    /*添加广告*/
+    $("#add_advertise").on("click", function () {
         let formData = new FormData();
         let files = $("#advertise_game_picture").get(0).files[0];
         formData.append("advertise_game_picture", files);
-        formData.append("gid",$("#advertise_game_id").val());
+        formData.append("gid", $("#advertise_game_id").val());
 
         $.ajax({
-            url:'/store/addAdvertise',
-            type:'post',
-            data:formData,
+            url: '/store/addAdvertise',
+            type: 'post',
+            data: formData,
             processData: false,
             contentType: false,
-            cache : false,
+            cache: false,
             dataType: 'json',
-            success:function (Result) {
+            success: function (Result) {
                 console.dir(Result);
-                if(Result.status == 1){
+                if (Result.status == 1) {
                     advertise_show();
-                }else {
+                } else {
                     alert("容器已满，请删除部分广告后再添加");
                 }
             }
@@ -558,8 +588,8 @@ function setBaseListener(){
                 vhref: $("#game-video").val(),
                 phref: $("#game-picture").val(),
                 chref: $("#game-face").val(),
-                systemreq:$("#game-systemreq").val(),
-                dlclist:$("#game-dlclist").val(),
+                systemreq: $("#game-systemreq").val(),
+                dlclist: $("#game-dlclist").val(),
             },
             dataType: 'json',
             success: function (Result) {
@@ -629,7 +659,7 @@ function setBaseListener(){
         ChangeUserPage(userCurrentIndex);
     })
     /*订单翻页*/
-    $(document).on("click",".to-page-order",function () {
+    $(document).on("click", ".to-page-order", function () {
         if (this.innerText == "»") {
             search_orderPage++;
             if (search_orderPage > search_orderCountPage) {
@@ -648,10 +678,10 @@ function setBaseListener(){
             search_orderPage = this.innerText
         }
         search_orderIndex = 12 * (search_orderPage - 1);
-        ChangeOrderPage(search_orderIndex,search_orderUid);
+        ChangeOrderPage(search_orderIndex, search_orderUid);
     })
     /*帖子翻页*/
-    $(document).on("click",".to-page-post",function () {
+    $(document).on("click", ".to-page-post", function () {
         if (this.innerText == "»") {
             PostCurrentPage++;
             if (PostCurrentPage > PostCountPage) {
@@ -698,21 +728,21 @@ function setBaseListener(){
 
     })
     /*删除帖子*/
-    $(document).on("click",".delete-post",function () {
+    $(document).on("click", ".delete-post", function () {
         let arr = new Array();
         let str = new String();
         str = this.id;
         arr = str.split("-");
         console.dir(arr[1]);
         $.ajax({
-            url:'/community/deletePostsById',
-            type:'post',
-            data:{
-                idType:"pid",
-                idValue:arr[1],
+            url: '/community/deletePostsById',
+            type: 'post',
+            data: {
+                idType: "pid",
+                idValue: arr[1],
             },
-            success:function (Result) {
-                if(Result.status == 1){
+            success: function (Result) {
+                if (Result.status == 1) {
                     alert("删除成功");
                     ChangePostPage(PostCurrentIndex);
                 }
@@ -721,20 +751,20 @@ function setBaseListener(){
         })
     })
     /*删除广告*/
-    $(document).on("click",".delete-advertise",function () {
+    $(document).on("click", ".delete-advertise", function () {
         let arr = new Array();
         let str = new String();
         str = this.id;
         arr = str.split("-");
         console.dir(arr[1]);
         $.ajax({
-            url:"/store/deleteAdvertise",
-            type:'post',
-            data:{
-                gid:arr[1],
+            url: "/store/deleteAdvertise",
+            type: 'post',
+            data: {
+                gid: arr[1],
             },
-            success:function (Result) {
-                if(Result.status == 1){
+            success: function (Result) {
+                if (Result.status == 1) {
                     alert("删除成功");
                     advertise_show();
                 }
@@ -743,39 +773,39 @@ function setBaseListener(){
         })
     })
     /*查询订单*/
-    $("#search-orderList-btn").on("click",function () {
+    $("#search-orderList-btn").on("click", function () {
         search_orderPage = 1;
         search_orderIndex = 0;
         search_orderUid = $("#search-orderList").val();
 
-        ChangeOrderPage(search_orderIndex,search_orderUid);
+        ChangeOrderPage(search_orderIndex, search_orderUid);
     })
     /*查看订单详细内容*/
-    $(document).on("click",".detail",function () {
-        let html ="";
+    $(document).on("click", ".detail", function () {
+        let html = "";
         let arr = new Array();
         let str = new String();
         str = this.id;
         arr = str.split("-");
         console.dir(arr[1]);
         $.ajax({
-            url:'/store/getOrderDetailByOid',
-            type:'post',
-            data:{
-                oid:arr[1],
+            url: '/store/getOrderDetailByOid',
+            type: 'post',
+            data: {
+                oid: arr[1],
             },
-            success:function (Result) {
-                let user_names =new String();
+            success: function (Result) {
+                let user_names = new String();
                 $.ajax({
-                    url:"/person/getUserById",
-                    type:'post',
-                    data:{
-                        uid:search_orderUid,
+                    url: "/person/getUserById",
+                    type: 'post',
+                    data: {
+                        uid: search_orderUid,
                     },
-                    success:function (Result2) {
+                    success: function (Result2) {
                         user_names = Result2.resultMap.user.uname;
                         console.dir(user_names);
-                        getValueFromAjax(user_names,arr[1],html,Result);
+                        getValueFromAjax(user_names, arr[1], html, Result);
                     },
                 });
 
@@ -783,15 +813,16 @@ function setBaseListener(){
         })
     })
 }
-/*实现详细页面写入*/
-function getValueFromAjax(Value,number,html,Result) {
 
-    html+=
+/*实现详细页面写入*/
+function getValueFromAjax(Value, number, html, Result) {
+
+    html +=
         "<table class='table'>" +
         "<tr>" +
-        "<td colspan='2' nowrap='nowrap'>用户名："+Value+"</td>"+
-        "<td colspan='3' nowrap='nowrap'>订单编号：<span>"+number+"</span></td>"+
-        "</tr>"+
+        "<td colspan='2' nowrap='nowrap'>用户名：" + Value + "</td>" +
+        "<td colspan='3' nowrap='nowrap'>订单编号：<span>" + number + "</span></td>" +
+        "</tr>" +
         "<tr class=\"rows\">\n" +
         "    <td scope=\"col\">已购买游戏</td>\n" +
         "    <td scope=\"col\">购买数量</td>\n" +
@@ -799,32 +830,34 @@ function getValueFromAjax(Value,number,html,Result) {
         "    <td scope=\"col\">购买时间</td>\n" +
         "    <td scope=\"col\">游戏激活码</td>\n" +
         "</tr>";
-    for(let key in Result.resultMap.orderDetail){
-        let game_name  = "";
+    for (let key in Result.resultMap.orderDetail) {
+        let game_name = "";
         $.ajax({
-            url:"/store/gameDetailShow",
-            type:'post',
-            data:{
-                id:Result.resultMap.orderDetail[key].gid,
+            url: "/store/gameDetailShow",
+            type: 'post',
+            data: {
+                id: Result.resultMap.orderDetail[key].gid,
             },
-            async:false,
-            success:function (Result3) {
+            async: false,
+            success: function (Result3) {
                 game_name = Result3.resultMap.game.gname;
             },
         });
         html +=
             "<tr class='rows'>" +
-            "<td scope='col'>"+ game_name+"</td>"+
-            "<td scope='col'>"+ Result.resultMap.orderDetail[key].knum+"</td>"+
-            "<td scope='col'>"+Result.resultMap.orderDetail[key].discount+"</td>"+
-            "<td scope='col'>"+Result.resultMap.orderDetail[key].otime+"</td>"+
-            "<td scope='col'>"+Result.resultMap.orderDetail[key].klist+"</td>"+
+            "<td scope='col'>" + game_name + "</td>" +
+            "<td scope='col'>" + Result.resultMap.orderDetail[key].knum + "</td>" +
+            "<td scope='col'>" + Result.resultMap.orderDetail[key].discount + "</td>" +
+            "<td scope='col'>" + Result.resultMap.orderDetail[key].otime + "</td>" +
+            "<td scope='col'>" + Result.resultMap.orderDetail[key].klist + "</td>" +
             "</tr>";
     }
-    html+="</table>";
+    html += "</table>";
     $(".order-detail-table").html(html);
 }
+
 /*实现分页*/
+
 /*游戏分页*/
 function ChangePage(index, search_name, gtype, games_order, sort_type) {
     let html = "";
@@ -964,6 +997,7 @@ function ChangePage(index, search_name, gtype, games_order, sort_type) {
         }
     })
 }
+
 /*用户分页*/
 function ChangeUserPage(index) {
     let html = "";
@@ -1061,12 +1095,13 @@ function ChangeUserPage(index) {
         }
     })
 }
+
 /*订单分页*/
-function ChangeOrderPage(index,user_id) {
+function ChangeOrderPage(index, user_id) {
     let html = "";
     let pageHtml = "";
     console.dir(user_id);
-    if(user_id == undefined){
+    if (user_id == undefined) {
         $(".object-show").html("<table class='table '>" +
             "<tr class='table-head'>" +
             "<th scope='col'>唯一识别码</th>" +
@@ -1076,13 +1111,13 @@ function ChangeOrderPage(index,user_id) {
             "<th colspan='2'>操作</th>" +
             "</tr>");
         $(".pages").html("");
-    }else{
+    } else {
         $.ajax({
             url: "/store/getOrderListByUid",
             type: "post",
             data: {
                 pageIndex: index,
-                uid:user_id,
+                uid: user_id,
                 pageCount: 12,
             },
             dataType: 'json',
@@ -1173,6 +1208,7 @@ function ChangeOrderPage(index,user_id) {
     }
 
 }
+
 /*帖子分页*/
 function ChangePostPage(index) {
 
@@ -1180,13 +1216,13 @@ function ChangePostPage(index) {
     let pageHtml = "";
 
     $.ajax({
-        url:'/community/getPostPage',
-        type:'post',
-        data:{
+        url: '/community/getPostPage',
+        type: 'post',
+        data: {
             pageIndex: index,
             pageCount: 12,
         },
-        success:function (Result) {
+        success: function (Result) {
             console.dir(Result);
             if (Result.status == 1) {
 
@@ -1198,18 +1234,18 @@ function ChangePostPage(index) {
                     "<th scope='col'>主要内容" +
                     "<th scope='col'>标题</th>" +
                     "<th scope='col'>发帖时间</th>" +
-                    "<th scope='col'>操作</th>"+
+                    "<th scope='col'>操作</th>" +
                     "</tr>"
                 for (let key in Result.resultMap.searchList) {
                     html +=
                         "<tr class='rows'>" +
-                            "<td scope='col'>" + Result.resultMap.searchList[key].pid + "</td>" +
-                            "<td scope='col'>" + Result.resultMap.searchList[key].uid + "</td>" +
-                            "<td scope='col'>" + Result.resultMap.searchList[key].ptheme + "</td>" +
-                            "<td scope='col'><textarea readonly='readonly' rows='1' cols='30' >"+Result.resultMap.searchList[key].content+"</textarea></td>" +
-                            "<td scope='col'>" + Result.resultMap.searchList[key].title + "</td>" +
-                            "<td scope='col'>" + Result.resultMap.searchList[key].ptime + "</td>" +
-                            "<td scope='col'> <a class='delete-post' role='button' id='postDelete-" + Result.resultMap.searchList[key].pid + "'>删除</a></td>"+
+                        "<td scope='col'>" + Result.resultMap.searchList[key].pid + "</td>" +
+                        "<td scope='col'>" + Result.resultMap.searchList[key].uid + "</td>" +
+                        "<td scope='col'>" + Result.resultMap.searchList[key].ptheme + "</td>" +
+                        "<td scope='col'><textarea readonly='readonly' rows='1' cols='30' >" + Result.resultMap.searchList[key].content + "</textarea></td>" +
+                        "<td scope='col'>" + Result.resultMap.searchList[key].title + "</td>" +
+                        "<td scope='col'>" + Result.resultMap.searchList[key].ptime + "</td>" +
+                        "<td scope='col'> <a class='delete-post' role='button' id='postDelete-" + Result.resultMap.searchList[key].pid + "'>删除</a></td>" +
                         "</tr>"
 
                 }
@@ -1264,8 +1300,7 @@ function ChangePostPage(index) {
                     "  </ul>\n" +
                     "</nav>"
                 $(".pages").html(pageHtml);
-            }
-            else {
+            } else {
                 $(".object-show").html("<table class='table '>" +
                     "<tr class='table-head'>" +
                     "<th scope='col'>唯一识别码</th>" +

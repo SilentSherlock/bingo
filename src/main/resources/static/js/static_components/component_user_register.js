@@ -64,14 +64,15 @@ $(document).ready(function () {
                 }
             },
             "user-register-form-email-input": {
-                message: "*邮箱不合法",
+                message: "*邮箱地址不合法",
                 validators: {
                     notEmpty: {
                         message: "*邮箱不能为空"
                     },
                     //邮箱地址合法性验证
-                    emailAddress: {
-                        message: "*请输入合法的邮箱地址"
+                    regexp: {
+                        regexp: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/,
+                        message: "*邮箱格式不正确"
                     }
                 }
             },

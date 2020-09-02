@@ -8,6 +8,10 @@
 // let curSort = 0;
 /*页面初始化*/
 $(document).ready(function () {
+    window.onresize = function () {
+        location.reload();
+    };
+
     $("#home-content").show();
     $("#edit-query-game").hide();
     $("#add-game-content").hide();
