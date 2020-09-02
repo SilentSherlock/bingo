@@ -1216,10 +1216,54 @@ function ChangePostPage(index) {
                 html += "</table>";
                 $(".object-show").html(html);
 
-                /*for (let key in Result.resultMap.searchList){
-                    let id = "post-" +Result.resultMap.searchList[key].pid;
-                    $("#"+id).val(Result.resultMap.searchList[key].content);
-                }*/
+                pageHtml +=
+                    "<nav aria-label=\"Page navigation\">\n" +
+                    "  <ul class=\"pagination \">\n" +
+                    "    <li>\n" +
+                    "      <a class='to-page-post' href=\"#\" aria-label=\"Previous\">\n" +
+                    "        <span aria-hidden=\"true\">&laquo;</span>\n" +
+                    "      </a>\n" +
+                    "    </li>"
+                PostCountPage = Result.resultMap.allSearchNum;
+                let pages = new Array();
+                if (PostCurrentPage > 3) {
+                    if (PostCurrentPage < PostCountPage - 3) {
+                        pages.push(PostCurrentPage - 3);
+                        pages.push(PostCurrentPage - 2);
+                        pages.push(PostCurrentPage - 1);
+                        pages.push(PostCurrentPage * 1);
+                        pages.push(PostCurrentPage * 1 + 1);
+                        pages.push(PostCurrentPage * 1 + 2);
+                    } else {
+                        for (let i = PostCountPage - 6; i < PostCountPage; i++) {
+                            pages.push(i + 1);
+                        }
+                    }
+                } else {
+                    for (let i = 0; i < 6; i++) {
+                        pages.push(i + 1);
+                    }
+                }
+                for (let i = 0; i < pages.length; i++) {
+                    let page = i;
+                    if (pages[page] > PostCountPage) {
+                        break;
+                    }
+                    if (pages[page] == PostCurrentPage) {
+                        pageHtml += "<li class='active'><a class='to-page-post' href=\"#\">" + pages[page] + "</a></li>"
+                    } else {
+                        pageHtml += "<li ><a class='to-page-post' href=\"#\">" + pages[page] + "</a></li>"
+                    }
+                }
+                pageHtml +=
+                    "<li>\n" +
+                    "      <a class='to-page-post' href=\"#\" aria-label=\"Next\">\n" +
+                    "        <span aria-hidden=\"true\">&raquo;</span>\n" +
+                    "      </a>\n" +
+                    "    </li>\n" +
+                    "  </ul>\n" +
+                    "</nav>"
+                $(".pages").html(pageHtml);
             }
             else {
                 $(".object-show").html("<table class='table '>" +
@@ -1231,54 +1275,7 @@ function ChangePostPage(index) {
                     "<th colspan='2'>操作</th>" +
                     "</tr>");
             }
-            pageHtml +=
-                "<nav aria-label=\"Page navigation\">\n" +
-                "  <ul class=\"pagination \">\n" +
-                "    <li>\n" +
-                "      <a class='to-page-post' href=\"#\" aria-label=\"Previous\">\n" +
-                "        <span aria-hidden=\"true\">&laquo;</span>\n" +
-                "      </a>\n" +
-                "    </li>"
-            PostCountPage = Result.resultMap.allSearchNum;
-            let pages = new Array();
-            if (PostCurrentPage > 3) {
-                if (PostCurrentPage < PostCountPage - 3) {
-                    pages.push(PostCurrentPage - 3);
-                    pages.push(PostCurrentPage - 2);
-                    pages.push(PostCurrentPage - 1);
-                    pages.push(PostCurrentPage * 1);
-                    pages.push(PostCurrentPage * 1 + 1);
-                    pages.push(PostCurrentPage * 1 + 2);
-                } else {
-                    for (let i = PostCountPage - 6; i < PostCountPage; i++) {
-                        pages.push(i + 1);
-                    }
-                }
-            } else {
-                for (let i = 0; i < 6; i++) {
-                    pages.push(i + 1);
-                }
-            }
-            for (let i = 0; i < pages.length; i++) {
-                let page = i;
-                if (pages[page] > PostCountPage) {
-                    break;
-                }
-                if (pages[page] == PostCurrentPage) {
-                    pageHtml += "<li class='active'><a class='to-page-post' href=\"#\">" + pages[page] + "</a></li>"
-                } else {
-                    pageHtml += "<li ><a class='to-page-post' href=\"#\">" + pages[page] + "</a></li>"
-                }
-            }
-            pageHtml +=
-                "<li>\n" +
-                "      <a class='to-page-post' href=\"#\" aria-label=\"Next\">\n" +
-                "        <span aria-hidden=\"true\">&raquo;</span>\n" +
-                "      </a>\n" +
-                "    </li>\n" +
-                "  </ul>\n" +
-                "</nav>"
-            $(".pages").html(pageHtml);
+
         },
     })
 
