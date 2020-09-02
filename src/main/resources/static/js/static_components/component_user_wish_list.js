@@ -133,7 +133,7 @@ function addCar(item) {//加入购物车
             } else if (parseInt(item.gid) == shoppingcar[i].gid) {
                 exist = 2;
                 console.log("购物车存在，商品在购物车中")
-                window.alert("已加入购物车，请勿重复添加！");
+                myAlert("已加入购物车，请勿重复添加！");
                 break;
             }
         }
@@ -145,7 +145,7 @@ function addCar(item) {//加入购物车
         carContent = JSON.parse(car);
         console.log(carContent);
         console.log(carContent[0]);*/
-        window.alert("加入购物车成功！");
+        myAlert("加入购物车成功！");
     }
 }
 
@@ -169,7 +169,7 @@ $(document).on("click", ".button2", function () {
         async: false,
         success: function (data) {
             console.dir(data)
-            alert("删除成功")
+            myAlert("删除成功")
         }
     })
     location.reload();
