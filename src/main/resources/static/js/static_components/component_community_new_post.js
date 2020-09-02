@@ -22,6 +22,19 @@ $(document).ready(function () {
 })
 
 function publish() {
+    if($("#input-title").val()===null||$("#input-title").val()===""){
+        myAlert("标题不能为空");
+        return ;
+    }
+    if($("#theme-name").val()===null||$("#theme-name").val()===""){
+        myAlert("主题不能为空");
+        return;
+    }
+    if($(".edit-body").text()===null||$(".edit-body").text()===""){
+        myAlert("内容不能为空");
+        return;
+    }
+
     let formData = new FormData();
 
     var date = new Date();
