@@ -137,6 +137,7 @@ let index_pageIndex = 0;
 
 //默认搜索全部游戏
 let searchCondition = {
+    name: undefined,
     order: undefined,
     sort: undefined,
     area: undefined,
