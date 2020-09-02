@@ -253,6 +253,9 @@ body, html {
 .modal-order{
   width:800px;
 }
+.Model-delete{
+  width: 300px;
+}
 .modal-advertise{
   width: 400px;
 }
