@@ -250,9 +250,6 @@ $(document).ready(function () {
     var n1 = loc.length;
     var n2 = loc.indexOf('=');
     GAMEID = decodeURI(loc.substr(n2 + 1, n1 - n2));
-
-    $("nav.navbar ul.navbar-nav:eq(0) > li:eq(1)").addClass("active");
-
     function getinfo() {
         var data = {
             id: GAMEID
