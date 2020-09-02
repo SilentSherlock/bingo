@@ -104,7 +104,8 @@ let requestmap = {
     user_register_validate_uname: "/person/validateNameLegality",
     user_register_send_code: "/person/user_register_send_code",
     store_search: "/store/search",
-    store_search_keywords: "store/searchGameByName"
+    store_search_keywords: "/store/searchGameByName",
+    store_index_carousel: "/store/getAllAdvertise"
 };
 
 //用户信息

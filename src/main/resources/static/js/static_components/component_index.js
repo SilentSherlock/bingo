@@ -19,6 +19,44 @@ function index_init(game_recommendation_card_html) {
 
     /*对首页幻灯片相关的初始化可以在这里完成*/
 
+    $.get(
+        requestmap.store_index_carousel,
+        function (data) {
+            if (data.status === 0)
+                $("#index-carousel-container").hide();
+            else {
+                let picList = data.resultMap.picList;
+                let gameList = data.resultMap.gameList;
+
+                let html_indicators = "";
+                let html_inner = "";
+
+                $.each(picList, function (key, value) {
+                    //轮播图片设置
+                    html_inner += "<div class='item'>\n" +
+                        "              <a target='_blank' href='game_detail.html?gid=" + gameList[key].gid + "'>" +
+                        "                   <img src='" + "/" + value + "' alt='" + gameList[key].gname + "'>" +
+                        "               </a>" +
+                        "              <div class='carousel-caption'>" + gameList[key].gname + "</div>" +
+                        "          </div>";
+
+                    //轮播指示设置
+                    html_indicators += "<li data-target='#index-carousel' data-slide-to='" + key + "'></li>";
+                });
+
+                //添加内容
+                $(".carousel-indicators").html(html_indicators);
+                $(".carousel-inner").html(html_inner);
+
+                //首次轮播
+                $(".carousel-inner .item:eq(0)").addClass("active");
+                $(".carousel-indicators li:eq(0)").addClass("active");
+            }
+        }
+    ).fail(function () {
+        $("#index-carousel-container").hide();
+    });
+
     //还原搜索条件
     restoreSearchConditonDefault();
 
@@ -53,7 +91,6 @@ function index_init(game_recommendation_card_html) {
 function setListenerForMoreA() {
     $(".recommendation-title-container > span:last-of-type > a").on("click", function () {
         let type = $(this).parent().prev().text().split("】")[1];
-        console.log("更多的种类：", type);
         //恢复默认搜索条件
         restoreSearchConditonDefault();
         //设置搜索条件
@@ -77,7 +114,6 @@ function setListenerForMoreA() {
             default:
                 break;
         }
-        console.log("更多-展示所有游戏前的查询条件：", JSON.stringify(searchCondition));
         $("nav.navbar ul.navbar-nav:eq(0) > li:eq(0)").removeClass("active");
         $("nav.navbar ul.navbar-nav:eq(0) > li:eq(1) > a").html(type + "<span class='caret'></span>");
         $("nav.navbar ul.navbar-nav:eq(0) > li:eq(1)").addClass("active");
