@@ -73,14 +73,12 @@ function setSearchFormValidateLisener() {
         //更改搜索按钮的登陆状态
         $("#navbar-search-form-submit-button").button("loading");
 
-        searchKeywords = {
-            name: $("#navbar-search-form-keyword-input").val()
-        };
+        searchCondition.name = $("#navbar-search-form-keyword-input").val();
 
-        console.log("保存搜索内容: " + searchKeywords);
+        console.log("保存搜索内容: " + searchCondition.name);
 
         //使用ajax提交搜索内容
-        $.get(requestmap.store_search_keywords, searchKeywords, function (data) {
+        $.get(requestmap.store_search, searchCondition, function (data) {
             if (data.status === 1) {
                 isSearchResult = true;
                 console.log("搜索到相关信息进行显示:");
@@ -307,6 +305,10 @@ function community_index() {
  * 描述: 加载发布帖子
  */
 function community_new_post() {
+    if(userInfo.uid === undefined){
+        myAlert("请登录后再执行操作!");
+        return;
+    }
     //记录用户当前访问的页面
     savePage("发布帖子");
     loadingAnimation("#body-container").then(function () {

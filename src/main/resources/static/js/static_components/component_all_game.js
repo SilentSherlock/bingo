@@ -18,11 +18,11 @@ $(document).ready(function () {
         console.log("issearchResult", isSearchResult);
         if (isSearchResult === true) {
             $.post(
-                requestmap.store_search_keywords,
-                searchKeywords,
+                requestmap.store_search,
+                searchCondition,
                 function (gameList) {
                     console.log("gameList:", gameList);
-                    let gamel = gameList.resultMap.searchGameListByName;
+                    let gamel = gameList.resultMap.searchList;
                     let html = "";
 
                     $('#game-list').empty();
