@@ -18,7 +18,7 @@ $(document).ready(function () {
 
     //根据获取的个人信息进行显示
     function setUserMsg() {
-        console.log(thisUser)
+        //console.log(thisUser)
         //console.log(thisUser.uprofile)
         $("#user-photo").attr("src", thisUser.uavatar)
         $(".user-describe").text(thisUser.uprofile);
@@ -34,7 +34,7 @@ $(document).ready(function () {
         }
         var temp = thisUser.ubirthday;//获取用户生日
         var date = temp
-        console.log(date)
+        //console.log(date)
         var list = new Array();//得到年月日
         list.push(date.substring(0, 4));
         list.push(date.substring(5, 7));
@@ -94,7 +94,7 @@ $(document).ready(function () {
         var year = document.getElementById("select-year");
         var month = document.getElementById("select-month");
         var dateCount = getDateCount(year.value, month.value)
-        console.log(dateCount + " " + year + " " + month)
+        //console.log(dateCount + " " + year + " " + month)
         $("#select-date").empty();
         var html_d = "";
         for (var i = 1; i <= dateCount; i++) {
@@ -167,12 +167,12 @@ $(".submit").click(function () {
     let year = $("#select-year option:selected").val();
     let month = $("#select-month option:selected").val();
     let date = $("#select-date option:selected").val();
-    console.log(year)
-    console.log(month)
-    console.log(date)
+    // console.log(year)
+    // console.log(month)
+    // console.log(date)
     let birthday = year + "-" + month + "-" + date;
     submitData.append("ubirthday", birthday)
-    console.log(birthday)
+    //console.log(birthday)
     let sex = "";
     if ($("#select-sex option:selected").val() === "0") {
         sex = "男"
@@ -181,7 +181,7 @@ $(".submit").click(function () {
     } else {
         sex = "保密"
     }
-    console.log(sex)
+    //console.log(sex)
     submitData.append("usex", sex)
     submitData.append("password", thisUser.password);
     submitData.append("gamelist", thisUser.gamelist);
@@ -197,8 +197,8 @@ $(".submit").click(function () {
             cache: false,
             async: false,
             success: function (data) {
-                console.dir(data)
-                myAlert("修改成功")
+                console.log("因后端开发人员懒惰，不愿意修改代码，头像只能重新登陆后变更。")
+                myAlert("修改成功，头像在重新登陆后变更。")
             }
         })
     } else {
@@ -214,7 +214,7 @@ function change_photo(file) {
     if(filePath){
         fileSize = file.files[0].size;
         var size = fileSize/2048;
-        console.log(size);
+        console.log("图片的尺寸为"+size);
         if (size>fileMaxSize) {
             myAlert("文件的大小不要超过2M!");
             file.value="";

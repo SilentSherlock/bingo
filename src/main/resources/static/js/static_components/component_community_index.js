@@ -44,7 +44,7 @@ $(document).ready(function () {
             "/community/allPosts",
             function (AllPosts) {
                 list = AllPosts.resultMap.AllPost;
-                //console.log(list)
+                console.log(list)
                 setHeader();
                 setPosts(sortType);
                 setScreen()
@@ -87,10 +87,14 @@ $(document).ready(function () {
         $("#community-index .community-post-detail").empty();
         if (type == "time") {
             list = list.sort(function (a, b) {
-                a = a.ptime.substring(0, 10);
-                b = b.ptime.substring(0, 10);
-                var list_a = a.split("-");
-                var list_b = b.split("-")
+                var a1 = a.ptime.substring(0, 10);
+                var b1 = b.ptime.substring(0, 10);
+                var a2 = a.ptime.substring(11,8);
+                var b2 = b.ptime.substring(11,8);
+                var list_a = a1.split("-");
+                var list_b = b1.split("-");
+                var list_a2 = a2.split(":");
+                var list_b2 = b2.split(":");
                 if (parseInt(list_a[0]) > parseInt(list_b[0])) {
                     return 1;
                 } else if (parseInt(list_a[0]) > parseInt(list_b[0])) {
@@ -106,7 +110,25 @@ $(document).ready(function () {
                         } else if (parseInt(list_a[2]) < parseInt(list_b[2])) {
                             return -1;
                         } else {
-                            return 0;
+                            if (parseInt(list_a2[0]) > parseInt(list_b2[0])) {
+                                return 1;
+                            } else if (parseInt(list_a2[0]) < parseInt(list_b2[0])) {
+                                return -1;
+                            } else {
+                                if (parseInt(list_a2[1]) > parseInt(list_b2[1])) {
+                                    return 1;
+                                } else if (parseInt(list_a2[1]) < parseInt(list_b2[1])) {
+                                    return -1;
+                                } else {
+                                    if (parseInt(list_a2[2]) > parseInt(list_b2[2])) {
+                                        return 1;
+                                    } else if (parseInt(list_a2[2]) < parseInt(list_b2[2])) {
+                                        return -1;
+                                    } else {
+                                        return 0;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -126,7 +148,7 @@ $(document).ready(function () {
                 "<h2 class=" + "h2-in-header" + ">" + list[i].content + "</h2>" +
                 "<div class=" + "left" + ">" +
                 "<img src=" + curent.uavatar + "><a class=" + "nick-name" + " " + "href=" + "other_profile.html?uid=" + list[i].uid + " " + "target=" + "_blank" + ">" + curent.ualias + "</a>" +
-                "<span class=" + "time" + ">" + "&nbsp;&nbsp;" + "<span>发表于&nbsp;&nbsp;" + list[i].ptime.substring(0, 10) + "</span></span>" +
+                "<span class=" + "time" + ">" + "&nbsp;&nbsp;" + "<span>发表于&nbsp;&nbsp;" + list[i].ptime.substring(0, 19) + "</span></span>" +
                 "</div>" +
                 "<div class=" + "btn-wrapper" + ">" +
                 "<button class='up' " + "id=" + list[i].pid + "><a>" + "点赞" + list[i].plikenum + "</a></button>" +

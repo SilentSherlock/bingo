@@ -56,7 +56,7 @@ function publish() {
 }
 
 function save() {
-    let formData = new FormData();
+    let formData;
     formData = {
         "ptheme": $("#theme-name").val(),
         "content": $(".edit-body").text(),
