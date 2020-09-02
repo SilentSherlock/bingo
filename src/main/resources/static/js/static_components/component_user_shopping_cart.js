@@ -1,7 +1,7 @@
 var gnum = [], price = [], num = 0, sumprice = 0;
 
 function buy() {//购买，向后台发送插入订单请求
-    var orDetails = [];
+    var canBuy = 0;
     var gids = [];
 
     var shoppingcar = JSON.parse(localStorage.getItem("shoppingcar"));
@@ -27,6 +27,7 @@ function buy() {//购买，向后台发送插入订单请求
     for (; i < length; i++) {
         if ((JSON.parse(localStorage.getItem("shoppingcar")))[i] == null) ;
         else {
+            canBuy = 1;
             console.log("i为:" + i);
             console.log("购买数量为:" + gnum[i]);
             var item = 0, keylist = [];
@@ -63,6 +64,11 @@ function buy() {//购买，向后台发送插入订单请求
             console.log("gids: " + gids);
         }
     }
+    if(canBuy == 0){
+     alert("购物车为空，快去添加自己喜欢的游戏吧~~~");
+     return ;
+    }
+    console.log("当前用户ID:"+userInfo.uid)
     //更改user表的个人游戏列表数据
     var data = {
         uid: userInfo.uid,
@@ -105,9 +111,9 @@ function deleteCar(game) {
     var i = 0, length = shoppingcar.length;
     for (; i < length; i++)
         if (JSON.parse(shoppingcar[i] == null)) {
-            delete shoppingcar[i];
+            shoppingcar.splice(i,1);
         } else if (GAMEID == shoppingcar[i].gid) {//删除游戏
-            delete shoppingcar[i];
+            shoppingcar.splice(i,1);
             break;
         }
     localStorage.setItem("shoppingcar", JSON.stringify(shoppingcar));
@@ -120,7 +126,7 @@ function addWishList(game) {
     var GAMEID = $(game).attr("id");
     console.log("游戏ID:" + GAMEID);
     var data = {
-        uid: 1
+        uid: userInfo.uid
     }
     $.get(
         "/person/getUserById", data,
@@ -144,7 +150,7 @@ function addWishList(game) {
                 window.alert("已在心愿单中！请勿重复添加");
             } else {
                 var data = {
-                    uid: 1,
+                    uid: userInfo.uid,
                     gid: GAMEID,
                     mode: 1
                 }
