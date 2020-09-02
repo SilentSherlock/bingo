@@ -1,12 +1,7 @@
 var thisUser;
 $(document).ready(function () {
     function getUser() {
-        var loc = location.href;
-        var n1 = loc.length;
-        var n2 = loc.indexOf('=');
-        var userId = decodeURI(loc.substr(n2 + 1, n1 - n2));
-        thisUser = userId;
-
+        thisUser = userInfo.uid;
     }
 
     function getPost() {
@@ -47,28 +42,28 @@ function publish() {
         cache: false,
         async: true,
         success: function (result) {
-            alert("发帖成功");
+            myAlert("发帖成功");
             window.location.reload();
         }
     });
     let localFormData;
     localFormData = {
-        "ptheme": null,
-        "content": null,
-        "title": null,
+        "ptheme": "",
+        "content": "",
+        "title": "",
     }
     localStorage.setItem("post", JSON.stringify(localFormData));
 }
 
 function save() {
-    let formData = new FormData();
+    let formData;
     formData = {
         "ptheme": $("#theme-name").val(),
         "content": $(".edit-body").text(),
         "title": $("#input-title").val()
     }
     localStorage.setItem("post", JSON.stringify(formData));
-    alert("保存成功");
+    myAlert("保存成功");
 }
 
 function input() {

@@ -18,7 +18,7 @@ $(document).ready(function () {
 
     //根据获取的个人信息进行显示
     function setUserMsg() {
-        console.log(thisUser)
+        //console.log(thisUser)
         //console.log(thisUser.uprofile)
         $("#user-photo").attr("src", thisUser.uavatar)
         $(".user-describe").text(thisUser.uprofile);
@@ -34,7 +34,7 @@ $(document).ready(function () {
         }
         var temp = thisUser.ubirthday;//获取用户生日
         var date = temp
-        console.log(date)
+        //console.log(date)
         var list = new Array();//得到年月日
         list.push(date.substring(0, 4));
         list.push(date.substring(5, 7));
@@ -69,6 +69,9 @@ $(document).ready(function () {
     }
 
     $(document).click(function () {
+        if($("#user-name").val()==null){
+            return;
+        }
         var temp = $("#user-name").val().length
         if (temp > 10) {
             $(".form-error-msg").show()
@@ -91,7 +94,7 @@ $(document).ready(function () {
         var year = document.getElementById("select-year");
         var month = document.getElementById("select-month");
         var dateCount = getDateCount(year.value, month.value)
-        console.log(dateCount + " " + year + " " + month)
+        //console.log(dateCount + " " + year + " " + month)
         $("#select-date").empty();
         var html_d = "";
         for (var i = 1; i <= dateCount; i++) {
@@ -164,12 +167,12 @@ $(".submit").click(function () {
     let year = $("#select-year option:selected").val();
     let month = $("#select-month option:selected").val();
     let date = $("#select-date option:selected").val();
-    console.log(year)
-    console.log(month)
-    console.log(date)
+    // console.log(year)
+    // console.log(month)
+    // console.log(date)
     let birthday = year + "-" + month + "-" + date;
     submitData.append("ubirthday", birthday)
-    console.log(birthday)
+    //console.log(birthday)
     let sex = "";
     if ($("#select-sex option:selected").val() === "0") {
         sex = "男"
@@ -178,7 +181,7 @@ $(".submit").click(function () {
     } else {
         sex = "保密"
     }
-    console.log(sex)
+    //console.log(sex)
     submitData.append("usex", sex)
     submitData.append("password", thisUser.password);
     submitData.append("gamelist", thisUser.gamelist);
@@ -194,8 +197,8 @@ $(".submit").click(function () {
             cache: false,
             async: false,
             success: function (data) {
-                console.dir(data)
-                alert("修改成功")
+                console.log("因后端开发人员懒惰，不愿意修改代码，头像只能重新登陆后变更。")
+                myAlert("修改成功，头像在重新登陆后变更。")
             }
         })
     } else {
@@ -204,14 +207,36 @@ $(".submit").click(function () {
 
 })
 
-function change_photo() {
-    var oFReader = new FileReader();
-    var file = document.getElementById("image").files[0];
-    oFReader.readAsDataURL(file);
-    oFReader.onloadend = function (oFRevent) {
-        var src = oFRevent.target.result;
-        $("#user-photo").attr("src", src);
+function change_photo(file) {
+    var fileSize = 0;
+    var fileMaxSize = 2048;
+    var filePath = file.value;
+    if(filePath){
+        fileSize = file.files[0].size;
+        var size = fileSize/2048;
+        console.log("图片的尺寸为"+size);
+        if (size>fileMaxSize) {
+            myAlert("文件的大小不要超过2M!");
+            file.value="";
+            return false;
+        }else if(size<=0){
+            myAlert("文件的大小不能为0M!");
+            file.value="";
+            return false;
+        }else{
+            var oFReader = new FileReader();
+            var file = document.getElementById("image").files[0];
+            oFReader.readAsDataURL(file);
+            oFReader.onloadend = function (oFRevent) {
+                var src = oFRevent.target.result;
+                $("#user-photo").attr("src", src);
+            }
+        }
+    }else{
+        return false;
     }
+
+
 }
 
 // function getOriginalPhoto(){
