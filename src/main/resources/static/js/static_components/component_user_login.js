@@ -115,6 +115,7 @@ $(document).ready(function () {
                     }
                 }
                 //跳转到首页
+                savePage("首页");
                 $(window).attr("location", "/");
             } else {
                 myAlert("用户名或密码错误!");
