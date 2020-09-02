@@ -1110,6 +1110,54 @@ function ChangeOrderPage(index,user_id) {
                     }
                     html += "</table>";
                     $(".object-show").html(html);
+                    pageHtml +=
+                        "<nav aria-label=\"Page navigation\">\n" +
+                        "  <ul class=\"pagination \">\n" +
+                        "    <li>\n" +
+                        "      <a class='to-page-order' href=\"#\" aria-label=\"Previous\">\n" +
+                        "        <span aria-hidden=\"true\">&laquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>"
+                    search_orderCountPage = Result.resultMap.allPageNum;
+                    let pages = new Array();
+                    if (search_orderPage > 3) {
+                        if (search_orderPage < search_orderCountPage - 3) {
+                            pages.push(search_orderPage - 3);
+                            pages.push(search_orderPage - 2);
+                            pages.push(search_orderPage - 1);
+                            pages.push(search_orderPage * 1);
+                            pages.push(search_orderPage * 1 + 1);
+                            pages.push(search_orderPage * 1 + 2);
+                        } else {
+                            for (let i = search_orderCountPage - 6; i < search_orderCountPage; i++) {
+                                pages.push(i + 1);
+                            }
+                        }
+                    } else {
+                        for (let i = 0; i < 6; i++) {
+                            pages.push(i + 1);
+                        }
+                    }
+                    for (let i = 0; i < pages.length; i++) {
+                        let page = i;
+                        if (pages[page] > search_orderCountPage) {
+                            break;
+                        }
+                        if (pages[page] == search_orderPage) {
+                            pageHtml += "<li class='active'><a class='to-page-order' href=\"#\">" + pages[page] + "</a></li>"
+                        } else {
+                            pageHtml += "<li ><a class='to-page-order' href=\"#\">" + pages[page] + "</a></li>"
+                        }
+                    }
+                    pageHtml +=
+                        "<li>\n" +
+                        "      <a class='to-page-order' href=\"#\" aria-label=\"Next\">\n" +
+                        "        <span aria-hidden=\"true\">&raquo;</span>\n" +
+                        "      </a>\n" +
+                        "    </li>\n" +
+                        "  </ul>\n" +
+                        "</nav>"
+                    $(".pages").html(pageHtml);
                 } else {
                     $(".object-show").html("<table class='table '>" +
                         "<tr class='table-head'>" +
@@ -1120,54 +1168,6 @@ function ChangeOrderPage(index,user_id) {
                         "<th colspan='2'>操作</th>" +
                         "</tr>");
                 }
-                pageHtml +=
-                    "<nav aria-label=\"Page navigation\">\n" +
-                    "  <ul class=\"pagination \">\n" +
-                    "    <li>\n" +
-                    "      <a class='to-page-order' href=\"#\" aria-label=\"Previous\">\n" +
-                    "        <span aria-hidden=\"true\">&laquo;</span>\n" +
-                    "      </a>\n" +
-                    "    </li>"
-                search_orderCountPage = Result.resultMap.allPageNum;
-                let pages = new Array();
-                if (search_orderPage > 3) {
-                    if (search_orderPage < search_orderCountPage - 3) {
-                        pages.push(search_orderPage - 3);
-                        pages.push(search_orderPage - 2);
-                        pages.push(search_orderPage - 1);
-                        pages.push(search_orderPage * 1);
-                        pages.push(search_orderPage * 1 + 1);
-                        pages.push(search_orderPage * 1 + 2);
-                    } else {
-                        for (let i = search_orderCountPage - 6; i < search_orderCountPage; i++) {
-                            pages.push(i + 1);
-                        }
-                    }
-                } else {
-                    for (let i = 0; i < 6; i++) {
-                        pages.push(i + 1);
-                    }
-                }
-                for (let i = 0; i < pages.length; i++) {
-                    let page = i;
-                    if (pages[page] > search_orderCountPage) {
-                        break;
-                    }
-                    if (pages[page] == search_orderPage) {
-                        pageHtml += "<li class='active'><a class='to-page-order' href=\"#\">" + pages[page] + "</a></li>"
-                    } else {
-                        pageHtml += "<li ><a class='to-page-order' href=\"#\">" + pages[page] + "</a></li>"
-                    }
-                }
-                pageHtml +=
-                    "<li>\n" +
-                    "      <a class='to-page-order' href=\"#\" aria-label=\"Next\">\n" +
-                    "        <span aria-hidden=\"true\">&raquo;</span>\n" +
-                    "      </a>\n" +
-                    "    </li>\n" +
-                    "  </ul>\n" +
-                    "</nav>"
-                $(".pages").html(pageHtml);
             }
         })
     }

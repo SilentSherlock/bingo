@@ -150,10 +150,15 @@
     font-size: $font-size-text;
     color: $font-color;
     margin-left: 10px;
-    //width: 135px;
-    height: 80px;
-    line-height: 80px;
+/*    height: 80px;
+    line-height: 80px;*/
     text-align: center;
+    display:-moz-inline-box;
+    display:inline-block;
+    width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     //color: #ffffff;
     //font-size: 18px;
     //position: absolute;

@@ -33,6 +33,10 @@ function star(score, string) {
 }
 
 function addCar() {//加入购物车
+    if (userInfo.uid === undefined) {
+        myAlert("请登录后进行操作!");
+        return;
+    }
     /* num = window.prompt("输入购买数量");
      if(isNaN(buynum=parseInt(num,10))){
          window.alert("请输入整数!!!");
@@ -91,13 +95,21 @@ function addCar() {//加入购物车
 }
 
 function buy() {//购买，向后台发送插入订单请求
+    if (userInfo.uid === undefined) {
+        myAlert("请登录后进行操作!");
+        return;
+    }
     var num, gnum = 1, buynum;
-    num = window.prompt("输入购买数量");
+    num = window.prompt("输入购买数量(1~10的整数)");
     if (num === null)
         return;
     if (isNaN(buynum = parseInt(num, 10))) {
         window.alert("请输入整数!!!");
-    } else {
+    }else if(buynum > 10 || buynum <= 0 || num != buynum){
+        window.alert("无效输入,请输入1~10之间的整数!!!");
+        return ;
+    }
+    else {
         console.log("购买数量为: " + buynum);
         //插入订单
         var i = 0, keylist = [];
@@ -135,7 +147,7 @@ function buy() {//购买，向后台发送插入订单请求
             oid: oid,
             uid: userInfo.uid,
             gid: GAMEID,
-            knum: num,
+            knum: buynum,
             klist: JSON.stringify(keylist),
             discount: game.discount,
             otime: myDate,
@@ -167,6 +179,10 @@ function buy() {//购买，向后台发送插入订单请求
 }
 
 function addWishList() {
+    if (userInfo.uid === undefined) {
+        myAlert("请登录后进行操作!");
+        return;
+    }
     var data = {
         uid: userInfo.uid
     }
