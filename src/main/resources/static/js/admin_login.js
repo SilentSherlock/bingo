@@ -96,15 +96,11 @@ $(document).ready(function () {
             password: base64_password
         };
         //使用ajax提交表单验证用户名密码
-        $.ajax({
-            url: "/person/adminValidate",
-            type: "post",
-            data: data,
-            contentType: "application/json;charset=utf-8",
-            async: false,
-            dataType: "json",
-            success: function (data) {
-                if (data.status === "0") {
+        $.post(
+            "/person/adminValidate",
+            data,
+            function (data) {
+                if (data.status === 0) {
                     //验证失败，提示用户验证失败
                     alert("用户名或密码错误(x_x)！");
                     //更改登录按钮的登陆状态
@@ -130,10 +126,7 @@ $(document).ready(function () {
                     //登陆成功，跳转到主页
                     $(window).attr("location", "/admin_home.html");
                 }
-            },
-            error: function (error) {
-                alert("----ajax请求校验账号密码执行出错！错误信息如下：----\n" + error.responseText);
             }
-        });
+        );
     });
 });
