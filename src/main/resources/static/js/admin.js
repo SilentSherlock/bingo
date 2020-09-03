@@ -22,7 +22,7 @@ let check_language;
 let check_types;
 let search_types;
 
-let search_orderUid;
+let search_orderUid = null;
 let search_orderPage = 1;
 let search_orderIndex = 0;
 let search_orderCountPage = 0;
@@ -40,6 +40,7 @@ $(document).ready(function () {
         success: function (data) {
             if (data.status === 0)
                 $(window).attr("location", "/admin_login.html");
+
         }
     }).fail(function () {
         $(window).attr("location", "/admin_login.html");
@@ -52,6 +53,19 @@ $(document).ready(function () {
     setPaddingListener();
 
     setBaseListener();
+
+    let cname = "savedAccInfoAdmin";
+    let base64_accInfo = getCookie(window.btoa(cname));
+    if (base64_accInfo !== null) {
+        //存在记住的账号密码
+        let arr = base64_accInfo.split("_");
+        //解码获取账号密码
+        let userName = window.atob(arr[0]);
+        //自动填充
+        console.dir(userName);
+        $("#admin").html(userName);
+    }
+
 });
 
 
@@ -716,6 +730,7 @@ function setBaseListener() {
             search_orderPage = this.innerText
         }
         search_orderIndex = 12 * (search_orderPage - 1);
+
         ChangeOrderPage(search_orderIndex, search_orderUid);
     })
     /*帖子翻页*/
