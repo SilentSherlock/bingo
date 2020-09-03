@@ -53,9 +53,15 @@ $(document).ready(function () {
                 "<a class=" + "title" + " " + "href=game_detail.html?gid=" + wish.gid + ">" + wish.gname + "</a>" +
 
                 "<div class=" + "shopping-operator" + ">" +
-                "<ul>" +
-                "<li><button id=" + wish.gid + "-1" + " " + "class=" + "button1" + ">加入购物车</button></li>" +
-                "<li><button id=" + wish.gid + "-2" + " " + "class=" + "button2" + ">移出心愿单</button></li>" +
+                "<ul>"
+            if(new Date(wish.realeasedate) < new Date()){
+                html+=
+                "<li><button id=" + wish.gid + "-1" + " " + "class=" + "button1" + ">加入购物车</button></li>"
+            }
+            html+=
+                "<li><button id=" + wish.gid + "-2" + " " + "class=" + "button2" + ">移出心愿单</button></li>"+
+
+
                 "</ul>" +
                 "</div>" +
                 "<div class=" + "sale-price" + ">" +
@@ -139,14 +145,16 @@ function addCar(item) {//加入购物车
         }
     }
     if (exist == 0 || exist == 1) {//购物车中没有该商品
-        shoppingcar.push(item);
-        localStorage.setItem("shoppingcar", JSON.stringify(shoppingcar));
-        /*car = localStorage.getItem("shoppingcar");
-        carContent = JSON.parse(car);
-        console.log(carContent);
-        console.log(carContent[0]);*/
-        myAlert("加入购物车成功！");
-    }
+
+            shoppingcar.push(item);
+            localStorage.setItem("shoppingcar", JSON.stringify(shoppingcar));
+            /*car = localStorage.getItem("shoppingcar");
+            carContent = JSON.parse(car);
+            console.log(carContent);
+            console.log(carContent[0]);*/
+            myAlert("加入购物车成功！");
+        }
+
 }
 
 $(document).on("click", ".button2", function () {

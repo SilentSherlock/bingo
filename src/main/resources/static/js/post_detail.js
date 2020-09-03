@@ -317,7 +317,7 @@ function thumb_up() {
         myAlert("请登录后进行操作!");
         return;
     }
-    $(".up-count").text(thisPost[0].plikenum);
+    thisPost[0].plikenum=$(".up-count").text();
     let upFormData = new FormData();
 
     upFormData.append("pid", parseInt(POSTID));
@@ -336,7 +336,10 @@ function thumb_up() {
         cache: false,
         async: true,
         success: function (result) {
-            location.reload();
+            //location.reload();
+            $(".up-count").text(parseInt($(".up-count").text())+1);
+            console.log($(".up-count").text());
+            $(".repost").text("点赞"+parseInt($(".up-count").text()));
         }
     });
 
