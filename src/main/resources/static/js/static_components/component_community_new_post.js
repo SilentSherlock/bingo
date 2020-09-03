@@ -22,15 +22,15 @@ $(document).ready(function () {
 })
 
 function publish() {
-    if($("#input-title").val()===null||$("#input-title").val()===""){
+    if ($("#input-title").val() === null || $("#input-title").val() === "") {
         myAlert("标题不能为空");
-        return ;
+        return;
     }
-    if($("#theme-name").val()===null||$("#theme-name").val()===""){
+    if ($("#theme-name").val() === null || $("#theme-name").val() === "") {
         myAlert("主题不能为空");
         return;
     }
-    if($(".edit-body").text()===null||$(".edit-body").text()===""){
+    if ($(".edit-body").text() === null || $(".edit-body").text() === "") {
         myAlert("内容不能为空");
         return;
     }
@@ -56,7 +56,7 @@ function publish() {
         async: true,
         success: function (result) {
             myAlert("发帖成功");
-            window.location.reload();
+            $("nav.navbar ul.navbar-nav:eq(0) > li:eq(2) > a").click();
         }
     });
     let localFormData;

@@ -23,8 +23,8 @@ let check_types;
 let search_types;
 
 let search_orderUid;
-let search_orderPage;
-let search_orderIndex;
+let search_orderPage = 1;
+let search_orderIndex = 0;
 let search_orderCountPage = 0;
 
 
@@ -182,7 +182,7 @@ function setJumpListener() {
         html_title +=
             "<h2>查看订单信息</h2>" +
             "<h5>一些与订单相关的信息</h5>";
-        ChangeOrderPage(search_orderIndex, search_orderUid);
+        ChangeOrderPage(search_orderIndex,null);
         $(".contain-des").html(html_title);
         $("#add-game-content").hide();
         $("#home-content").hide();
@@ -378,7 +378,7 @@ function setPaddingListener() {
                 str = Result.resultMap.game.realeasedate;
                 let times = new Array();
 
-                times = str.split('T');
+                times = str.split(' ');
                 $("#game-name").val(Result.resultMap.game.gname);
                 $("#game-types").val(Result.resultMap.game.gtype);
                 check_types = Result.resultMap.game.gtype;
@@ -529,7 +529,8 @@ function setBaseListener() {
             success: function (Result) {
                 console.dir(Result);
                 if (Result.status == 1) {
-                    alert("添加成功");
+                    $("#add-model").modal("show");
+                    $("#search-edit-game").trigger('click');
                 }
 
             }
@@ -555,7 +556,7 @@ function setBaseListener() {
                 if (Result.status == 1) {
                     advertise_show();
                 } else {
-                    alert("容器已满，请删除部分广告后再添加");
+                    $("#add-model-fail").modal("show");
                 }
             }
         })
@@ -593,8 +594,9 @@ function setBaseListener() {
             },
             dataType: 'json',
             success: function (Result) {
+                console.dir(Result);
                 if (Result.status == 1) {
-                    alert("更新成功")
+                    $("#update-model").modal("show");
                     $("#close-editor").trigger('click');
                     console.dir(currentIndex);
                     console.dir(search_game_name);
@@ -702,6 +704,10 @@ function setBaseListener() {
         PostCurrentIndex = 12 * (PostCurrentPage - 1);
         ChangePostPage(PostCurrentIndex);
     })
+
+    /**
+     * 删除
+     */
     /*删除游戏*/
     $(document).on("click", ".delete", function () {
         let arr = new Array();
@@ -720,7 +726,7 @@ function setBaseListener() {
             success: function (Result) {
                 console.dir(Result);
                 if (Result.status == 1) {
-                    alert("删除成功");
+                    $("#delete-model").modal("show");
                     ChangePage(currentIndex, search_game_name, search_types);
                 }
             }
@@ -743,7 +749,7 @@ function setBaseListener() {
             },
             success: function (Result) {
                 if (Result.status == 1) {
-                    alert("删除成功");
+                    $("#delete-model").modal("show");
                     ChangePostPage(PostCurrentIndex);
                 }
 
@@ -765,13 +771,16 @@ function setBaseListener() {
             },
             success: function (Result) {
                 if (Result.status == 1) {
-                    alert("删除成功");
+                    $("#delete-model").modal("show");
                     advertise_show();
                 }
 
             }
         })
     })
+    /**
+     * 查询
+     */
     /*查询订单*/
     $("#search-orderList-btn").on("click", function () {
         search_orderPage = 1;
@@ -795,12 +804,13 @@ function setBaseListener() {
                 oid: arr[1],
             },
             success: function (Result) {
+                console.dir(Result);
                 let user_names = new String();
                 $.ajax({
                     url: "/person/getUserById",
                     type: 'post',
                     data: {
-                        uid: search_orderUid,
+                        uid: Result.resultMap.orderDetail[0].uid,
                     },
                     success: function (Result2) {
                         user_names = Result2.resultMap.user.uname;
@@ -900,7 +910,7 @@ function ChangePage(index, search_name, gtype, games_order, sort_type) {
                         "<td scope='col'>" + Result.resultMap.searchList[key].gid + "</td>" +
                         "<td scope='col'>" + Result.resultMap.searchList[key].gname + "</td>" +
                         "<td scope='col'>" + Result.resultMap.searchList[key].gtype + "</td>" +
-                        "<td scope='col'>" + Result.resultMap.searchList[key].gprice * Result.resultMap.searchList[key].discount + "</td>" +
+                        "<td scope='col'>" + (Result.resultMap.searchList[key].gprice * Result.resultMap.searchList[key].discount).toFixed(2) + "</td>" +
                         "<td scope='col'> <a class='edit'   role='button' data-toggle='modal' href='#myModal' id='" + Result.resultMap.searchList[key].gid + "'>编辑</a></td>" +
                         "<td scope='col'> " +
                         "<a class='delete' role='button' data-toggle='modal' id='delete_btn-" + Result.resultMap.searchList[key].gid + "'>" +
@@ -1100,18 +1110,7 @@ function ChangeUserPage(index) {
 function ChangeOrderPage(index, user_id) {
     let html = "";
     let pageHtml = "";
-    console.dir(user_id);
-    if (user_id == undefined) {
-        $(".object-show").html("<table class='table '>" +
-            "<tr class='table-head'>" +
-            "<th scope='col'>唯一识别码</th>" +
-            "<th scope='col'>用户ID</th>" +
-            "<th scope='col'>订单生成时间</th>" +
-            "<th scope='col'>总价</th>" +
-            "<th colspan='2'>操作</th>" +
-            "</tr>");
-        $(".pages").html("");
-    } else {
+
         $.ajax({
             url: "/store/getOrderListByUid",
             type: "post",
@@ -1202,10 +1201,11 @@ function ChangeOrderPage(index, user_id) {
                         "<th scope='col'>总价</th>" +
                         "<th colspan='2'>操作</th>" +
                         "</tr>");
+                    $(".pages").html("");
                 }
             }
         })
-    }
+
 
 }
 
@@ -1309,6 +1309,7 @@ function ChangePostPage(index) {
                     "<th scope='col'>性别</th>" +
                     "<th colspan='2'>操作</th>" +
                     "</tr>");
+                $(".pages").html("");
             }
 
         },
