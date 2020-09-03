@@ -299,7 +299,7 @@ $(document).ready(function () {
         }
 
 
-        $(".active").removeClass("active")
+        $(".condition .active").removeClass("active")
         //将当前 a 的属性添加 active
         $(this).addClass("active")
     })

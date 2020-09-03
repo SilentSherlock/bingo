@@ -30,10 +30,14 @@ function configureBarEcharts(echartsId, xData, yData){
 //饼状图
 function configurePieEcharts(echartsId, data){
     var myEcharts = echarts.init(document.getElementById(echartsId));
+    var maxIndex = data.length - 1;
+    var min = data[maxIndex].value - (data[maxIndex].value / 2);
+    var max = data[0].value + (data[0].value / 2);
+
     // 指定图表的配置项和数据
     var option = {
         title: {
-            text: '前五大热销类型',
+            text: '热销类型',
             left: 'center',
             top: 20,
             textStyle: {
@@ -48,8 +52,8 @@ function configurePieEcharts(echartsId, data){
 
         visualMap: {
             show: false,
-            min: data[4].value - 10,
-            max: data[0].value + 10,
+            min: min,
+            max: max,
             inRange: {
                 colorLightness: [0, 1]
             }
