@@ -376,3 +376,9 @@ body, html {
   background-color: #F6F6F6;
 }
 
+.page-title{
+  position: relative;
+  top: 5px;
+  left: 20px;
+}
+
