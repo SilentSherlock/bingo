@@ -260,6 +260,9 @@
                             游戏销量-类型
                         </h2>
                     </div>
+                    <div class="no-data-alert-admin" id="no-data-alert-admin" hidden style="text-align: center">
+                        <h1>无销售数据</h1>
+                    </div>
                     <div>
                         <div class="gameType" id="gameType"></div>
                     </div>
@@ -812,24 +815,13 @@
                         </tr>
                         <tr>
                             <td nowrap="nowarp">个人简介：</td>
-                            <td colspan="4"><label><textarea cols="88" class="form-control "
-                                                             id="user-profile"></textarea></label></td>
+                            <td colspan="4"><label><textarea cols="88" class="form-control " id="user-profile"></textarea></label></td>
                         </tr>
-                        <!--<tr>
-                            <td>游戏单：</td>
-                            <td colspan="5"><label><input type="text" class="form-control"></label></td>
-                        </tr>
-                        <tr>
-                            <td>愿望单：</td>
-                            <td colspan="5"><label><input type="text" class="form-control"></label></td>
-                        </tr>-->
-
                     </table>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-
             </div>
         </div>
     </div>
@@ -871,7 +863,7 @@
         </div>
     </div>
 </div>
-
+<!--查看广告内容-->
 <div class="modal fade" id="advertise-add-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 
     <div class="modal-dialog modal-advertise" role="document">
@@ -892,6 +884,86 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" class="btn btn-default" id="save-advertise">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--增删改的结果提示框-->
+<div class="modal fade" id ="delete-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog Model-delete" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel5">提示信息</h4>
+            </div>
+            <div class="modal-body">
+                <div align="center">
+                    删除成功！
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id ="add-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog Model-delete" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel6">提示信息</h4>
+            </div>
+            <div class="modal-body">
+                <div align="center">
+                    添加成功！
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id ="add-model-fail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog Model-delete" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel7">提示信息</h4>
+            </div>
+            <div class="modal-body">
+                <div align="center">
+                    广告容器已满，请删除容器内的广告后再添加
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id ="update-model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog Model-delete" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel8">提示信息</h4>
+            </div>
+            <div class="modal-body">
+                <div align="center">
+                    更新成功
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >关闭</button>
             </div>
         </div>
     </div>

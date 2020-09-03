@@ -103,8 +103,26 @@ function loadStartEcharts(){
         }
     })
     //生成Echarts表
-    configureBarEcharts('gameType', type, sales);
-    configurePieEcharts('gameTypeFav', data);
+    let flag = 0;
+    if(sales.length != 0 && type.length != 0){
+        configureBarEcharts('gameType', type, sales);
+        flag = 0;
+    }
+    else{
+        flag = 1;
+    }
+    if(data.length != 0){
+        console.log(data);
+        configurePieEcharts('gameTypeFav', data);
+        flag = 0;
+    }else{
+        flag = 1;
+    }
+    if(flag === 1){
+        document.getElementById("no-data-alert-admin").removeAttribute("hidden");
+    }else if(flag == 0){
+        document.getElementById("no-data-alert-admin").setAttribute("hidden", true);
+    }
 }
 //根据相应标签id获取其下的折线图
 function getECharts(id){
