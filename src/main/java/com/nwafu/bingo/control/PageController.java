@@ -100,6 +100,21 @@ public class PageController {
         return "static_components/component_community_new_post";
     }
 
+    @RequestMapping("component_community_post_detail")
+    public String component_community_post_detail() {
+        return "static_components/component_post_detail";
+    }
+
+    @RequestMapping("component_game_detail")
+    public String component_game_detail() {
+        return "static_components/component_game_detail";
+    }
+
+    @RequestMapping("component_community_other_profile")
+    public String component_community_other_profile() {
+        return "static_components/component_other_profile";
+    }
+
     //动态组件----------------------------
     @RequestMapping("component_game_recommendation_card")
     public String component_game_recommendation_card() {
