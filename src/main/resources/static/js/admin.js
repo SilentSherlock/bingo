@@ -498,6 +498,42 @@ function setBaseListener() {
         }
 
     })
+    /*查询用户信息*/
+    $("#search-user-btn").on("click",function () {
+        let html="";
+        let search_user_id;
+        search_user_id = $("#search-user").val();
+        if(search_user_id == "" || search_user_id == null || search_user_id == undefined){
+            $("#query-user").trigger("onclick");
+            alert("id不能为空");
+        }else {
+            $.ajax({
+                url:"/person/getUserById",
+                type:'post',
+                data:{
+                    uid:search_user_id,
+                },
+                success:function (Result) {
+                    console.dir(Result);
+                    if(Result.status == 1){
+                        $("#user-name").val(Result.resultMap.user.uname);
+                        $("#user-avator").attr("src",Result.resultMap.user.uavatar);
+                        $("#user-mail").val(Result.resultMap.user.umail);
+                        $("#user-alias").val(Result.resultMap.user.ualias);
+                        $("#user-sex").val(Result.resultMap.user.usex);
+                        $("#user-birthday").val(Result.resultMap.user.ubirthday);
+                        $("#user-profile").val(Result.resultMap.user.uprofile);
+                        $("#user-Modal").modal("show");
+                    }else {
+                        alert("该用户不存在");
+                    }
+
+
+                }
+            });
+        }
+
+    })
     /*添加游戏*/
     $("#add-btn").on("click", function () {
         let str = new String();
