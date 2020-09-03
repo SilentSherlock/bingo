@@ -75,14 +75,10 @@ function setSearchFormValidateLisener() {
 
         searchCondition.name = $("#navbar-search-form-keyword-input").val();
 
-        console.log("保存搜索内容: " + searchCondition.name);
-
         //使用ajax提交搜索内容
         $.get(requestmap.store_search, searchCondition, function (data) {
             if (data.status === 1) {
                 isSearchResult = true;
-                console.log("搜索到相关信息进行显示:");
-                console.log(data);
                 showAllGame();
             } else
                 myAlert("未找到相关游戏!");
@@ -305,7 +301,7 @@ function community_index() {
  * 描述: 加载发布帖子
  */
 function community_new_post() {
-    if(userInfo.uid === undefined){
+    if (userInfo.uid === undefined) {
         myAlert("请登录后再执行操作!");
         return;
     }
