@@ -71,7 +71,7 @@ $(document).ready(function () {
         for (var i = (4 < list.length ? 4 : list.length); i > 0; i--) {
             html +=
                 "<li>" +
-                "<a href=" + "post_detail.html?pid=" + list[i - 1].pid + " target='_blank'" + "><span class=" + "content-title" + "><span class=" + "text" + ">" + "【" + list[i - 1].ptheme + "】" + list[i - 1].title + "</span></span></a>" +
+                "<a href='javascript:void(0)' onclick='showPostDetail(" + list[i - 1].pid + ")'><span class=" + "content-title" + "><span class=" + "text" + ">" + "【" + list[i - 1].ptheme + "】" + list[i - 1].title + "</span></span></a>" +
                 "</li>"
         }
         $("#community-index .community-news-list").html(html);
@@ -89,8 +89,8 @@ $(document).ready(function () {
             list = list.sort(function (a, b) {
                 var a1 = a.ptime.substring(0, 10);
                 var b1 = b.ptime.substring(0, 10);
-                var a2 = a.ptime.substring(11,8);
-                var b2 = b.ptime.substring(11,8);
+                var a2 = a.ptime.substring(11, 8);
+                var b2 = b.ptime.substring(11, 8);
                 var list_a = a1.split("-");
                 var list_b = b1.split("-");
                 var list_a2 = a2.split(":");
@@ -144,15 +144,15 @@ $(document).ready(function () {
             var comments = getComments(list[i].pid);
             html +=
                 "<div class=" + "item-wrap" + ">" +
-                "<div class=" + "header" + "><div class=" + "btn" + "></div><a href=" + "post_detail.html?pid=" + list[i].pid + " target='_blank'" + "><h1 class=" + "h1-in-header" + ">" + "【" + list[i].ptheme + "】" + list[i].title + "</h1></a></div>" +
+                "<div class=" + "header" + "><div class=" + "btn" + "></div><a href='javascript:void(0)' onclick='showPostDetail(" + list[i].pid + ")'><h1 class=" + "h1-in-header" + ">" + "【" + list[i].ptheme + "】" + list[i].title + "</h1></a></div>" +
                 "<h2 class=" + "h2-in-header" + ">" + list[i].content + "</h2>" +
                 "<div class=" + "left" + ">" +
-                "<img src=" + curent.uavatar + "><a class=" + "nick-name" + " " + "href=" + "other_profile.html?uid=" + list[i].uid + " " + "target=" + "_blank" + ">" + curent.ualias + "</a>" +
+                "<img src=" + curent.uavatar + "><a class=" + "nick-name" + " " + "href='javascript:void(0)' onclick='showOtherProfile(" + list[i].uid + ")'>" + curent.ualias + "</a>" +
                 "<span class=" + "time" + ">" + "&nbsp;&nbsp;" + "<span>发表于&nbsp;&nbsp;" + list[i].ptime.substring(0, 19) + "</span></span>" +
                 "</div>" +
                 "<div class=" + "btn-wrapper" + ">" +
                 "<button class='up' " + "id=" + list[i].pid + "><a>" + "点赞" + list[i].plikenum + "</a></button>" +
-                "<button class='reply'><a href=" + "post_detail.html?pid=" + list[i].pid + " target='_blank'>" + "回复" + comments.length + "</a>" + "</button>" +
+                "<button class='reply'><a href='javascript:void(0)' onclick='showPostDetail(" + list[i].pid + ")'>" + "回复" + comments.length + "</a>" + "</button>" +
                 "</div>" +
                 "</div>" +
                 "</div>"

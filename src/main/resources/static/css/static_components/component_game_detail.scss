@@ -1,0 +1,549 @@
+/**
+ * 时间: 2020.8.30
+ * 描述：游戏详情页面css
+ */
+
+//导入基本常量
+@import "../constant";
+
+#body-container .game-detail {
+  width: 1230px;
+}
+
+.game-detail {
+
+  //region 列表开始
+  .titile-three {
+    height: 100%;
+    float: left;
+    margin: 20px 20px 20px 20px;
+  }
+
+  .score-1-3 {
+    display: block;
+    width: 740px;
+    height: 100%;
+    padding-left: 20px;
+  }
+
+  .sElem {
+    width: 700px;
+    height: 100px;
+    display: block;
+  }
+
+  .score-1-3-1 {
+    position: absolute;
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .score-1-3-2 {
+    position: absolute;
+    margin-left: 130px;
+    display: inline-block;
+    width: 500px;
+  }
+
+  .Avatar {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+  }
+
+  .uAvatar {
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .uname {
+    color: #7a80a2;
+    display: inline-block;
+    width: 90px;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .score1 {
+  }
+
+  .score2 {
+    color: #7a80a2;
+    font-size: $font-size-text-small;
+  }
+
+  .score3 {
+    color: $font-color-light;
+  }
+
+  //endregion
+
+  div {
+    display: block;
+    padding: 0;
+    margin: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+  }
+
+  p {
+    color: $font-color-light;
+    line-height: 24px;
+    font-size: $font-size-text-small;
+  }
+
+  .detail-main {
+    padding-top: 30px;
+  }
+
+  .title {
+    position: relative;
+    font-size: $font-size-title-largest;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 5px;
+    color: $font-color-light;
+  }
+
+  .content {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+  }
+
+  .videos-player {
+    display: inline-block;
+    position: relative;
+    float: left;
+  }
+
+  .videos-player .new-big-center-play-btn {
+    display: inline-block;
+    z-index: 2;
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    top: 136px;
+    left: 269px;
+    cursor: pointer;
+    //background: url()
+  }
+
+  .default-height {
+    height: 100%;
+    margin: 0;
+    width: 600px;
+  }
+
+  .titile-content-left {
+    height: 100%;
+    width: 800px;
+    float: left;
+    margin-right: 20px;
+  }
+
+  .titile-content-right {
+    width: 360px;
+    float: left;
+  }
+
+  .titile-content-left-1 {
+    background-color: $background-light;
+    position: relative;
+    height: 400px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+
+  .titile-content-left-2 {
+    /*  height: 325px;*/
+    height: 100%;
+    background-color: #33394d;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    transition: height .5s;
+    margin-bottom: 20px;
+  }
+
+  .titile-one {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    color: $font-color-light;
+    height: 28px;
+    padding: 20px 20px 25px 20px;
+  }
+
+  .titile-two {
+    margin: 0 20px 20px 20px;
+  }
+
+  .titile-content-left-3 {
+    margin-bottom: 20px;
+    background-color: #33394d;
+  }
+
+  .titile-content-right-3 > p {
+    color: $font-color-light;
+    font-size: $font-size-title;
+  }
+
+  .titile-content-left-3-1 {
+    display: inline-block;
+    padding: 16px 15px 17px 15px;
+    font-size: $font-size-title;
+    text-align: center;
+    background-color: $background-light;
+    color: $font-color-light;
+  }
+
+  .titile-content-left-3-b {
+    background-color: #292e41;
+  }
+
+  .titile-content-left-3-2 {
+    padding: 13px 20px 20px 20px;
+  }
+
+  .titile-content-left-3-2-1 {
+    display: inline-block;
+    width: 350px;
+  }
+
+  .titile-content-left-3-2-2 {
+    margin-left: 40px;
+    display: inline-block;
+    width: 350px;
+  }
+
+  .titile-content-right-1 {
+    background-color: #33394d;
+    min-height: 93px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .titile-content-right-1-2 {
+    /*  height: 325px;*/
+    height: 300px;
+    background-color: $background-light;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    transition: height .5s;
+    margin-bottom: 20px;
+  }
+
+  .tag-list {
+    padding: 20px 20px 0 20px;
+  }
+
+  .tag {
+    display: inline-block;
+    margin-right: 6px;
+    border-radius: 4px;
+    background-color: $background;
+    padding: 4px 6px;
+    text-align: center;
+    font-size: $font-size-text-small;
+    margin-bottom: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    color: $font-color-light;
+  }
+
+  .sale-info {
+    padding: 27px 20px 0 20px;
+  }
+
+  .off-discount {
+    margin-left: 10px;
+    padding: 0 10px;
+    float: right;
+    color: $yellow;
+    height: 40px;
+    line-height: 40px;
+    background-color: $background;
+  }
+
+  .off-count {
+    font-size: $font-size-text;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .list-price {
+    width: 65px;
+    margin-left: 10px;
+    font-size: $font-size-text;
+    color: $font-color;
+    text-decoration: line-through;
+    float: right;
+    height: 42px;
+    line-height: 42px;
+  }
+
+  .true-price {
+    padding-right: 40px;
+    float: right;
+    font-size: $font-size-text;
+    font-weight: 600;
+    color: $orange;
+    height: 42px;
+    line-height: 42px;
+  }
+
+  .box-buy {
+    padding: 10px 20px 17px 20px;
+    height: 45px;
+  }
+
+  .box-bts {
+    margin-right: 15px;
+    width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+    float: left;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 2px;
+  }
+
+  .shoopingcat {
+    height: inherit;
+    width: 100%;
+  }
+
+  .buy {
+    width: 135px;
+    float: left;
+    height: 45px;
+    line-height: 45px;
+  }
+
+  .tobuy {
+    font-weight: bold;
+    font-size: 18px;
+    height: inherit;
+    width: 100%;
+  }
+
+  .titile-content-right-2 {
+    background-color: #33394d;
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+
+  .titile-content-right-3 {
+    background-color: #33394d;
+    position: relative;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .titile-deploy {
+    font-size: $font-size-text;
+    text-align: left;
+    color: $font-color-light;
+  }
+
+  .main-table {
+    margin-top: 14px;
+  }
+
+  .lab {
+    width: 66px;
+    color: $font-color;
+    font-size: $font-size-text-small;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid lighten($background, 15);
+  }
+
+  .txt {
+    border: 1px solid lighten($background, 15);
+    color: $font-color;
+    padding-left: 5px;
+  }
+
+  .t1 {
+    background-color: $background;
+  }
+
+  .wish {
+    margin-top: 40px;
+    padding: 8px 20px 15px 20px;
+    font-size: $font-size-text;
+    text-align: left;
+    color: $font-color;
+  }
+
+  .addwish {
+    background-color: transparent;
+    border: none;
+    outline: none;
+  }
+
+  .item-info {
+    margin-bottom: 5px;
+    color: #b9c0ef;
+  }
+
+  .item-info .item-label {
+    display: inline-block;
+    width: 70px;
+    text-align: left;
+    color: $font-color;
+    height: 24px;
+    font-size: $font-size-text;
+  }
+
+  .item-info .item-content {
+    padding-left: 5px;
+    display: inline-block;
+    width: 240px;
+    text-align: left;
+    vertical-align: top;
+    box-sizing: border-box;
+  }
+
+  .item {
+    margin-right: 5px;
+    text-align: center;
+    color: #b9c0ef;
+    display: inline-block;
+    background-color: #292e41;
+    border-radius: 2px;
+    height: 20px;
+    line-height: 20px;
+  }
+
+  .d-cover {
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .cover {
+    margin-top: 5px;
+    margin-right: 20px;
+    float: right;
+    width: 324px;
+    height: 151px;
+  }
+
+  .score-1 {
+    padding-left: 20px;
+    width: 740px;
+    height: 60px;
+  }
+
+  .score-1-1 {
+    font-size: 56px;
+    font-weight: 600;
+    color: $orange;
+    width: 60px;
+    height: 20px;
+    display: inline-block;
+    float: left;
+  }
+
+  .score-1-2 {
+    height: 60px;
+    margin-top: 30px;
+    margin-left: 30px;
+    float: left;
+    display: inline-block;
+  }
+
+  .star {
+    color: $yellow;
+  }
+
+  .videoPlayer {
+    width: 100%;
+    height: 100%;
+  }
+
+  .show-list {
+    display: inline-block;
+    width: 200px;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    height: 100% - 5;
+    overflow: hidden;
+    padding-left: 5px;
+    float: left;
+    position: relative;
+    overflow-y: auto;
+  }
+
+  .show-elem {
+    width: 141px;
+    height: 79px;
+    margin-bottom: 6px;
+    position: relative;
+    cursor: pointer;
+    box-sizing: border-box;
+    opacity: .6;
+  }
+
+  .show-elem img {
+    width: 141px;
+    height: 78px;
+    border: 2px solid transparent;
+    box-sizing: content-box;
+  }
+
+  .list-control {
+    margin-top: 10px;
+    margin-left: 710px;
+    width: 18px;
+    height: 340px;
+    background-color: whitesmoke;
+    position: relative;
+  }
+
+  .thumb {
+    height: 80px;
+    top: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    width: 18px;
+    border-radius: 2px;
+    background-color: purple;
+  }
+
+  .show-elem :hover {
+    border: 2px solid #808BF3;
+  }
+
+  .player {
+    display: block;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 20px;
+    left: 55px;
+    z-index: 9999;
+    font-size: 40px;
+  }
+}

@@ -68,6 +68,7 @@ function getGameList(formData) {
         function (gameList) {
             let gamel = gameList.resultMap.searchList;
             let page = gameList.resultMap.allSearchNum;
+            console.log("gamenum", page);
             let html = "";
 
             $('#game-list').empty();
@@ -98,7 +99,7 @@ function getGameList(formData) {
 
                 html +=
                     "<li>" +
-                    "<a href=" + "/game_detail.html?gid=" + game.gid + " class=" + "game-click" + " target='_blank'>" +
+                    "<a href='javascript:void(0)' onclick='showGameDetail(" + game.gid + ")'>" +
                     "<div class=" + "left" + "><img src=" + game.chref + "></div>" +
                     "<div class=" + "right" + ">"
                 if (game.discount != 1 && game.discount != null) {

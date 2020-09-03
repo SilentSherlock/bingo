@@ -34,7 +34,7 @@ function index_init(game_recommendation_card_html) {
                 $.each(picList, function (key, value) {
                     //轮播图片设置
                     html_inner += "<div class='item'>\n" +
-                        "              <a target='_blank' href='game_detail.html?gid=" + gameList[key].gid + "'>" +
+                        "              <a href='javascript:void(0)' onclick='showGameDetail(" + gameList[key].gid +")'>" +
                         "                   <img src='" + "/" + value + "' alt='" + gameList[key].gname + "'>" +
                         "               </a>" +
                         "              <div class='carousel-caption'>" + gameList[key].gname + "</div>" +
@@ -156,7 +156,7 @@ function showGameByPromotion(game_recommendation_card_html) {
                 $.each(data.resultMap.searchList, function (key, value) {
                     let html = $(game_recommendation_card_html);
                     //设置点击事件
-                    html.find(".index-game-card-cover-container > a").attr("href", "/game_detail.html?gid=" + value.gid);
+                    html.find(".index-game-card-cover-container > a").attr("onclick", "showGameDetail(" + value.gid + ")");
                     //设置封面
                     html.find(".index-game-card-cover-container img").attr("src", value.chref);
                     //设置游戏名称
@@ -203,7 +203,7 @@ function showGameByScore(game_recommendation_card_html) {
                 $.each(data.resultMap.searchList, function (key, value) {
                     let html = $(game_recommendation_card_html);
                     //设置点击事件
-                    html.find(".index-game-card-cover-container > a").attr("href", "/game_detail.html?gid=" + value.gid);
+                    html.find(".index-game-card-cover-container > a").attr("onclick", "showGameDetail(" + value.gid + ")");
                     //设置封面
                     html.find(".index-game-card-cover-container img").attr("src", value.chref);
                     //设置游戏名称
@@ -277,7 +277,7 @@ function showFreeGame(game_recommendation_card_html) {
                 $.each(data.resultMap.searchList, function (key, value) {
                     let html = $(game_recommendation_card_html);
                     //设置点击事件
-                    html.find(".index-game-card-cover-container > a").attr("href", "/game_detail.html?gid=" + value.gid);
+                    html.find(".index-game-card-cover-container > a").attr("onclick", "showGameDetail(" + value.gid + ")");
                     //设置封面
                     html.find(".index-game-card-cover-container img").attr("src", value.chref);
                     //设置游戏名称
@@ -327,7 +327,7 @@ function showNewGame(game_recommendation_card_html) {
                 $.each(data.resultMap.searchList, function (key, value) {
                     let html = $(game_recommendation_card_html);
                     //设置点击事件
-                    html.find(".index-game-card-cover-container > a").attr("href", "/game_detail.html?gid=" + value.gid);
+                    html.find(".index-game-card-cover-container > a").attr("onclick", "showGameDetail(" + value.gid + ")");
                     //设置封面
                     html.find(".index-game-card-cover-container img").attr("src", value.chref);
                     //设置游戏名称
@@ -399,7 +399,7 @@ function showPreGame(game_recommendation_card_html) {
                 $.each(data.resultMap.searchList, function (key, value) {
                     let html = $(game_recommendation_card_html);
                     //设置点击事件
-                    html.find(".index-game-card-cover-container > a").attr("href", "/game_detail.html?gid=" + value.gid);
+                    html.find(".index-game-card-cover-container > a").attr("onclick", "showGameDetail(" + value.gid + ")");
                     //设置封面
                     html.find(".index-game-card-cover-container img").attr("src", value.chref);
                     //设置游戏名称

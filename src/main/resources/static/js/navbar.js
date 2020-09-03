@@ -404,33 +404,13 @@ function logout() {
  * 描述: 还原刷新前的页面 尽量
  */
 function reloadBeforePage() {
-    let nowPage = location.href;
-    let lastPage = window.sessionStorage.getItem("lastPage");
+    let lastType = window.sessionStorage.getItem("lastType");
 
     //首次访问页面,转到主页
-    if (lastPage === null) {
+    if (lastType === null) {
         $("nav.navbar ul.navbar-nav:eq(0) > li:eq(0) > a").click();
-        return;
-    }
-
-    //打开了新的标签页,根据内容激活对应标签
-    if (lastPage !== nowPage) {
-        if (nowPage.includes("game_detail")) {
-            $("nav.navbar ul.navbar-nav:eq(0) > li:eq(1)").addClass("active");
-            return;
-        } else if (nowPage.includes("other_profile")) {
-            return;
-        } else if (nowPage.includes("post_detail")) {
-            $("nav.navbar ul.navbar-nav:eq(0) > li:eq(2)").addClass("active");
-        } else
-            return;
-    }
-
-    //当前页内的跳转
-    if (nowPage === lastPage) {
-        let type = window.sessionStorage.getItem("lastType");
-
-        switch (type) {
+    } else {
+        switch (lastType) {
             case "首页":
                 $("nav.navbar ul.navbar-nav:eq(0) > li:eq(0) > a").click();
                 break;
@@ -451,8 +431,23 @@ function reloadBeforePage() {
                 $("nav.navbar ul.navbar-nav:eq(0) > li:eq(2)").addClass("active");
                 community_new_post();
                 break;
+            case "gameDetail":
+                let gid = sessionStorage.getItem("id");
+                showGameDetail(gid);
+                $("nav.navbar ul.navbar-nav:eq(0) > li:eq(1)").addClass("active");
+                break;
+            case "postDetail":
+                let pid = sessionStorage.getItem("id");
+                $("nav.navbar ul.navbar-nav:eq(0) > li:eq(2)").addClass("active");
+                showPostDetail(pid);
+                break;
+            case "otherProfile":
+                let uid = sessionStorage.getItem("id");
+                $("nav.navbar ul.navbar-nav:eq(0) > li:eq(2)").addClass("active");
+                showOtherProfile(uid);
+                break;
             default:
-                showUserPage = type;
+                showUserPage = lastType;
                 showUserInfo();
                 break;
         }
@@ -464,10 +459,85 @@ function reloadBeforePage() {
  * 时间: 2020.9.1
  * 描述: 存储当前页面
  */
-function savePage(type) {
+function savePage(type, id) {
     let data = {
         lastType: type,
-        lastPage: location.href
+        id: id,
     };
     saveData2Ses(data);
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.9.3
+ * 描述: 查看游戏详细信息
+ */
+function showGameDetail(gid) {
+    game_detail_gid = gid;
+    savePage("gameDetail", game_detail_gid);
+    $("nav.navbar ul.navbar-nav:eq(0) > li.active").removeClass("active");
+    $("nav.navbar ul.navbar-nav:eq(0) > li:eq(1)").addClass("active");
+    loadingAnimation("#body-container").then(function () {
+        $.get(
+            static_components.component_game_detail.curl,
+            function (data) {
+                if (data !== undefined || data !== "") {
+                    $("#body-container").html(data);
+                } else
+                    ajaxNoContent("#body-container");
+            }
+        ).fail(function () {
+            ajaxFailed("#body-container");
+        });
+    });
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.9.3
+ * 描述: 查看帖子详细信息
+ */
+function showPostDetail(pid) {
+    post_detail_pid = pid;
+    savePage("postDetail", post_detail_pid);
+    $("nav.navbar ul.navbar-nav:eq(0) > li.active").removeClass("active");
+    $("nav.navbar ul.navbar-nav:eq(0) > li:eq(2)").addClass("active");
+    loadingAnimation("#body-container").then(function () {
+        $.get(
+            static_components.component_community_post_detail.curl,
+            function (data) {
+                if (data !== undefined || data !== "") {
+                    $("#body-container").html(data);
+                } else
+                    ajaxNoContent("#body-container");
+            }
+        ).fail(function () {
+            ajaxFailed("#body-container");
+        });
+    });
+}
+
+/**
+ * 作者: lwh
+ * 时间: 2020.9.3
+ * 描述: 查看其他用户信息
+ */
+function showOtherProfile(uid) {
+    other_profile_uid = uid;
+    savePage("otherProfile", other_profile_uid);
+    $("nav.navbar ul.navbar-nav:eq(0) > li.active").removeClass("active");
+    $("nav.navbar ul.navbar-nav:eq(0) > li:eq(2)").addClass("active");
+    loadingAnimation("#body-container").then(function () {
+        $.get(
+            static_components.component_community_other_profile.curl,
+            function (data) {
+                if (data !== undefined || data !== "") {
+                    $("#body-container").html(data);
+                } else
+                    ajaxNoContent("#body-container");
+            }
+        ).fail(function () {
+            ajaxFailed("#body-container");
+        });
+    });
 }

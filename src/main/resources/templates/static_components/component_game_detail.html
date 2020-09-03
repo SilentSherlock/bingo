@@ -1,0 +1,240 @@
+<div class="game-detail container" id="game-detail">
+    <div class="detail-main">
+        <h3 class="title"><span id="title">樱岛麻衣</span></h3>
+        <div class="titile-content-left">
+            <div class="titile-content-left-1">
+                <div class="content">
+                    <div class="videos-player default-height" id="show">
+                        <video class="videoPlayer" id="videoPlayer" src="" controls="controls" autobuffer muted>
+                        </video>
+                    </div>
+                    <div class="show-list">
+                        <div class="show-elem">
+                            <img src="" id="video" onclick="change(this)">
+                            <div class="player" id="videochild" onclick="change(this)">
+                                <span class="glyphicon glyphicon-expand"></span>
+                            </div>
+                        </div>
+                        <div class="show-elem">
+                            <img src="" id="elem1" onclick="change(this)">
+                        </div>
+                        <div class="show-elem">
+                            <img src="" id="elem2" onclick="change(this)">
+                        </div>
+                        <div class="show-elem">
+                            <img src="" id="elem3" onclick="change(this)">
+                        </div>
+                        <div class="show-elem">
+                            <img src="" id="elem4" onclick="change(this)">
+                        </div>
+                        <div class="show-elem">
+                            <img src="" id="elem5" onclick="change(this)">
+                        </div>
+                        <div class="show-elem">
+                            <img src="" id="elem6" onclick="change(this)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="titile-content-left-3">
+                <div class="titile-content-left-3-b">
+                    <div class="titile-content-left-3-1">配置需求</div>
+                </div>
+                <div class="titile-content-left-3-2">
+                    <div class="titile-content-left-3-2-1">
+                        <div class="titile-deploy">最低配置</div>
+                        <table class="main-table">
+                            <tbody>
+                            <tr class="t1">
+                                <td class="lab">操作系统</td>
+                                <td class="txt" id="os1"></td>
+                            </tr>
+                            <tr>
+                                <td class="lab">内存</td>
+                                <td class="txt" id="ram1"></td>
+                            </tr>
+                            <tr class="t1">
+                                <td class="lab">处理器</td>
+                                <td class="txt" id="cpu1"></td>
+                            </tr>
+                            <tr>
+                                <td class="lab">显卡</td>
+                                <td class="txt" id="gpu1"></td>
+                            </tr>
+                            <tr class="t1">
+                                <td class="lab">硬盘</td>
+                                <td class="txt" id="harddisk1"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="titile-content-left-3-2-2">
+                        <div class="titile-deploy">推荐配置</div>
+
+                        <table class="main-table">
+                            <tbody>
+                            <tr class="t1">
+                                <td class="lab">操作系统</td>
+                                <td class="txt" id="os2"></td>
+                            </tr>
+                            <tr>
+                                <td class="lab">内存</td>
+                                <td class="txt" id="ram2"></td>
+                            </tr>
+                            <tr class="t1">
+                                <td class="lab">处理器</td>
+                                <td class="txt" id="cpu2"></td>
+                            </tr>
+                            <tr>
+                                <td class="lab">显卡</td>
+                                <td class="txt" id="gpu2"></td>
+                            </tr>
+                            <tr class="t1">
+                                <td class="lab">硬盘</td>
+                                <td class="txt" id="harddisk2"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="titile-content-left-2">
+                <h3 class="titile-one">游戏评分</h3>
+                <div class="titile-two">
+                    <div class="score-1">
+                        <div class="score-1-1" id="gscore">0</div>
+                        <div class="score-1-2" id="gstar">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star star"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                            </svg>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star star"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                            </svg>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star star"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                            </svg>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star star"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                            </svg>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star star"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="titile-three">
+                    <div class="score-1-3" id="scoreElem">
+                        <!--<div class="sElem" id="scoreElem1"></div>
+                        <div class="sElem" id="scoreElem2"></div>
+                        <div class="sElem" id="scoreElem3"></div>
+                        <div class="sElem" id="scoreElem4"></div>
+                        <div class="sElem" id="scoreElem5"></div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="titile-content-right">
+            <div class="titile-content-right-1">
+                <div class="titile-content-1-2">
+                    <div class="d-cover">
+                        <img src="" class="cover" id="cover" alt="封面">
+                    </div>
+                    <div class="titile-two">
+                        <p id="detail"></p>
+                    </div>
+                </div>
+                <div class="tag-list">
+                    <div class="tag" id="gtype">动作</div>
+                </div>
+                <div class="sale-info">
+                    <div>
+                        <div class="off-discount">
+                            <div class="off-count" id="discount">-35%</div>
+                        </div>
+                        <div class="list-price" id="gprice">￥268</div>
+                        <div class="true-price" id="realPrice">￥174</div>
+                    </div>
+                </div>
+                <div class="box-buy">
+                    <div>
+                        <div class="box-bts">
+                            <button class="shoopingcat btn-info" onclick="addCar()">加入购物车</button>
+                        </div>
+                        <div class="buy">
+                            <button class="tobuy btn-primary" onclick="buy()">立即购买</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="wish">
+                    <button class="addwish" onclick="addWishList()">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart"
+                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                        </svg>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill"
+                             fill="currentColor" xmlns="http://www.w3.org/2000/svg" hidden="true">
+                            <path fill-rule="evenodd"
+                                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        </svg>
+                        加入心愿单
+                    </button>
+                </div>
+            </div>
+            <div class="titile-content-right-2">
+                <div class="item-info">
+                    <div class="item-label">开发商</div>
+                    <div class="item-content">
+                        <div class="item" id="developer">2K</div>
+                    </div>
+                    <div class="item-label">发行商</div>
+                    <div class="item-content">
+                        <div class="item" id="publisher">2K</div>
+                    </div>
+                    <div class="item-label">发行日期</div>
+                    <div class="item-content">
+                        <div class="item" id="realeasedate">2017/2/22</div>
+                    </div>
+                    <div class="item-label">语言</div>
+                    <div class="item-content">
+                        <div class="item" id="language">中文</div>
+                    </div>
+                    <div class="item-label">支持系统</div>
+                    <div class="item-content">
+                        <div class="item" id="platform">win</div>
+                    </div>
+                </div>
+            </div>
+            <div class="titile-content-right-3" id="addContent" style="display: none;">
+                <p>对游戏进行评测</p>
+                <div class="item-info">
+                    <br>
+                    <span>评论内容:</span>
+                    <input class="form-control ipt-dark" type="text" id="content-txt"
+                           style="height: 30px;"></br>
+                    <span>评分:</span>
+                    <input class="form-control ipt-dark" type="number" id="content-score"
+                           style="width:70px; height: 30px;"
+                           oninput="if(value>10)value=10;if(value<0)value=0"></br>
+                    <button class="btn-secondary form-control" type="submit" id="submit">提交评测</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 引入该组件的css库文件-->
+<link rel="stylesheet" href="/css/static_components/component_game_detail.css">
+<!-- 引入该组件的js库文件-->
+<script type="text/javascript" src="/js/static_components/component_game_detail.js"></script>
+</div>
