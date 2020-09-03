@@ -152,16 +152,11 @@ function searchGame(formData) {
 
     formData = formData || defaultSearchCondition;
 
-    console.log("搜索中的搜索条件:");
-    console.log(formData);
-
     return new Promise(function (resolve, reject) {
         $.post(
             requestmap.store_search,
             formData,
             function (data) {
-                console.log("搜索结果:");
-                console.log(data);
                 resolve(data);
             }
         ).fail(function () {
@@ -191,6 +186,6 @@ function restoreSearchConditonDefault() {
  */
 function clearUserInfo() {
     $.each(userInfo, function (key, value) {
-        searchCondition[key] = undefined;
+        userInfo[key] = undefined;
     });
 }

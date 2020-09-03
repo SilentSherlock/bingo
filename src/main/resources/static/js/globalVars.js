@@ -126,10 +126,6 @@ let userInfo = {
 //当前展示的用户信息
 let showUserPage;
 
-//导航栏搜索框搜索条件
-let isSearchResult = false;
-let searchKeywords;
-
 //首页搜索处理的默认参数
 let index_pageCount = 12;
 let index_pageIndex = 0;

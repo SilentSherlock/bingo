@@ -147,6 +147,9 @@
   font-size: 14px;
   font-weight: 400;
   color: #b9c0ef;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 #community-index a {
   color: #000;
@@ -162,6 +165,11 @@
 }
 #community-index .text {
   float: left;
+  width:364px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
 }
 #community-index .community-content {
   position: relative;
