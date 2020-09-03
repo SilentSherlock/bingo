@@ -186,6 +186,6 @@ function restoreSearchConditonDefault() {
  */
 function clearUserInfo() {
     $.each(userInfo, function (key, value) {
-        searchCondition[key] = undefined;
+        userInfo[key] = undefined;
     });
 }

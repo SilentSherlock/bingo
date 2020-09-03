@@ -36,7 +36,6 @@ function isLogin() {
                 $("nav.navbar ul.navbar-right:eq(1)").show();
                 $("nav.navbar ul.navbar-right:eq(0)").hide();
             }
-            console.log("登陆的用户信息", userInfo);
         }
     });
 }
@@ -73,12 +72,13 @@ function setSearchFormValidateLisener() {
         //更改搜索按钮的登陆状态
         $("#navbar-search-form-submit-button").button("loading");
 
+        restoreSearchConditonDefault();
+
         searchCondition.name = $("#navbar-search-form-keyword-input").val();
 
         //使用ajax提交搜索内容
         $.get(requestmap.store_search, searchCondition, function (data) {
             if (data.status === 1) {
-                isSearchResult = true;
                 showAllGame();
             } else
                 myAlert("未找到相关游戏!");

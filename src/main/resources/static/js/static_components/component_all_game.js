@@ -1,4 +1,4 @@
-var name;
+var all_game_name;
 var sort;
 var order;
 var pageIndex;
@@ -12,7 +12,7 @@ var language;
 
 //所有游戏页面初始化
 $(document).ready(function () {
-    name = searchCondition.name;
+    all_game_name = searchCondition.name;
     sort = searchCondition.sort;
     order = searchCondition.order;
     pageIndex = searchCondition.pageIndex;
@@ -32,6 +32,9 @@ $(document).ready(function () {
     maxPrice = searchCondition.maxPrice;
     area = searchCondition.area;
     language = searchCondition.language;
+
+    if (searchCondition.name !== undefined)
+        $("#all-game .search-title h1").text("搜索结果");
 
     getGameList(searchCondition);
 });
@@ -59,180 +62,96 @@ function setPage(pageNumber) {
 }
 
 function getGameList(formData) {
-    if (isSearchResult === true) {
-        $.post(
-            requestmap.store_search,
-            searchCondition,
-            function (gameList) {
-                let gamel = gameList.resultMap.searchList;
-                let html = "";
+    $.post(
+        requestmap.store_search,
+        formData,
+        function (gameList) {
+            let gamel = gameList.resultMap.searchList;
+            let page = gameList.resultMap.allSearchNum;
+            let html = "";
 
-                $('#game-list').empty();
+            $('#game-list').empty();
 
-                if (gameList.status === 0)
-                    return;
-                for (let i = 0; i < gamel.length; i++) {
+            if (gameList.status === 0)
+                return;
+            for (let i = 0; i < gamel.length; i++) {
 
-                    let game = gamel[i]
-                    let temp = (parseFloat(game.gprice) * (parseFloat(game.discount))).toString();
-                    if (temp.length > 6) {
-                        temp.substr(0, 6);
-                    }
-                    //得到游戏类别数组
-                    let typelist = game.gtype;
-                    typelist = (typelist != null ? typelist.substring(1, typelist.length - 1) : "");
-
-                    typelist = typelist.split(",")
-                    //得到游戏语言数组
-                    let languagelist = game.language;
-                    languagelist = (languagelist != null ? languagelist.substring(1, languagelist.length - 1) : "")
-
-                    languagelist = languagelist.split(",")
-                    for (let j = 0; j < languagelist.length; j++) {
-                        languagelist[j].substring(1, languagelist[j].length - 1)
-                    }
-
-
-                    html +=
-                        "<li>" +
-                        "<a href=" + "/game_detail.html?gid=" + game.gid + " class=" + "game-click" + " target=" + "_black>" +
-                        "<div class=" + "left" + "><img src=" + game.chref + "></div>" +
-                        "<div class=" + "right" + ">"
-                    if (game.discount != 1 && game.discount != null) {
-                        html +=
-                            "<span class=" + "game-discount" + ">" + "-" + ((1 - game.discount) * 100).toFixed() + "%</span>" +
-                            "<span class=" + "game-origin-price" + ">￥" + game.gprice + "</span>"
-                    }
-                    html +=
-                        "<span class=" + "game-sale-price" + ">￥" + temp + "</span>" +
-                        "</div>" +
-                        "<div class=" + "middle" + ">" +
-                        "<p class=" + "title" + ">" +
-                        game.gname
-
-                    if (game.discount != 1) {
-                        html += "<span class=" + "title-tag" + ">促销</span>"
-                    }
-                    var china = false;
-                    for (var start = 0; start < languagelist.length; start++) {
-                        if (languagelist[start] === "\"中文\"" && languagelist.length == 1) {
-                            html += "<span class=" + "title-area" + ">中国站</span>";
-                            china = true;
-                            break;
-                        }
-                    }
-                    if (!china) {
-
-                        html += "<span class=" + "title-area" + ">国际站</span>"
-                    }
-
-                    html += "</p>" +
-                        "<p class='date'>发行于" + (game.realeasedate != null ? game.realeasedate.substring(0, 10) : ' ') + "</p>" +
-                        "<p class='tags'>"
-                    for (j = 0; j < typelist.length; j++) {
-                        html +=
-                            "<span class=" + "tag-block" + ">" + (typelist[j] != null ? typelist[j].substring(1, typelist[j].length - 1) : ' ') + "</span>"
-                    }
-                    html += "</p>" +
-                        "</div>" +
-                        "</a>" +
-                        "</li>"
+                let game = gamel[i]
+                let temp = (parseFloat(game.gprice) * (parseFloat(game.discount))).toString();
+                if (temp.length > 6) {
+                    temp.substr(0, 6);
                 }
-                $("#game-list").html(html)
-            });
-        isSearchResult = false;
-    } else {
-        $.post(
-            requestmap.store_search,
-            formData,
-            function (gameList) {
-                let gamel = gameList.resultMap.searchList;
-                let page = gameList.resultMap.allSearchNum;
-                let html = "";
+                //得到游戏类别数组
+                let typelist = game.gtype;
+                typelist = (typelist != null ? typelist.substring(1, typelist.length - 1) : "");
 
-                $('#game-list').empty();
+                typelist = typelist.split(",")
+                //得到游戏语言数组
+                let languagelist = game.language;
+                languagelist = (languagelist != null ? languagelist.substring(1, languagelist.length - 1) : "")
 
-                if (gameList.status === 0)
-                    return;
-                for (let i = 0; i < gamel.length; i++) {
-
-                    let game = gamel[i]
-                    let temp = (parseFloat(game.gprice) * (parseFloat(game.discount))).toString();
-                    if (temp.length > 6) {
-                        temp.substr(0, 6);
-                    }
-                    //得到游戏类别数组
-                    let typelist = game.gtype;
-                    typelist = (typelist != null ? typelist.substring(1, typelist.length - 1) : "");
-
-                    typelist = typelist.split(",")
-                    //得到游戏语言数组
-                    let languagelist = game.language;
-                    languagelist = (languagelist != null ? languagelist.substring(1, languagelist.length - 1) : "")
-
-                    languagelist = languagelist.split(",")
-                    for (let j = 0; j < languagelist.length; j++) {
-                        languagelist[j].substring(1, languagelist[j].length - 1)
-                    }
-
-
-                    html +=
-                        "<li>" +
-                        "<a href=" + "/game_detail.html?gid=" + game.gid + " class=" + "game-click" + " target='_blank'>" +
-                        "<div class=" + "left" + "><img src=" + game.chref + "></div>" +
-                        "<div class=" + "right" + ">"
-                    if (game.discount != 1 && game.discount != null) {
-                        html +=
-                            "<span class=" + "game-discount" + ">" + "-" + ((1 - game.discount) * 100).toFixed() + "%</span>" +
-                            "<span class=" + "game-origin-price" + ">￥" + game.gprice + "</span>"
-                    }
-                    html +=
-                        "<span class=" + "game-sale-price" + ">￥" + temp + "</span>" +
-                        "</div>" +
-                        "<div class=" + "middle" + ">" +
-                        "<p class=" + "title" + ">" +
-                        game.gname
-
-                    if (game.discount != 1) {
-                        html += "<span class=" + "title-tag" + ">促销</span>"
-                    }
-                    var china = false;
-                    for (var start = 0; start < languagelist.length; start++) {
-                        if (languagelist[start] === "\"中文\"" && languagelist.length == 1) {
-                            html += "<span class=" + "title-area" + ">中国站</span>";
-                            china = true;
-                            break;
-                        }
-                    }
-                    if (!china) {
-
-                        html += "<span class=" + "title-area" + ">国际站</span>"
-                    }
-
-                    html += "</p>" +
-                        "<p class='date'>发行于" + (game.realeasedate != null ? game.realeasedate.substring(0, 10) : ' ') + "</p>" +
-                        "<p class='tags'>"
-                    for (j = 0; j < typelist.length; j++) {
-                        html +=
-                            "<span class=" + "tag-block" + ">" + (typelist[j] != null ? typelist[j].substring(1, typelist[j].length - 1) : ' ') + "</span>"
-                    }
-                    html += "</p>" +
-                        "</div>" +
-                        "</a>" +
-                        "</li>"
+                languagelist = languagelist.split(",")
+                for (let j = 0; j < languagelist.length; j++) {
+                    languagelist[j].substring(1, languagelist[j].length - 1)
                 }
-                $("#game-list").html(html)
-                setPage(page)
+
+
+                html +=
+                    "<li>" +
+                    "<a href=" + "/game_detail.html?gid=" + game.gid + " class=" + "game-click" + " target='_blank'>" +
+                    "<div class=" + "left" + "><img src=" + game.chref + "></div>" +
+                    "<div class=" + "right" + ">"
+                if (game.discount != 1 && game.discount != null) {
+                    html +=
+                        "<span class=" + "game-discount" + ">" + "-" + ((1 - game.discount) * 100).toFixed() + "%</span>" +
+                        "<span class=" + "game-origin-price" + ">￥" + game.gprice + "</span>"
+                }
+                html +=
+                    "<span class=" + "game-sale-price" + ">￥" + temp + "</span>" +
+                    "</div>" +
+                    "<div class=" + "middle" + ">" +
+                    "<p class=" + "title" + ">" +
+                    game.gname
+
+                if (game.discount != 1) {
+                    html += "<span class=" + "title-tag" + ">促销</span>"
+                }
+                var china = false;
+                for (var start = 0; start < languagelist.length; start++) {
+                    if (languagelist[start] === "\"中文\"" && languagelist.length == 1) {
+                        html += "<span class=" + "title-area" + ">中国站</span>";
+                        china = true;
+                        break;
+                    }
+                }
+                if (!china) {
+
+                    html += "<span class=" + "title-area" + ">国际站</span>"
+                }
+
+                html += "</p>" +
+                    "<p class='date'>发行于" + (game.realeasedate != null ? game.realeasedate.substring(0, 10) : ' ') + "</p>" +
+                    "<p class='tags'>"
+                for (j = 0; j < typelist.length; j++) {
+                    html +=
+                        "<span class=" + "tag-block" + ">" + (typelist[j] != null ? typelist[j].substring(1, typelist[j].length - 1) : ' ') + "</span>"
+                }
+                html += "</p>" +
+                    "</div>" +
+                    "</a>" +
+                    "</li>"
             }
-        )
-    }
-
+            $("#game-list").html(html)
+            setPage(page)
+        }
+    )
 }
 
 //为页码设置事件 -> 分页切换
 $(document).on("click", ".page-item", function () {
     pageIndex = (parseInt($(this).text()) - 1) * 10;
     let thisFormData = {
+        name: all_game_name,
         sort: sort,
         pageIndex: pageIndex,
         order: order,
@@ -277,6 +196,7 @@ $(".game-sort-order").on("click", function () {
             $(".fa").text("▼")
         }
         let thisFormData = {
+            name: all_game_name,
             sort: sort,
             pageIndex: pageIndex,
             order: order,
@@ -290,6 +210,7 @@ $(".game-sort-order").on("click", function () {
         getGameList(thisFormData)
     } else {
         let thisFormData = {
+            name: all_game_name,
             sort: sort,
             pageIndex: pageIndex,
             order: order,
@@ -323,6 +244,7 @@ $(".tags-block-wrapper").on("click", function () {
         $(this).text(thisString);
     }
     let thisFormData = {
+        name: all_game_name,
         sort: sort,
         pageIndex: pageIndex,
         order: order,
@@ -358,6 +280,7 @@ $(".tags-block-wrapper1").on("click", function () {
         $(this).text(thisString);
     }
     let thisFormData = {
+        name: all_game_name,
         sort: sort,
         pageIndex: pageIndex,
         order: order,
@@ -408,6 +331,7 @@ $(".tags-block-wrapper2").on("click", function () {
             break;
     }
     let thisFormData = {
+        name: all_game_name,
         sort: sort,
         pageIndex: pageIndex,
         order: order,
@@ -449,6 +373,7 @@ $(".tags-block-wrapper4").on("click", function () {
             break;
     }
     let thisFormData = {
+        name: all_game_name,
         sort: sort,
         pageIndex: pageIndex,
         order: order,
@@ -488,6 +413,7 @@ $(".tags-block-wrapper3").on("click", function () {
             break;
     }
     let thisFormData = {
+        name: all_game_name,
         sort: sort,
         pageIndex: pageIndex,
         order: order,
