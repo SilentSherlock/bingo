@@ -68,28 +68,8 @@ $(document).ready(function () {
         return date;
     }
 
-    $(document).click(function () {
-        if($("#user-name").val()==null){
-            return;
-        }
-        var temp = $("#user-name").val().length
-        if (temp > 10) {
-            $(".form-error-msg").show()
-            $(".form-right-msg").hide()
-            $(".form-error-msg").text("不要超过10个字符")
-            haveError = true;
-        } else if (temp == 0) {
-            $(".form-error-msg").show()
-            $(".form-right-msg").hide()
-            $(".form-error-msg").text("昵称不能为空")
-            haveError = true;
-        } else {
-            $(".form-error-msg").hide()
-            $(".form-right-msg").show()
-            $(".form-right-msg").text("昵称符合要求")
-            haveError = false;
-        }
-    })
+
+
     $("#select-month").click(function () {
         var year = document.getElementById("select-year");
         var month = document.getElementById("select-month");
@@ -197,12 +177,17 @@ $(".submit").click(function () {
             cache: false,
             async: false,
             success: function (data) {
-                console.log("因后端开发人员懒惰，不愿意修改代码，头像只能重新登陆后变更。")
-                myAlert("修改成功，头像在重新登陆后变更。")
+                if(files===null){
+                    myAlert("修改个人信息成功。")
+                }else{
+                    myAlert("修改成功，头像在重新登陆后变更。")
+                    console.log("因后端开发人员懒惰，不愿意修改代码，头像只能重新登陆后变更。")
+                }
+
             }
         })
     } else {
-        alert("请填写符合要求的昵称");
+        myAlert("请填写符合要求的昵称");
     }
 
 })
@@ -237,6 +222,28 @@ function change_photo(file) {
     }
 
 
+}
+function change_name() {
+    if($("#user-name").val()==null){
+        return;
+    }
+    var temp = $("#user-name").val().length
+    if (temp > 10) {
+        $(".form-error-msg").show()
+        $(".form-right-msg").hide()
+        $(".form-error-msg").text("不要超过10个字符")
+        haveError = true;
+    } else if (temp == 0) {
+        $(".form-error-msg").show()
+        $(".form-right-msg").hide()
+        $(".form-error-msg").text("昵称不能为空")
+        haveError = true;
+    } else {
+        $(".form-error-msg").hide()
+        $(".form-right-msg").show()
+        $(".form-right-msg").text("昵称符合要求")
+        haveError = false;
+    }
 }
 
 // function getOriginalPhoto(){
