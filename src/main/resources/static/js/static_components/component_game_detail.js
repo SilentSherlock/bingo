@@ -451,7 +451,7 @@ $(document).ready(function () {
                 var i = 0, j = gamelist.length, ok = 0;
                 for (; i < j; i++) {
                     console.log("查找到的游戏ID: " + gamelist[i])
-                    if (txt == gamelist[i]) {
+                    if (GAMEID == gamelist[i]) {
                         ok = 1;//用户拥有此游戏
                         console.log("用户拥有此游戏");
                         break;
@@ -460,7 +460,7 @@ $(document).ready(function () {
                 if (ok == 1) {
                     //查找用户是否评论过
                     var data = {
-                        gid: txt,
+                        gid: GAMEID,
                         uid: userInfo.uid
                     }
                     $.get(
@@ -489,7 +489,7 @@ $(document).ready(function () {
             console.log(myDate);
             var data = {
                 uid: userInfo.uid,
-                gid: txt,
+                gid: GAMEID,
                 content: $("#content-txt").val(),
                 score: $("#content-score").val(),
                 etime: timestampToTime(myDate.getTime())
