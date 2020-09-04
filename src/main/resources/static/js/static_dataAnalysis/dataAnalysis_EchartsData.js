@@ -105,7 +105,7 @@ function configureLineEcharts(echartsId, xData, yData){
     option = {
         title: {
             text: '游戏销量关系图',
-            subtext: '七天之内的销量',
+            subtext: '30日内的销量',
             left: 'center'
         },
         tooltip: {

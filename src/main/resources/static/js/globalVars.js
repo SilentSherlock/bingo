@@ -82,6 +82,21 @@ let static_components = {
         cid: "community-new-post",
         curl: "/page/component_community_new_post"
     },
+    component_game_detail: {
+        cname: "游戏详情",
+        cid: "game-detail",
+        curl: "/page/component_game_detail"
+    },
+    component_community_post_detail: {
+        cname: "帖子详情",
+        cid: "community-post-detail",
+        curl: "/page/component_community_post_detail"
+    },
+    component_community_other_profile: {
+        cname: "他人信息",
+        cid: "community-other-profile",
+        curl: "/page/component_community_other_profile"
+    },
 };
 
 //动态组件信息，展示游戏的卡片等依赖具体数据实现的组件
@@ -145,3 +160,10 @@ let searchCondition = {
     pageIndex: 0,
     pageCount: undefined
 };
+
+//保存需要显示详细信息的游戏id
+let game_detail_gid;
+//保存需要显示详细信息的帖子id
+let post_detail_pid;
+//保存需要显示资料的uid
+let other_profile_uid;
