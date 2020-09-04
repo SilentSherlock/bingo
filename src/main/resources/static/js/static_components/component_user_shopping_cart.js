@@ -64,11 +64,11 @@ function buy() {//购买，向后台发送插入订单请求
             console.log("gids: " + gids);
         }
     }
-    if(canBuy == 0){
-     alert("购物车为空，快去添加自己喜欢的游戏吧~~~");
-     return ;
+    if (canBuy == 0) {
+        myAlert("购物车为空，快去添加自己喜欢的游戏吧~~~");
+        return;
     }
-    console.log("当前用户ID:"+userInfo.uid)
+    console.log("当前用户ID:" + userInfo.uid)
     //更改user表的个人游戏列表数据
     var data = {
         uid: userInfo.uid,
@@ -81,7 +81,7 @@ function buy() {//购买，向后台发送插入订单请求
             console.log(result);
         }
     );
-    window.alert("购买成功！");
+    myAlert("购买成功！");
 }
 
 //删除总价
@@ -111,9 +111,9 @@ function deleteCar(game) {
     var i = 0, length = shoppingcar.length;
     for (; i < length; i++)
         if (JSON.parse(shoppingcar[i] == null)) {
-            shoppingcar.splice(i,1);
+            shoppingcar.splice(i, 1);
         } else if (GAMEID == shoppingcar[i].gid) {//删除游戏
-            shoppingcar.splice(i,1);
+            shoppingcar.splice(i, 1);
             break;
         }
     localStorage.setItem("shoppingcar", JSON.stringify(shoppingcar));
@@ -134,8 +134,8 @@ function addWishList(game) {
             console.log(result);
             wishlist = result.resultMap.wishList;
             console.log(wishlist);
-            if(wishlist === null);
-            else{
+            if (wishlist === null) ;
+            else {
                 var i = 0, length = wishlist.length, exist = 0;
                 for (; i < length; i++) {
                     /*console.log(wishlist[i].gid);

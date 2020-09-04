@@ -36,7 +36,7 @@ $(document).ready(function () {
                             var game = gameResult.resultMap.game;
                             html += "<div class=\"myorder-elem\">\n" +
                                 "        <div class=\"game-elem\">\n" +
-                                "            <a href=game_detail.html?gid=" + gamelist[i] + "><img src=" + game.chref + " class=\"gameCover\">\n" +
+                                "            <a href='javascript:void(0)' onclick='showGameDetail(" + gamelist[i] + ")'><img src=" + game.chref + " class=\"gameCover\">\n" +
                                 "            <span class=\"elem-name\">" + game.gname + "</span></a>\n" +
                                 /* "            <div class=\"condition\" onclick=\"javascript:void (0)\">\n" +
                                  "                <button class=\"condition\" id=\"showCode\">查看激活码</button>\n" +
